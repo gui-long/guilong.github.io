@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>福瑞百科 - 首页</title>
+    <style>
+        /* --- 基础样式 (CSS) --- */
+        body {
+            font-family: "Microsoft YaHei", sans-serif; /* 字体 */
+            background-color: #f4f4f4; /* 浅灰背景 */
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* 顶部导航栏 */
+        header {
+            background-color: #2c3e50; /* 深蓝色顶栏 */
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 主体布局 */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex; /* 使用 Flexbox 布局 */
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* 左侧边栏 (目录/导航) */
+        aside {
+            flex: 1; /* 占 1 份宽度 */
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside li {
+            margin-bottom: 10px;
+        }
+
+        aside a {
+            text-decoration: none;
+            color: #2980b9;
+        }
+
+        /* 右侧主要内容区 */
+        main {
+            flex: 3; /* 占 3 份宽度，比侧边栏宽 */
+            background: white;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 文章标题和段落样式 */
+        article h2 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        article p {
+            line-height: 1.6; /* 行高，让文字不拥挤 */
+            margin-bottom: 20px;
+        }
+
+        /* 底部版权 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部 -->
+    <header>
+        <h1> 福瑞百科 (Furry Wiki)</h1>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">随机页面</a>
+            <a href="#">关于项目</a>
+        </nav>
+    </header>
+
+    <!-- 中间容器 -->
+    <div class="container">
+        
+        <!-- 左侧：目录或分类 -->
+        <aside>
+            <h3> 快速导航</h3>
+            <ul>
+                <li><a href="#"> 兽人设定基础</a></li>
+                <li><a href="#"> 常见物种介绍</a></li>
+                <li><a href="#"> 2011年历史归档</a></li>
+                <li><a href="#"> 术语表</a></li>
+            </ul>
+        </aside>
+
+        <!-- 右侧：你摘抄的内容放这里 -->
+        <main>
+            <article>
+                <!--  在这里修改标题 -->
+                <h2>福瑞的起源</h2>
+                
+                <!--  在这里粘贴你摘抄的第一段文字 -->
+                <p>
+                    兽迷（Furry）指对具有人类属性的拟人化动物形象（如展现人类智能、双足步行、穿着服装等特征）感兴趣的群体，又称兽圈，其外文名为Furry fandom或Furries。该群体涵盖兽人爱好者、动物爱好者及兽装爱好者等分支，通过创造虚拟角色（兽设）、穿戴兽装、参与兽展等线下活动进行交流，形成独特的文化认同
+Furry在英语中是一个形容词，最早可追溯到17世纪后期，最早的含义为毛皮的；覆有毛皮的，于20世纪80年代延伸出了拟人动物角色、穿着兽装的人的含义 [1]。在亚文化语境中，furry通常的含义指的是“拟人化动物”。无论相关的主题，或者对这个主题感到兴趣的群体，都可以被称为兽迷(furry爱好者)，根据语境的不同，furry可以用来指代拟人动物形象或拟人动物爱好者，也可以表示拟人动物爱好文化。
+                </p>
+
+                <!--  如果有第二段，就再加一个 p 标签 -->
+                <p>
+                   20世纪50年代末、60年代初，由于美国的社会环境，美国漫画杂志协会（CMAA）跟《权威漫画准则》（CCA）先后成立，对当时美国的漫画产业造成了较大影响[2]，漫画产业由于CCA的影响，更接近“儿童娱乐”跟“道德教育书”。
+在这种压力下，美国部分漫画家为了反抗CCA，进行自费印刷跟出版漫画，在 Furry 文化诞生之前，为了讽刺、借用或探讨严肃议题的 Funny Animal 漫画已有较多数量。
+
+Vootie 则是在这个背景下 为了连接 Funny Animal 创作者而诞生的APA，这个APA诞生了如《猫舞者奥马哈》这样的作品，让拟人动物脱离了象征化，形成了“角色可以是角色本身的认知”。
+
+后于第38届世界科幻大会（Worldcon，又称 Noreascon Two）期间，Steve Gallacci 向一小群科幻迷展示了其原创角色 Erma Felna 的插画与设定草稿。这一行为本身并非正式发表，而更接近于一种在同好之间进行的概念分享，却意外地引发了持续数年的连锁反应。
+
+围绕 Gallacci 的展示，自发形成了一个松散却高度聚焦的讨论圈，也被称为Gallacci Group（加拉其小组）。 在兽迷作家协会于2015年的采访“A Conversation with Fred Patten”中，Fred Patten提到关于 Gallacci 小组的这样一段话：
+
+那位画家就在附近，他向我们介绍自己叫 Steve Gallacci，是一名美国空军的技术插画师。这幅画并不是单独的创作，而是他多年构思的一整个系列设定的一部分：故事背景是一个由人工进化的动物智慧种族所居住的星系，这些种族遗忘了自己的起源，并在一场猫族与兔族之间的星际战争中重新发现了历史。
+Gallacci 随身带着一个牛皮纸文件夹，里面装满了以漫画形式绘制的设定草稿，他愿意给我们看。我们并不是随便翻翻，而是非常认真地逐页研究。在大会的艺术品拍卖上，我们三个人甚至为了那幅画展开了竞拍大战——但最终谁也没拍到，我也不知道最后是谁买走了它。
+
+我并不清楚当时还有哪些人加入了 1980 年 Worldcon 上围绕 Gallacci 观看设定草稿的“加拉其小组”，但 Tim Fay 和 John Cawley 是最早的一批成员。Gallacci 在那之后不久退役，离开空军，定居西雅图，并在整个 1980 年代频繁参加西海岸的科幻与漫画展会。
+Gallacci Group 所形成的“先于作品的社群意识”基础上，后面的 Rowrbrazzle 得以迅速汇聚拟人动物爱好者，并将这一松散兴趣明确命名、记录并持续输出，从而推动 Furry 文化完成从潜在形态向自觉亚文化的过渡。
+
+相较于只能大致追溯至 1970—1980 年代的早期 Furry爱好者群体，于 1984 年创刊的Rowrbrazzle ，通常被视为更明确的文化节点。它标志着对拟人动物的兴趣已不再只是零散的个人偏好，而是形成了能够稳定支持创作、交流与再生产的独立文化实践。在国际 Furry 史的讨论中，Rowrbrazzle 常被视为 Furry 走向独立亚文化重要的起源里程碑之一。
+
+这就是福瑞最初的起源，而福瑞传入中国是在2005开始，大陆的兽迷主要集中在百度贴吧的兽人吧活动。
+2005~2013年左右，兽人吧跟相关贴吧以及衍生群一直作为兽迷主要的活动网络存在，2013年后贴吧颓势略显，用户量显著减少。在2015年下旬，许多相关吧受到了百度贴吧大规模删封的波及，该枢纽网络被认为自2015年起失去了原本的地位。
+                </p>
+
+                <h3>小标题：关于来源</h3>
+                <p>
+    数据来源于萌娘百科 <a href="https://mzh.moegirl.org.cn/Furry">Furry</a> 
+    以及 2025年9月13日 (星期六) 19:52 的前福瑞Wiki <a href="https://zh.wikifur.com/wiki/Furry">Furry</a>
+</p>
+
+            </article>
+        </main>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <p> 2026 福瑞百科重建计划(测试版） | 基于 HTML5 & CSS3</p>
+    </footer>
+
+</body>
+</html>
