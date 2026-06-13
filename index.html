@@ -3,181 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>福瑞百科 - 首页</title>
+    <title>福瑞百科</title>
     <style>
-        /* --- 基础样式 (CSS) --- */
-        body {
-            font-family: "Microsoft YaHei", sans-serif; /* 字体 */
-            background-color: #f4f4f4; /* 浅灰背景 */
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        /* 顶部导航栏 */
-        header {
-            background-color: #2c3e50; /* 深蓝色顶栏 */
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        nav a {
-            color: #ecf0f1;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* 主体布局 */
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            display: flex; /* 使用 Flexbox 布局 */
-            gap: 20px;
-            padding: 0 20px;
-        }
-
-        /* 左侧边栏 (目录/导航) */
-        aside {
-            flex: 1; /* 占 1 份宽度 */
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            height: fit-content;
-        }
-
-        aside ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        aside li {
-            margin-bottom: 10px;
-        }
-
-        aside a {
-            text-decoration: none;
-            color: #2980b9;
-        }
-
-        /* 右侧主要内容区 */
-        main {
-            flex: 3; /* 占 3 份宽度，比侧边栏宽 */
-            background: white;
-            padding: 40px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* 文章标题和段落样式 */
-        article h2 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        article p {
-            line-height: 1.6; /* 行高，让文字不拥挤 */
-            margin-bottom: 20px;
-        }
-
-        /* 底部版权 */
-        footer {
+        /* 1. 导航栏样式：固定在顶部 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 15px;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            color: #777;
-            font-size: 0.9rem;
+            z-index: 1000; /* 确保导航栏在最上层 */
         }
+        /* 导航链接样式 */
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color: #aaa; /* 鼠标悬停变灰 */
+        }
+        
+        /* 2. 页面内容区块样式 */
+        .section {
+            padding: 80px 20px; /* 留出顶部空间，防止被固定导航栏遮挡 */
+            min-height: 100vh;  /* 每个区块占满整个屏幕高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+        }
+        /* 交替背景色，让层次更分明 */
+        #home { background-color: #f9f9f9; }
+        #history { background-color: #ffffff; }
+        #characters { background-color: #f0f8ff; }
     </style>
 </head>
 <body>
 
-    <!-- 顶部 -->
-    <header>
-        <h1> 福瑞百科 (Furry Wiki)</h1>
-        <nav>
-            <a href="#">首页</a>
-            <a href="#">随机页面</a>
-            <a href="#">关于项目</a>
-        </nav>
-    </header>
+    <!-- 顶部导航栏 -->
+    <nav>
+        <!-- 核心：href 里的 # 后面跟着下面对应区块的 id -->
+        <a href="#home"> 主页</a>
+        <a href="#history"> 历史</a>
+        <a href="#characters"> 角色</a>
+    </nav>
 
-    <!-- 中间容器 -->
-    <div class="container">
+    <!-- 网页内容区 -->
+    <!-- 核心：id 必须和导航栏 href 里的名字一模一样 -->
+    <div id="home" class="section">
+        <h1>欢迎来到新福瑞wiki百科主页！</h1>
+    </div>
+    <!-- 历史页内容区块 -->
+    <div id="history" class="section" style="display: block; text-align: left; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.8; color: #333;">
         
-        <!-- 左侧：目录或分类 -->
-        <aside>
-            <h3> 快速导航</h3>
-            <ul>
-                <li><a href="#"> 兽人设定基础</a></li>
-                <li><a href="#"> 常见物种介绍</a></li>
-                <li><a href="#"> 2011年历史归档</a></li>
-                <li><a href="#"> 术语表</a></li>
-            </ul>
-        </aside>
+        <!-- 区块大标题 -->
+        <h1 style="text-align: center; margin-bottom: 30px; color: #2c3e50;"> 福瑞文化的起源</h1>
 
-        <!-- 右侧：你摘抄的内容放这里 -->
-        <main>
-            <article>
-                <!--  在这里修改标题 -->
-                <h2>福瑞的起源</h2>
-                
-                <!--  在这里粘贴你摘抄的第一段文字 -->
-                <p>
-                    兽迷（Furry）指对具有人类属性的拟人化动物形象（如展现人类智能、双足步行、穿着服装等特征）感兴趣的群体，又称兽圈，其外文名为Furry fandom或Furries。该群体涵盖兽人爱好者、动物爱好者及兽装爱好者等分支，通过创造虚拟角色（兽设）、穿戴兽装、参与兽展等线下活动进行交流，形成独特的文化认同
-Furry在英语中是一个形容词，最早可追溯到17世纪后期，最早的含义为毛皮的；覆有毛皮的，于20世纪80年代延伸出了拟人动物角色、穿着兽装的人的含义 [1]。在亚文化语境中，furry通常的含义指的是“拟人化动物”。无论相关的主题，或者对这个主题感到兴趣的群体，都可以被称为兽迷(furry爱好者)，根据语境的不同，furry可以用来指代拟人动物形象或拟人动物爱好者，也可以表示拟人动物爱好文化。
-                </p>
+        <!-- 第一段：什么是福瑞 -->
+        <p>福瑞（Furry），又称兽迷或兽圈，是指对具有人类智能、双足步行、穿着服装等人类属性的拟人化动物形象感兴趣的群体。在英语中，“Furry”一词最早可追溯至17世纪后期，原意为“覆有毛皮的”。直到20世纪80年代，它才在亚文化语境中延伸出拟人动物角色及爱好者的含义，并逐渐成为一种独特的文化认同。</p>
 
-                <!--  如果有第二段，就再加一个 p 标签 -->
-                <p>
-                   20世纪50年代末、60年代初，由于美国的社会环境，美国漫画杂志协会（CMAA）跟《权威漫画准则》（CCA）先后成立，对当时美国的漫画产业造成了较大影响[2]，漫画产业由于CCA的影响，更接近“儿童娱乐”跟“道德教育书”。
-在这种压力下，美国部分漫画家为了反抗CCA，进行自费印刷跟出版漫画，在 Furry 文化诞生之前，为了讽刺、借用或探讨严肃议题的 Funny Animal 漫画已有较多数量。
+        <!-- 第二段：时代背景 -->
+        <p>福瑞文化的诞生，与20世纪中叶美国的社会环境及漫画产业变革息息相关。50年代末至60年代初，美国漫画杂志协会（CMAA）及《权威漫画准则》（CCA）先后成立，导致漫画产业被迫向“儿童娱乐”与“道德教育”靠拢。为反抗这种审查压力，部分漫画家开始自费出版，借拟人动物（Funny Animal）探讨严肃议题。在这一背景下，为了连接创作者而诞生的APA组织，让拟人动物脱离了单纯的象征化，形成了“角色可以是角色本身”的全新认知。</p>
 
-Vootie 则是在这个背景下 为了连接 Funny Animal 创作者而诞生的APA，这个APA诞生了如《猫舞者奥马哈》这样的作品，让拟人动物脱离了象征化，形成了“角色可以是角色本身的认知”。
+        <!-- 第三段：关键事件（加拉其小组） -->
+        <p>真正推动福瑞文化从潜在形态向自觉亚文化过渡的，是1980年第38届世界科幻大会（Worldcon）上的一次偶然分享。当时，美国空军技术插画师 Steve Gallacci 向一小群科幻迷展示了其原创角色 Erma Felna 的插画与设定草稿。这一非正式的概念分享意外引发了持续数年的连锁反应，自发形成了一个高度聚焦的讨论圈——“加拉其小组（Gallacci Group）”。成员们不仅认真研读其关于人工进化动物智慧种族的星际战争设定，甚至在拍卖会上为那幅设定草稿展开竞拍。这种“先于作品的社群意识”，为福瑞文化的凝聚奠定了基础。</p>
 
-后于第38届世界科幻大会（Worldcon，又称 Noreascon Two）期间，Steve Gallacci 向一小群科幻迷展示了其原创角色 Erma Felna 的插画与设定草稿。这一行为本身并非正式发表，而更接近于一种在同好之间进行的概念分享，却意外地引发了持续数年的连锁反应。
+        <!-- 第四段：文化里程碑 -->
+        <p>1984年创刊的《Rowrbrazzle》杂志，则被视为福瑞走向独立亚文化的重要里程碑。它标志着对拟人动物的兴趣不再只是零散的个人偏好，而是形成了能够稳定支持创作、交流与再生产的独立文化实践。</p>
 
-围绕 Gallacci 的展示，自发形成了一个松散却高度聚焦的讨论圈，也被称为Gallacci Group（加拉其小组）。 在兽迷作家协会于2015年的采访“A Conversation with Fred Patten”中，Fred Patten提到关于 Gallacci 小组的这样一段话：
+        <!-- 第五段：传入中国 -->
+        <p>随着互联网的发展，福瑞文化逐渐跨越国界。2005年左右，福瑞文化正式传入中国，大陆的兽迷开始集中在百度贴吧的“兽人吧”及相关衍生群中活动。在2005年至2013年间，贴吧及相关群组是兽迷最主要的网络交流枢纽。然而，随着2013年后贴吧颓势渐显，加之2015年下旬遭遇大规模删封波及，这一早期的国内兽迷网络枢纽最终失去了原本的核心地位，福瑞文化也由此进入了新的发展阶段。</p>
 
-那位画家就在附近，他向我们介绍自己叫 Steve Gallacci，是一名美国空军的技术插画师。这幅画并不是单独的创作，而是他多年构思的一整个系列设定的一部分：故事背景是一个由人工进化的动物智慧种族所居住的星系，这些种族遗忘了自己的起源，并在一场猫族与兔族之间的星际战争中重新发现了历史。
-Gallacci 随身带着一个牛皮纸文件夹，里面装满了以漫画形式绘制的设定草稿，他愿意给我们看。我们并不是随便翻翻，而是非常认真地逐页研究。在大会的艺术品拍卖上，我们三个人甚至为了那幅画展开了竞拍大战——但最终谁也没拍到，我也不知道最后是谁买走了它。
-
-我并不清楚当时还有哪些人加入了 1980 年 Worldcon 上围绕 Gallacci 观看设定草稿的“加拉其小组”，但 Tim Fay 和 John Cawley 是最早的一批成员。Gallacci 在那之后不久退役，离开空军，定居西雅图，并在整个 1980 年代频繁参加西海岸的科幻与漫画展会。
-Gallacci Group 所形成的“先于作品的社群意识”基础上，后面的 Rowrbrazzle 得以迅速汇聚拟人动物爱好者，并将这一松散兴趣明确命名、记录并持续输出，从而推动 Furry 文化完成从潜在形态向自觉亚文化的过渡。
-
-相较于只能大致追溯至 1970—1980 年代的早期 Furry爱好者群体，于 1984 年创刊的Rowrbrazzle ，通常被视为更明确的文化节点。它标志着对拟人动物的兴趣已不再只是零散的个人偏好，而是形成了能够稳定支持创作、交流与再生产的独立文化实践。在国际 Furry 史的讨论中，Rowrbrazzle 常被视为 Furry 走向独立亚文化重要的起源里程碑之一。
-
-这就是福瑞最初的起源，而福瑞传入中国是在2005开始，大陆的兽迷主要集中在百度贴吧的兽人吧活动。
-2005~2013年左右，兽人吧跟相关贴吧以及衍生群一直作为兽迷主要的活动网络存在，2013年后贴吧颓势略显，用户量显著减少。在2015年下旬，许多相关吧受到了百度贴吧大规模删封的波及，该枢纽网络被认为自2015年起失去了原本的地位。
-                </p>
-
-                <h3>小标题：关于来源</h3>
-                <p>
-    数据来源于萌娘百科 <a href="https://mzh.moegirl.org.cn/Furry">Furry</a> 
-    以及 2025年9月13日 (星期六) 19:52 的前福瑞Wiki <a href="https://zh.wikifur.com/wiki/Furry">Furry</a>
-</p>
-
-            </article>
-        </main>
+        <!-- 底部：数据来源声明 -->
+        <hr style="margin: 30px 0; border: none; border-top: 1px dashed #ccc;">
+        <p style="font-size: 12px; color: #888;">
+            <strong>数据来源：</strong>萌娘百科 <a href="https://mzh.moegirl.org.cn/Furry">Furry</a>、前福瑞Wiki Furry（2025年9月13日版本） <a href="https://zh.wikifur.com/wiki/Furry">Furry</a>
+        </p>
     </div>
 
-    <!-- 底部 -->
-    <footer>
-        <p> 2026 福瑞百科重建计划(测试版） | 基于 HTML5 & CSS3</p>
-    </footer>
+    <div id="characters" class="section">
+        <h1><style>
+    /* 简单的样式表，可以直接放在 <head> 里或者保留在这里 */
+    .ranking-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background-color: #1a1a1a; /* 深色背景 */
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #eee;
+    }
+    .ranking-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+        border-bottom: 1px solid #333;
+        padding-bottom: 15px;
+    }
+    .rank-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        position: relative;
+    }
+    .rank-num {
+        width: 30px;
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+        margin-right: 15px;
+    }
+    /* 前三名颜色 */
+    .top-1 { color: #ffd700; font-size: 1.2em; } /* 金 */
+    .top-2 { color: #c0c0c0; font-size: 1.1em; } /* 银 */
+    .top-3 { color: #cd7f32; font-size: 1.1em; } /* 铜 */
+    .rank-name {
+        width: 140px; /* 名字宽度 */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        z-index: 2;
+    }
+    .rank-bar-bg {
+        flex-grow: 1;
+        background-color: #333;
+        height: 24px;
+        border-radius: 4px;
+        margin: 0 15px;
+        position: relative;
+        overflow: hidden;
+    }
+    .rank-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        transition: width 1s ease-in-out;
+    }
+    /* 特殊高亮第一名 */
+    .highlight-bar {
+        background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
+        /* 或者用金色渐变 */
+        background: linear-gradient(90deg, #FDC830 0%, #F37335 100%);
+    }
+    .rank-value {
+        width: 60px;
+        text-align: right;
+        font-size: 12px;
+        color: #aaa;
+    }
+    .note-text {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #333;
+        padding-top: 10px;
+        line-height: 1.5;
+    }
+    .icon-note {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        background: #666;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 14px;
+        font-size: 10px;
+        margin-left: 5px;
+        cursor: help;
+    }
+</style>
+<div class="ranking-container">
+    <div class="ranking-title"> 兽圈/泛兽类主播热度 TOP 20</div>
+    <!-- 列表开始 -->
+    <!-- 1. 碧月狐 (特殊处理) -->
+    <div class="rank-item">
+        <div class="rank-num top-1">1</div>
+        <div class="rank-name">碧月狐<span class="icon-note" title="注：该主播虽数据极高，但本人声明不属于兽迷圈子，此处仅作热度参考">?</span></div>
+        <div class="rank-bar-bg">
+            <!-- 假设最大值约140w，这里宽度设为100%作为基准 -->
+            <div class="rank-bar-fill highlight-bar" style="width: 100%;"></div>
+        </div>
+        <div class="rank-value">136.2w</div>
+    </div>
+    <!-- 2. 一块电鹿板 -->
+    <div class="rank-item">
+        <div class="rank-num top-2">2</div>
+        <div class="rank-name">一块电鹿板</div>
+        <div class="rank-bar-bg">
+            <!-- 76.3 / 136.2 ≈ 56% -->
+            <div class="rank-bar-fill" style="width: 56%;"></div>
+        </div>
+        <div class="rank-value">76.3w</div>
+    </div>
+    <!-- 3. 银碳Gintan -->
+    <div class="rank-item">
+        <div class="rank-num top-3">3</div>
+        <div class="rank-name">银碳Gintan</div>
+        <div class="rank-bar-bg">
+            <!-- 35.4 / 136.2 ≈ 26% -->
+            <div class="rank-bar-fill" style="width: 26%;"></div>
+        </div>
+        <div class="rank-value">35.4w</div>
+    </div>
+    <!-- 4. 带袋浣能Rakky -->
+    <div class="rank-item">
+        <div class="rank-num">4</div>
+        <div class="rank-name">带袋浣能Rakky</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 25%;"></div>
+        </div>
+        <div class="rank-value">33.9w</div>
+    </div>
+    <!-- 5. 茭白柒 -->
+    <div class="rank-item">
+        <div class="rank-num">5</div>
+        <div class="rank-name">茭白柒</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 25%;"></div>
+        </div>
+        <div class="rank-value">34.7w</div>
+    </div>
+    <!-- 6. 饼人b -->
+    <div class="rank-item">
+        <div class="rank-num">6</div>
+        <div class="rank-name">饼人b</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 24%;"></div>
+        </div>
+        <div class="rank-value">33.9w</div>
+    </div>
+    <!-- 7. 鹿野灸 -->
+    <div class="rank-item">
+        <div class="rank-num">7</div>
+        <div class="rank-name">鹿野灸</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 21%;"></div>
+        </div>
+        <div class="rank-value">28.5w</div>
+    </div>
+    <!-- 8. sound—track -->
+    <div class="rank-item">
+        <div class="rank-num">8</div>
+        <div class="rank-name">sound—track</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 18%;"></div>
+        </div>
+        <div class="rank-value">25.1w</div>
+    </div>
+    <!-- 9. 冰糖雪理不是梨 -->
+    <div class="rank-item">
+        <div class="rank-num">9</div>
+        <div class="rank-name">冰糖雪理不是梨</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 18%;"></div>
+        </div>
+        <div class="rank-value">25.0w</div>
+    </div>
+    <!-- 10. 虾多喵 -->
+    <div class="rank-item">
+        <div class="rank-num">10</div>
+        <div class="rank-name">虾多喵</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 18%;"></div>
+        </div>
+        <div class="rank-value">24.5w</div>
+    </div>
+    <!-- 11. 老朋友王海缤 -->
+    <div class="rank-item">
+        <div class="rank-num">11</div>
+        <div class="rank-name">老朋友王海缤</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 17%;"></div>
+        </div>
+        <div class="rank-value">24.4w</div>
+    </div>
+    <!-- 12. 蹭饭不下饭 -->
+    <div class="rank-item">
+        <div class="rank-num">12</div>
+        <div class="rank-name">蹭饭不下饭</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 17%;"></div>
+        </div>
+        <div class="rank-value">24.1w</div>
+    </div>
+    <!-- 13. 白曦学友 -->
+    <div class="rank-item">
+        <div class="rank-num">13</div>
+        <div class="rank-name">白曦学友</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 16%;"></div>
+        </div>
+        <div class="rank-value">23.2w</div>
+    </div>
+    <!-- 14. 果糖含量 -->
+    <div class="rank-item">
+        <div class="rank-num">14</div>
+        <div class="rank-name">果糖含量</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 16%;"></div>
+        </div>
+        <div class="rank-value">22.3w</div>
+    </div>
+    <!-- 15. 塔米糕ovo -->
+    <div class="rank-item">
+        <div class="rank-num">15</div>
+        <div class="rank-name">塔米糕ovo</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 15%;"></div>
+        </div>
+        <div class="rank-value">21.3w</div>
+    </div>
+    <!-- 16. Yumehime鱼咩 -->
+    <div class="rank-item">
+        <div class="rank-num">16</div>
+        <div class="rank-name">Yumehime鱼咩</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 14%;"></div>
+        </div>
+        <div class="rank-value">19.5w</div>
+    </div>
+    <!-- 17. 小猫蛋卷 -->
+    <div class="rank-item">
+        <div class="rank-num">17</div>
+        <div class="rank-name">小猫蛋卷</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 14%;"></div>
+        </div>
+        <div class="rank-value">19.1w</div>
+    </div>
+    <!-- 18. 雪狐玩暗区 -->
+    <div class="rank-item">
+        <div class="rank-num">18</div>
+        <div class="rank-name">雪狐玩暗区</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 13%;"></div>
+        </div>
+        <div class="rank-value">18.2w</div>
+    </div>
+    <!-- 19. 魔法少年电池er -->
+    <div class="rank-item">
+        <div class="rank-num">19</div>
+        <div class="rank-name">魔法少年电池er</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 12%;"></div>
+        </div>
+        <div class="rank-value">17.5w</div>
+    </div>
+    <!-- 20. FN柴北黎Chabry -->
+    <div class="rank-item">
+        <div class="rank-num">20</div>
+        <div class="rank-name">FN柴北黎Chabry</div>
+        <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width: 10%;"></div>
+        </div>
+        <div class="rank-value">14.8w</div>
+    </div>
+    <!-- 底部说明 -->
+    <div class="note-text">
+        * 数据来源：网络统计（截止至2026年5月）。<br>
+        * 特别说明：榜单第1名“碧月狐”虽然拥有极高的相关话题热度，但作者本人已声明不属于兽迷（Furry）圈子。本榜单将其列入旨在客观反映当前泛兽类内容的流量分布，不代表对其身份的定义。<br>
+        * 如有数据遗漏或更新，欢迎联系站长。
+    </div>
+</div>
+
+</h1>
+    </div>
+
+    <!-- 3. 添加平滑滚动效果（让点击跳转不那么生硬） -->
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // 阻止默认的瞬间跳转
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                // 平滑滚动到目标位置
+                targetElement.scrollIntoView({
+                    behavior: 'smooth' 
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
