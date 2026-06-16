@@ -14,778 +14,210 @@
 
         /* 导航栏样式 */
         nav {
-            position: fixed; /* 固定在顶部 */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px; /* 固定高度 */
-            background-color: #222; /* 深色背景 */
+            height: 60px;
+            background-color: #222;
             display: flex;
-            align-items: center; /* 垂直居中 */
-            padding-left: 20px; /* 左边留点空隙 */
+            align-items: center;
+            padding-left: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             z-index: 9999;
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
-        /* Logo/标题区域 */
         .logo {
             color: #fff;
             font-size: 20px;
             font-weight: bold;
-            margin-right: 40px; /* 和后面链接拉开距离 */
+            margin-right: 40px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
-        /* 导航链接样式 */
         nav a {
             color: #ccc;
             text-decoration: none;
             font-size: 16px;
-            margin-right: 25px; /* 链接之间的间距 */
+            margin-right: 25px;
             transition: color 0.3s;
+            flex-shrink: 0;
         }
 
-        /* 鼠标悬停变色 */
         nav a:hover {
             color: #fff;
-            border-bottom: 2px solid #fff; /* 下划线效果 */
+            border-bottom: 2px solid #fff;
             padding-bottom: 5px;
         }
 
-        /* 你的ID显示样式（放在最右边） */
         .user-id {
-            margin-left: auto; /* 自动推到最右边 */
+            margin-left: auto;
             margin-right: 30px;
             color: #888;
             font-size: 14px;
+            flex-shrink: 0;
         }
-    </style>
-</head>
-<body>
 
-    <!-- 导航栏 -->
-    <nav>
-        <!-- 网站Logo或名称 -->
-        <a href="#" class="logo">FurryWiki</a>
-
-        <!-- 导航链接 -->
-        <a href="#home">主页</a>
-        <a href="#history">历史</a>
-        <a href="#characters">角色</a>
-        <a href="#current-status">福瑞现状与反福瑞</a>
-        <a href="#works">作品推荐</a>
-        <a href="#old-wiki">旧Wiki档案</a>
-        <a href="#calendar">兽聚日期</a>
-        <a href="#fursuit-tv">兽频道</a>
-        <a href="#games">福瑞游戏</a>
-        <a href="#anti-furry-history">反福瑞的历史</a>
-        <!-- 你的ID 3493140589709746  -->
-        <span class="user-id">管理员: 东海域的鬼龙</span>
-    </nav>
-
-    <!-- 下面的内容全部清空了，是一片空白 -->
-
-</body>
-</html>
-    <!-- 网页内容区 -->
-    <!-- 核心：id 必须和导航栏 href 里的名字一模一样 -->
-    <div id="home" class="section">
-        <h1>你看啥源码啊，看网站呗</h1>
-    </div>
-    <!-- 历史页内容区块 -->
-    <div id="history" class="section" style="display: block; text-align: left; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.8; color: #333;">
-        
-        <!-- 区块大标题 -->
-        <h1 style="text-align: center; margin-bottom: 30px; color: #2c3e50;"> 福瑞文化的起源</h1>
-
-        <!-- 第一段：什么是福瑞 -->
-        <p>福瑞（Furry），又称兽迷或兽圈，是指对具有人类智能、双足步行、穿着服装等人类属性的拟人化动物形象感兴趣的群体。在英语中，“Furry”一词最早可追溯至17世纪后期，原意为“覆有毛皮的”。直到20世纪80年代，它才在亚文化语境中延伸出拟人动物角色及爱好者的含义，并逐渐成为一种独特的文化认同。</p>
-
-        <!-- 第二段：时代背景 -->
-        <p>福瑞文化的诞生，与20世纪中叶美国的社会环境及漫画产业变革息息相关。50年代末至60年代初，美国漫画杂志协会（CMAA）及《权威漫画准则》（CCA）先后成立，导致漫画产业被迫向“儿童娱乐”与“道德教育”靠拢。为反抗这种审查压力，部分漫画家开始自费出版，借拟人动物（Funny Animal）探讨严肃议题。在这一背景下，为了连接创作者而诞生的APA组织，让拟人动物脱离了单纯的象征化，形成了“角色可以是角色本身”的全新认知。</p>
-
-        <!-- 第三段：关键事件（加拉其小组） -->
-        <p>真正推动福瑞文化从潜在形态向自觉亚文化过渡的，是1980年第38届世界科幻大会（Worldcon）上的一次偶然分享。当时，美国空军技术插画师 Steve Gallacci 向一小群科幻迷展示了其原创角色 Erma Felna 的插画与设定草稿。这一非正式的概念分享意外引发了持续数年的连锁反应，自发形成了一个高度聚焦的讨论圈——“加拉其小组（Gallacci Group）”。成员们不仅认真研读其关于人工进化动物智慧种族的星际战争设定，甚至在拍卖会上为那幅设定草稿展开竞拍。这种“先于作品的社群意识”，为福瑞文化的凝聚奠定了基础。</p>
-
-        <!-- 第四段：文化里程碑 -->
-        <p>1984年创刊的《Rowrbrazzle》杂志，则被视为福瑞走向独立亚文化的重要里程碑。它标志着对拟人动物的兴趣不再只是零散的个人偏好，而是形成了能够稳定支持创作、交流与再生产的独立文化实践。</p>
-
-        <!-- 第五段：传入中国 -->
-        <p>随着互联网的发展，福瑞文化逐渐跨越国界。2005年左右，福瑞文化正式传入中国，大陆的兽迷开始集中在百度贴吧的“兽人吧”及相关衍生群中活动。在2005年至2013年间，贴吧及相关群组是兽迷最主要的网络交流枢纽。然而，随着2013年后贴吧颓势渐显，加之2015年下旬遭遇大规模删封波及，这一早期的国内兽迷网络枢纽最终失去了原本的核心地位，福瑞文化也由此进入了新的发展阶段。</p>
-
-        <!-- 底部：数据来源声明 -->
-        <hr style="margin: 30px 0; border: none; border-top: 1px dashed #ccc;">
-        <p style="font-size: 12px; color: #888;">
-            <strong>数据来源：</strong>萌娘百科 <a href="https://mzh.moegirl.org.cn/Furry">Furry</a>、前福瑞Wiki Furry（2025年9月13日版本） <a href="https://zh.wikifur.com/wiki/Furry">Furry</a>
-            <strong>投稿请去m1314434630@163.com
-        </p>
-    </div>
-
-    <div id="characters" class="section">
-        <h1><style>
-    /* 简单的样式表，可以直接放在 <head> 里或者保留在这里 */
-    .ranking-container {
-        max-width: 800px;
-        margin: 40px auto;
-        background-color: #1a1a1a; /* 深色背景 */
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #eee;
-    }
-    .ranking-title {
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #fff;
-        border-bottom: 1px solid #333;
-        padding-bottom: 15px;
-    }
-    .rank-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
-        position: relative;
-    }
-    .rank-num {
-        width: 30px;
-        font-weight: bold;
-        font-style: italic;
-        text-align: center;
-        margin-right: 15px;
-    }
-    /* 前三名颜色 */
-    .top-1 { color: #ffd700; font-size: 1.2em; } /* 金 */
-    .top-2 { color: #c0c0c0; font-size: 1.1em; } /* 银 */
-    .top-3 { color: #cd7f32; font-size: 1.1em; } /* 铜 */
-    .rank-name {
-        width: 140px; /* 名字宽度 */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 14px;
-        z-index: 2;
-    }
-    .rank-bar-bg {
-        flex-grow: 1;
-        background-color: #333;
-        height: 24px;
-        border-radius: 4px;
-        margin: 0 15px;
-        position: relative;
-        overflow: hidden;
-    }
-    .rank-bar-fill {
-        height: 100%;
-        border-radius: 4px;
-        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-        transition: width 1s ease-in-out;
-    }
-    /* 特殊高亮第一名 */
-    .highlight-bar {
-        background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
-        /* 或者用金色渐变 */
-        background: linear-gradient(90deg, #FDC830 0%, #F37335 100%);
-    }
-    .rank-value {
-        width: 60px;
-        text-align: right;
-        font-size: 12px;
-        color: #aaa;
-    }
-    .note-text {
-        margin-top: 20px;
-        font-size: 12px;
-        color: #666;
-        border-top: 1px solid #333;
-        padding-top: 10px;
-        line-height: 1.5;
-    }
-    .icon-note {
-        display: inline-block;
-        width: 14px;
-        height: 14px;
-        background: #666;
-        color: #fff;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 14px;
-        font-size: 10px;
-        margin-left: 5px;
-        cursor: help;
-    }
-</style>
-<div class="ranking-container">
-    <div class="ranking-title"> 兽圈/泛兽类主播热度 TOP 20</div>
-    <!-- 列表开始 -->
-    <!-- 1. 碧月狐 (特殊处理) -->
-    <div class="rank-item">
-        <div class="rank-num top-1">1</div>
-        <div class="rank-name">碧月狐<span class="icon-note" title="注：该主播虽数据极高，但本人声明不属于兽迷圈子，此处仅作热度参考">?</span></div>
-        <div class="rank-bar-bg">
-            <!-- 假设最大值约140w，这里宽度设为100%作为基准 -->
-            <div class="rank-bar-fill highlight-bar" style="width: 100%;"></div>
-        </div>
-        <div class="rank-value">136.2w</div>
-    </div>
-    <!-- 2. 一块电鹿板 -->
-    <div class="rank-item">
-        <div class="rank-num top-2">2</div>
-        <div class="rank-name">一块电鹿板</div>
-        <div class="rank-bar-bg">
-            <!-- 76.3 / 136.2 ≈ 56% -->
-            <div class="rank-bar-fill" style="width: 56%;"></div>
-        </div>
-        <div class="rank-value">76.3w</div>
-    </div>
-    <!-- 3. 银碳Gintan -->
-    <div class="rank-item">
-        <div class="rank-num top-3">3</div>
-        <div class="rank-name">银碳Gintan</div>
-        <div class="rank-bar-bg">
-            <!-- 35.4 / 136.2 ≈ 26% -->
-            <div class="rank-bar-fill" style="width: 26%;"></div>
-        </div>
-        <div class="rank-value">35.4w</div>
-    </div>
-    <!-- 4. 带袋浣能Rakky -->
-    <div class="rank-item">
-        <div class="rank-num">4</div>
-        <div class="rank-name">带袋浣能Rakky</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 25%;"></div>
-        </div>
-        <div class="rank-value">33.9w</div>
-    </div>
-    <!-- 5. 茭白柒 -->
-    <div class="rank-item">
-        <div class="rank-num">5</div>
-        <div class="rank-name">茭白柒</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 25%;"></div>
-        </div>
-        <div class="rank-value">34.7w</div>
-    </div>
-    <!-- 6. 饼人b -->
-    <div class="rank-item">
-        <div class="rank-num">6</div>
-        <div class="rank-name">饼人b</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 24%;"></div>
-        </div>
-        <div class="rank-value">33.9w</div>
-    </div>
-    <!-- 7. 鹿野灸 -->
-    <div class="rank-item">
-        <div class="rank-num">7</div>
-        <div class="rank-name">鹿野灸</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 21%;"></div>
-        </div>
-        <div class="rank-value">28.5w</div>
-    </div>
-    <!-- 8. sound—track -->
-    <div class="rank-item">
-        <div class="rank-num">8</div>
-        <div class="rank-name">sound—track</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 18%;"></div>
-        </div>
-        <div class="rank-value">25.1w</div>
-    </div>
-    <!-- 9. 冰糖雪理不是梨 -->
-    <div class="rank-item">
-        <div class="rank-num">9</div>
-        <div class="rank-name">冰糖雪理不是梨</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 18%;"></div>
-        </div>
-        <div class="rank-value">25.0w</div>
-    </div>
-    <!-- 10. 虾多喵 -->
-    <div class="rank-item">
-        <div class="rank-num">10</div>
-        <div class="rank-name">虾多喵</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 18%;"></div>
-        </div>
-        <div class="rank-value">24.5w</div>
-    </div>
-    <!-- 11. 老朋友王海缤 -->
-    <div class="rank-item">
-        <div class="rank-num">11</div>
-        <div class="rank-name">老朋友王海缤</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 17%;"></div>
-        </div>
-        <div class="rank-value">24.4w</div>
-    </div>
-    <!-- 12. 蹭饭不下饭 -->
-    <div class="rank-item">
-        <div class="rank-num">12</div>
-        <div class="rank-name">蹭饭不下饭</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 17%;"></div>
-        </div>
-        <div class="rank-value">24.1w</div>
-    </div>
-    <!-- 13. 白曦学友 -->
-    <div class="rank-item">
-        <div class="rank-num">13</div>
-        <div class="rank-name">白曦学友</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 16%;"></div>
-        </div>
-        <div class="rank-value">23.2w</div>
-    </div>
-    <!-- 14. 果糖含量 -->
-    <div class="rank-item">
-        <div class="rank-num">14</div>
-        <div class="rank-name">果糖含量</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 16%;"></div>
-        </div>
-        <div class="rank-value">22.3w</div>
-    </div>
-    <!-- 15. 塔米糕ovo -->
-    <div class="rank-item">
-        <div class="rank-num">15</div>
-        <div class="rank-name">塔米糕ovo</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 15%;"></div>
-        </div>
-        <div class="rank-value">21.3w</div>
-    </div>
-    <!-- 16. Yumehime鱼咩 -->
-    <div class="rank-item">
-        <div class="rank-num">16</div>
-        <div class="rank-name">Yumehime鱼咩</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 14%;"></div>
-        </div>
-        <div class="rank-value">19.5w</div>
-    </div>
-    <!-- 17. 小猫蛋卷 -->
-    <div class="rank-item">
-        <div class="rank-num">17</div>
-        <div class="rank-name">小猫蛋卷</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 14%;"></div>
-        </div>
-        <div class="rank-value">19.1w</div>
-    </div>
-    <!-- 18. 雪狐玩暗区 -->
-    <div class="rank-item">
-        <div class="rank-num">18</div>
-        <div class="rank-name">雪狐玩暗区</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 13%;"></div>
-        </div>
-        <div class="rank-value">18.2w</div>
-    </div>
-    <!-- 19. 魔法少年电池er -->
-    <div class="rank-item">
-        <div class="rank-num">19</div>
-        <div class="rank-name">魔法少年电池er</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 12%;"></div>
-        </div>
-        <div class="rank-value">17.5w</div>
-    </div>
-    <!-- 20. FN柴北黎Chabry -->
-    <div class="rank-item">
-        <div class="rank-num">20</div>
-        <div class="rank-name">FN柴北黎Chabry</div>
-        <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: 10%;"></div>
-        </div>
-        <div class="rank-value">14.8w</div>
-    </div>
-    <!-- 底部说明 -->
-    <div class="note-text">
-        * 数据来源：网络统计（截止至2026年5月）。<br>
-        * 特别说明：榜单第1名“碧月狐”虽然拥有极高的相关话题热度，但作者本人已声明不属于兽迷（Furry）圈子。本榜单将其列入旨在客观反映当前泛兽类内容的流量分布，不代表对其身份的定义。<br>
-        * 如有数据遗漏或更新，欢迎联系站长。
-    </div>
-</div>
-
-</h1>
-    </div>
-
-    <!-- 3. 添加平滑滚动效果（让点击跳转不那么生硬） -->
-    <script>
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // 阻止默认的瞬间跳转
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                // 平滑滚动到目标位置
-                targetElement.scrollIntoView({
-                    behavior: 'smooth' 
-                });
-            });
-        });
-    </script>
-<!-- 福瑞现状与反福瑞 总容器 -->
-<div id="current-status" style="margin-top: 50px; padding: 20px;">
-
-    <!-- 板块一：现在的漫画与创作生态 -->
-    <div style="margin-bottom: 40px;">
-        <h2 style="color: #27ae60; border-left: 5px solid #27ae60; padding-left: 15px;"> 现在的漫画与创作生态</h2>
-        <p style="color: #ccc;">如今的福瑞文化早已不再局限于早期的设定集，而是衍生出了庞大的产业链。漫画创作是其中的核心载体，题材跨度极大：</p>
-        <ul style="list-style-type: disc; margin-left: 20px; color: #ccc;">
-            <li><strong>全年龄向作品：</strong> 许多作品专注于温馨日常或探讨社会议题。例如《坏蛋大饭店》和《Beastars》，深刻探讨了种族偏见、身份认同等严肃话题。</li>
-            <li><strong>网络条漫与独立创作：</strong> 随着互联网的发展，大量创作者通过 Webtoon 等平台连载条漫，极大地降低了创作和传播门槛。</li>
-            <li><strong>成人向内容：</strong> 必须客观承认，这也是圈子庞大流量的一部分。由于互联网的传播特性，这部分内容往往更容易“破圈”，但也因此给大众留下了刻板印象。</li>
-        </ul>
-    </div>
-
-    <!-- 板块二：圈内的分歧 -->
-    <div style="margin-bottom: 40px; padding-top: 20px; border-top: 1px dashed #444;">
-        <h2 style="color: #e67e22; border-left: 5px solid #e67e22; padding-left: 15px;"> 圈内的分歧与冲突</h2>
-        <p style="color: #ccc;">福瑞圈内部并非铁板一块，随着群体扩大，关于“什么是真正的福瑞”以及“如何对外展示”的争论从未停止。</p>
-        <ul style="list-style-type: disc; margin-left: 20px; color: #ccc;">
-            <li><strong>“兽设”与“皮套”之争：</strong> 拥有昂贵定制皮套（Fursuit）的现充派与坚持二次元绘画、文字创作的“键盘派”之间偶尔存在鄙视链。</li>
-            <li><strong>商业化与原教旨主义：</strong> 一部分人主张积极商业化、拥抱主流；另一部分人则担心过度商业化和色情化会毁掉这个亚文化的纯粹性。</li>
-        </ul>
-    </div>
-
-    <!-- 板块三：国内政治议题与底线 -->
-    <div style="margin-bottom: 40px; padding-top: 20px; border-top: 1px dashed #444;">
-        <h2 style="color: #8e44ad; border-left: 5px solid #8e44ad; padding-left: 15px;"> 国内政治议题与底线</h2>
-        <p style="color: #ccc;">在国内语境下，福瑞圈并非脱离现实的“乌托邦”，当亚文化与大是大非发生碰撞时，往往会引发激烈的争议与抵制：</p>
-        <ul style="list-style-type: disc; margin-left: 20px; color: #ccc;">
-            <li><strong>坚决抵制“台独”等分裂言论：</strong> 曾有极个别拥有兽设的主播或创作者暗夹私货，这种行为一经曝光，立刻遭到国内兽迷群体的强烈抵制与自发封杀。大家普遍认为，无论披着多么可爱的“兽皮”，都不能掩盖政治立场上的恶劣本质。</li>
-            <li><strong>网络黑称与侮辱性标签：</strong> 随着圈子扩大，外界针对福瑞群体的恶意攻击层出不穷。部分极端反福瑞群体发明了诸如“扫***”等带有强烈侮辱性的黑称。这类词汇本质上是针对整个亚文化群体的无差别攻击和污名化。更有甚者亵渎毛主席来获得反福瑞的流量</li>
-            <!-- 图片容器：用来控制位置和间距 -->
-<div style="text-align: center; margin: 30px 0;">
-    
-    <!-- 图片本体：限制了最大宽度，防止在手机上看太大 -->
-    <img src="示例.jpg" 
-         alt="示例" 
-         style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-         
-    <!-- 图片标题（可选）：亵渎 -->
-    <p style="font-size: 0.9em; color: #888; margin-top: 10px;">图：相关的网络现象示例</p>
-    
-</div>
-
-        </ul>
-    </div>
-<!-- 福瑞作品推荐板块开始 -->
-<div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-    <h2 style="text-align: center; color: #333;"> 精选福瑞漫画与动画</h2>
-    <p style="text-align: center; color: #666;">收录圈内知名作品，感受兽设的魅力</p>
-    
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
-        
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc39773" style="color: #00a1d6; text-decoration: none;" target="_blank">历历回响</a></h3>
-            <p style="font-size: 14px; color: #555;">关于痛，爱与和解的短片集。</p>
-            <p style="font-size: 12px; color: #999;">作者：炭烧小狗</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://www.bilibili.com/video/BV1H2M6zXEMm/" style="color: #00a1d6; text-decoration: none;" target="_blank">黑白回响</a></h3>
-            <p style="font-size: 14px; color: #555;">中世纪剧情向兽设短剧。</p>
-            <p style="font-size: 12px; color: #999;">类型：动画短片</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc40778" style="color: #00a1d6; text-decoration: none;" target="_blank">有狐·遗仙</a></h3>
-            <p style="font-size: 14px; color: #555;">山海再绘，笔墨生灵。</p>
-            <p style="font-size: 12px; color: #999;">作者：玉枝</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39566" style="color: #00a1d6; text-decoration: none;" target="_blank">拾昔</a></h3>
-            <p style="font-size: 14px; color: #555;">讲述单独角色的个人故事。</p>
-            <p style="font-size: 12px; color: #999;">作者：KaEr</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39754" style="color: #00a1d6; text-decoration: none;" target="_blank">大兽纪</a></h3>
-            <p style="font-size: 14px; color: #555;">宏大的世界观设定。</p>
-            <p style="font-size: 12px; color: #999;">作者：不二茶</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc37764" style="color: #00a1d6; text-decoration: none;" target="_blank">兽域战纪</a></h3>
-            <p style="font-size: 14px; color: #555;">热血战斗风格，元兽少年的成长之旅。</p>
-            <p style="font-size: 12px; color: #999;">作者：钰逆</p>
-        </div>
-
-        <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-            <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc29329" style="color: #00a1d6; text-decoration: none;" target="_blank">有兽焉</a></h3>
-            <p style="font-size: 14px; color: #555;">人间有神兽，来自九重天。</p>
-            <p style="font-size: 12px; color: #999;">作者：靴下猫腰子</p>
-        </div>
-    </div>
-</div>
-<!-- 福瑞漫画推荐板块结束 -->
-
-<!-- 历史板块开始 -->
-<div id="old-wiki" style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 10px; border-left: 4px solid #8B0000;">
-    <h2 style="color: #8B0000; border-bottom: 2px solid #ddd; padding-bottom: 10px;"> 旧版 Furry Wiki 历史档案</h2>
-    <p><em>“访问速度很快，页面UI美观，可惜无人更新维护……”</em></p>
-
-    <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-        <p><strong>成立时间：</strong>2020年4月1日</p>
-        <p><strong>创始人：</strong>福林菌（哔哩哔哩兽装穿扮者）</p>
-        <p><strong>技术基础：</strong>MediaWiki + 阿里云服务器</p>
-        <p><strong>最终状态：</strong><span style="color: red;">2024年1月失效，重定向至商业约稿平台</span></p>
-    </div>
-
-    <h3> 大事记（根据哔哩哔哩月报整理）</h3>
-    <ul>
-        <li><strong>2020.04.01：</strong>项目开始，第一条编辑。</li>
-        <li><strong>2020.04.12：</strong>注册编辑者达到10人。</li>
-        <li><strong>2020.04.25：</strong>编辑次数突破1000次。</li>
-        <li><strong>2020.04.27：</strong>启用主域名 <code>furrywiki.cn</code>。</li>
-        <li><strong>2020.07.26：</strong>官方微博上线，发布吉祥物。</li>
-        <li><strong>2022.08：</strong>停止更新维护，界面定格。</li>
-    </ul>
-
-    <h3> 危机与争议</h3>
-    <ol>
-        <li><strong>管理混乱：</strong>任用错误的行政员（如 <code>UWU</code>），导致大量未经许可的模板和文章被导入。</li>
-        <li><strong>历史抹除：</strong>行政员绕过系统直接修改数据库，删除了修订记录，违背了百科的透明原则。</li>
-        <li><strong>商业背刺：</strong>备案主体为<em>广州福瑞文化传播有限公司</em>，涉嫌违背 CC BY-NC-SA 3.0 的非商业性使用协议。</li>
-        <li><strong>最终结局：</strong>2024年1月，域名重定向至“兽聚汇”画师约稿平台，社区心血付之一炬。</li>
-    </ol>
-</div>
-<!-- 历史板块结束 -->
-
-<!-- 兽聚日历板块开始 -->
-<div id="calendar" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-    <h2 style="text-align: center; color: #333;"> 全球兽聚日历 (Furry Con Calendar)</h2>
-    <p style="text-align: center; color: #666;">线下相聚，感受毛茸茸的魅力！(数据持续更新中)</p>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0;">
-        <button onclick="showMonth('may')" class="month-btn active">5月</button>
-        <button onclick="showMonth('jun')" class="month-btn">6月</button>
-        <button onclick="showMonth('jul')" class="month-btn">7月</button>
-        <button onclick="showMonth('aug')" class="month-btn">8月</button>
-        <button onclick="showMonth('sep')" class="month-btn">9月</button>
-        <button onclick="showMonth('oct')" class="month-btn">10月</button>
-    </div>
-    <div id="calendar-content" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-height: 150px;">
-    </div>
-</div>
-
-<style>
-    .month-btn {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 20px;
-        background: #eee;
-        cursor: pointer;
-        font-size: 14px;
-        transition: 0.3s;
-    }
-    .month-btn:hover { background: #00a1d6; color: white; }
-    .month-btn.active { background: #00a1d6; color: white; font-weight: bold; }
-    .con-list { list-style: none; padding: 0; margin: 0; }
-    .con-list li { 
-        padding: 10px; 
-        border-bottom: 1px dashed #eee; 
-        display: flex; 
-        align-items: center; 
-    }
-    .con-list li:last-child { border-bottom: none; }
-    .con-date { 
-        background: #00a1d6; 
-        color: white; 
-        padding: 2px 8px; 
-        border-radius: 4px; 
-        font-size: 12px; 
-        margin-right: 15px; 
-        min-width: 40px; 
-        text-align: center;
-    }
-</style>
-
-<script>
-    const conData = {
-        may: [
-            { date: "6日", name: "Furrymosa" },
-            { date: "11-15日", name: "Campfire Tails" },
-            { date: "11-14日", name: "Furvaria" },
-            { date: "13-14日", name: "Little Island Furcon" },
-            { date: "19-21日", name: "墨兽居·花与海之歌" },
-            { date: "19-21日", name: "Argentina FurFiesta" },
-            { date: "20-21日", name: "Borneo Anthro Hub" },
-            { date: "27-30日", name: "Lakeside Furs" },
-            { date: "27日", name: "UTFG" }
-        ],
-        jun: [
-            { date: "1-6日", name: "Lakeside Furs" },
-            { date: "2-6日", name: "Anthrocon" },
-            { date: "4-5日", name: "Indonesia Anthro Gathering" },
-            { date: "9-11日", name: "福绒聚" },
-            { date: "10-12日", name: "绒萌世界" },
-            { date: "11-13日", name: "青笛兽韵" },
-            { date: "16日", name: "探麟志" },
-            { date: "16日", name: "星绒会·第四届" },
-            { date: "16日", name: "Fur-Eh!" },
-            { date: "17-20日", name: "得闲兽聚·像素奇旅" },
-            { date: "17-19日", name: "古都有兽·瑞兽迎福" },
-            { date: "17-19日", name: "绵绒汇" },
-            { date: "23-26日", name: "幻兽聚·龙渊溯踪" },
-            { date: "23-26日", name: "兽星航·ECHO" },
-            { date: "23日", name: "Eufuria" },
-            { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" },
-            { date: "24-26日", name: "落茜聚" },
-            { date: "31日", name: "星澜特快号" }
-        ],
-        jul: [
-            { date: "6-9日", name: "EAST" },
-            { date: "19-23日", name: "Eurofurence" },
-            { date: "20-22日", name: "瑞影聚坊·万兽吟风" },
-            { date: "21-23日", name: "Megaplex" },
-            { date: "28-30日", name: "DenFur" }
-        ],
-        aug: [
-            { date: "3-4日", name: "FursonaCon" },
-            { date: "4-6日", name: "Calfurry" },
-            { date: "5-6日", name: "Barkada FurFest" },
-            { date: "11-13日", name: "Furry Migration" }
-        ],
-        sep: [
-            { date: "9-11日", name: "AquatiFur" },
-            { date: "29-31日", name: "Confuror" },
-            { date: "30-31日", name: "Infurnity獸無限" }
-        ],
-        oct: [
-            { date: "1-8日", name: "GoldenHorn" }
-        ]
-    };
-    function showMonth(month) {
-        document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        let html = '<ul class="con-list">';
-        if (conData[month] && conData[month].length > 0) {
-            conData[month].forEach(con => {
-                html += `<li><span class="con-date">${con.date}</span><span>${con.name}</span></li>`;
-            });
-        } else {
-            html = '<p style="text-align: center; color: #999;">暂无展会安排</p>';
+        /* 滚动偏移，防止被固定导航遮挡 */
+        #home, #history, #characters, #current-status, #works, #old-wiki, #calendar, #fursuit-tv {
+            scroll-margin-top: 70px;
         }
-        html += '</ul>';
-        document.getElementById('calendar-content').innerHTML = html;
-    }
-    window.onload = function() { showMonth('jun'); }
-</script>
-<!-- 兽聚日历板块结束 -->
 
-<!-- 兽频道推荐卡片开始 -->
-<div id="fursuit-tv" style="margin-top: 30px; padding: 20px; background-color: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 5px solid #ff9900;">
-    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-        <div style="width: 50px; height: 50px; background-color: #ff9900; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 24px; margin-right: 15px;">TV</div>
-        <div>
-            <h3 style="margin: 0; color: #333;">兽频道 (Fursuit.tv)</h3>
-            <span style="font-size: 12px; color: #666; background: #eee; padding: 2px 6px; border-radius: 4px;">APP / 社区</span>
-        </div>
-    </div>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <p style="color: #555; line-height: 1.6; font-size: 14px;">
-        国内知名的兽装文化交流平台。在这里你可以浏览海量毛毛的精美照片、视频，分享自己的兽设，还能找到同好交流。<strong>注意：</strong>如果遇到图片崩溃或更新失败，请务必通过以下官方渠道获取最新版。
-    </p>
+        /* 排行榜样式 */
+        .ranking-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #1a1a1a;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #eee;
+        }
+        .ranking-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+        .rank-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .rank-num {
+            width: 30px;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            margin-right: 15px;
+        }
+        .top-1 { color: #ffd700; font-size: 1.2em; }
+        .top-2 { color: #c0c0c0; font-size: 1.1em; }
+        .top-3 { color: #cd7f32; font-size: 1.1em; }
+        .rank-name {
+            width: 140px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            z-index: 2;
+        }
+        .rank-bar-bg {
+            flex-grow: 1;
+            background-color: #333;
+            height: 24px;
+            border-radius: 4px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+        .rank-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            transition: width 1s ease-in-out;
+        }
+        .highlight-bar {
+            background: linear-gradient(90deg, #FDC830 0%, #F37335 100%);
+        }
+        .rank-value {
+            width: 60px;
+            text-align: right;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .note-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            line-height: 1.5;
+        }
+        .icon-note {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #666;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 14px;
+            font-size: 10px;
+            margin-left: 5px;
+            cursor: help;
+        }
 
-    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
-        <h4 style="margin-top: 0; color: #333; font-size: 14px;"> 故障排除与下载</h4>
-        <ul style="padding-left: 20px; margin-bottom: 0; color: #444; font-size: 13px;">
-            <li style="margin-bottom: 5px;"><strong>官网下载：</strong> <a href="http://fursuit.tv" target="_blank" style="color: #007bff; text-decoration: none;">fursuit.tv</a> (解决安装包损坏问题)</li>
-            <li><strong>官方QQ群：</strong> 1042314846 (获取最新版/反馈Bug)</li>
-        </ul>
-    </div>
-</div>
+        /* 兽聚日历按钮 */
+        .month-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: #eee;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .month-btn:hover { background: #00a1d6; color: white; }
+        .month-btn.active { background: #00a1d6; color: white; font-weight: bold; }
+        .con-list { list-style: none; padding: 0; margin: 0; }
+        .con-list li { 
+            padding: 10px; 
+            border-bottom: 1px dashed #eee; 
+            display: flex; 
+            align-items: center; 
+        }
+        .con-list li:last-child { border-bottom: none; }
+        .con-date { 
+            background: #00a1d6; 
+            color: white; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            margin-right: 15px; 
+            min-width: 40px; 
+            text-align: center;
+        }
 
-<!-- 游戏推荐板块开始 -->
-<div id="games" style="margin-top: 40px; padding: 25px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05);">
-    <h2 style="text-align: center; color: #333; margin-bottom: 10px;"> 精选福瑞游戏推荐</h2>
-    <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 30px;">从硬核解谜到温馨日常，探索毛茸茸的虚拟世界。</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-        <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
-            <div style="height: 140px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Changed</div>
-            <div style="padding: 20px;">
-                <h3 style="margin: 0 0 10px 0; color: #333;">兽化实验室 (Changed)</h3>
-                <p style="font-size: 13px; color: #666; line-height: 1.6;">横版动作解谜神作。扮演实验体 Colin，在充满变异生物的实验室中潜行逃生。无战斗系统，全靠策略与观察，剧情丰富且结局多样。</p>
-                <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
-                     <strong>推荐解说：</strong>B站UP主 <a href="https://space.bilibili.com/35565205?spm_id_from=333.1387.follow.user_card.click">茭白柒</a>（专注细节解析，全篇分析系列必看）
-                </div>
-                <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 4px;">#解谜 #硬核</span>
-            </div>
-        </div>
-<div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
-    <!-- 顶部渐变背景 -->
-    <div style="height: 140px; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">
-        Clover Field
-    </div>
-    
-    <!-- 内容区域 -->
-    <div style="padding: 20px;">
-        <h3 style="margin: 0 0 10px 0; color: #333;">四叶苜蓿 (Clover Field)</h3>
-        <p style="font-size: 13px; color: #666; line-height: 1.6;">
-            像素风角色扮演游戏。以《有兽焉》为背景，自由探索关卡并与NPC互动。画风复古可爱，氛围轻松温馨，适合休闲玩家。
-        </p>
-        
-        <!-- 作者信息（已修复链接） -->
-        <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
-             <strong>作者：</strong>
-            <a href="https://space.bilibili.com/341593687?spm_id_from=333.337.0.0" target="_blank" style="color: #00a1d6; text-decoration: none; font-weight: bold;">小猫Giovanni</a>
-            （独立开发者，用心打磨的同人佳作）
-        </div>
-    </div>
-</div>
+        /* 作品推荐选项卡样式 */
+        .works-tab {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #eee;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .works-tab:hover {
+            background: #00a1d6;
+            color: white;
+        }
+        .works-tab.active {
+            background: #00a1d6;
+            color: white;
+            font-weight: bold;
+        }
+        .works-content {
+            transition: all 0.3s;
+        }
 
-
-                </div>
-                <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e8f5e9; color: #388e3c; font-size: 12px; border-radius: 4px;">#RPG #像素风</span>
-            </div>
-        </div>
-        <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
-            <div style="height: 140px; background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Night Shift</div>
-            <div style="padding: 20px;">
-                <h3 style="margin: 0 0 10px 0; color: #333;">福瑞娘的夜班</h3>
-                <p style="font-size: 13px; color: #666; line-height: 1.6;">恐怖生存与解谜挑战。在昏暗的店铺中一边完成夜班任务，一边提防四处游荡的“福瑞娘”。极度考验反应力与资源分配。</p>
-                <div style="margin-top: 10px; padding: 8px; background: #fff8e1; border-radius: 6px; font-size: 12px; color: #f57c00;">
-                    ️ <strong>温馨提示：</strong>本作包含惊悚元素，建议18+玩家体验。
-                </div>
-                <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fff3e0; color: #f57c00; font-size: 12px; border-radius: 4px;">#恐怖解谜 #生存</span>
-            </div>
-        </div>
-        <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
-            <div style="height: 140px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">DevilConnection</div>
-            <div style="padding: 20px;">
-                <h3 style="margin: 0 0 10px 0; color: #333;">恶魔连结 (DevilConnection)</h3>
-                <p style="font-size: 13px; color: #666; line-height: 1.6;">哥特风恶魔调教冒险游戏。无战斗系统，通过“邪眼洞察”窥视角色内心，收集海量结局。画风可爱略带黑暗，剧情充满个人趣味。</p>
-                <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
-                     <strong>平台：</strong>Steam / Nintendo Switch
-                </div>
-                <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #ede7f6; color: #512da8; font-size: 12px; border-radius: 4px;">#冒险 #多结局</span>
-            </div>
-        </div>
-        <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
-            <div style="height: 140px; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Warm Breeze</div>
-            <div style="padding: 20px;">
-                <h3 style="margin: 0 0 10px 0; color: #333;">煦风新笺</h3>
-                <p style="font-size: 13px; color: #666; line-height: 1.6;">青春校园恋爱模拟。主打细腻的双男主情感互动，多位兽人角色性格鲜明。剧情清水向，注重情感培养与故事体验。</p>
-                <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fce4ec; color: #c2185b; font-size: 12px; border-radius: 4px;">#恋爱模拟 #剧情</span>
-            </div>
-        </div>
-    </div>
-    <div style="margin-top: 20px; text-align: center; font-size: 12px; color: #999;">
-        * 所有推荐均为全年龄或轻微擦边向作品，请放心游玩。支持正版，请前往 Steam / itch.io 获取。
-    </div>
-</div>
-<!-- 游戏推荐板块结束 -->
-<!-- 兽频道推荐卡片结束 -->
-<!-- 反福瑞现象发展史板块开始 -->
-<div id="anti-furry-history" style="max-width: 800px; margin: 40px auto; padding: 25px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05);">
-    <style>
+        /* 反福瑞文章样式（合并到现状中，保留原有风格） */
+        .anti-furry-article {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #aaa;
+        }
         .anti-furry-article h1 { border-bottom: 2px solid #333; padding-bottom: 10px; font-size: 24px; }
         .anti-furry-article h2 { color: #2c3e50; border-left: 5px solid #c0392b; padding-left: 10px; margin-top: 30px; font-size: 20px; }
         .anti-furry-article h3 { color: #444; margin-top: 20px; font-size: 18px; }
@@ -794,43 +226,451 @@
         .anti-furry-article li { margin-bottom: 8px; }
         .anti-furry-article .intro { background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
     </style>
-    
-    <article class="anti-furry-article">
-        <h1>中文反福瑞现象发展史</h1>
-        
-        <div class="intro">
-            <p><strong>中文反福瑞现象</strong>，是指在中国互联网语境下，部分网民及组织针对"福瑞"（Furry，即兽迷/拟人化动物爱好者）亚文化群体，所产生的一系列排斥、污名化及网络暴力事件的总称。该现象自2016年起初露端倪，经历了从媒体误读、圈层内部矛盾外溢，到最终演变为有组织、系统性的网络"猎巫"行动，其演变史反映了边缘亚文化在破圈过程中所面临的严峻舆论环境。</p>
+</head>
+<body>
+
+    <!-- ========== 导航栏 ========== -->
+    <nav>
+        <a href="#" class="logo">FurryWiki</a>
+        <a href="#home">主页</a>
+        <a href="#history">历史</a>
+        <a href="#characters">角色</a>
+        <a href="#current-status">福瑞现状与反福瑞</a>
+        <a href="#works">作品推荐</a>
+        <a href="#old-wiki">旧Wiki档案</a>
+        <a href="#calendar">兽聚日期</a>
+        <a href="#fursuit-tv">兽频道</a>
+        <!-- 删除原 "反福瑞的历史" 导航项 -->
+        <span class="user-id">管理员: 东海域的鬼龙</span>
+    </nav>
+
+    <!-- ========== 主页 ========== -->
+    <div id="home" class="section" style="padding-top: 80px; text-align: center;">
+        <h1>欢迎来到新福瑞Wiki百科</h1>
+    </div>
+
+    <!-- ========== 历史 ========== -->
+    <div id="history" class="section" style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 16px; line-height: 1.8; color: #333; padding: 20px 0;">
+        <h1 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">福瑞文化的起源</h1>
+        <p>福瑞（Furry），又称兽迷或兽圈，是指对具有人类智能、双足步行、穿着服装等人类属性的拟人化动物形象感兴趣的群体。在英语中，“Furry”一词最早可追溯至17世纪后期，原意为“覆有毛皮的”。直到20世纪80年代，它才在亚文化语境中延伸出拟人动物角色及爱好者的含义，并逐渐成为一种独特的文化认同。</p>
+        <p>福瑞文化的诞生，与20世纪中叶美国的社会环境及漫画产业变革息息相关。50年代末至60年代初，美国漫画杂志协会（CMAA）及《权威漫画准则》（CCA）先后成立，导致漫画产业被迫向“儿童娱乐”与“道德教育”靠拢。为反抗这种审查压力，部分漫画家开始自费出版，借拟人动物（Funny Animal）探讨严肃议题。在这一背景下，为了连接创作者而诞生的APA组织，让拟人动物脱离了单纯的象征化，形成了“角色可以是角色本身”的全新认知。</p>
+        <p>真正推动福瑞文化从潜在形态向自觉亚文化过渡的，是1980年第38届世界科幻大会（Worldcon）上的一次偶然分享。当时，美国空军技术插画师 Steve Gallacci 向一小群科幻迷展示了其原创角色 Erma Felna 的插画与设定草稿。这一非正式的概念分享意外引发了持续数年的连锁反应，自发形成了一个高度聚焦的讨论圈——“加拉其小组（Gallacci Group）”。成员们不仅认真研读其关于人工进化动物智慧种族的星际战争设定，甚至在拍卖会上为那幅设定草稿展开竞拍。这种“先于作品的社群意识”，为福瑞文化的凝聚奠定了基础。</p>
+        <p>1984年创刊的《Rowrbrazzle》杂志，则被视为福瑞走向独立亚文化的重要里程碑。它标志着对拟人动物的兴趣不再只是零散的个人偏好，而是形成了能够稳定支持创作、交流与再生产的独立文化实践。</p>
+        <p>随着互联网的发展，福瑞文化逐渐跨越国界。2005年左右，福瑞文化正式传入中国，大陆的兽迷开始集中在百度贴吧的“兽人吧”及相关衍生群中活动。在2005年至2013年间，贴吧及相关群组是兽迷最主要的网络交流枢纽。然而，随着2013年后贴吧颓势渐显，加之2015年下旬遭遇大规模删封波及，这一早期的国内兽迷网络枢纽最终失去了原本的核心地位，福瑞文化也由此进入了新的发展阶段。</p>
+        <hr style="margin: 30px 0; border: none; border-top: 1px dashed #ccc;">
+        <p style="font-size: 12px; color: #888;">
+            <strong>数据来源：</strong>萌娘百科 <a href="https://mzh.moegirl.org.cn/Furry">Furry</a>、前福瑞Wiki Furry（2025年9月13日版本） <a href="https://zh.wikifur.com/wiki/Furry">Furry</a>
+        </p>
+    </div>
+
+    <!-- ========== 角色热度 ========== -->
+    <div id="characters" class="section">
+        <div class="ranking-container">
+            <div class="ranking-title">兽圈/泛兽类主播热度 TOP 20</div>
+            <div class="rank-item">
+                <div class="rank-num top-1">1</div>
+                <div class="rank-name">碧月狐<span class="icon-note" title="注：该主播虽数据极高，但本人声明不属于兽迷圈子，此处仅作热度参考">?</span></div>
+                <div class="rank-bar-bg"><div class="rank-bar-fill highlight-bar" style="width: 100%;"></div></div>
+                <div class="rank-value">136.2w</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num top-2">2</div>
+                <div class="rank-name">一块电鹿板</div>
+                <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 56%;"></div></div>
+                <div class="rank-value">76.3w</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num top-3">3</div>
+                <div class="rank-name">银碳Gintan</div>
+                <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 26%;"></div></div>
+                <div class="rank-value">35.4w</div>
+            </div>
+            <div class="rank-item"><div class="rank-num">4</div><div class="rank-name">带袋浣能Rakky</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 25%;"></div></div><div class="rank-value">33.9w</div></div>
+            <div class="rank-item"><div class="rank-num">5</div><div class="rank-name">茭白柒</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 25%;"></div></div><div class="rank-value">34.7w</div></div>
+            <div class="rank-item"><div class="rank-num">6</div><div class="rank-name">饼人b</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 24%;"></div></div><div class="rank-value">33.9w</div></div>
+            <div class="rank-item"><div class="rank-num">7</div><div class="rank-name">鹿野灸</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 21%;"></div></div><div class="rank-value">28.5w</div></div>
+            <div class="rank-item"><div class="rank-num">8</div><div class="rank-name">sound—track</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 18%;"></div></div><div class="rank-value">25.1w</div></div>
+            <div class="rank-item"><div class="rank-num">9</div><div class="rank-name">冰糖雪理不是梨</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 18%;"></div></div><div class="rank-value">25.0w</div></div>
+            <div class="rank-item"><div class="rank-num">10</div><div class="rank-name">虾多喵</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 18%;"></div></div><div class="rank-value">24.5w</div></div>
+            <div class="rank-item"><div class="rank-num">11</div><div class="rank-name">老朋友王海缤</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 17%;"></div></div><div class="rank-value">24.4w</div></div>
+            <div class="rank-item"><div class="rank-num">12</div><div class="rank-name">蹭饭不下饭</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 17%;"></div></div><div class="rank-value">24.1w</div></div>
+            <div class="rank-item"><div class="rank-num">13</div><div class="rank-name">白曦学友</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 16%;"></div></div><div class="rank-value">23.2w</div></div>
+            <div class="rank-item"><div class="rank-num">14</div><div class="rank-name">果糖含量</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 16%;"></div></div><div class="rank-value">22.3w</div></div>
+            <div class="rank-item"><div class="rank-num">15</div><div class="rank-name">塔米糕ovo</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 15%;"></div></div><div class="rank-value">21.3w</div></div>
+            <div class="rank-item"><div class="rank-num">16</div><div class="rank-name">Yumehime鱼咩</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 14%;"></div></div><div class="rank-value">19.5w</div></div>
+            <div class="rank-item"><div class="rank-num">17</div><div class="rank-name">小猫蛋卷</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 14%;"></div></div><div class="rank-value">19.1w</div></div>
+            <div class="rank-item"><div class="rank-num">18</div><div class="rank-name">雪狐玩暗区</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 13%;"></div></div><div class="rank-value">18.2w</div></div>
+            <div class="rank-item"><div class="rank-num">19</div><div class="rank-name">魔法少年电池er</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 12%;"></div></div><div class="rank-value">17.5w</div></div>
+            <div class="rank-item"><div class="rank-num">20</div><div class="rank-name">FN柴北黎Chabry</div><div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 10%;"></div></div><div class="rank-value">14.8w</div></div>
+            <div class="note-text">
+                * 数据来源：网络统计（截止至2026年5月）。<br>
+                * 特别说明：榜单第1名“碧月狐”虽然拥有极高的相关话题热度，但作者本人已声明不属于兽迷（Furry）圈子。本榜单将其列入旨在客观反映当前泛兽类内容的流量分布，不代表对其身份的定义。<br>
+                * 如有数据遗漏或更新，欢迎联系站长。
+            </div>
+        </div>
+    </div>
+    <div id="current-status" style="margin-top: 50px; padding: 20px;">
+
+        <!-- 第一部分：福瑞现状（原内容） -->
+        <div style="margin-bottom: 40px;">
+            <h2 style="color: #27ae60; border-left: 5px solid #27ae60; padding-left: 15px;">现在的漫画与创作生态</h2>
+            <p style="color: #333;">如今的福瑞文化早已不再局限于早期的设定集，而是衍生出了庞大的产业链。漫画创作是其中的核心载体，题材跨度极大：</p>
+            <ul style="list-style-type: disc; margin-left: 20px; color: #333;">
+                <li><strong>全年龄向作品：</strong> 许多作品专注于温馨日常或探讨社会议题。例如《坏蛋大饭店》和《Beastars》，深刻探讨了种族偏见、身份认同等严肃话题。</li>
+                <li><strong>网络条漫与独立创作：</strong> 随着互联网的发展，大量创作者通过 Webtoon 等平台连载条漫，极大地降低了创作和传播门槛。</li>
+                <li><strong>成人向内容：</strong> 必须客观承认，这也是圈子庞大流量的一部分。由于互联网的传播特性，这部分内容往往更容易“破圈”，但也因此给大众留下了刻板印象。</li>
+            </ul>
         </div>
 
-        <h2>1. 2016年：媒体失实报道与舆论"第一枪"</h2>
-        <p>反福瑞舆论的源头可追溯至2016年。当时，《南方都市报》发布了一篇关于兽迷圈的深度报道，该报道在描述圈内乱象时出现了关键性的表述缺失。文中指出"兽迷圈存在未成年人的低俗色情内容"，却未加上"部分"或"少数"等关键限定词。</p>
-        <p>这一以偏概全的表述，直接将亚文化圈层内部的灰色地带问题等同于整个群体的普遍特征，触发了社会大众对于"未成年人保护"的敏感神经。此次报道被广泛视为中文互联网"反福瑞"情绪的第一枪，确立了后续反福瑞群体利用"道德高地"进行攻击的逻辑基础。</p>
+        <div style="margin-bottom: 40px; padding-top: 20px; border-top: 1px dashed #444;">
+            <h2 style="color: #e67e22; border-left: 5px solid #e67e22; padding-left: 15px;">圈内的分歧与冲突</h2>
+            <p style="color: #333;">福瑞圈内部并非铁板一块，随着群体扩大，关于“什么是真正的福瑞”以及“如何对外展示”的争论从未停止。</p>
+            <ul style="list-style-type: disc; margin-left: 20px; color: #333;">
+                <li><strong>“兽设”与“皮套”之争：</strong> 拥有昂贵定制皮套（Fursuit）的现充派与坚持二次元绘画、文字创作的“键盘派”之间偶尔存在鄙视链。</li>
+                <li><strong>商业化与原教旨主义：</strong> 一部分人主张积极商业化、拥抱主流；另一部分人则担心过度商业化和色情化会毁掉这个亚文化的纯粹性。</li>
+            </ul>
+        </div>
 
-        <h2>2. 2018年：低龄化乱象与《有兽焉》网暴事件</h2>
-        <p>2018年是反福瑞情绪从"观念排斥"转向"具体行动"的关键年份，期间发生了两起标志性事件，标志着反福瑞行为开始针对具体的文化作品进行"定点爆破"。</p>
+        <div style="margin-bottom: 40px; padding-top: 20px; border-top: 1px dashed #444;">
+            <h2 style="color: #8e44ad; border-left: 5px solid #8e44ad; padding-left: 15px;">国内政治议题与底线</h2>
+            <p style="color: #333;">在国内语境下，福瑞圈并非脱离现实的“乌托邦”，当亚文化与大是大非发生碰撞时，往往会引发激烈的争议与抵制：</p>
+            <ul style="list-style-type: disc; margin-left: 20px; color: #333;">
+                <li><strong>坚决抵制“台独”等分裂言论：</strong> 曾有极个别拥有兽设的主播或创作者暗夹私货，这种行为一经曝光，立刻遭到国内兽迷群体的强烈抵制与自发封杀。大家普遍认为，无论披着多么可爱的“兽皮”，都不能掩盖政治立场上的恶劣本质。</li>
+                <li><strong>网络黑称与侮辱性标签：</strong> 随着圈子扩大，外界针对福瑞群体的恶意攻击层出不穷。部分极端反福瑞群体发明了诸如“扫***”等带有强烈侮辱性的黑称。这类词汇本质上是针对整个亚文化群体的无差别攻击和污名化。更有甚者亵渎毛主席来获得反福瑞的流量</li>
+            </ul>
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="示例.jpg" alt="示例" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" onerror="this.style.display='none'">
+                <p style="font-size: 0.9em; color: #888; margin-top: 10px;">图：相关的网络现象示例</p>
+            </div>
+        </div>
+        <div class="anti-furry-article">
+            <h1>中文反福瑞现象发展史</h1>
+            <div class="intro">
+                <p><strong>中文反福瑞现象</strong>，是指在中国互联网语境下，部分网民及组织针对"福瑞"（Furry，即兽迷/拟人化动物爱好者）亚文化群体，所产生的一系列排斥、污名化及网络暴力事件的总称。该现象自2016年起初露端倪，经历了从媒体误读、圈层内部矛盾外溢，到最终演变为有组织、系统性的网络"猎巫"行动，其演变史反映了边缘亚文化在破圈过程中所面临的严峻舆论环境。</p>
+            </div>
+            <h2>1. 2016年：媒体失实报道与舆论"第一枪"</h2>
+            <p>反福瑞舆论的源头可追溯至2016年。当时，《南方都市报》发布了一篇关于兽迷圈的深度报道，该报道在描述圈内乱象时出现了关键性的表述缺失。文中指出"兽迷圈存在未成年人的低俗色情内容"，却未加上"部分"或"少数"等关键限定词。</p>
+            <p>这一以偏概全的表述，直接将亚文化圈层内部的灰色地带问题等同于整个群体的普遍特征，触发了社会大众对于"未成年人保护"的敏感神经。此次报道被广泛视为中文互联网"反福瑞"情绪的第一枪，确立了后续反福瑞群体利用"道德高地"进行攻击的逻辑基础。</p>
+            <h2>2. 2018年：低龄化乱象与《有兽焉》网暴事件</h2>
+            <p>2018年是反福瑞情绪从"观念排斥"转向"具体行动"的关键年份，期间发生了两起标志性事件，标志着反福瑞行为开始针对具体的文化作品进行"定点爆破"。</p>
+            <ul>
+                <li><strong>"大牛村"低龄化乱象：</strong>以"大牛村"为代表的事件暴露了当时兽迷圈受众的极度低龄化。大量心智尚未成熟的小学生及初中生涌入，在缺乏引导的情况下模仿圈内不良风气，导致公共网络平台出现大量出格行为，为反福瑞群体提供了攻击的"实锤"。</li>
+                <li><strong>《有兽焉》遭遇大型网暴：</strong>2024.10.01，国产知名条漫《有兽焉》遭遇了史无前例的大型网络暴力。反福瑞群体及部分极端网友利用漫画中的个别争议点，进行了断章取义的传播与恶意解读，引发了针对作者及作品的大规模谩骂与举报。这是兽迷相关文化产品首次在主流视野中遭受如此规模的集中攻击。</li>
+            </ul>
+            <h2>3. 2023年：组织化对抗与历史最大规模网暴</h2>
+            <p>进入2023年，反福瑞行为彻底完成了从"散兵游勇"到"有组织集团"的蜕变，并爆发了历史上规模最大的围剿事件。</p>
+            <ul>
+                <li><strong>有组织的"猎巫"行动：</strong>反福瑞群体不再是个体宣泄，而是形成了严密的组织架构。他们建立了专门的素材库与话术群，制定了统一的攻击计划，将反福瑞行为演变为一种"网络狂欢"与"烂梗"传播。</li>
+                <li><strong>全网级舆论围剿：</strong>2023年至今爆发的网暴，其规模、持续时间及破坏力均远超2018年。反福瑞组织利用平台监管规则的漏洞，对兽迷画师、兽展主办方及相关社群进行了无差别的举报与骚扰。</li>
+                <li><strong>性质质变：</strong>此次事件不再局限于对"低俗内容"的批判，而是演变为对整个兽迷群体生存空间的系统性挤压，试图通过制造恐慌和污名化，将兽迷文化彻底驱逐出公共网络平台。</li>
+            </ul>
+            <h2>4. 现象成因与社会学分析</h2>
+            <p>综合来看，中文反福瑞现象的爆发并非单一因素所致，而是多重矛盾叠加的结果：</p>
+            <ul>
+                <li><strong>内部因素：</strong>圈子门槛较低导致受众极度低龄化，部分缺乏判断力的低龄用户发表极端言论或擦边行为，加之圈内少数不良分子借机宣泄过度欲望，为外界攻击提供了直接抓手。</li>
+                <li><strong>外部因素：</strong>随着社交媒体的普及，福瑞文化从封闭同好群进入大众视野。大众往往无法区分"正常爱好者"与"不良分子"，产生易得性启发与群体归因错误，将极少数不良个体等同于整个圈层。</li>
+                <li><strong>心理机制：</strong>部分反福瑞行为本质上是一种网络霸凌的变体。施暴者通过寻找一个相对弱势的亚文化群体作为"替罪羊"（即"黑羊效应"）欺负弱小的福瑞（即踢猫效应）一次忍让带来的变本加厉（即破窗效应），以此来释放现实生活中的压力或获取群体归属感。</li>
+            </ul>
+            <h2>结语</h2>
+            <p>从2016年的媒体误读，到2018年针对具体作品的网暴，再到2023年的全网围剿，反福瑞现象的演变史，是一部亚文化在偏见与恶意中艰难求生的血泪史。记录这些历史，旨在客观还原事件真相，警惕网络暴力的蔓延，并呼吁社会各界对多元文化保持应有的尊重与包容。</p>
+        </div>
+        <!-- ========== 反福瑞历史内容结束 ========== -->
+
+    </div>
+    <!-- ========== 合并后的 current-status 结束 ========== -->
+
+    <!-- ========== 合并后的“作品推荐 + 福瑞游戏”区块（带选项卡） ========== -->
+    <div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+
+        <!-- 选项卡按钮 -->
+        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+            <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active">📚 漫画动画</button>
+            <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab">🎮 福瑞游戏</button>
+        </div>
+
+        <!-- 漫画动画内容（默认显示） -->
+        <div id="works-comic" class="works-content">
+            <h2 style="text-align: center; color: #333;">精选福瑞漫画与动画</h2>
+            <p style="text-align: center; color: #666;">收录圈内知名作品，感受兽设的魅力</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc39773" style="color: #00a1d6; text-decoration: none;" target="_blank">历历回响</a></h3>
+                    <p style="font-size: 14px; color: #555;">关于痛，爱与和解的短片集。</p>
+                    <p style="font-size: 12px; color: #999;">作者：炭烧小狗</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://www.bilibili.com/video/BV1H2M6zXEMm/" style="color: #00a1d6; text-decoration: none;" target="_blank">黑白回响</a></h3>
+                    <p style="font-size: 14px; color: #555;">中世纪剧情向兽设短剧。</p>
+                    <p style="font-size: 12px; color: #999;">类型：动画短片</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc40778" style="color: #00a1d6; text-decoration: none;" target="_blank">有狐·遗仙</a></h3>
+                    <p style="font-size: 14px; color: #555;">山海再绘，笔墨生灵。</p>
+                    <p style="font-size: 12px; color: #999;">作者：玉枝</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39566" style="color: #00a1d6; text-decoration: none;" target="_blank">拾昔</a></h3>
+                    <p style="font-size: 14px; color: #555;">讲述单独角色的个人故事。</p>
+                    <p style="font-size: 12px; color: #999;">作者：KaEr</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39754" style="color: #00a1d6; text-decoration: none;" target="_blank">大兽纪</a></h3>
+                    <p style="font-size: 14px; color: #555;">宏大的世界观设定。</p>
+                    <p style="font-size: 12px; color: #999;">作者：不二茶</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc37764" style="color: #00a1d6; text-decoration: none;" target="_blank">兽域战纪</a></h3>
+                    <p style="font-size: 14px; color: #555;">热血战斗风格，元兽少年的成长之旅。</p>
+                    <p style="font-size: 12px; color: #999;">作者：钰逆</p>
+                </div>
+                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc29329" style="color: #00a1d6; text-decoration: none;" target="_blank">有兽焉</a></h3>
+                    <p style="font-size: 14px; color: #555;">人间有神兽，来自九重天。</p>
+                    <p style="font-size: 12px; color: #999;">作者：靴下猫腰子</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏内容（默认隐藏） -->
+        <div id="works-game" class="works-content" style="display: none;">
+            <h2 style="text-align: center; color: #333; margin-top: 10px;">精选福瑞游戏推荐</h2>
+            <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 30px;">从硬核解谜到温馨日常，探索毛茸茸的虚拟世界。</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Changed</div>
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; color: #333;">兽化实验室 (Changed)</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">横版动作解谜神作。扮演实验体 Colin，在充满变异生物的实验室中潜行逃生。无战斗系统，全靠策略与观察，剧情丰富且结局多样。</p>
+                        <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                            <strong>推荐解说：</strong>B站UP主 <a href="https://space.bilibili.com/35565205" target="_blank" style="color: #00a1d6; text-decoration: none;">茭白柒</a>
+                        </div>
+                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 4px;">#解谜 #硬核</span>
+                    </div>
+                </div>
+                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Clover Field</div>
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; color: #333;">四叶苜蓿</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">像素风角色扮演游戏。以《有兽焉》为背景，自由探索关卡并与NPC互动。画风复古可爱，氛围轻松温馨，适合休闲玩家。</p>
+                        <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                            <strong>作者：</strong><a href="https://space.bilibili.com/341593687" target="_blank" style="color: #00a1d6; text-decoration: none;">小猫Giovanni</a>
+                        </div>
+                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e8f5e9; color: #388e3c; font-size: 12px; border-radius: 4px;">#RPG #像素风</span>
+                    </div>
+                </div>
+                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Night Shift</div>
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; color: #333;">福瑞娘的夜班</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">恐怖生存与解谜挑战。在昏暗的店铺中一边完成夜班任务，一边提防四处游荡的“福瑞娘”。极度考验反应力与资源分配。</p>
+                        <div style="margin-top: 10px; padding: 8px; background: #fff8e1; border-radius: 6px; font-size: 12px; color: #f57c00;">
+                            ⚠️ <strong>温馨提示：</strong>本作包含惊悚元素，建议18+玩家体验。
+                        </div>
+                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fff3e0; color: #f57c00; font-size: 12px; border-radius: 4px;">#恐怖解谜 #生存</span>
+                    </div>
+                </div>
+                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">DevilConnection</div>
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; color: #333;">恶魔连结 (でびるコネクショん)</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">哥特风恶魔调教冒险游戏。无战斗系统，通过“邪眼洞察”窥视角色内心，收集海量结局。画风可爱略带黑暗，剧情充满个人趣味。</p>
+                        <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                            <strong>平台：</strong>Steam / Nintendo Switch
+                        </div>
+                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #ede7f6; color: #512da8; font-size: 12px; border-radius: 4px;">#冒险 #多结局</span>
+                    </div>
+                </div>
+                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Warm Breeze</div>
+                    <div style="padding: 20px;">
+                        <h3 style="margin: 0 0 10px 0; color: #333;">煦风新笺</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">青春校园恋爱模拟。主打细腻的双男主情感互动，多位兽人角色性格鲜明。剧情清水向，注重情感培养与故事体验。</p>
+                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fce4ec; color: #c2185b; font-size: 12px; border-radius: 4px;">#恋爱模拟 #剧情</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: center; font-size: 12px; color: #999;">
+                * 所有推荐均为全年龄或轻微擦边向作品，请放心游玩。支持正版，请前往 Steam / itch.io 获取。
+            </div>
+        </div>
+    </div>
+    <!-- ========== 合并区块结束 ========== -->
+
+    <!-- ========== 旧Wiki档案 ========== -->
+    <div id="old-wiki" style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 10px; border-left: 4px solid #8B0000;">
+        <h2 style="color: #8B0000; border-bottom: 2px solid #ddd; padding-bottom: 10px;">旧版 Furry Wiki 历史档案</h2>
+        <p><em>“访问速度很快，页面UI美观，可惜无人更新维护……”</em></p>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <p><strong>成立时间：</strong>2020年4月1日</p>
+            <p><strong>创始人：</strong>福林菌（哔哩哔哩兽装穿扮者）</p>
+            <p><strong>技术基础：</strong>MediaWiki + 阿里云服务器</p>
+            <p><strong>最终状态：</strong><span style="color: red;">2024年1月失效，重定向至商业约稿平台</span></p>
+        </div>
+        <h3>大事记（根据哔哩哔哩月报整理）</h3>
         <ul>
-            <li><strong>"大牛村"低龄化乱象：</strong>以"大牛村"为代表的事件暴露了当时兽迷圈受众的极度低龄化。大量心智尚未成熟的小学生及初中生涌入，在缺乏引导的情况下模仿圈内不良风气，导致公共网络平台出现大量出格行为，为反福瑞群体提供了攻击的"实锤"。</li>
-            <li><strong>《有兽焉》遭遇大型网暴：</strong>2024.10.01，国产知名条漫《有兽焉》遭遇了史无前例的大型网络暴力。反福瑞群体及部分极端网友利用漫画中的个别争议点，进行了断章取义的传播与恶意解读，引发了针对作者及作品的大规模谩骂与举报。这是兽迷相关文化产品首次在主流视野中遭受如此规模的集中攻击。</li>
+            <li><strong>2020.04.01：</strong>项目开始，第一条编辑。</li>
+            <li><strong>2020.04.12：</strong>注册编辑者达到10人。</li>
+            <li><strong>2020.04.25：</strong>编辑次数突破1000次。</li>
+            <li><strong>2020.04.27：</strong>启用主域名 <code>furrywiki.cn</code>。</li>
+            <li><strong>2020.07.26：</strong>官方微博上线，发布吉祥物。</li>
+            <li><strong>2022.08：</strong>停止更新维护，界面定格。</li>
         </ul>
+        <h3>危机与争议</h3>
+        <ol>
+            <li><strong>管理混乱：</strong>任用错误的行政员（如 <code>UWU</code>），导致大量未经许可的模板和文章被导入。</li>
+            <li><strong>历史抹除：</strong>行政员绕过系统直接修改数据库，删除了修订记录，违背了百科的透明原则。</li>
+            <li><strong>商业背刺：</strong>备案主体为<em>广州福瑞文化传播有限公司</em>，涉嫌违背 CC BY-NC-SA 3.0 的非商业性使用协议。</li>
+            <li><strong>最终结局：</strong>2024年1月，域名重定向至“兽聚汇”画师约稿平台，社区心血付之一炬。</li>
+        </ol>
+    </div>
 
-        <h2>3. 2023年：组织化对抗与历史最大规模网暴</h2>
-        <p>进入2023年，反福瑞行为彻底完成了从"散兵游勇"到"有组织集团"的蜕变，并爆发了历史上规模最大的围剿事件。</p>
-        <ul>
-            <li><strong>有组织的"猎巫"行动：</strong>反福瑞群体不再是个体宣泄，而是形成了严密的组织架构。他们建立了专门的素材库与话术群，制定了统一的攻击计划，将反福瑞行为演变为一种"网络狂欢"与"烂梗"传播。</li>
-            <li><strong>全网级舆论围剿：</strong>2023年至今爆发的网暴，其规模、持续时间及破坏力均远超2018年。反福瑞组织利用平台监管规则的漏洞，对兽迷画师、兽展主办方及相关社群进行了无差别的举报与骚扰。</li>
-            <li><strong>性质质变：</strong>此次事件不再局限于对"低俗内容"的批判，而是演变为对整个兽迷群体生存空间的系统性挤压，试图通过制造恐慌和污名化，将兽迷文化彻底驱逐出公共网络平台。</li>
-        </ul>
+    <!-- ========== 兽聚日历 ========== -->
+    <div id="calendar" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+        <h2 style="text-align: center; color: #333;">全球兽聚日历 (Furry Con Calendar)</h2>
+        <p style="text-align: center; color: #666;">线下相聚，感受毛茸茸的魅力！(数据持续更新中)</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0;">
+            <button onclick="showMonth('may')" class="month-btn">5月</button>
+            <button onclick="showMonth('jun')" class="month-btn active">6月</button>
+            <button onclick="showMonth('jul')" class="month-btn">7月</button>
+            <button onclick="showMonth('aug')" class="month-btn">8月</button>
+            <button onclick="showMonth('sep')" class="month-btn">9月</button>
+            <button onclick="showMonth('oct')" class="month-btn">10月</button>
+        </div>
+        <div id="calendar-content" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-height: 150px;"></div>
+    </div>
 
-        <h2>4. 现象成因与社会学分析</h2>
-        <p>综合来看，中文反福瑞现象的爆发并非单一因素所致，而是多重矛盾叠加的结果：</p>
-        <ul>
-            <li><strong>内部因素：</strong>圈子门槛较低导致受众极度低龄化，部分缺乏判断力的低龄用户发表极端言论或擦边行为，加之圈内少数不良分子借机宣泄过度欲望，为外界攻击提供了直接抓手。</li>
-            <li><strong>外部因素：</strong>随着社交媒体的普及，福瑞文化从封闭同好群进入大众视野。大众往往无法区分"正常爱好者"与"不良分子"，产生易得性启发与群体归因错误，将极少数不良个体等同于整个圈层。</li>
-            <li><strong>心理机制：</strong>部分反福瑞行为本质上是一种网络霸凌的变体。施暴者通过寻找一个相对弱势的亚文化群体作为"替罪羊"（即"黑羊效应"）欺负弱小的福瑞（即踢猫效应）一次忍让带来的变本加厉（即破窗效应），以此来释放现实生活中的压力或获取群体归属感。</li>
-        </ul>
+    <!-- ========== 兽频道 ========== -->
+    <div id="fursuit-tv" style="margin-top: 30px; padding: 20px; background-color: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 5px solid #ff9900;">
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+            <div style="width: 50px; height: 50px; background-color: #ff9900; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 24px; margin-right: 15px;">TV</div>
+            <div>
+                <h3 style="margin: 0; color: #333;">兽频道 (Fursuit.tv)</h3>
+                <span style="font-size: 12px; color: #666; background: #eee; padding: 2px 6px; border-radius: 4px;">APP / 社区</span>
+            </div>
+        </div>
+        <p style="color: #555; line-height: 1.6; font-size: 14px;">
+            国内知名的兽装文化交流平台。在这里你可以浏览海量毛毛的精美照片、视频，分享自己的兽设，还能找到同好交流。<strong>注意：</strong>如果遇到图片崩溃或更新失败，请务必通过以下官方渠道获取最新版。
+        </p>
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <h4 style="margin-top: 0; color: #333; font-size: 14px;">故障排除与下载</h4>
+            <ul style="padding-left: 20px; margin-bottom: 0; color: #444; font-size: 13px;">
+                <li style="margin-bottom: 5px;"><strong>官网下载：</strong> <a href="http://fursuit.tv" target="_blank" style="color: #007bff; text-decoration: none;">fursuit.tv</a> (解决安装包损坏问题)</li>
+                <li><strong>官方QQ群：</strong> 1042314846 (获取最新版/反馈Bug)</li>
+            </ul>
+        </div>
+    </div>
 
-        <h2>结语</h2>
-        <p>从2016年的媒体误读，到2018年针对具体作品的网暴，再到2023年的全网围剿，反福瑞现象的演变史，是一部亚文化在偏见与恶意中艰难求生的血泪史。记录这些历史，旨在客观还原事件真相，警惕网络暴力的蔓延，并呼吁社会各界对多元文化保持应有的尊重与包容。</p>
-    </article>
-</div>
-<!-- 反福瑞现象发展史板块结束 -->
+    <!-- ========== JavaScript 脚本 ========== -->
+    <script>
+        // 1. 平滑滚动（导航链接）
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (href === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 2. 兽聚日历数据与函数
+        const conData = {
+            may: [
+                { date: "6日", name: "Furrymosa" },
+                { date: "11-15日", name: "Campfire Tails" },
+                { date: "11-14日", name: "Furvaria" },
+                { date: "13-14日", name: "Little Island Furcon" },
+                { date: "19-21日", name: "墨兽居·花与海之歌" },
+                { date: "19-21日", name: "Argentina FurFiesta" },
+                { date: "20-21日", name: "Borneo Anthro Hub" },
+                { date: "27-30日", name: "Lakeside Furs" },
+                { date: "27日", name: "UTFG" }
+            ],
+            jun: [
+                { date: "1-6日", name: "Lakeside Furs" },
+                { date: "2-6日", name: "Anthrocon" },
+                { date: "4-5日", name: "Indonesia Anthro Gathering" },
+                { date: "9-11日", name: "福绒聚" },
+                { date: "10-12日", name: "绒萌世界" },
+                { date: "11-13日", name: "青笛兽韵" },
+                { date: "16日", name: "探麟志" },
+                { date: "16日", name: "星绒会·第四届" },
+                { date: "16日", name: "Fur-Eh!" },
+                { date: "17-20日", name: "得闲兽聚·像素奇旅" },
+                { date: "17-19日", name: "古都有兽·瑞兽迎福" },
+                { date: "17-19日", name: "绵绒汇" },
+                { date: "23-26日", name: "幻兽聚·龙渊溯踪" },
+                { date: "23-26日", name: "兽星航·ECHO" },
+                { date: "23日", name: "Eufuria" },
+                { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" },
+                { date: "24-26日", name: "落茜聚" },
+                { date: "31日", name: "星澜特快号" }
+            ],
+            jul: [
+                { date: "6-9日", name: "EAST" },
+                { date: "19-23日", name: "Eurofurence" },
+                { date: "20-22日", name: "瑞影聚坊·万兽吟风" },
+                { date: "21-23日", name: "Megaplex" },
+                { date: "28-30日", name: "DenFur" }
+            ],
+            aug: [
+                { date: "3-4日", name: "FursonaCon" },
+                { date: "4-6日", name: "Calfurry" },
+                { date: "5-6日", name: "Barkada FurFest" },
+                { date: "11-13日", name: "Furry Migration" }
+            ],
+            sep: [
+                { date: "9-11日", name: "AquatiFur" },
+                { date: "29-31日", name: "Confuror" },
+                { date: "30-31日", name: "Infurnity獸無限" }
+            ],
+            oct: [
+                { date: "1-8日", name: "GoldenHorn" }
+            ]
+        };
+
+        function showMonth(month) {
+            document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.querySelector(`.month-btn[onclick*="${month}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            let html = '<ul class="con-list">';
+            if (conData[month] && conData[month].length > 0) {
+                conData[month].forEach(con => {
+                    html += `<li><span class="con-date">${con.date}</span><span>${con.name}</span></li>`;
+                });
+            } else {
+                html = '<p style="text-align: center; color: #999;">暂无展会安排</p>';
+            }
+            html += '</ul>';
+            document.getElementById('calendar-content').innerHTML = html;
+        }
+
+        // 3. 作品推荐选项卡切换
+        function switchWorksTab(tab) {
+            document.querySelectorAll('.works-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.works-tab').forEach(btn => btn.classList.remove('active'));
+            if (tab === 'comic') {
+                document.getElementById('works-comic').style.display = 'block';
+                document.getElementById('tab-comic').classList.add('active');
+            } else if (tab === 'game') {
+                document.getElementById('works-game').style.display = 'block';
+                document.getElementById('tab-game').classList.add('active');
+            }
+        }
+
+        // 页面加载时默认显示6月兽聚，并确保作品默认显示漫画动画
+        window.onload = function() {
+            showMonth('jun');
+            switchWorksTab('comic');
+        };
+    </script>
+
+</body>
+</html>
