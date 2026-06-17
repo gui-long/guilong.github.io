@@ -476,43 +476,134 @@
         </div>
     </div>
 
-    <!-- ========== 合并后的“作品推荐 + 福瑞游戏”区块 ========== -->
-    <div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-            <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active">📚 漫画动画</button>
-            <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab">🎮 福瑞游戏</button>
-        </div>
-        <div id="works-comic" class="works-content">
-            <h2 style="text-align: center; color: #333;">精选福瑞漫画与动画</h2>
-            <p style="text-align: center; color: #666;">收录圈内知名作品，感受兽设的魅力</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
-                <!-- 漫画卡片（同之前，省略重复以节省篇幅） -->
-                <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                    <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc39773" style="color: #00a1d6; text-decoration: none;" target="_blank">历历回响</a></h3>
-                    <p style="font-size: 14px; color: #555;">关于痛，爱与和解的短片集。</p>
-                    <p style="font-size: 12px; color: #999;">作者：炭烧小狗</p>
-                </div>
-                <!-- 其他卡片略，完整代码中会保留所有 -->
+ <!-- ========== 合并后的“作品推荐 + 福瑞游戏”区块（带选项卡） ========== -->
+<div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+
+    <!-- 选项卡按钮 -->
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+        <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active">📚 漫画动画</button>
+        <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab">🎮 福瑞游戏</button>
+    </div>
+
+    <!-- 漫画动画内容（默认显示） -->
+    <div id="works-comic" class="works-content">
+        <h2 style="text-align: center; color: #333;">精选福瑞漫画与动画</h2>
+        <p style="text-align: center; color: #666;">收录圈内知名作品，感受兽设的魅力</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
+            <!-- 1. 历历回响 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc39773" style="color: #00a1d6; text-decoration: none;" target="_blank">历历回响</a></h3>
+                <p style="font-size: 14px; color: #555;">关于痛，爱与和解的短片集。</p>
+                <p style="font-size: 12px; color: #999;">作者：炭烧小狗</p>
             </div>
-        </div>
-        <div id="works-game" class="works-content" style="display: none;">
-            <h2 style="text-align: center; color: #333; margin-top: 10px;">精选福瑞游戏推荐</h2>
-            <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 30px;">从硬核解谜到温馨日常，探索毛茸茸的虚拟世界。</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                <!-- 游戏卡片（同之前，省略重复） -->
-                <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
-                    <div style="height: 140px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Changed</div>
-                    <div style="padding: 20px;">
-                        <h3 style="margin: 0 0 10px 0; color: #333;">兽化实验室 (Changed)</h3>
-                        <p style="font-size: 13px; color: #666; line-height: 1.6;">横版动作解谜神作。</p>
-                        <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 4px;">#解谜 #硬核</span>
-                    </div>
-                </div>
-                <!-- 其他略 -->
+            <!-- 2. 黑白回响 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://www.bilibili.com/video/BV1H2M6zXEMm/" style="color: #00a1d6; text-decoration: none;" target="_blank">黑白回响</a></h3>
+                <p style="font-size: 14px; color: #555;">中世纪剧情向兽设短剧。</p>
+                <p style="font-size: 12px; color: #999;">类型：动画短片</p>
             </div>
-            <div style="margin-top: 20px; text-align: center; font-size: 12px; color: #999;">* 支持正版，请前往 Steam / itch.io 获取。</div>
+            <!-- 3. 有狐·遗仙 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc40778" style="color: #00a1d6; text-decoration: none;" target="_blank">有狐·遗仙</a></h3>
+                <p style="font-size: 14px; color: #555;">山海再绘，笔墨生灵。</p>
+                <p style="font-size: 12px; color: #999;">作者：玉枝</p>
+            </div>
+            <!-- 4. 拾昔 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39566" style="color: #00a1d6; text-decoration: none;" target="_blank">拾昔</a></h3>
+                <p style="font-size: 14px; color: #555;">讲述单独角色的个人故事。</p>
+                <p style="font-size: 12px; color: #999;">作者：KaEr</p>
+            </div>
+            <!-- 5. 大兽纪 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/m/detail/mc39754" style="color: #00a1d6; text-decoration: none;" target="_blank">大兽纪</a></h3>
+                <p style="font-size: 14px; color: #555;">宏大的世界观设定。</p>
+                <p style="font-size: 12px; color: #999;">作者：不二茶</p>
+            </div>
+            <!-- 6. 兽域战纪 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc37764" style="color: #00a1d6; text-decoration: none;" target="_blank">兽域战纪</a></h3>
+                <p style="font-size: 14px; color: #555;">热血战斗风格，元兽少年的成长之旅。</p>
+                <p style="font-size: 12px; color: #999;">作者：钰逆</p>
+            </div>
+            <!-- 7. 有兽焉 -->
+            <div style="width: 200px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin: 10px 0; font-size: 18px;"><a href="https://manga.bilibili.com/detail/mc29329" style="color: #00a1d6; text-decoration: none;" target="_blank">有兽焉</a></h3>
+                <p style="font-size: 14px; color: #555;">人间有神兽，来自九重天。</p>
+                <p style="font-size: 12px; color: #999;">作者：靴下猫腰子</p>
+            </div>
         </div>
     </div>
+
+    <!-- 游戏内容（默认隐藏） -->
+    <div id="works-game" class="works-content" style="display: none;">
+        <h2 style="text-align: center; color: #333; margin-top: 10px;">精选福瑞游戏推荐</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 30px;">从硬核解谜到温馨日常，探索毛茸茸的虚拟世界。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <!-- 游戏1：Changed -->
+            <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                <div style="height: 140px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Changed</div>
+                <div style="padding: 20px;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">兽化实验室 (Changed)</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.6;">横版动作解谜神作。扮演实验体 Colin，在充满变异生物的实验室中潜行逃生。无战斗系统，全靠策略与观察，剧情丰富且结局多样。</p>
+                    <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                        <strong>推荐解说：</strong>B站UP主 <a href="https://space.bilibili.com/35565205" target="_blank" style="color: #00a1d6; text-decoration: none;">茭白柒</a>
+                    </div>
+                    <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 4px;">#解谜 #硬核</span>
+                </div>
+            </div>
+            <!-- 游戏2：四叶苜蓿 -->
+            <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                <div style="height: 140px; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Clover Field</div>
+                <div style="padding: 20px;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">四叶苜蓿 (Clover Field)</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.6;">像素风角色扮演游戏。以《有兽焉》为背景，自由探索关卡并与NPC互动。画风复古可爱，氛围轻松温馨，适合休闲玩家。</p>
+                    <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                        <strong>作者：</strong><a href="https://space.bilibili.com/341593687" target="_blank" style="color: #00a1d6; text-decoration: none;">小猫Giovanni</a>
+                    </div>
+                    <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #e8f5e9; color: #388e3c; font-size: 12px; border-radius: 4px;">#RPG #像素风</span>
+                </div>
+            </div>
+            <!-- 游戏3：福瑞娘的夜班 -->
+            <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                <div style="height: 140px; background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Night Shift</div>
+                <div style="padding: 20px;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">福瑞娘的夜班</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.6;">恐怖生存与解谜挑战。在昏暗的店铺中一边完成夜班任务，一边提防四处游荡的“福瑞娘”。极度考验反应力与资源分配。</p>
+                    <div style="margin-top: 10px; padding: 8px; background: #fff8e1; border-radius: 6px; font-size: 12px; color: #f57c00;">
+                        ⚠️ <strong>温馨提示：</strong>本作包含惊悚元素，建议18+玩家体验。
+                    </div>
+                    <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fff3e0; color: #f57c00; font-size: 12px; border-radius: 4px;">#恐怖解谜 #生存</span>
+                </div>
+            </div>
+            <!-- 游戏4：恶魔连结 -->
+            <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                <div style="height: 140px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">DevilConnection</div>
+                <div style="padding: 20px;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">恶魔连结 (DevilConnection)</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.6;">哥特风恶魔调教冒险游戏。无战斗系统，通过“邪眼洞察”窥视角色内心，收集海量结局。画风可爱略带黑暗，剧情充满个人趣味。</p>
+                    <div style="margin-top: 10px; padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #555;">
+                        <strong>平台：</strong>Steam / Nintendo Switch
+                    </div>
+                    <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #ede7f6; color: #512da8; font-size: 12px; border-radius: 4px;">#冒险 #多结局</span>
+                </div>
+            </div>
+            <!-- 游戏5：煦风新笺 -->
+            <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden;">
+                <div style="height: 140px; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">Warm Breeze</div>
+                <div style="padding: 20px;">
+                    <h3 style="margin: 0 0 10px 0; color: #333;">煦风新笺</h3>
+                    <p style="font-size: 13px; color: #666; line-height: 1.6;">青春校园恋爱模拟。主打细腻的双男主情感互动，多位兽人角色性格鲜明。剧情清水向，注重情感培养与故事体验。</p>
+                    <span style="display: inline-block; margin-top: 10px; padding: 4px 8px; background-color: #fce4ec; color: #c2185b; font-size: 12px; border-radius: 4px;">#恋爱模拟 #剧情</span>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px; text-align: center; font-size: 12px; color: #999;">
+            * 所有推荐均为全年龄或轻微擦边向作品，请放心游玩。支持正版，请前往 Steam / itch.io 获取。
+        </div>
+    </div>
+</div>
+<!-- ========== 合并区块结束 ========== -->
 
     <!-- ========== 旧Wiki档案 ========== -->
     <div id="old-wiki" style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 10px; border-left: 4px solid #8B0000;">
