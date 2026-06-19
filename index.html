@@ -196,7 +196,6 @@
             'nav-oldwiki': { zh: '旧Wiki档案', 'zh-tw': '舊Wiki檔案', en: 'Old Wiki Archive' },
             'nav-calendar': { zh: '兽聚日期', 'zh-tw': '獸聚日期', en: 'Con Calendar' },
             'nav-tv': { zh: '兽频道', 'zh-tw': '獸頻道', en: 'Fursuit TV' },
-            // 主页标题已修改
             'home-title': { zh: '欢迎来到新福瑞Wiki！', 'zh-tw': '歡迎來到新福瑞Wiki！', en: 'Welcome to the New FurryWiki!' },
             'tab-comic': { zh: '📚 漫画动画', 'zh-tw': '📚 漫畫動畫', en: '📚 Comics & Animation' },
             'tab-game': { zh: '🎮 福瑞游戏', 'zh-tw': '🎮 福瑞遊戲', en: '🎮 Furry Games' },
@@ -705,22 +704,85 @@
             container.innerHTML = html;
         }
 
+        // ================================================================
+        // 兽聚日历数据（已添加狸想城）
+        // ================================================================
         const conData = {
-            may: [{ date: "6日", name: "Furrymosa" }, { date: "11-15日", name: "Campfire Tails" }, { date: "11-14日", name: "Furvaria" }, { date: "13-14日", name: "Little Island Furcon" }, { date: "19-21日", name: "墨兽居·花与海之歌" }, { date: "19-21日", name: "Argentina FurFiesta" }, { date: "20-21日", name: "Borneo Anthro Hub" }, { date: "27-30日", name: "Lakeside Furs" }, { date: "27日", name: "UTFG" }],
-            jun: [{ date: "1-6日", name: "Lakeside Furs" }, { date: "2-6日", name: "Anthrocon" }, { date: "4-5日", name: "Indonesia Anthro Gathering" }, { date: "9-11日", name: "福绒聚" }, { date: "10-12日", name: "绒萌世界" }, { date: "11-13日", name: "青笛兽韵" }, { date: "16日", name: "探麟志" }, { date: "16日", name: "星绒会·第四届" }, { date: "16日", name: "Fur-Eh!" }, { date: "17-20日", name: "得闲兽聚·像素奇旅" }, { date: "17-19日", name: "古都有兽·瑞兽迎福" }, { date: "17-19日", name: "绵绒汇" }, { date: "23-26日", name: "幻兽聚·龙渊溯踪" }, { date: "23-26日", name: "兽星航·ECHO" }, { date: "23日", name: "Eufuria" }, { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" }, { date: "24-26日", name: "落茜聚" }, { date: "31日", name: "星澜特快号" }],
-            jul: [{ date: "6-9日", name: "EAST" }, { date: "19-23日", name: "Eurofurence" }, { date: "20-22日", name: "瑞影聚坊·万兽吟风" }, { date: "21-23日", name: "Megaplex" }, { date: "28-30日", name: "DenFur" }],
-            aug: [{ date: "3-4日", name: "FursonaCon" }, { date: "4-6日", name: "Calfurry" }, { date: "5-6日", name: "Barkada FurFest" }, { date: "11-13日", name: "Furry Migration" }],
-            sep: [{ date: "9-11日", name: "AquatiFur" }, { date: "29-31日", name: "Confuror" }, { date: "30-31日", name: "Infurnity獸無限" }],
-            oct: [{ date: "1-8日", name: "GoldenHorn" }]
+            may: [
+                { date: "6日", name: "Furrymosa" },
+                { date: "11-15日", name: "Campfire Tails" },
+                { date: "11-14日", name: "Furvaria" },
+                { date: "13-14日", name: "Little Island Furcon" },
+                { date: "19-21日", name: "墨兽居·花与海之歌" },
+                { date: "19-21日", name: "Argentina FurFiesta" },
+                { date: "20-21日", name: "Borneo Anthro Hub" },
+                { date: "27-30日", name: "Lakeside Furs" },
+                { date: "27日", name: "UTFG" }
+            ],
+            jun: [
+                { date: "1-6日", name: "Lakeside Furs" },
+                { date: "2-6日", name: "Anthrocon" },
+                { date: "4-5日", name: "Indonesia Anthro Gathering" },
+                { date: "9-11日", name: "福绒聚" },
+                { date: "10-12日", name: "绒萌世界" },
+                { date: "11-13日", name: "青笛兽韵" },
+                { date: "16日", name: "探麟志" },
+                { date: "16日", name: "星绒会·第四届" },
+                { date: "16日", name: "Fur-Eh!" },
+                { date: "17-20日", name: "得闲兽聚·像素奇旅" },
+                { date: "17-19日", name: "古都有兽·瑞兽迎福" },
+                { date: "17-19日", name: "绵绒汇" },
+                { date: "23-26日", name: "幻兽聚·龙渊溯踪" },
+                { date: "23-26日", name: "兽星航·ECHO" },
+                { date: "23日", name: "Eufuria" },
+                { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" },
+                { date: "24-26日", name: "落茜聚" },
+                { date: "31日", name: "星澜特快号" }
+            ],
+            jul: [
+                { date: "6-9日", name: "EAST" },
+                { date: "19-23日", name: "Eurofurence" },
+                { date: "20-22日", name: "瑞影聚坊·万兽吟风" },
+                { date: "21-23日", name: "Megaplex" },
+                { date: "28-30日", name: "DenFur" }
+            ],
+            aug: [
+                { date: "3-4日", name: "FursonaCon" },
+                { date: "4-6日", name: "Calfurry" },
+                { date: "5-6日", name: "Barkada FurFest" },
+                { date: "11-13日", name: "Furry Migration" }
+            ],
+            sep: [
+                { date: "9-11日", name: "AquatiFur" },
+                { date: "29-31日", name: "Confuror" },
+                { date: "30-31日", name: "Infurnity獸無限" }
+            ],
+            oct: [
+                { date: "1-8日", name: "GoldenHorn" },
+                { date: "暂时未公开", name: "狸想城" }   // 新增
+            ]
         };
 
+        // ================================================================
+        // 修改后的 showMonth 函数（支持日期多语言）
+        // ================================================================
         function showMonth(month) {
             document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.querySelector(`.month-btn[onclick*="${month}"]`);
             if (activeBtn) activeBtn.classList.add('active');
+
             let html = '<ul class="con-list">';
-            if (conData[month] && conData[month].length) {
-                conData[month].forEach(con => html += `<li><span class="con-date">${con.date}</span><span>${con.name}</span></li>`);
+            if (conData[month] && conData[month].length > 0) {
+                conData[month].forEach(con => {
+                    let dateDisplay = con.date;
+                    // 处理“暂时未公开”的多语言显示
+                    if (con.date === "暂时未公开") {
+                        if (currentLang === 'en') dateDisplay = 'TBA';
+                        else if (currentLang === 'zh-tw') dateDisplay = '暫時未公開';
+                        // 简体中文保持原样
+                    }
+                    html += `<li><span class="con-date">${dateDisplay}</span><span>${con.name}</span></li>`;
+                });
             } else {
                 const msg = currentLang === 'zh' ? '暂无展会安排' : (currentLang === 'zh-tw' ? '暫無展會安排' : 'No conventions scheduled');
                 html = `<p style="text-align:center;color:#999;">${msg}</p>`;
@@ -729,6 +791,9 @@
             document.getElementById('calendar-content').innerHTML = html;
         }
 
+        // ================================================================
+        // 其他功能（平滑滚动、选项卡等）
+        // ================================================================
         function switchWorksTab(tab) {
             document.querySelectorAll('.works-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.works-tab').forEach(btn => btn.classList.remove('active'));
