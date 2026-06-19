@@ -140,6 +140,55 @@
             border-left: 4px solid #2980b9;
             margin: 15px 0;
         }
+
+        /* 兽装工作室卡片样式 */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+        .studio-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            transition: box-shadow 0.2s;
+        }
+        .studio-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .studio-card .name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a5276;
+            margin-bottom: 6px;
+        }
+        .studio-card .contact {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+        .studio-card .contact a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        .studio-card .contact a:hover {
+            text-decoration: underline;
+        }
+        .region-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #ddd;
+        }
+        .region-label:first-of-type {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -152,7 +201,7 @@
         <a href="#characters" id="nav-characters">角色</a>
         <a href="#history" id="nav-history">历史</a>
         <a href="#current-status" id="nav-status">福瑞现状与反福瑞</a>
-        <a href="#works" id="nav-works">福瑞周边推荐</a>   <!-- 已改名 -->
+        <a href="#works" id="nav-works">福瑞周边推荐</a>
         <a href="#old-wiki" id="nav-oldwiki">旧Wiki档案</a>
         <a href="#calendar" id="nav-calendar">兽聚日期</a>
         <a href="#fursuit-tv" id="nav-tv">兽频道</a>
@@ -184,14 +233,16 @@
         <div id="status-content"></div>
     </div>
 
-    <!-- ========== 福瑞周边推荐（原作品推荐） ========== -->
+    <!-- ========== 福瑞周边推荐（含兽装工作室选项卡） ========== -->
     <div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
-        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px;">
             <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active">📚 漫画动画</button>
             <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab">🎮 福瑞游戏</button>
+            <button onclick="switchWorksTab('studio')" id="tab-studio" class="works-tab">🧵 兽装工作室</button>
         </div>
         <div id="works-comic" class="works-content"></div>
         <div id="works-game" class="works-content" style="display: none;"></div>
+        <div id="works-studio" class="works-content" style="display: none;"></div>
     </div>
 
     <div id="old-wiki" style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 10px; border-left: 4px solid #8B0000;">
@@ -242,7 +293,7 @@
             'nav-characters': { zh: '角色', 'zh-tw': '角色', en: 'Characters' },
             'nav-history': { zh: '历史', 'zh-tw': '歷史', en: 'History' },
             'nav-status': { zh: '福瑞现状与反福瑞', 'zh-tw': '福瑞現狀與反福瑞', en: 'Furry Status & Anti-Furry' },
-            'nav-works': { zh: '福瑞周边推荐', 'zh-tw': '福瑞周邊推薦', en: 'Furry Merch Recommendations' },  // 已改名
+            'nav-works': { zh: '福瑞周边推荐', 'zh-tw': '福瑞周邊推薦', en: 'Furry Merch Recommendations' },
             'nav-oldwiki': { zh: '旧Wiki档案', 'zh-tw': '舊Wiki檔案', en: 'Old Wiki Archive' },
             'nav-calendar': { zh: '兽聚日期', 'zh-tw': '獸聚日期', en: 'Con Calendar' },
             'nav-tv': { zh: '兽频道', 'zh-tw': '獸頻道', en: 'Fursuit TV' },
@@ -251,6 +302,7 @@
             'home-title': { zh: '欢迎来到新福瑞Wiki！', 'zh-tw': '歡迎來到新福瑞Wiki！', en: 'Welcome to the New FurryWiki!' },
             'tab-comic': { zh: '📚 漫画动画', 'zh-tw': '📚 漫畫動畫', en: '📚 Comics & Animation' },
             'tab-game': { zh: '🎮 福瑞游戏', 'zh-tw': '🎮 福瑞遊戲', en: '🎮 Furry Games' },
+            'tab-studio': { zh: '🧵 兽装工作室', 'zh-tw': '🧵 獸裝工作室', en: '🧵 Fursuit Studios' },
             'calendar-title': { zh: '全球兽聚日历 (Furry Con Calendar)', 'zh-tw': '全球獸聚日曆 (Furry Con Calendar)', en: 'Global Furry Convention Calendar' },
             'calendar-sub': { zh: '线下相聚，感受毛茸茸的魅力！(数据持续更新中)', 'zh-tw': '線下相聚，感受毛茸茸的魅力！(數據持續更新中)', en: 'Meet in person and feel the fluffy charm! (Data continuously updated)' },
             'ranking-title': { zh: '兽圈/泛兽类主播热度 TOP 20', 'zh-tw': '獸圈/泛獸類主播熱度 TOP 20', en: 'Furry/Pan-Furry Streamer Popularity TOP 20' },
@@ -332,7 +384,7 @@
             },
 
             // ============================================================
-            // 历史
+            // 历史正文
             // ============================================================
             'history-text': {
                 zh: `
@@ -826,6 +878,96 @@
                     </div>
                     <p style="text-align:right;color:#888;">— FurryWiki Admin Team</p>
                 `
+            },
+
+            // ============================================================
+            // 兽装工作室数据（三语独立）
+            // ============================================================
+            'studio-data': {
+                zh: {
+                    title: '🧵 兽装工作室',
+                    subtitle: '收录有公开联系方式的大陆及台湾地区兽装工作室（排名不分先后）',
+                    mainland: '🧭 大陆地区',
+                    taiwan: '🌊 台湾地区',
+                    note: '其他未列出者均因未找到任何公开的官网、社交账号、QQ群或邮箱。如需进一步核实或补充，可随时告知。',
+                    studios: {
+                        mainland: [
+                            { name: '万物通行', contact: '官网：<a href="https://www.ww-pass.com/" target="_blank">www.ww-pass.com</a>' },
+                            { name: '文禽武兽工作室', contact: '微博：<a href="https://weibo.com/Gentlefur" target="_blank">@Gentlefur_文禽武兽</a>；官网：<a href="https://www.gentlefur.cn/" target="_blank">www.gentlefur.cn</a>' },
+                            { name: '雾洞兽作', contact: '委托QQ群：326028357' },
+                            { name: 'MOFUMOFU手作', contact: '官网：<a href="https://www.mofumofu.art/" target="_blank">www.mofumofu.art</a>；邮箱：3418898423@qq.com' },
+                            { name: '鸿萌造物', contact: '官网：<a href="https://www.furmony.com/" target="_blank">www.furmony.com</a>' },
+                            { name: '煤球重工', contact: '官方QQ群：671729364；主理人QQ：2463209798' },
+                            { name: '爻光星', contact: '官网：<a href="http://www.alkaidfur.com/" target="_blank">www.alkaidfur.com</a>' },
+                            { name: '苍牌毛化', contact: '官网：<a href="https://cangpaifur.com/" target="_blank">cangpaifur.com</a>；官方QQ群：923611256' },
+                            { name: '毛绒盖子', contact: 'B站：<a href="https://space.bilibili.com/毛绒盖子FurCap" target="_blank">毛绒盖子FurCap</a>' },
+                            { name: 'TAS兽化工作室', contact: '官网：<a href="https://www.tasfurry.com/" target="_blank">www.tasfurry.com</a>' },
+                            { name: '宇灵制造', contact: '官网：<a href="https://www.ulfursuit.com/" target="_blank">www.ulfursuit.com</a>；邮箱：official@ulfursuit.com；QQ群：780338372；客服QQ：3880527520' },
+                            { name: '前行无界', contact: '官网：<a href="https://www.haxis.cn/" target="_blank">www.haxis.cn</a>；QQ群：805909541' },
+                            { name: '森林兔', contact: '工作室QQ群：750053033' },
+                            { name: '一梦千朝', contact: '可通过小红书或QQ群私信投递设定（为公开接单渠道）' }
+                        ],
+                        taiwan: [
+                            { name: '奇兽幻响', contact: '官网：<a href="https://www.BeastFantasia.com/" target="_blank">www.BeastFantasia.com</a>' }
+                        ]
+                    }
+                },
+                'zh-tw': {
+                    title: '🧵 獸裝工作室',
+                    subtitle: '收錄有公開聯絡方式的大陸及台灣地區獸裝工作室（排名不分先後）',
+                    mainland: '🧭 大陸地區',
+                    taiwan: '🌊 台灣地區',
+                    note: '其他未列出者均因未找到任何公開的官網、社交帳號、QQ群或信箱。如需進一步核實或補充，可隨時告知。',
+                    studios: {
+                        mainland: [
+                            { name: '萬物通行', contact: '官網：<a href="https://www.ww-pass.com/" target="_blank">www.ww-pass.com</a>' },
+                            { name: '文禽武獸工作室', contact: '微博：<a href="https://weibo.com/Gentlefur" target="_blank">@Gentlefur_文禽武獸</a>；官網：<a href="https://www.gentlefur.cn/" target="_blank">www.gentlefur.cn</a>' },
+                            { name: '霧洞獸作', contact: '委託QQ群：326028357' },
+                            { name: 'MOFUMOFU手作', contact: '官網：<a href="https://www.mofumofu.art/" target="_blank">www.mofumofu.art</a>；信箱：3418898423@qq.com' },
+                            { name: '鴻萌造物', contact: '官網：<a href="https://www.furmony.com/" target="_blank">www.furmony.com</a>' },
+                            { name: '煤球重工', contact: '官方QQ群：671729364；主理人QQ：2463209798' },
+                            { name: '爻光星', contact: '官網：<a href="http://www.alkaidfur.com/" target="_blank">www.alkaidfur.com</a>' },
+                            { name: '蒼牌毛化', contact: '官網：<a href="https://cangpaifur.com/" target="_blank">cangpaifur.com</a>；官方QQ群：923611256' },
+                            { name: '毛絨蓋子', contact: 'B站：<a href="https://space.bilibili.com/毛絨蓋子FurCap" target="_blank">毛絨蓋子FurCap</a>' },
+                            { name: 'TAS獸化工作室', contact: '官網：<a href="https://www.tasfurry.com/" target="_blank">www.tasfurry.com</a>' },
+                            { name: '宇靈製造', contact: '官網：<a href="https://www.ulfursuit.com/" target="_blank">www.ulfursuit.com</a>；信箱：official@ulfursuit.com；QQ群：780338372；客服QQ：3880527520' },
+                            { name: '前行無界', contact: '官網：<a href="https://www.haxis.cn/" target="_blank">www.haxis.cn</a>；QQ群：805909541' },
+                            { name: '森林兔', contact: '工作室QQ群：750053033' },
+                            { name: '一夢千朝', contact: '可透過小紅書或QQ群私訊投遞設定（為公開接單管道）' }
+                        ],
+                        taiwan: [
+                            { name: '奇獸幻響', contact: '官網：<a href="https://www.BeastFantasia.com/" target="_blank">www.BeastFantasia.com</a>' }
+                        ]
+                    }
+                },
+                en: {
+                    title: '🧵 Fursuit Studios',
+                    subtitle: 'List of fursuit studios in Mainland China and Taiwan with public contact information (in no particular order)',
+                    mainland: '🧭 Mainland China',
+                    taiwan: '🌊 Taiwan',
+                    note: 'Studios not listed are those for which no public website, social media, QQ group, or email could be found. If you need further verification or have additions, please let us know.',
+                    studios: {
+                        mainland: [
+                            { name: 'Wanwu Tongxing', contact: 'Website: <a href="https://www.ww-pass.com/" target="_blank">www.ww-pass.com</a>' },
+                            { name: 'Wenqin Wushou Studio', contact: 'Weibo: <a href="https://weibo.com/Gentlefur" target="_blank">@Gentlefur_文禽武兽</a>；Website: <a href="https://www.gentlefur.cn/" target="_blank">www.gentlefur.cn</a>' },
+                            { name: 'Wudong Shouzuo', contact: 'Commission QQ Group: 326028357' },
+                            { name: 'MOFUMOFU Handmade', contact: 'Website: <a href="https://www.mofumofu.art/" target="_blank">www.mofumofu.art</a>；Email: 3418898423@qq.com' },
+                            { name: 'Hongmeng Zaowu', contact: 'Website: <a href="https://www.furmony.com/" target="_blank">www.furmony.com</a>' },
+                            { name: 'Meiqiu Chonggong', contact: 'Official QQ Group: 671729364；Manager QQ: 2463209798' },
+                            { name: 'Yaoguangxing', contact: 'Website: <a href="http://www.alkaidfur.com/" target="_blank">www.alkaidfur.com</a>' },
+                            { name: 'Cangpai Maohua', contact: 'Website: <a href="https://cangpaifur.com/" target="_blank">cangpaifur.com</a>；Official QQ Group: 923611256' },
+                            { name: 'Maorong Gaizi', contact: 'Bilibili: <a href="https://space.bilibili.com/毛绒盖子FurCap" target="_blank">毛绒盖子FurCap</a>' },
+                            { name: 'TAS Fursuit Studio', contact: 'Website: <a href="https://www.tasfurry.com/" target="_blank">www.tasfurry.com</a>' },
+                            { name: 'Yuling Zhizao', contact: 'Website: <a href="https://www.ulfursuit.com/" target="_blank">www.ulfursuit.com</a>；Email: official@ulfursuit.com；QQ Group: 780338372；Customer Service QQ: 3880527520' },
+                            { name: 'Qianxing Wujie', contact: 'Website: <a href="https://www.haxis.cn/" target="_blank">www.haxis.cn</a>；QQ Group: 805909541' },
+                            { name: 'Senlin Tu', contact: 'Studio QQ Group: 750053033' },
+                            { name: 'Yimeng Qianchao', contact: 'You can send your fursona via Xiaohongshu or QQ group private message (public commission channel)' }
+                        ],
+                        taiwan: [
+                            { name: 'Beast Fantasia', contact: 'Website: <a href="https://www.BeastFantasia.com/" target="_blank">www.BeastFantasia.com</a>' }
+                        ]
+                    }
+                }
             }
         };
 
@@ -960,6 +1102,7 @@
             document.getElementById('home-title').textContent = TEXTS['home-title'][lang];
             document.getElementById('tab-comic').innerHTML = TEXTS['tab-comic'][lang];
             document.getElementById('tab-game').innerHTML = TEXTS['tab-game'][lang];
+            document.getElementById('tab-studio').innerHTML = TEXTS['tab-studio'][lang];
             document.getElementById('calendar-title').textContent = TEXTS['calendar-title'][lang];
             document.getElementById('calendar-sub').textContent = TEXTS['calendar-sub'][lang];
 
@@ -975,6 +1118,7 @@
             renderRanking(lang);
             renderComicCards(lang);
             renderGameCards(lang);
+            renderStudio(lang);
 
             const activeMonth = document.querySelector('.month-btn.active');
             if (activeMonth) {
@@ -1052,6 +1196,44 @@
             container.innerHTML = html;
         }
 
+        function renderStudio(lang) {
+            const container = document.getElementById('works-studio');
+            const data = TEXTS['studio-data'][lang];
+            if (!data) return;
+
+            let html = `
+                <h2 style="text-align:center;color:#333;">${data.title}</h2>
+                <p style="text-align:center;color:#666;font-size:14px;margin-bottom:10px;">${data.subtitle}</p>
+            `;
+
+            html += `<div class="region-label">${data.mainland}</div>`;
+            html += `<div class="studio-grid">`;
+            data.studios.mainland.forEach(s => {
+                html += `
+                    <div class="studio-card">
+                        <div class="name">${s.name}</div>
+                        <div class="contact">${s.contact}</div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
+            html += `<div class="region-label">${data.taiwan}</div>`;
+            html += `<div class="studio-grid">`;
+            data.studios.taiwan.forEach(s => {
+                html += `
+                    <div class="studio-card">
+                        <div class="name">${s.name}</div>
+                        <div class="contact">${s.contact}</div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
+            html += `<p style="font-size:12px;color:#999;margin-top:20px;text-align:center;">${data.note}</p>`;
+            container.innerHTML = html;
+        }
+
         function showMonth(month) {
             document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.querySelector(`.month-btn[onclick*="${month}"]`);
@@ -1081,9 +1263,12 @@
             if (tab === 'comic') {
                 document.getElementById('works-comic').style.display = 'block';
                 document.getElementById('tab-comic').classList.add('active');
-            } else {
+            } else if (tab === 'game') {
                 document.getElementById('works-game').style.display = 'block';
                 document.getElementById('tab-game').classList.add('active');
+            } else if (tab === 'studio') {
+                document.getElementById('works-studio').style.display = 'block';
+                document.getElementById('tab-studio').classList.add('active');
             }
         }
 
