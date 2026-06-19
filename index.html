@@ -30,13 +30,12 @@
         .logo { color: #fff; font-size: 20px; font-weight: bold; margin-right: 40px; text-decoration: none; flex-shrink: 0; }
         nav a { color: #ccc; text-decoration: none; font-size: 16px; margin-right: 25px; transition: color 0.3s; flex-shrink: 0; }
         nav a:hover { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
-        .user-id { margin-left: auto; margin-right: 15px; color: #888; font-size: 14px; flex-shrink: 0; }
         .lang-btn { background: none; border: 1px solid #666; color: #ccc; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; margin-right: 5px; transition: 0.3s; flex-shrink: 0; }
         .lang-btn:hover { background: #444; color: #fff; }
         .lang-btn.active { background: #00a1d6; color: #fff; border-color: #00a1d6; }
 
         /* 滚动偏移 */
-        #home, #furry-intro, #characters, #history, #current-status, #works, #old-wiki, #calendar, #fursuit-tv {
+        #home, #furry-intro, #characters, #history, #current-status, #works, #old-wiki, #calendar, #fursuit-tv, #contribute, #special-thanks, #about {
             scroll-margin-top: 70px;
         }
         html { scroll-behavior: smooth; }
@@ -107,6 +106,40 @@
         .furry-intro-container ul { margin-left: 20px; margin-bottom: 16px; color: #333; }
         .furry-intro-container ul li { margin-bottom: 8px; }
         .furry-intro-container .highlight-box { background-color: #f0f7ff; padding: 12px 18px; border-radius: 8px; border-left: 4px solid #2980b9; margin: 15px 0; }
+
+        /* 新增板块通用样式 */
+        .page-block {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .page-block h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 10px;
+            font-size: 28px;
+        }
+        .page-block p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .page-block ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+        .page-block ul li { margin-bottom: 8px; }
+        .page-block .highlight-box {
+            background-color: #f0f7ff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border-left: 4px solid #2980b9;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -119,11 +152,12 @@
         <a href="#characters" id="nav-characters">角色</a>
         <a href="#history" id="nav-history">历史</a>
         <a href="#current-status" id="nav-status">福瑞现状与反福瑞</a>
-        <a href="#works" id="nav-works">作品推荐</a>
+        <a href="#works" id="nav-works">福瑞周边推荐</a>   <!-- 已改名 -->
         <a href="#old-wiki" id="nav-oldwiki">旧Wiki档案</a>
         <a href="#calendar" id="nav-calendar">兽聚日期</a>
         <a href="#fursuit-tv" id="nav-tv">兽频道</a>
-        <span class="user-id">管理员: 东海域的鬼龙</span>
+        <a href="#contribute" id="nav-contribute">网友投稿</a>
+        <a href="#about" id="nav-about">关于</a>
         <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
         <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
         <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
@@ -150,6 +184,7 @@
         <div id="status-content"></div>
     </div>
 
+    <!-- ========== 福瑞周边推荐（原作品推荐） ========== -->
     <div id="works" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
         <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
             <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active">📚 漫画动画</button>
@@ -181,6 +216,21 @@
         <div id="tv-content"></div>
     </div>
 
+    <!-- 网友投稿 -->
+    <div id="contribute" class="page-block">
+        <div id="contribute-content"></div>
+    </div>
+
+    <!-- 特别鸣谢 -->
+    <div id="special-thanks" class="page-block">
+        <div id="special-thanks-content"></div>
+    </div>
+
+    <!-- 关于 -->
+    <div id="about" class="page-block">
+        <div id="about-content"></div>
+    </div>
+
     <!-- ========== JavaScript ========== -->
     <script>
         // ================================================================
@@ -192,10 +242,12 @@
             'nav-characters': { zh: '角色', 'zh-tw': '角色', en: 'Characters' },
             'nav-history': { zh: '历史', 'zh-tw': '歷史', en: 'History' },
             'nav-status': { zh: '福瑞现状与反福瑞', 'zh-tw': '福瑞現狀與反福瑞', en: 'Furry Status & Anti-Furry' },
-            'nav-works': { zh: '作品推荐', 'zh-tw': '作品推薦', en: 'Recommendations' },
+            'nav-works': { zh: '福瑞周边推荐', 'zh-tw': '福瑞周邊推薦', en: 'Furry Merch Recommendations' },  // 已改名
             'nav-oldwiki': { zh: '旧Wiki档案', 'zh-tw': '舊Wiki檔案', en: 'Old Wiki Archive' },
             'nav-calendar': { zh: '兽聚日期', 'zh-tw': '獸聚日期', en: 'Con Calendar' },
             'nav-tv': { zh: '兽频道', 'zh-tw': '獸頻道', en: 'Fursuit TV' },
+            'nav-contribute': { zh: '网友投稿', 'zh-tw': '網友投稿', en: 'Submit' },
+            'nav-about': { zh: '关于', 'zh-tw': '關於', en: 'About' },
             'home-title': { zh: '欢迎来到新福瑞Wiki！', 'zh-tw': '歡迎來到新福瑞Wiki！', en: 'Welcome to the New FurryWiki!' },
             'tab-comic': { zh: '📚 漫画动画', 'zh-tw': '📚 漫畫動畫', en: '📚 Comics & Animation' },
             'tab-game': { zh: '🎮 福瑞游戏', 'zh-tw': '🎮 福瑞遊戲', en: '🎮 Furry Games' },
@@ -206,7 +258,10 @@
                 'zh-tw': '* 數據來源：網路統計（截止至2026年5月）。<br>* 特別說明：榜單第1名「碧月狐」雖然擁有極高的相關話題熱度，但作者本人已聲明不屬於獸迷（Furry）圈子。本榜單將其列入旨在客觀反映當前泛獸類內容的流量分佈，不代表對其身分的定義。<br>* 如有數據遺漏或更新，歡迎聯繫站長。',
                 en: '* Source: Online statistics (as of May 2026).<br>* Special note: The #1 streamer "Bi Yue Hu" has extremely high related topic热度, but the author has stated they do not belong to the Furry fandom. This ranking is intended to objectively reflect the current traffic distribution of pan-furry content and does not represent a definition of their identity.<br>* If data is missing or needs updating, please contact the webmaster.'
             },
-            // Furry 词条正文（完整三语）
+
+            // ============================================================
+            // Furry 词条正文
+            // ============================================================
             'intro-text': {
                 zh: `
                     <h1>Furry (兽迷文化)</h1>
@@ -275,7 +330,10 @@
                     <ul><li>Some creators or enthusiasts may fully belong to Furry in aesthetic and identity (e.g., Bilibili's Biyuehu), but they may choose not to enter the core social circles, not participate in conventions or group chats typical of "being in the circle."</li><li>These individuals are still part of Furry culture, but their existence is more independent. Therefore, one cannot simply judge whether a person or work belongs to Furry based on "whether active in the circle."</li></ul>
                 `
             },
-            // 历史正文（完整）
+
+            // ============================================================
+            // 历史
+            // ============================================================
             'history-text': {
                 zh: `
                     <h1 style="text-align:center;margin-bottom:30px;color:#2c3e50;">福瑞文化的起源</h1>
@@ -308,7 +366,10 @@
                     <p style="font-size:12px;color:#888;"><strong>Sources:</strong> Moegirl Encyclopedia <a href="https://mzh.moegirl.org.cn/Furry">Furry</a>, former Furry Wiki (2025-09-13 version) <a href="https://zh.wikifur.com/wiki/Furry">Furry</a> <strong>Submissions to: m1314434630@163.com</strong></p>
                 `
             },
-            // status-text 包含现状 + 反福瑞 1~5 章（完整，已含2025-2026）
+
+            // ============================================================
+            // 现状+反福瑞（含2025-2026）
+            // ============================================================
             'status-text': {
                 zh: `
                     <div style="margin-bottom:40px;">
@@ -533,7 +594,10 @@
                     </div>
                 `
             },
-            // 旧Wiki 和 兽频道（完整）
+
+            // ============================================================
+            // 旧Wiki 和 兽频道
+            // ============================================================
             'oldwiki-text': {
                 zh: `<h2 style="color:#8B0000;border-bottom:2px solid #ddd;padding-bottom:10px;">旧版 Furry Wiki 历史档案</h2><p><em>“访问速度很快，页面UI美观，可惜无人更新维护……”</em></p><div style="background:white;padding:15px;border-radius:8px;margin:15px 0;box-shadow:0 2px 5px rgba(0,0,0,0.1);"><p><strong>成立时间：</strong>2020年4月1日</p><p><strong>创始人：</strong>福林菌（哔哩哔哩兽装穿扮者）</p><p><strong>技术基础：</strong>MediaWiki + 阿里云服务器</p><p><strong>最终状态：</strong><span style="color:red;">2024年1月失效，重定向至商业约稿平台</span></p></div><h3>大事记（根据哔哩哔哩月报整理）</h3><ul><li><strong>2020.04.01：</strong>项目开始，第一条编辑。</li><li><strong>2020.04.12：</strong>注册编辑者达到10人。</li><li><strong>2020.04.25：</strong>编辑次数突破1000次。</li><li><strong>2020.04.27：</strong>启用主域名 <code>furrywiki.cn</code>。</li><li><strong>2020.07.26：</strong>官方微博上线，发布吉祥物。</li><li><strong>2022.08：</strong>停止更新维护，界面定格。</li></ul><h3>危机与争议</h3><ol><li><strong>管理混乱：</strong>任用错误的行政员（如 <code>UWU</code>），导致大量未经许可的模板和文章被导入。</li><li><strong>历史抹除：</strong>行政员绕过系统直接修改数据库，删除了修订记录，违背了百科的透明原则。</li><li><strong>商业背刺：</strong>备案主体为<em>广州福瑞文化传播有限公司</em>，涉嫌违背 CC BY-NC-SA 3.0 的非商业性使用协议。</li><li><strong>最终结局：</strong>2024年1月，域名重定向至“兽聚汇”画师约稿平台，社区心血付之一炬。</li></ol>`,
                 'zh-tw': `<h2 style="color:#8B0000;border-bottom:2px solid #ddd;padding-bottom:10px;">舊版 Furry Wiki 歷史檔案</h2><p><em>「存取速度很快，頁面UI美觀，可惜無人更新維護……」</em></p><div style="background:white;padding:15px;border-radius:8px;margin:15px 0;box-shadow:0 2px 5px rgba(0,0,0,0.1);"><p><strong>成立時間：</strong>2020年4月1日</p><p><strong>創始人：</strong>福林菌（嗶哩嗶哩獸裝穿扮者）</p><p><strong>技術基礎：</strong>MediaWiki + 阿里雲伺服器</p><p><strong>最終狀態：</strong><span style="color:red;">2024年1月失效，重新導向至商業約稿平台</span></p></div><h3>大事記（根據嗶哩嗶哩月報整理）</h3><ul><li><strong>2020.04.01：</strong>項目開始，第一條編輯。</li><li><strong>2020.04.12：</strong>註冊編輯者達到10人。</li><li><strong>2020.04.25：</strong>編輯次數突破1000次。</li><li><strong>2020.04.27：</strong>啟用主域名 <code>furrywiki.cn</code>。</li><li><strong>2020.07.26：</strong>官方微博上線，發布吉祥物。</li><li><strong>2022.08：</strong>停止更新維護，界面定格。</li></ul><h3>危機與爭議</h3><ol><li><strong>管理混亂：</strong>任用錯誤的行政員（如 <code>UWU</code>），導致大量未經許可的模板和文章被匯入。</li><li><strong>歷史抹除：</strong>行政員繞過系統直接修改資料庫，刪除了修訂記錄，違背了百科的透明原則。</li><li><strong>商業背刺：</strong>備案主體為<em>廣州福瑞文化傳播有限公司</em>，涉嫌違背 CC BY-NC-SA 3.0 的非商業性使用協議。</li><li><strong>最終結局：</strong>2024年1月，域名重新導向至「獸聚匯」畫師約稿平台，社群心血付之一炬。</li></ol>`,
@@ -543,10 +607,231 @@
                 zh: `<div style="display:flex;align-items:center;margin-bottom:15px;"><div style="width:50px;height:50px;background-color:#ff9900;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:24px;margin-right:15px;">TV</div><div><h3 style="margin:0;color:#333;">兽频道 (Fursuit.tv)</h3><span style="font-size:12px;color:#666;background:#eee;padding:2px 6px;border-radius:4px;">APP / 社区</span></div></div><p style="color:#555;line-height:1.6;font-size:14px;">国内知名的兽装文化交流平台。在这里你可以浏览海量毛毛的精美照片、视频，分享自己的兽设，还能找到同好交流。<strong>注意：</strong>如果遇到图片崩溃或更新失败，请务必通过以下官方渠道获取最新版。</p><div style="background-color:#f8f9fa;padding:15px;border-radius:8px;margin-top:15px;"><h4 style="margin-top:0;color:#333;font-size:14px;">故障排除与下载</h4><ul style="padding-left:20px;margin-bottom:0;color:#444;font-size:13px;"><li style="margin-bottom:5px;"><strong>官网下载：</strong> <a href="http://fursuit.tv" target="_blank" style="color:#007bff;text-decoration:none;">fursuit.tv</a> (解决安装包损坏问题)</li><li><strong>官方QQ群：</strong> 1042314846 (获取最新版/反馈Bug)</li></ul></div>`,
                 'zh-tw': `<div style="display:flex;align-items:center;margin-bottom:15px;"><div style="width:50px;height:50px;background-color:#ff9900;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:24px;margin-right:15px;">TV</div><div><h3 style="margin:0;color:#333;">獸頻道 (Fursuit.tv)</h3><span style="font-size:12px;color:#666;background:#eee;padding:2px 6px;border-radius:4px;">APP / 社群</span></div></div><p style="color:#555;line-height:1.6;font-size:14px;">國內知名的獸裝文化交流平台。在這裡你可以瀏覽海量毛毛的精美照片、影片，分享自己的獸設，還能找到同好交流。<strong>注意：</strong>如果遇到圖片崩潰或更新失敗，請務必透過以下官方管道獲取最新版。</p><div style="background-color:#f8f9fa;padding:15px;border-radius:8px;margin-top:15px;"><h4 style="margin-top:0;color:#333;font-size:14px;">故障排除與下載</h4><ul style="padding-left:20px;margin-bottom:0;color:#444;font-size:13px;"><li style="margin-bottom:5px;"><strong>官網下載：</strong> <a href="http://fursuit.tv" target="_blank" style="color:#007bff;text-decoration:none;">fursuit.tv</a> (解決安裝包損壞問題)</li><li><strong>官方QQ群：</strong> 1042314846 (獲取最新版/回報Bug)</li></ul></div>`,
                 en: `<div style="display:flex;align-items:center;margin-bottom:15px;"><div style="width:50px;height:50px;background-color:#ff9900;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:24px;margin-right:15px;">TV</div><div><h3 style="margin:0;color:#333;">Fursuit.tv</h3><span style="font-size:12px;color:#666;background:#eee;padding:2px 6px;border-radius:4px;">APP / Community</span></div></div><p style="color:#555;line-height:1.6;font-size:14px;">A well-known domestic fursuit culture exchange platform. Here you can browse a vast collection of beautiful photos and videos of fursuits, share your own fursona, and connect with like-minded people. <strong>Note:</strong> If you encounter image crashes or update failures, please obtain the latest version through the following official channels.</p><div style="background-color:#f8f9fa;padding:15px;border-radius:8px;margin-top:15px;"><h4 style="margin-top:0;color:#333;font-size:14px;">Troubleshooting & Downloads</h4><ul style="padding-left:20px;margin-bottom:0;color:#444;font-size:13px;"><li style="margin-bottom:5px;"><strong>Official website:</strong> <a href="http://fursuit.tv" target="_blank" style="color:#007bff;text-decoration:none;">fursuit.tv</a> (fix installation package corruption)</li><li><strong>Official QQ Group:</strong> 1042314846 (get latest version / report bugs)</li></ul></div>`
+            },
+
+            // ============================================================
+            // 网友投稿
+            // ============================================================
+            'contribute-text': {
+                zh: `
+                    <h1>📬 网友投稿</h1>
+                    <p>欢迎各位兽迷、画师、创作者向 FurryWiki 投稿！我们希望通过大家的共同努力，让这个知识库更加丰富多元。</p>
+                    <div class="highlight-box">
+                        <h3>投稿范围</h3>
+                        <ul>
+                            <li><strong>福瑞相关科普文章</strong> —— 历史、文化、作品分析等</li>
+                            <li><strong>原创角色（OC）介绍</strong> —— 展示你的兽设，附上设定图和文字</li>
+                            <li><strong>兽展/兽聚游记</strong> —— 分享你的线下经历与见闻</li>
+                            <li><strong>福瑞艺术创作</strong> —— 绘画、音乐、小说等任何形式</li>
+                            <li><strong>其他与福瑞文化相关的内容</strong></li>
+                        </ul>
+                    </div>
+                    <h3>投稿方式</h3>
+                    <p>请将稿件发送至邮箱：<strong>m1314434630@163.com</strong></p>
+                    <p>邮件标题请注明“【投稿】+ 标题”，并在正文中附上你的署名（可匿名）。我们将在审核后尽快发布。</p>
+                    <div class="highlight-box">
+                        <h3>注意事项</h3>
+                        <ul>
+                            <li>投稿内容需为原创或已获得原作者授权。</li>
+                            <li>请勿涉及政治敏感、色情、暴力等违规内容。</li>
+                            <li>我们有权对稿件进行适当编辑和排版调整。</li>
+                            <li>欢迎附带你的联系方式（可选），以便我们与你沟通。</li>
+                        </ul>
+                    </div>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理组</p>
+                `,
+                'zh-tw': `
+                    <h1>📬 網友投稿</h1>
+                    <p>歡迎各位獸迷、畫師、創作者向 FurryWiki 投稿！我們希望透過大家的共同努力，讓這個知識庫更加豐富多元。</p>
+                    <div class="highlight-box">
+                        <h3>投稿範圍</h3>
+                        <ul>
+                            <li><strong>福瑞相關科普文章</strong> —— 歷史、文化、作品分析等</li>
+                            <li><strong>原創角色（OC）介紹</strong> —— 展示你的獸設，附上設定圖和文字</li>
+                            <li><strong>獸展/獸聚遊記</strong> —— 分享你的線下經歷與見聞</li>
+                            <li><strong>福瑞藝術創作</strong> —— 繪畫、音樂、小說等任何形式</li>
+                            <li><strong>其他與福瑞文化相關的內容</strong></li>
+                        </ul>
+                    </div>
+                    <h3>投稿方式</h3>
+                    <p>請將稿件寄送至信箱：<strong>m1314434630@163.com</strong></p>
+                    <p>郵件標題請註明「【投稿】+ 標題」，並在內文中附上你的署名（可匿名）。我們將在審核後盡快發布。</p>
+                    <div class="highlight-box">
+                        <h3>注意事項</h3>
+                        <ul>
+                            <li>投稿內容需為原創或已獲得原作者授權。</li>
+                            <li>請勿涉及政治敏感、色情、暴力等違規內容。</li>
+                            <li>我們有權對稿件進行適當編輯和排版調整。</li>
+                            <li>歡迎附帶你的聯絡方式（可選），以便我們與你溝通。</li>
+                        </ul>
+                    </div>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理組</p>
+                `,
+                en: `
+                    <h1>📬 Submissions</h1>
+                    <p>We welcome all furries, artists, and creators to contribute to FurryWiki! Together we can make this knowledge base more diverse and rich.</p>
+                    <div class="highlight-box">
+                        <h3>Scope of Submissions</h3>
+                        <ul>
+                            <li><strong>Furry-related informative articles</strong> — history, culture, work analysis, etc.</li>
+                            <li><strong>Original Character (OC) introductions</strong> — showcase your fursona with design art and description.</li>
+                            <li><strong>Convention / meetup reports</strong> — share your offline experiences.</li>
+                            <li><strong>Furry art creations</strong> — drawings, music, stories, or any other form.</li>
+                            <li><strong>Other content related to Furry culture</strong></li>
+                        </ul>
+                    </div>
+                    <h3>How to Submit</h3>
+                    <p>Please send your submission to: <strong>m1314434630@163.com</strong></p>
+                    <p>Use the subject line: “[Submission] + Title”, and include your name (or anonymous) in the body. We will review and publish it as soon as possible.</p>
+                    <div class="highlight-box">
+                        <h3>Guidelines</h3>
+                        <ul>
+                            <li>Content must be original or have permission from the original author.</li>
+                            <li>No politically sensitive, obscene, violent, or otherwise inappropriate content.</li>
+                            <li>We reserve the right to edit and format submissions appropriately.</li>
+                            <li>You may include your contact info (optional) so we can reach you.</li>
+                        </ul>
+                    </div>
+                    <p style="text-align:right;color:#888;">— FurryWiki Admin Team</p>
+                `
+            },
+
+            // ============================================================
+            // 特别鸣谢
+            // ============================================================
+            'special-thanks-text': {
+                zh: `
+                    <h1>🙏 特别鸣谢</h1>
+                    <p>感谢以下朋友对 FurryWiki 的支持与贡献（排名不分先后）：</p>
+                    <ul>
+                        <li><strong>苏离茫</strong></li>
+                        <li><strong>思想</strong></li>
+                        <li><strong>QC-minecraft</strong></li>
+                        <li><strong>瓦狼瓦事</strong></li>
+                    </ul>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理组</p>
+                `,
+                'zh-tw': `
+                    <h1>🙏 特別鳴謝</h1>
+                    <p>感謝以下朋友對 FurryWiki 的支持與貢獻（排名不分先後）：</p>
+                    <ul>
+                        <li><strong>蘇離茫</strong></li>
+                        <li><strong>思想</strong></li>
+                        <li><strong>QC-minecraft</strong></li>
+                        <li><strong>瓦狼瓦事</strong></li>
+                    </ul>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理組</p>
+                `,
+                en: `
+                    <h1>🙏 Special Thanks</h1>
+                    <p>We would like to thank the following friends for their support and contributions to FurryWiki (in no particular order):</p>
+                    <ul>
+                        <li><strong>Su Limang</strong></li>
+                        <li><strong>Sixiang</strong></li>
+                        <li><strong>QC-minecraft</strong></li>
+                        <li><strong>Walangwashi</strong></li>
+                    </ul>
+                    <p style="text-align:right;color:#888;">— FurryWiki Admin Team</p>
+                `
+            },
+
+            // ============================================================
+            // 关于
+            // ============================================================
+            'about-text': {
+                zh: `
+                    <h1>❓ 关于 FurryWiki</h1>
+                    <p><strong>FurryWiki</strong> 是一个由兽迷自发组织的中文维基项目，旨在系统性地记录和传播福瑞（Furry）文化的知识、历史、艺术、社群动态等信息。</p>
+                    <div class="highlight-box">
+                        <h3>我们的使命</h3>
+                        <ul>
+                            <li><strong>知识记录</strong> —— 保存福瑞文化的发展脉络，为后人提供可靠参考资料。</li>
+                            <li><strong>文化传播</strong> —— 向公众展示福瑞文化的多样性、包容性和艺术价值。</li>
+                            <li><strong>社群连接</strong> —— 为兽迷提供一个分享、交流和协作的平台。</li>
+                        </ul>
+                    </div>
+                    <h3>站点信息</h3>
+                    <ul>
+                        <li><strong>上线时间：</strong>2026年6月12日</li>
+                        <li><strong>技术栈：</strong>纯静态 HTML + CSS + JavaScript（无后端，轻量快速）</li>
+                        <li><strong>内容来源：</strong>公开资料整理、网友投稿、编者原创</li>
+                        <li><strong>版权声明：</strong>本站内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 协议，转载需注明出处且不得用于商业目的。</li>
+                    </ul>
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li><strong>投稿邮箱：</strong>m1314434630@163.com</li>
+                        <li><strong>管理员：</strong>东海域的鬼龙（B站）</li>
+                        <li><strong>反馈建议：</strong>欢迎通过邮件或站内留言提出，我们会认真考虑。</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p style="font-size:0.95em;color:#555;">我们相信，每一种文化都值得被记录和尊重。FurryWiki 将始终秉持开放、包容、客观的原则，为大家呈现一个真实的福瑞世界。</p>
+                    </div>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理组 敬上</p>
+                `,
+                'zh-tw': `
+                    <h1>❓ 關於 FurryWiki</h1>
+                    <p><strong>FurryWiki</strong> 是一個由獸迷自發組織的中文維基項目，旨在系統性地記錄和傳播福瑞（Furry）文化的知識、歷史、藝術、社群動態等資訊。</p>
+                    <div class="highlight-box">
+                        <h3>我們的使命</h3>
+                        <ul>
+                            <li><strong>知識記錄</strong> —— 保存福瑞文化的發展脈絡，為後人提供可靠參考資料。</li>
+                            <li><strong>文化傳播</strong> —— 向公眾展示福瑞文化的多樣性、包容性和藝術價值。</li>
+                            <li><strong>社群連接</strong> —— 為獸迷提供一個分享、交流和協作的平台。</li>
+                        </ul>
+                    </div>
+                    <h3>站點資訊</h3>
+                    <ul>
+                        <li><strong>上線時間：</strong>2026年6月12日</li>
+                        <li><strong>技術棧：</strong>純靜態 HTML + CSS + JavaScript（無後端，輕量快速）</li>
+                        <li><strong>內容來源：</strong>公開資料整理、網友投稿、編者原創</li>
+                        <li><strong>版權聲明：</strong>本站內容採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 協議，轉載需註明出處且不得用於商業目的。</li>
+                    </ul>
+                    <h3>聯繫我們</h3>
+                    <ul>
+                        <li><strong>投稿信箱：</strong>m1314434630@163.com</li>
+                        <li><strong>管理員：</strong>東海域的鬼龍（B站）</li>
+                        <li><strong>反饋建議：</strong>歡迎透過郵件或站內留言提出，我們會認真考慮。</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p style="font-size:0.95em;color:#555;">我們相信，每一種文化都值得被記錄和尊重。FurryWiki 將始終秉持開放、包容、客觀的原則，為大家呈現一個真實的福瑞世界。</p>
+                    </div>
+                    <p style="text-align:right;color:#888;">—— FurryWiki 管理組 敬上</p>
+                `,
+                en: `
+                    <h1>❓ About FurryWiki</h1>
+                    <p><strong>FurryWiki</strong> is a Chinese wiki project organized by furry fans, dedicated to systematically documenting and disseminating knowledge, history, art, community dynamics, and more about Furry culture.</p>
+                    <div class="highlight-box">
+                        <h3>Our Mission</h3>
+                        <ul>
+                            <li><strong>Knowledge Preservation</strong> — Save the development of Furry culture for future reference.</li>
+                            <li><strong>Cultural Dissemination</strong> — Show the diversity, inclusivity, and artistic value of Furry culture to the public.</li>
+                            <li><strong>Community Connection</strong> — Provide a platform for furries to share, communicate, and collaborate.</li>
+                        </ul>
+                    </div>
+                    <h3>Site Info</h3>
+                    <ul>
+                        <li><strong>Launched:</strong> June 12, 2026</li>
+                        <li><strong>Tech Stack:</strong> Pure static HTML + CSS + JavaScript (no backend, lightweight and fast)</li>
+                        <li><strong>Content Sources:</strong> Public materials, user submissions, editor originals</li>
+                        <li><strong>License:</strong> All content is under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>. Attribution required and no commercial use.</li>
+                    </ul>
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><strong>Submission Email:</strong> m1314434630@163.com</li>
+                        <li><strong>Admin:</strong> EastSeaDragon (Bilibili)</li>
+                        <li><strong>Feedback:</strong> Welcome to send us your suggestions via email or on-site messages.</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p style="font-size:0.95em;color:#555;">We believe every culture deserves to be recorded and respected. FurryWiki will always uphold the principles of openness, inclusiveness, and objectivity to present a genuine Furry world.</p>
+                    </div>
+                    <p style="text-align:right;color:#888;">— FurryWiki Admin Team</p>
+                `
             }
         };
 
-        // 漫画卡片数据（完整）
+        // ================================================================
+        // 漫画卡片数据
+        // ================================================================
         const COMIC_CARDS = {
             zh: [
                 { title: '历历回响', desc: '关于痛，爱与和解的短片集。', author: '作者：炭烧小狗', link: 'https://manga.bilibili.com/detail/mc39773' },
@@ -602,6 +887,65 @@
         };
 
         // ================================================================
+        // 兽聚日历数据
+        // ================================================================
+        const conData = {
+            may: [
+                { date: "6日", name: "Furrymosa" },
+                { date: "11-15日", name: "Campfire Tails" },
+                { date: "11-14日", name: "Furvaria" },
+                { date: "13-14日", name: "Little Island Furcon" },
+                { date: "19-21日", name: "墨兽居·花与海之歌" },
+                { date: "19-21日", name: "Argentina FurFiesta" },
+                { date: "20-21日", name: "Borneo Anthro Hub" },
+                { date: "27-30日", name: "Lakeside Furs" },
+                { date: "27日", name: "UTFG" }
+            ],
+            jun: [
+                { date: "1-6日", name: "Lakeside Furs" },
+                { date: "2-6日", name: "Anthrocon" },
+                { date: "4-5日", name: "Indonesia Anthro Gathering" },
+                { date: "9-11日", name: "福绒聚" },
+                { date: "10-12日", name: "绒萌世界" },
+                { date: "11-13日", name: "青笛兽韵" },
+                { date: "16日", name: "探麟志" },
+                { date: "16日", name: "星绒会·第四届" },
+                { date: "16日", name: "Fur-Eh!" },
+                { date: "17-20日", name: "得闲兽聚·像素奇旅" },
+                { date: "17-19日", name: "古都有兽·瑞兽迎福" },
+                { date: "17-19日", name: "绵绒汇" },
+                { date: "23-26日", name: "幻兽聚·龙渊溯踪" },
+                { date: "23-26日", name: "兽星航·ECHO" },
+                { date: "23日", name: "Eufuria" },
+                { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" },
+                { date: "24-26日", name: "落茜聚" },
+                { date: "31日", name: "星澜特快号" }
+            ],
+            jul: [
+                { date: "6-9日", name: "EAST" },
+                { date: "19-23日", name: "Eurofurence" },
+                { date: "20-22日", name: "瑞影聚坊·万兽吟风" },
+                { date: "21-23日", name: "Megaplex" },
+                { date: "28-30日", name: "DenFur" }
+            ],
+            aug: [
+                { date: "3-4日", name: "FursonaCon" },
+                { date: "4-6日", name: "Calfurry" },
+                { date: "5-6日", name: "Barkada FurFest" },
+                { date: "11-13日", name: "Furry Migration" }
+            ],
+            sep: [
+                { date: "9-11日", name: "AquatiFur" },
+                { date: "29-31日", name: "Confuror" },
+                { date: "30-31日", name: "Infurnity獸無限" }
+            ],
+            oct: [
+                { date: "1-8日", name: "GoldenHorn" },
+                { date: "暂时未公开", name: "狸想城" }
+            ]
+        };
+
+        // ================================================================
         // 核心函数
         // ================================================================
         let currentLang = 'zh';
@@ -624,10 +968,14 @@
             document.getElementById('status-content').innerHTML = TEXTS['status-text'][lang];
             document.getElementById('oldwiki-content').innerHTML = TEXTS['oldwiki-text'][lang];
             document.getElementById('tv-content').innerHTML = TEXTS['tv-text'][lang];
+            document.getElementById('contribute-content').innerHTML = TEXTS['contribute-text'][lang];
+            document.getElementById('special-thanks-content').innerHTML = TEXTS['special-thanks-text'][lang];
+            document.getElementById('about-content').innerHTML = TEXTS['about-text'][lang];
 
             renderRanking(lang);
             renderComicCards(lang);
             renderGameCards(lang);
+
             const activeMonth = document.querySelector('.month-btn.active');
             if (activeMonth) {
                 const m = activeMonth.textContent.replace('月','');
@@ -704,68 +1052,6 @@
             container.innerHTML = html;
         }
 
-        // ================================================================
-        // 兽聚日历数据（已添加狸想城）
-        // ================================================================
-        const conData = {
-            may: [
-                { date: "6日", name: "Furrymosa" },
-                { date: "11-15日", name: "Campfire Tails" },
-                { date: "11-14日", name: "Furvaria" },
-                { date: "13-14日", name: "Little Island Furcon" },
-                { date: "19-21日", name: "墨兽居·花与海之歌" },
-                { date: "19-21日", name: "Argentina FurFiesta" },
-                { date: "20-21日", name: "Borneo Anthro Hub" },
-                { date: "27-30日", name: "Lakeside Furs" },
-                { date: "27日", name: "UTFG" }
-            ],
-            jun: [
-                { date: "1-6日", name: "Lakeside Furs" },
-                { date: "2-6日", name: "Anthrocon" },
-                { date: "4-5日", name: "Indonesia Anthro Gathering" },
-                { date: "9-11日", name: "福绒聚" },
-                { date: "10-12日", name: "绒萌世界" },
-                { date: "11-13日", name: "青笛兽韵" },
-                { date: "16日", name: "探麟志" },
-                { date: "16日", name: "星绒会·第四届" },
-                { date: "16日", name: "Fur-Eh!" },
-                { date: "17-20日", name: "得闲兽聚·像素奇旅" },
-                { date: "17-19日", name: "古都有兽·瑞兽迎福" },
-                { date: "17-19日", name: "绵绒汇" },
-                { date: "23-26日", name: "幻兽聚·龙渊溯踪" },
-                { date: "23-26日", name: "兽星航·ECHO" },
-                { date: "23日", name: "Eufuria" },
-                { date: "24-26日", name: "福瑞八奇物志·虚匣伪宴" },
-                { date: "24-26日", name: "落茜聚" },
-                { date: "31日", name: "星澜特快号" }
-            ],
-            jul: [
-                { date: "6-9日", name: "EAST" },
-                { date: "19-23日", name: "Eurofurence" },
-                { date: "20-22日", name: "瑞影聚坊·万兽吟风" },
-                { date: "21-23日", name: "Megaplex" },
-                { date: "28-30日", name: "DenFur" }
-            ],
-            aug: [
-                { date: "3-4日", name: "FursonaCon" },
-                { date: "4-6日", name: "Calfurry" },
-                { date: "5-6日", name: "Barkada FurFest" },
-                { date: "11-13日", name: "Furry Migration" }
-            ],
-            sep: [
-                { date: "9-11日", name: "AquatiFur" },
-                { date: "29-31日", name: "Confuror" },
-                { date: "30-31日", name: "Infurnity獸無限" }
-            ],
-            oct: [
-                { date: "1-8日", name: "GoldenHorn" },
-                { date: "暂时未公开", name: "狸想城" }   // 新增
-            ]
-        };
-
-        // ================================================================
-        // 修改后的 showMonth 函数（支持日期多语言）
-        // ================================================================
         function showMonth(month) {
             document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.querySelector(`.month-btn[onclick*="${month}"]`);
@@ -775,11 +1061,9 @@
             if (conData[month] && conData[month].length > 0) {
                 conData[month].forEach(con => {
                     let dateDisplay = con.date;
-                    // 处理“暂时未公开”的多语言显示
                     if (con.date === "暂时未公开") {
                         if (currentLang === 'en') dateDisplay = 'TBA';
                         else if (currentLang === 'zh-tw') dateDisplay = '暫時未公開';
-                        // 简体中文保持原样
                     }
                     html += `<li><span class="con-date">${dateDisplay}</span><span>${con.name}</span></li>`;
                 });
@@ -791,9 +1075,6 @@
             document.getElementById('calendar-content').innerHTML = html;
         }
 
-        // ================================================================
-        // 其他功能（平滑滚动、选项卡等）
-        // ================================================================
         function switchWorksTab(tab) {
             document.querySelectorAll('.works-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.works-tab').forEach(btn => btn.classList.remove('active'));
