@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘画作品 · FurryWiki 画廊</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+            background: #f5f6f8;
+            min-height: 100vh;
+            line-height: 1.7;
+            color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px 60px;
+        }
+        .gallery-container {
+            max-width: 1000px;
+            width: 100%;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            padding: 36px 40px;
+            text-align: center;
+        }
+        .gallery-heading {
+            color: #1e293b;
+            border-bottom: 3px solid #57c3ff;
+            padding-bottom: 16px;
+            margin-bottom: 32px;
+            font-size: 34px;
+            font-weight: 700;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        .gallery-item {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            transition: transform 0.25s, box-shadow 0.25s;
+            background: #fff;
+            border: 1px solid #eef1f5;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 28px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: #f0f2f5;
+        }
+        .gallery-item .caption {
+            padding: 14px 16px;
+            font-size: 14px;
+            color: #5b6877;
+            text-align: center;
+            font-weight: 500;
+        }
+        .gallery-footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e4e7eb;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+        .gallery-footer a {
+            text-decoration: none;
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .gallery-footer a:hover span {
+            color: #0ea5e9 !important;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #57c3ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #0ea5e9; }
+
+        @media (max-width: 640px) {
+            .gallery-container { padding: 24px 20px; border-radius: 20px; }
+            .gallery-heading { font-size: 26px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <h1 class="gallery-heading">🖼️ 绘画作品</h1>
+
+        <div class="gallery-footer">
+            本站图像服务由
+            <a href="https://www.beeimg.cn/" target="_blank" rel="noopener noreferrer" title="蜜蜂图床"
+               onmouseover="this.querySelector('span').style.color='#0ea5e9'"
+               onmouseout="this.querySelector('span').style.color='#38bdf8'">
+                <img src="https://www.beeimg.cn/favicon.png" alt="蜜蜂图床"
+                     style="height: 20px; vertical-align: middle; border: none;" loading="lazy">
+                <span style="color: #38bdf8; font-weight: 700; transition: color 0.2s;">蜜蜂图床</span>
+            </a>
+            提供
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← 返回主站</a>
+        </div>
+    </div>
+</body>
+</html>
