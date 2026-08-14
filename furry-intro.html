@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FurryWiki - 兽圈百科知识库">
+    <title>Furry兽迷文化 - FurryWiki</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root{
+            --bg:#f5f6f8; --text:#2c3e50; --text-secondary:#4b5563; --text-muted:#6b7280;
+            --card-bg:#fff; --card-hover:#f8fafc; --border:#eef1f5; --border-strong:#e4e7eb;
+            --nav-bg:#1a1c23; --nav-text:#b0b5c0; --accent:#57c3ff; --accent-light:#f0f6ff;
+            --highlight-box:#f0f6ff; --ranking-bg:#1a1c23; --ranking-text:#eee;
+            --ranking-bar-bg:#2a2d35; --ranking-note:#777e8c; --btn-bg:#eef1f5; --btn-text:#333;
+            --icon-note-bg:#444b5a; --section-bg:#fdf2f8; --section-border:#fce7f3;
+        }
+        [data-theme="dark"]{
+            --bg:#0f172a; --text:#e2e8f0; --text-secondary:#cbd5e1; --text-muted:#94a3b8;
+            --card-bg:#1e293b; --card-hover:#334155; --border:#334155; --border-strong:#475569;
+            --nav-bg:#0f172a; --nav-text:#94a3b8; --accent:#38bdf8; --accent-light:#1e3a5f;
+            --highlight-box:#1e3a5f; --ranking-bg:#1e293b; --ranking-text:#e2e8f0;
+            --ranking-bar-bg:#334155; --ranking-note:#64748b; --btn-bg:#334155; --btn-text:#e2e8f0;
+            --icon-note-bg:#475569; --section-bg:#3f1d38; --section-border:#5b2a50;
+        }
+        [data-colorblind="true"]{
+            --accent:#f59e0b;
+            --accent-light:#fffbeb;
+            --highlight-box:#fffbeb;
+            --section-bg:#fffbeb;
+            --section-border:#fef3c7;
+        }
+        [data-theme="dark"][data-colorblind="true"]{
+            --accent:#fbbf24;
+            --accent-light:#451a03;
+            --highlight-box:#451a03;
+            --section-bg:#451a03;
+            --section-border:#78350f;
+        }
+        body { font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif; background: var(--bg); display: flex; min-height: 100vh; line-height: 1.7; color: var(--text); transition: background .3s, color .3s; }
+        nav { position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: var(--nav-bg); display: flex; flex-direction: column; padding: 30px 0 24px 0; box-shadow: 4px 0 25px rgba(0,0,0,0.25); z-index: 9999; overflow-y: auto; overflow-x: hidden; flex-shrink: 0; scrollbar-width: thin; scrollbar-color: #4a4a5a transparent; border-right: 1px solid rgba(255,255,255,0.08); transition: background .3s; }
+        nav::-webkit-scrollbar { width: 6px; }
+        nav::-webkit-scrollbar-track { background: transparent; }
+        nav::-webkit-scrollbar-thumb { background: #4a4a5a; border-radius: 10px; }
+        .logo { color: #fff; font-size: 30px; font-weight: 700; text-decoration: none; padding: 10px 30px 28px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; display: block; letter-spacing: 1.5px; }
+        .logo:hover { color: #57c3ff; }
+        nav .nav-link { color: var(--nav-text); text-decoration: none; font-size: 16px; padding: 14px 30px; margin: 3px 12px; border-radius: 10px; transition: all 0.2s; flex-shrink: 0; display: block; border-left: 4px solid transparent; white-space: nowrap; font-weight: 500; }
+        nav .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); border-left: 4px solid var(--accent); }
+        nav .nav-link.active { color: #fff; background: rgba(87,195,255,0.15); border-left: 4px solid var(--accent); }
+        .lang-group { margin-top: auto; flex-shrink: 0; padding: 24px 18px 16px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; flex-direction: column; align-items: center; }
+        .lang-row { display: flex; gap: 10px; }
+        .theme-toggle-row { margin-top: 14px; }
+        .theme-toggle-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ccc; padding: 10px 20px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); color: #ccc; padding: 8px 18px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; }
+        .lang-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn.active { background: #57c3ff; color: #fff; border-color: #57c3ff; font-weight: 600; }
+        .main-content { margin-left: 300px; flex: 1; min-width: 0; padding: 50px 50px 40px 50px; display: flex; flex-direction: column; }
+        .page-container { max-width: 960px; margin: 0 auto; }
+        .page-title { font-size: 36px; font-weight: 700; margin-bottom: 30px; padding-bottom: 16px; border-bottom: 3px solid var(--accent); }
+        .page-content { font-size: 16px; line-height: 1.85; color: var(--text-secondary); }
+        .page-content h1 { color: var(--text); font-size: 32px; margin: 40px 0 20px; }
+        .page-content h2 { color: var(--accent); border-left: 5px solid var(--accent); padding-left: 18px; margin: 36px 0 18px; font-size: 24px; font-weight: 600; }
+        .page-content h3 { color: var(--text); margin: 24px 0 12px; font-size: 20px; font-weight: 600; }
+        .page-content p { margin-bottom: 16px; }
+        .page-content ul { margin-left: 24px; margin-bottom: 16px; }
+        .page-content ul li { margin-bottom: 10px; line-height: 1.75; }
+        .highlight-box { background: var(--highlight-box); padding: 18px 24px; border-radius: 14px; border-left: 5px solid var(--accent); margin: 20px 0; font-size: 15px; }
+        .ranking-container { max-width: 800px; margin: 30px auto; padding: 30px; background: var(--ranking-bg); border-radius: 24px; color: var(--ranking-text); box-shadow: 0 12px 32px rgba(0,0,0,0.25); transition: background .3s; }
+        .ranking-title { text-align: center; margin-bottom: 30px; font-size: 26px; font-weight: 700; color: #fff; border-bottom: 1px solid var(--ranking-bar-bg); padding-bottom: 20px; }
+        .rank-item { display: flex; align-items: center; margin-bottom: 16px; }
+        .rank-num { width: 34px; font-weight: 700; font-style: italic; text-align: center; margin-right: 18px; }
+        .top-1 { color: #ffd866; font-size: 1.4em; } .top-2 { color: #b0bec5; } .top-3 { color: #e5a87b; }
+        .rank-name { width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; color: #ddd; }
+        .rank-bar-bg { flex-grow: 1; background: var(--ranking-bar-bg); height: 26px; border-radius: 20px; margin: 0 18px; overflow: hidden; }
+        .rank-bar-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--accent), #4da1ff); transition: width 1s; }
+        .highlight-bar { background: linear-gradient(90deg, #ffb347, #ff6b6b); }
+        .rank-value { width: 65px; text-align: right; font-size: 13px; color: #9aa0b0; font-weight: 500; }
+        .note-text { margin-top: 28px; font-size: 12px; color: var(--ranking-note); border-top: 1px solid var(--ranking-bar-bg); padding-top: 16px; line-height: 1.7; }
+        .icon-note { display: inline-block; width: 18px; height: 18px; background: var(--icon-note-bg); color: #fff; border-radius: 50%; text-align: center; line-height: 18px; font-size: 11px; margin-left: 6px; cursor: help; }
+        .works-section { margin-top: 30px; padding: 32px; background: var(--section-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border: 1px solid var(--section-border); }
+        .works-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 32px; }
+        .works-tab { padding: 10px 26px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 15px; transition: 0.3s; font-weight: 500; color: var(--btn-text); margin: 0 6px; }
+        .works-tab:hover, .works-tab.active { background: var(--accent); color: white; box-shadow: 0 6px 18px rgba(87,195,255,0.25); }
+        .thanks-tab { padding: 10px 26px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 15px; transition: 0.3s; font-weight: 500; color: var(--btn-text); margin: 0 6px; }
+        .thanks-tab:hover, .thanks-tab.active { background: #ff9f7a; color: white; box-shadow: 0 6px 18px rgba(255,159,122,0.25); }
+        .studio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; margin-top: 24px; }
+        .studio-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); transition: 0.25s; }
+        .studio-card:hover { box-shadow: 0 14px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .studio-card .name { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+        .studio-card .contact { font-size: 14px; color: var(--text-secondary); line-height: 1.7; word-break: break-all; }
+        .studio-card .contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .region-label { font-size: 18px; font-weight: 700; color: var(--text); margin: 32px 0 16px 0; padding-bottom: 10px; border-bottom: 2px solid var(--border-strong); }
+        .month-btn { padding: 10px 22px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 14px; transition: 0.3s; font-weight: 500; color: var(--btn-text); }
+        .month-btn:hover, .month-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 14px rgba(87,195,255,0.3); }
+        .con-list { list-style: none; padding: 0; }
+        .con-list li { padding: 14px 18px; border-bottom: 1px dashed var(--border-strong); display: flex; align-items: center; border-radius: 8px; }
+        .con-list li:hover { background: var(--card-hover); }
+        .con-date { background: var(--accent); color: white; padding: 5px 16px; border-radius: 20px; font-size: 13px; margin-right: 18px; min-width: 48px; text-align: center; font-weight: 600; }
+        .calendar-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        .calendar-title { text-align: center; font-size: 28px; margin-bottom: 10px; }
+        .calendar-sub { text-align: center; color: var(--text-muted); margin-bottom: 28px; }
+        .month-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 32px; }
+        .tv-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border-left: 6px solid #ffb347; }
+        .oldwiki-page { margin-top: 30px; padding: 28px; background: var(--card-bg); border-radius: 20px; border-left: 6px solid #ff6b6b; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        .thanks-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        .comic-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px; }
+        .comic-card { width: 220px; padding: 20px 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: all 0.25s; }
+        .comic-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .comic-card h3 { margin: 0 0 10px 0; font-size: 18px; font-weight: 700; }
+        .comic-card h3 a { color: #1e293b; text-decoration: none; }
+        .comic-card p { font-size: 14px; color: #5b6877; line-height: 1.6; margin-bottom: 10px; }
+        .comic-card .author { font-size: 12px; color: #999; margin: 0; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px; }
+        .game-card { border: 1px solid #eee; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .game-header { height: 140px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold; }
+        .game-body { padding: 22px; }
+        .game-body h3 { margin: 0 0 10px; color: #333; }
+        .game-body p { font-size: 14px; color: #666; line-height: 1.7; }
+        .game-extra { margin-top: 12px; padding: 10px; background: #f9f9f9; border-radius: 8px; font-size: 13px; color: #555; }
+        .game-tags { display: inline-block; margin-top: 14px; padding: 5px 12px; background: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 6px; }
+        .support-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 28px 0; }
+        .support-grid img { max-width: 300px; height: auto; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+
+        @media (max-width: 768px) {
+            
+            body { flex-direction: column; }
+            nav { position: fixed; top: 0; width: 100%; height: 56px; flex-direction: row; align-items: center; padding: 0 16px; overflow-x: auto; white-space: nowrap; z-index: 1000; -webkit-overflow-scrolling: touch; }
+            .logo { font-size: 18px; padding: 0 16px 0 6px; border-bottom: none; margin: 0; font-weight: 700; }
+            nav .nav-link { font-size: 14px; padding: 8px 16px; margin: 0; border-radius: 20px; border-left: none !important; }
+            
+            .lang-group { margin: 0; padding: 0 12px 0 8px; border: none; flex-direction: row; gap: 8px; align-items: center; }
+            .lang-row { display: flex; gap: 6px; }
+            
+            
+            .lang-btn { font-size: 12px; padding: 5px 12px; border-radius: 16px; }
+            .theme-toggle-row { margin-top: 0; display: flex; gap: 6px; }
+            #themeToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #themeToggle::before { content: "🌙"; font-size: 14px; }
+            [data-theme="dark"] #themeToggle::before { content: "☀️"; }
+            #colorblindToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #colorblindToggle::before { content: "👁️"; font-size: 14px; }
+            [data-colorblind="true"] #colorblindToggle::before { content: "🔴"; font-size: 14px; }
+            
+            
+            .main-content { margin-left: 0; padding: 70px 20px 40px 20px; }
+            .page-title { font-size: 26px; margin-bottom: 20px; }
+            .page-content h1 { font-size: 24px; }
+            .page-content h2 { font-size: 20px; }
+            .page-content h3 { font-size: 18px; }
+            .ranking-container { padding: 20px 16px; }
+            .ranking-title { font-size: 20px; }
+            .rank-name { width: 90px; font-size: 12px; }
+            .rank-bar-bg { margin: 0 10px; height: 20px; }
+            .rank-num { width: 26px; margin-right: 10px; font-size: 13px; }
+            .rank-value { width: 50px; font-size: 11px; }
+            .studio-grid { grid-template-columns: 1fr; gap: 12px; }
+            .works-section, .calendar-page, .tv-page, .oldwiki-page, .thanks-page { padding: 20px 16px; }
+            .comic-grid { gap: 12px; }
+            .comic-card { width: calc(50% - 6px); padding: 14px 10px; }
+            .game-grid { grid-template-columns: 1fr; gap: 16px; }
+        }
+        @media (max-width: 480px) {
+            nav { height: 50px; padding: 0 10px; }
+            .logo { font-size: 16px; padding: 0 12px 0 4px; }
+            nav .nav-link { font-size: 12px; padding: 6px 12px; }
+            .lang-group { padding: 0 8px 0 6px; gap: 6px; }
+            .lang-btn { font-size: 11px; padding: 4px 10px; }
+            #themeToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #themeToggle::before { font-size: 13px; }
+            #colorblindToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #colorblindToggle::before { font-size: 13px; }
+            
+            .main-content { padding: 62px 14px 32px 14px; }
+            .page-title { font-size: 22px; }
+            .comic-card { width: 100%; }
+        }
+        .feedback-btn{position:fixed;right:28px;bottom:28px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#4da1ff);color:#fff;border:none;cursor:pointer;font-size:26px;box-shadow:0 4px 20px rgba(87,195,255,.4);transition:all .3s;z-index:9999;display:flex;align-items:center;justify-content:center;text-decoration:none}
+        .feedback-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(87,195,255,.5)}
+        @media (max-width: 768px) {
+            .feedback-btn{width:52px;height:52px;font-size:22px;right:18px;bottom:18px}
+        }
+        [data-theme="dark"] .comic-card h3 a { color: #e2e8f0; }
+        [data-theme="dark"] .game-body h3 { color: #e2e8f0; }
+        [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
+        [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
+    </style>
+<script src="common.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">FurryWiki</a>
+        <a href="index.html" class="nav-link" id="nav-home" data-zh="主页" data-zhtw="主頁" data-en="Home">主页</a>
+        <a href="furry-intro.html" class="nav-link active" id="nav-intro" data-zh="Furry (兽迷文化)" data-zhtw="Furry (獸迷文化)" data-en="Furry (Furry Fandom)">Furry (兽迷文化)</a>
+        <a href="characters.html" class="nav-link" id="nav-characters" data-zh="角色" data-zhtw="角色" data-en="Characters">角色</a>
+        <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
+        <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
+        <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
+
+        <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
+        <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
+        <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
+        <a href="contribute.html" class="nav-link" id="nav-contribute" data-zh="网友投稿" data-zhtw="網友投稿" data-en="Submit">网友投稿</a>
+        <a href="about.html" class="nav-link" id="nav-about" data-zh="关于" data-zhtw="關於" data-en="About">关于</a>
+        <div class="lang-group">
+            <div class="lang-row">
+                <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
+                <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+            </div>
+            <div class="theme-toggle-row">
+                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button><button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-container">
+<h1 class="page-title" id="intro-title">Furry (兽迷文化)</h1>
+            <div class="page-content" id="page-content">
+<p id="intro-p1"><strong>Furry</strong>（英文形容词，意为"毛茸茸的"），在中文语境下常被称为<strong>兽迷</strong>、<strong>福瑞</strong>或<strong>furry控</strong>。虽然从字面上看，该词源于对"动物毛皮"的描述，但在现代亚文化语境中，它已经演变为一个基于拟人化动物角色的庞大兴趣社群。</p>
+<p id="intro-p2">作为一个去中心化的泛爱好者群体，Furry不仅仅指代"有毛皮的生物"，更涵盖了从爬行类、水生生物到幻想生物的广泛拟人化创作。其核心在于对具有人类特质（如智慧、情感、社会性）的动物形象的兴趣，并通过艺术、文学、角色扮演等形式进行表达。</p>
+<h2 id="intro-h2-1">常见误区与正名</h2>
+<p id="intro-p3">由于语言隔阂与望文生义，国内部分爱好者对Furry存在刻板印象，需予以厘清：</p>
+<h3 id="intro-h3-1">误区一："Furry必须是毛茸茸的"</h3>
+<div class="highlight-box"><p id="intro-p4"><strong>事实：</strong>这是一个基于字面意思的误解。虽然哺乳动物是主流，但Furry文化早在80年代确立时就不排斥无毛生物。爬行类（Scalies）、水生类甚至昆虫类的拟人角色，只要具备拟人化特征，均属于Furry范畴。"是否毛茸茸"在审美观中从来都是可选元素。</p></div>
+<h3 id="intro-h3-2">误区二："只有直立行走的'人形兽'才算"</h3>
+<div class="highlight-box"><p id="intro-p5"><strong>事实：</strong>拥有类人躯干、直立行走的角色在英文中称为 <strong>Anthro</strong>，这只是Furry的一种主流形态。保留四足行走形态但拥有人类智慧的 <strong>Feral</strong>，以及半人半兽的 <strong>Taur</strong> 等形态，同样是Furry文化的重要组成部分。</p></div>
+<h2 id="intro-h2-2">历史溯源与定义演变</h2>
+<p id="intro-p6">Furry作为一种独立文化，通常被认为形成于1980年代中期。</p>
+<p id="intro-p7"><strong>术语起源：</strong>根据记载，"Furry"一词作为群体称呼的流行，与1986年圣地亚哥第39届"西海岸科幻奇幻大会"有关。当时圈外人士 Dr. Pepper 撰写的《Furry Fandom Observed》一文在BBS上流传，文中指出虽然人们喜欢的动物大多是哺乳动物（因此有Furry一词），但这并不排除对其他动物的喜爱。</p>
+<p id="intro-p8"><strong>文化独立性：</strong>Furry是基于拟人动物这一表现形式于1983年左右独立的现代文化。虽然它与早期的Funny Animals漫画潮流有渊源，但它拥有明确的社群结构和独特的图腾表达，不同于单纯的商业漫画受众。</p>
+<h2 id="intro-h2-3">文化边界与自我认同</h2>
+<p id="intro-p9">Furry是一个包容性极强的概念，但在实际应用中，需要尊重创作者的自我定义以及社群参与的差异：</p>
+<h3 id="intro-h3-3">尊重创作者的自我定义（OC与自设）</h3>
+<p id="intro-p10">在中国现代创作环境中，许多画师或创作者虽然绘制了符合Furry定义的原创角色（OC）或自设，但如果创作者本人不承认自己是福瑞，或者根本不知道"福瑞"这一概念（例如B站的纪夫Junly老师、Faith不是Fish老师等），那么在严谨的分类上，不应强行将其归类为Furry作品或作者。这种情况下，应尊重其原本的创作意图（如单纯的角色设计、神话重构等），避免过度标签化。</p>
+<h3 id="intro-h3-4">"是福瑞"不等于"混福瑞圈"</h3>
+<p id="intro-p11">Furry既是一种文化标签，也是一种社交圈子，二者可以剥离。</p>
+<ul>
+<li id="intro-li1">有些创作者或爱好者虽然在审美和身份认同上完全属于Furry（例如B站的碧月狐老师），但他们可能选择不进入核心的社交圈子，不参与兽展、群组交流等典型的"混圈"行为。</li>
+<li id="intro-li2">这类人群依然是Furry文化的一部分，但他们的存在形式更加独立。因此，不能简单地用"是否活跃于圈子"来判断一个人或作品是否属于Furry。</li>
+</ul>
+            </div>        </div>
+
+        <div style="flex-grow:1;"></div>
+    </div>
+
+    <script>
+        const T = {
+            'intro-title': { zh:'Furry (兽迷文化)', 'zh-tw':'Furry (獸迷文化)', en:'Furry (Furry Fandom)' },
+            'intro-p1': { zh:'<strong>Furry</strong>（英文形容词，意为"毛茸茸的"），在中文语境下常被称为<strong>兽迷</strong>、<strong>福瑞</strong>或<strong>furry控</strong>。虽然从字面上看，该词源于对"动物毛皮"的描述，但在现代亚文化语境中，它已经演变为一个基于拟人化动物角色的庞大兴趣社群。', 'zh-tw':'<strong>Furry</strong>（英文形容詞，意為"毛茸茸的"），在中文語境下常被稱為<strong>獸迷</strong>、<strong>福瑞</strong>或<strong>furry控</strong>。雖然從字面上看，該詞源於對"動物毛皮"的描述，但在現代亞文化語境中，它已經演變為一個基於擬人化動物角色的龐大興趣社群。', en:'<strong>Furry</strong> (an English adjective meaning "covered with fur"), is commonly referred to as <strong>Furries</strong>, <strong>Furry Fans</strong>, or <strong>Furry Lovers</strong> in Chinese contexts. Although literally derived from the description of "animal fur," in modern subcultural contexts, it has evolved into a large interest community based on anthropomorphic animal characters.' },
+            'intro-p2': { zh:'作为一个去中心化的泛爱好者群体，Furry不仅仅指代"有毛皮的生物"，更涵盖了从爬行类、水生生物到幻想生物的广泛拟人化创作。其核心在于对具有人类特质（如智慧、情感、社会性）的动物形象的兴趣，并通过艺术、文学、角色扮演等形式进行表达。', 'zh-tw':'作為一個去中心化的泛愛好者群體，Furry不僅僅指代"有毛皮的生物"，更涵蓋了從爬行類、水生生物到幻想生物的廣泛擬人化創作。其核心在於對具有人類特質（如智慧、情感、社會性）的動物形象的興趣，並通過藝術、文學、角色扮演等形式進行表達。', en:'As a decentralized community of enthusiasts, Furry does not merely refer to "furry creatures," but encompasses a wide range of anthropomorphic creations from reptiles, aquatic creatures to fantasy beings. Its core lies in the interest in animal figures with human traits (such as intelligence, emotions, and sociality), expressed through art, literature, role-playing, and other forms.' },
+            'intro-h2-1': { zh:'常见误区与正名', 'zh-tw':'常見誤區與正名', en:'Common Misconceptions and Clarifications' },
+            'intro-p3': { zh:'由于语言隔阂与望文生义，国内部分爱好者对Furry存在刻板印象，需予以厘清：', 'zh-tw':'由於語言隔閡與望文生義，國內部分愛好者對Furry存在刻板印象，需予以釐清：', en:'Due to language barriers and literal interpretations, some domestic enthusiasts hold stereotypes about Furry that need to be clarified:' },
+            'intro-h3-1': { zh:'误区一："Furry必须是毛茸茸的"', 'zh-tw':'誤區一："Furry必須是毛茸茸的"', en:'Misconception 1: "Furries must be furry"' },
+            'intro-p4': { zh:'<strong>事实：</strong>这是一个基于字面意思的误解。虽然哺乳动物是主流，但Furry文化早在80年代确立时就不排斥无毛生物。爬行类（Scalies）、水生类甚至昆虫类的拟人角色，只要具备拟人化特征，均属于Furry范畴。"是否毛茸茸"在审美观中从来都是可选元素。', 'zh-tw':'<strong>事實：</strong>這是一個基於字面意思的誤解。雖然哺乳動物是主流，但Furry文化早在80年代確立時就不排斥無毛生物。爬行類（Scalies）、水生類甚至昆蟲類的擬人角色，只要具備擬人化特徵，均屬於Furry範疇。"是否毛茸茸"在審美觀中從來都是可選元素。', en:'<strong>Fact:</strong> This is a misunderstanding based on literal meaning. While mammals are mainstream, Furry culture has never excluded non-furry creatures since its establishment in the 1980s. Anthropomorphic characters of reptiles (Scalies), aquatic creatures, and even insects, as long as they possess anthropomorphic characteristics, belong to the Furry category. "Being furry" has always been an optional element in aesthetics.' },
+            'intro-h3-2': { zh:'误区二："只有直立行走的\'人形兽\'才算"', 'zh-tw':'誤區二："只有直立行走的\'人形獸\'才算"', en:'Misconception 2: "Only upright-walking \'anthropomorphic beasts\' count"' },
+            'intro-p5': { zh:'<strong>事实：</strong>拥有类人躯干、直立行走的角色在英文中称为 <strong>Anthro</strong>，这只是Furry的一种主流形态。保留四足行走形态但拥有人类智慧的 <strong>Feral</strong>，以及半人半兽的 <strong>Taur</strong> 等形态，同样是Furry文化的重要组成部分。', 'zh-tw':'<strong>事實：</strong>擁有類人軀幹、直立行走的角色在英文中稱為 <strong>Anthro</strong>，這只是Furry的一種主流形態。保留四足行走形態但擁有人類智慧的 <strong>Feral</strong>，以及半人半獸的 <strong>Taur</strong> 等形態，同樣是Furry文化的重要組成部分。', en:'<strong>Fact:</strong> Characters with human-like torsos that walk upright are called <strong>Anthro</strong> in English, which is just one mainstream form of Furry. <strong>Feral</strong> forms that retain quadrupedal walking but possess human intelligence, as well as <strong>Taur</strong> forms that are half-human half-beast, are also important components of Furry culture.' },
+            'intro-h2-2': { zh:'历史溯源与定义演变', 'zh-tw':'歷史溯源與定義演變', en:'Historical Origins and Definition Evolution' },
+            'intro-p6': { zh:'Furry作为一种独立文化，通常被认为形成于1980年代中期。', 'zh-tw':'Furry作為一種獨立文化，通常被認為形成於1980年代中期。', en:'Furry, as an independent culture, is generally believed to have formed in the mid-1980s.' },
+            'intro-p7': { zh:'<strong>术语起源：</strong>根据记载，"Furry"一词作为群体称呼的流行，与1986年圣地亚哥第39届"西海岸科幻奇幻大会"有关。当时圈外人士 Dr. Pepper 撰写的《Furry Fandom Observed》一文在BBS上流传，文中指出虽然人们喜欢的动物大多是哺乳动物（因此有Furry一词），但这并不排除对其他动物的喜爱。', 'zh-tw':'<strong>術語起源：</strong>根據記載，"Furry"一詞作為群體稱呼的流行，與1986年聖地亞哥第39屆"西海岸科幻奇幻大會"有關。當時圈外人士 Dr. Pepper 撰寫的《Furry Fandom Observed》一文在BBS上流傳，文中指出雖然人們喜歡的動物大多是哺乳動物（因此有Furry一詞），但這並不排除對其他動物的喜愛。', en:'<strong>Terminology Origin:</strong> According to records, the popularity of the term "Furry" as a group name is related to the 39th West Coast Science Fiction Conference in San Diego in 1986. At that time, an article titled "Furry Fandom Observed" written by outsider Dr. Pepper circulated on BBS, pointing out that although people mostly liked mammals (hence the term Furry), this did not exclude the love for other animals.' },
+            'intro-p8': { zh:'<strong>文化独立性：</strong>Furry是基于拟人动物这一表现形式于1983年左右独立的现代文化。虽然它与早期的Funny Animals漫画潮流有渊源，但它拥有明确的社群结构和独特的图腾表达，不同于单纯的商业漫画受众。', 'zh-tw':'<strong>文化獨立性：</strong>Furry是基於擬人動物這一表現形式於1983年左右獨立的現代文化。雖然它與早期的Funny Animals漫畫潮流有淵源，但它擁有明確的社群結構和獨特的圖騰表達，不同於單純的商業漫畫受眾。', en:'<strong>Cultural Independence:</strong> Furry is a modern culture that became independent around 1983 based on the form of anthropomorphic animals. Although it has roots in the early Funny Animals comic trend, it has a clear community structure and unique totemic expressions, distinguishing it from mere commercial comic audiences.' },
+            'intro-h2-3': { zh:'文化边界与自我认同', 'zh-tw':'文化邊界與自我認同', en:'Cultural Boundaries and Self-Identity' },
+            'intro-p9': { zh:'Furry是一个包容性极强的概念，但在实际应用中，需要尊重创作者的自我定义以及社群参与的差异：', 'zh-tw':'Furry是一個包容性極強的概念，但在實際應用中，需要尊重創作者的自我定義以及社群參與的差異：', en:'Furry is a highly inclusive concept, but in practice, we need to respect the self-definition of creators and the differences in community participation:' },
+            'intro-h3-3': { zh:'尊重创作者的自我定义（OC与自设）', 'zh-tw':'尊重創作者的自我定義（OC與自設）', en:'Respecting Creators\' Self-Definition (OCs and Self-Insert Characters)' },
+            'intro-p10': { zh:'在中国现代创作环境中，许多画师或创作者虽然绘制了符合Furry定义的原创角色（OC）或自设，但如果创作者本人不承认自己是福瑞，或者根本不知道"福瑞"这一概念（例如B站的纪夫Junly老师、Faith不是Fish老师等），那么在严谨的分类上，不应强行将其归类为Furry作品或作者。这种情况下，应尊重其原本的创作意图（如单纯的角色设计、神话重构等），避免过度标签化。', 'zh-tw':'在中國現代創作環境中，許多畫師或創作者雖然繪製了符合Furry定義的原創角色（OC）或自設，但如果創作者本人不承認自己是福瑞，或者根本不知道"福瑞"這一概念（例如B站的紀夫Junly老師、Faith不是Fish老師等），那麼在嚴謹的分類上，不應強行將其歸類為Furry作品或作者。這種情況下，應尊重其原本的創作意圖（如單純的角色設計、神話重構等），避免過度標籤化。', en:'In China\'s modern creative environment, many artists or creators have drawn original characters (OCs) or self-insert characters that fit the Furry definition. However, if the creator does not identify as a Furry or is not even aware of the concept (such as Bilibili artists Junly, Faith not Fish, etc.), then in rigorous classification, they should not be forcibly categorized as Furry works or authors. In such cases, we should respect their original creative intent (such as pure character design, mythological reconstruction, etc.) and avoid over-labeling.' },
+            'intro-h3-4': { zh:'"是福瑞"不等于"混福瑞圈"', 'zh-tw':'"是福瑞"不等於"混福瑞圈"', en:'"Being a Furry" does not equal "Being in the Furry Community"' },
+            'intro-p11': { zh:'Furry既是一种文化标签，也是一种社交圈子，二者可以剥离。', 'zh-tw':'Furry既是一種文化標籤，也是一種社交圈子，二者可以剝離。', en:'Furry is both a cultural label and a social circle, and the two can be separated.' },
+            'intro-li1': { zh:'有些创作者或爱好者虽然在审美和身份认同上完全属于Furry（例如B站的碧月狐老师），但他们可能选择不进入核心的社交圈子，不参与兽展、群组交流等典型的"混圈"行为。', 'zh-tw':'有些創作者或愛好者雖然在審美和身份認同上完全屬於Furry（例如B站的碧月狐老師），但他們可能選擇不進入核心的社交圈子，不參與獸展、群組交流等典型的"混圈"行為。', en:'Some creators or enthusiasts, although fully belonging to Furry in terms of aesthetics and identity (such as Bilibili artist Biyuehu), may choose not to enter the core social circles or participate in typical "community mixing" behaviors like furry conventions or group chats.' },
+            'intro-li2': { zh:'这类人群依然是Furry文化的一部分，但他们的存在形式更加独立。因此，不能简单地用"是否活跃于圈子"来判断一个人或作品是否属于Furry。', 'zh-tw':'這類人群依然是Furry文化的一部分，但他們的存在形式更加獨立。因此，不能簡單地用"是否活躍於圈子"來判斷一個人或作品是否屬於Furry。', en:'Such individuals are still part of Furry culture, but their existence is more independent. Therefore, one cannot simply use "whether active in the community" to judge whether a person or work belongs to Furry.' },
+        };
+
+        function updatePageLang(lang) {
+            for(let key in T){
+                const el = document.getElementById(key);
+                if(el) el.innerHTML = T[key][lang];
+            }
+        }
+        updatePageLang(localStorage.getItem('lang') || 'zh');
+    </script>
+
+    <a href="contribute.html" class="feedback-btn" title="投稿/反馈">✉️</a>
+</body>
+</html>
