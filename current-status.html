@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FurryWiki - 兽圈百科知识库">
+    <title>福瑞现状与反福瑞 - FurryWiki</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root{
+            --bg:#f5f6f8; --text:#2c3e50; --text-secondary:#4b5563; --text-muted:#6b7280;
+            --card-bg:#fff; --card-hover:#f8fafc; --border:#eef1f5; --border-strong:#e4e7eb;
+            --nav-bg:#1a1c23; --nav-text:#b0b5c0; --accent:#57c3ff; --accent-light:#f0f6ff;
+            --highlight-box:#f0f6ff; --ranking-bg:#1a1c23; --ranking-text:#eee;
+            --ranking-bar-bg:#2a2d35; --ranking-note:#777e8c; --btn-bg:#eef1f5; --btn-text:#333;
+            --icon-note-bg:#444b5a; --section-bg:#fdf2f8; --section-border:#fce7f3;
+        }
+        [data-theme="dark"]{
+            --bg:#0f172a; --text:#e2e8f0; --text-secondary:#cbd5e1; --text-muted:#94a3b8;
+            --card-bg:#1e293b; --card-hover:#334155; --border:#334155; --border-strong:#475569;
+            --nav-bg:#0f172a; --nav-text:#94a3b8; --accent:#38bdf8; --accent-light:#1e3a5f;
+            --highlight-box:#1e3a5f; --ranking-bg:#1e293b; --ranking-text:#e2e8f0;
+            --ranking-bar-bg:#334155; --ranking-note:#64748b; --btn-bg:#334155; --btn-text:#e2e8f0;
+            --icon-note-bg:#475569; --section-bg:#3f1d38; --section-border:#5b2a50;
+        }
+        [data-colorblind="true"]{
+            --accent:#f59e0b;
+            --accent-light:#fffbeb;
+            --highlight-box:#fffbeb;
+            --section-bg:#fffbeb;
+            --section-border:#fef3c7;
+        }
+        [data-theme="dark"][data-colorblind="true"]{
+            --accent:#fbbf24;
+            --accent-light:#451a03;
+            --highlight-box:#451a03;
+            --section-bg:#451a03;
+            --section-border:#78350f;
+        }
+        body { font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif; background: var(--bg); display: flex; min-height: 100vh; line-height: 1.7; color: var(--text); transition: background .3s, color .3s; }
+        nav { position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: var(--nav-bg); display: flex; flex-direction: column; padding: 30px 0 24px 0; box-shadow: 4px 0 25px rgba(0,0,0,0.25); z-index: 9999; overflow-y: auto; overflow-x: hidden; flex-shrink: 0; scrollbar-width: thin; scrollbar-color: #4a4a5a transparent; border-right: 1px solid rgba(255,255,255,0.08); transition: background .3s; }
+        nav::-webkit-scrollbar { width: 6px; }
+        nav::-webkit-scrollbar-track { background: transparent; }
+        nav::-webkit-scrollbar-thumb { background: #4a4a5a; border-radius: 10px; }
+        .logo { color: #fff; font-size: 30px; font-weight: 700; text-decoration: none; padding: 10px 30px 28px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; display: block; letter-spacing: 1.5px; }
+        .logo:hover { color: #57c3ff; }
+        nav .nav-link { color: var(--nav-text); text-decoration: none; font-size: 16px; padding: 14px 30px; margin: 3px 12px; border-radius: 10px; transition: all 0.2s; flex-shrink: 0; display: block; border-left: 4px solid transparent; white-space: nowrap; font-weight: 500; }
+        nav .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); border-left: 4px solid var(--accent); }
+        nav .nav-link.active { color: #fff; background: rgba(87,195,255,0.15); border-left: 4px solid var(--accent); }
+        .lang-group { margin-top: auto; flex-shrink: 0; padding: 24px 18px 16px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; flex-direction: column; align-items: center; }
+        .lang-row { display: flex; gap: 10px; }
+        .theme-toggle-row { margin-top: 14px; }
+        .theme-toggle-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ccc; padding: 10px 20px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); color: #ccc; padding: 8px 18px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; }
+        .lang-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn.active { background: #57c3ff; color: #fff; border-color: #57c3ff; font-weight: 600; }
+        .main-content { margin-left: 300px; flex: 1; min-width: 0; padding: 50px 50px 40px 50px; display: flex; flex-direction: column; }
+        .page-container { max-width: 960px; margin: 0 auto; }
+        .page-title { font-size: 36px; font-weight: 700; margin-bottom: 30px; padding-bottom: 16px; border-bottom: 3px solid var(--accent); }
+        .page-content { font-size: 16px; line-height: 1.85; color: var(--text-secondary); }
+        .page-content h1 { color: var(--text); font-size: 32px; margin: 40px 0 20px; }
+        .page-content h2 { color: var(--accent); border-left: 5px solid var(--accent); padding-left: 18px; margin: 36px 0 18px; font-size: 24px; font-weight: 600; }
+        .page-content h3 { color: var(--text); margin: 24px 0 12px; font-size: 20px; font-weight: 600; }
+        .page-content p { margin-bottom: 16px; }
+        .page-content ul { margin-left: 24px; margin-bottom: 16px; }
+        .page-content ul li { margin-bottom: 10px; line-height: 1.75; }
+        .highlight-box { background: var(--highlight-box); padding: 18px 24px; border-radius: 14px; border-left: 5px solid var(--accent); margin: 20px 0; font-size: 15px; }
+        .ranking-container { max-width: 800px; margin: 30px auto; padding: 30px; background: var(--ranking-bg); border-radius: 24px; color: var(--ranking-text); box-shadow: 0 12px 32px rgba(0,0,0,0.25); transition: background .3s; }
+        .ranking-title { text-align: center; margin-bottom: 30px; font-size: 26px; font-weight: 700; color: #fff; border-bottom: 1px solid var(--ranking-bar-bg); padding-bottom: 20px; }
+        .rank-item { display: flex; align-items: center; margin-bottom: 16px; }
+        .rank-num { width: 34px; font-weight: 700; font-style: italic; text-align: center; margin-right: 18px; }
+        .top-1 { color: #ffd866; font-size: 1.4em; } .top-2 { color: #b0bec5; } .top-3 { color: #e5a87b; }
+        .rank-name { width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; color: #ddd; }
+        .rank-bar-bg { flex-grow: 1; background: var(--ranking-bar-bg); height: 26px; border-radius: 20px; margin: 0 18px; overflow: hidden; }
+        .rank-bar-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--accent), #4da1ff); transition: width 1s; }
+        .highlight-bar { background: linear-gradient(90deg, #ffb347, #ff6b6b); }
+        .rank-value { width: 65px; text-align: right; font-size: 13px; color: #9aa0b0; font-weight: 500; }
+        .note-text { margin-top: 28px; font-size: 12px; color: var(--ranking-note); border-top: 1px solid var(--ranking-bar-bg); padding-top: 16px; line-height: 1.7; }
+        .icon-note { display: inline-block; width: 18px; height: 18px; background: var(--icon-note-bg); color: #fff; border-radius: 50%; text-align: center; line-height: 18px; font-size: 11px; margin-left: 6px; cursor: help; }
+        .works-section { margin-top: 30px; padding: 32px; background: var(--section-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border: 1px solid var(--section-border); }
+        .works-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 32px; }
+        .works-tab { padding: 10px 26px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 15px; transition: 0.3s; font-weight: 500; color: var(--btn-text); margin: 0 6px; }
+        .works-tab:hover, .works-tab.active { background: var(--accent); color: white; box-shadow: 0 6px 18px rgba(87,195,255,0.25); }
+        .thanks-tab { padding: 10px 26px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 15px; transition: 0.3s; font-weight: 500; color: var(--btn-text); margin: 0 6px; }
+        .thanks-tab:hover, .thanks-tab.active { background: #ff9f7a; color: white; box-shadow: 0 6px 18px rgba(255,159,122,0.25); }
+        .studio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; margin-top: 24px; }
+        .studio-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); transition: 0.25s; }
+        .studio-card:hover { box-shadow: 0 14px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .studio-card .name { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+        .studio-card .contact { font-size: 14px; color: var(--text-secondary); line-height: 1.7; word-break: break-all; }
+        .studio-card .contact a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        .region-label { font-size: 18px; font-weight: 700; color: var(--text); margin: 32px 0 16px 0; padding-bottom: 10px; border-bottom: 2px solid var(--border-strong); }
+        .month-btn { padding: 10px 22px; border: none; border-radius: 30px; background: var(--btn-bg); cursor: pointer; font-size: 14px; transition: 0.3s; font-weight: 500; color: var(--btn-text); }
+        .month-btn:hover, .month-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 14px rgba(87,195,255,0.3); }
+        .con-list { list-style: none; padding: 0; }
+        .con-list li { padding: 14px 18px; border-bottom: 1px dashed var(--border-strong); display: flex; align-items: center; border-radius: 8px; }
+        .con-list li:hover { background: var(--card-hover); }
+        .con-date { background: var(--accent); color: white; padding: 5px 16px; border-radius: 20px; font-size: 13px; margin-right: 18px; min-width: 48px; text-align: center; font-weight: 600; }
+        .calendar-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        .calendar-title { text-align: center; font-size: 28px; margin-bottom: 10px; }
+        .calendar-sub { text-align: center; color: var(--text-muted); margin-bottom: 28px; }
+        .month-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 32px; }
+        .tv-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border-left: 6px solid #ffb347; }
+        .oldwiki-page { margin-top: 30px; padding: 28px; background: var(--card-bg); border-radius: 20px; border-left: 6px solid #ff6b6b; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        .thanks-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        .comic-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px; }
+        .comic-card { width: 220px; padding: 20px 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: all 0.25s; }
+        .comic-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .comic-card h3 { margin: 0 0 10px 0; font-size: 18px; font-weight: 700; }
+        .comic-card h3 a { color: #1e293b; text-decoration: none; }
+        .comic-card p { font-size: 14px; color: #5b6877; line-height: 1.6; margin-bottom: 10px; }
+        .comic-card .author { font-size: 12px; color: #999; margin: 0; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px; }
+        .game-card { border: 1px solid #eee; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .game-header { height: 140px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold; }
+        .game-body { padding: 22px; }
+        .game-body h3 { margin: 0 0 10px; color: #333; }
+        .game-body p { font-size: 14px; color: #666; line-height: 1.7; }
+        .game-extra { margin-top: 12px; padding: 10px; background: #f9f9f9; border-radius: 8px; font-size: 13px; color: #555; }
+        .game-tags { display: inline-block; margin-top: 14px; padding: 5px 12px; background: #e3f2fd; color: #1976d2; font-size: 12px; border-radius: 6px; }
+        .support-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 28px 0; }
+        .support-grid img { max-width: 300px; height: auto; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+
+        @media (max-width: 768px) {
+            
+            body { flex-direction: column; }
+            nav { position: fixed; top: 0; width: 100%; height: 56px; flex-direction: row; align-items: center; padding: 0 16px; overflow-x: auto; white-space: nowrap; z-index: 1000; -webkit-overflow-scrolling: touch; }
+            .logo { font-size: 18px; padding: 0 16px 0 6px; border-bottom: none; margin: 0; font-weight: 700; }
+            nav .nav-link { font-size: 14px; padding: 8px 16px; margin: 0; border-radius: 20px; border-left: none !important; }
+            
+            .lang-group { margin: 0; padding: 0 12px 0 8px; border: none; flex-direction: row; gap: 8px; align-items: center; }
+            .lang-row { display: flex; gap: 6px; }
+            
+            
+            .lang-btn { font-size: 12px; padding: 5px 12px; border-radius: 16px; }
+            .theme-toggle-row { margin-top: 0; display: flex; gap: 6px; }
+            #themeToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #themeToggle::before { content: "🌙"; font-size: 14px; }
+            [data-theme="dark"] #themeToggle::before { content: "☀️"; }
+            #colorblindToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #colorblindToggle::before { content: "👁️"; font-size: 14px; }
+            [data-colorblind="true"] #colorblindToggle::before { content: "🔴"; font-size: 14px; }
+            
+            
+            .main-content { margin-left: 0; padding: 70px 20px 40px 20px; }
+            .page-title { font-size: 26px; margin-bottom: 20px; }
+            .page-content h1 { font-size: 24px; }
+            .page-content h2 { font-size: 20px; }
+            .page-content h3 { font-size: 18px; }
+            .ranking-container { padding: 20px 16px; }
+            .ranking-title { font-size: 20px; }
+            .rank-name { width: 90px; font-size: 12px; }
+            .rank-bar-bg { margin: 0 10px; height: 20px; }
+            .rank-num { width: 26px; margin-right: 10px; font-size: 13px; }
+            .rank-value { width: 50px; font-size: 11px; }
+            .studio-grid { grid-template-columns: 1fr; gap: 12px; }
+            .works-section, .calendar-page, .tv-page, .oldwiki-page, .thanks-page { padding: 20px 16px; }
+            .comic-grid { gap: 12px; }
+            .comic-card { width: calc(50% - 6px); padding: 14px 10px; }
+            .game-grid { grid-template-columns: 1fr; gap: 16px; }
+        }
+        @media (max-width: 480px) {
+            nav { height: 50px; padding: 0 10px; }
+            .logo { font-size: 16px; padding: 0 12px 0 4px; }
+            nav .nav-link { font-size: 12px; padding: 6px 12px; }
+            .lang-group { padding: 0 8px 0 6px; gap: 6px; }
+            .lang-btn { font-size: 11px; padding: 4px 10px; }
+            #themeToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #themeToggle::before { font-size: 13px; }
+            #colorblindToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #colorblindToggle::before { font-size: 13px; }
+            
+            .main-content { padding: 62px 14px 32px 14px; }
+            .page-title { font-size: 22px; }
+            .comic-card { width: 100%; }
+        }
+        .feedback-btn{position:fixed;right:28px;bottom:28px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#4da1ff);color:#fff;border:none;cursor:pointer;font-size:26px;box-shadow:0 4px 20px rgba(87,195,255,.4);transition:all .3s;z-index:9999;display:flex;align-items:center;justify-content:center;text-decoration:none}
+        .feedback-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(87,195,255,.5)}
+        @media (max-width: 768px) {
+            .feedback-btn{width:52px;height:52px;font-size:22px;right:18px;bottom:18px}
+        }
+        [data-theme="dark"] .comic-card h3 a { color: #e2e8f0; }
+        [data-theme="dark"] .game-body h3 { color: #e2e8f0; }
+        [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
+        [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
+    </style>
+<script src="common.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">FurryWiki</a>
+        <a href="index.html" class="nav-link" id="nav-home" data-zh="主页" data-zhtw="主頁" data-en="Home">主页</a>
+        <a href="furry-intro.html" class="nav-link" id="nav-intro" data-zh="Furry (兽迷文化)" data-zhtw="Furry (獸迷文化)" data-en="Furry (Furry Fandom)">Furry (兽迷文化)</a>
+        <a href="characters.html" class="nav-link" id="nav-characters" data-zh="角色" data-zhtw="角色" data-en="Characters">角色</a>
+        <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
+        <a href="current-status.html" class="nav-link active" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
+        <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
+
+        <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
+        <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
+        <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
+        <a href="编辑.html" class="nav-link" id="nav-contribute" data-zh="编辑" data-zhtw="編輯" data-en="Edit">编辑</a>
+        <a href="about.html" class="nav-link" id="nav-about" data-zh="关于" data-zhtw="關於" data-en="About">关于</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-container">
+<h1 class="page-title" id="status-title">福瑞现状与反福瑞现象</h1>
+            <div class="page-content" style="max-width:900px;margin:0 auto;background:var(--section-bg);padding:30px;border-radius:20px;border:1px solid var(--section-border);">
+<h2 id="status-h2-1">现在的漫画与创作生态</h2>
+<p id="status-p1">如今的福瑞文化早已不再局限于早期的设定集，而是衍生出了庞大的产业链。漫画创作是其中的核心载体，题材跨度极大：</p>
+<ul>
+<li id="status-li1"><strong>全年龄向作品：</strong>许多作品专注于温馨日常或探讨社会议题。例如《坏蛋大饭店》和《Beastars》，深刻探讨了种族偏见、身份认同等严肃话题。</li>
+<li id="status-li2"><strong>网络条漫与独立创作：</strong>随着互联网的发展，大量创作者通过 Webtoon 等平台连载条漫，极大地降低了创作和传播门槛。</li>
+<li id="status-li3"><strong>成人向内容：</strong>必须客观承认，这也是圈子庞大流量的一部分。由于互联网的传播特性，这部分内容往往更容易"破圈"，但也因此给大众留下了刻板印象。</li>
+</ul>
+<h2 id="status-h2-2">圈内的分歧与冲突</h2>
+<p id="status-p2">福瑞圈内部并非铁板一块，随着群体扩大，关于"什么是真正的福瑞"以及"如何对外展示"的争论从未停止。</p>
+<ul>
+<li id="status-li4"><strong>"兽设"与"皮套"之争：</strong>拥有昂贵定制皮套（Fursuit）的现充派与坚持二次元绘画、文字创作的"键盘派"之间偶尔存在鄙视链。</li>
+<li id="status-li5"><strong>商业化与原教旨主义：</strong>一部分人主张积极商业化、拥抱主流；另一部分人则担心过度商业化和色情化会毁掉这个亚文化的纯粹性。</li>
+</ul>
+<h2 id="status-h2-3">国内政治议题与底线</h2>
+<p id="status-p3">在国内语境下，福瑞圈并非脱离现实的"乌托邦"，当亚文化与大是大非发生碰撞时，往往会引发激烈的争议与抵制：</p>
+<ul>
+<li id="status-li6"><strong>坚决抵制"台独"等分裂言论：</strong>曾有极个别拥有兽设的主播或创作者暗夹私货，这种行为一经曝光，立刻遭到国内兽迷群体的强烈抵制与自发封杀。大家普遍认为，无论披着多么可爱的"兽皮"，都不能掩盖政治立场上的恶劣本质。</li>
+<li id="status-li7"><strong>网络黑称与侮辱性标签：</strong>随着圈子扩大，外界针对福瑞群体的恶意攻击层出不穷。部分极端反福瑞群体发明了诸如"扫福瑞"等带有强烈侮辱性的黑称。这类词汇本质上是针对整个亚文化群体的无差别攻击和污名化。</li>
+</ul>
+<h1 id="status-h1-2">中文反福瑞现象发展史</h1>
+<p id="status-p4">中文反福瑞现象，是指在中国互联网语境下，部分网民及组织针对"福瑞"（Furry，即兽迷/拟人化动物爱好者）亚文化群体，所产生的一系列排斥、污名化及网络暴力事件的总称。该现象自2016年起初露端倪，经历了从媒体误读、圈层内部矛盾外溢，到最终演变为有组织、系统性的网络"猎巫"行动，其演变史反映了边缘亚文化在破圈过程中所面临的严峻舆论环境。</p>
+<h3 id="status-h3-1">2016年：媒体失实报道与舆论"第一枪"</h3>
+<p id="status-p5">反福瑞舆论的源头可追溯至2016年。当时，《南方都市报》发布了一篇关于兽迷圈的深度报道，该报道在描述圈内乱象时出现了关键性的表述缺失。文中指出"兽迷圈存在未成年人的低俗色情内容"，却未加上"部分"或"少数"等关键限定词。这一以偏概全的表述，直接将亚文化圈层内部的灰色地带问题等同于整个群体的普遍特征，触发了社会大众对于"未成年人保护"的敏感神经。此次报道被广泛视为中文互联网"反福瑞"情绪的第一枪，确立了后续反福瑞群体利用"道德高地"进行攻击的逻辑基础。</p>
+<h3 id="status-h3-2">2018年：低龄化乱象与《有兽焉》网暴事件</h3>
+<p id="status-p6">2018年是反福瑞情绪从"观念排斥"转向"具体行动"的关键年份，期间发生了两起标志性事件，标志着反福瑞行为开始针对具体的文化作品进行"定点爆破"。</p>
+<ul>
+<li id="status-li8"><strong>"大牛村"低龄化乱象：</strong>以"大牛村"为代表的事件暴露了当时兽迷圈受众的极度低龄化。大量心智尚未成熟的小学生及初中生涌入，在缺乏引导的情况下模仿圈内不良风气，导致公共网络平台出现大量出格行为，为反福瑞群体提供了攻击的"实锤"。</li>
+<li id="status-li9"><strong>《有兽焉》遭遇大型网暴：</strong>2024.10.01，国产知名条漫《有兽焉》遭遇了史无前例的大型网络暴力。反福瑞群体及部分极端网友利用漫画中的个别争议点，进行了断章取义的传播与恶意解读，引发了针对作者及作品的大规模谩骂与举报。这是兽迷相关文化产品首次在主流视野中遭受如此规模的集中攻击。</li>
+</ul>
+<h3 id="status-h3-3">2023年：组织化对抗与历史最大规模网暴</h3>
+<p id="status-p7">进入2023年，反福瑞行为彻底完成了从"散兵游勇"到"有组织集团"的蜕变，并爆发了历史上规模最大的围剿事件。</p>
+<ul>
+<li id="status-li10"><strong>有组织的"猎巫"行动：</strong>反福瑞群体不再是个体宣泄，而是形成了严密的组织架构。他们建立了专门的素材库与话术群，制定了统一的攻击计划，将反福瑞行为演变为一种"网络狂欢"与"烂梗"传播。</li>
+<li id="status-li11"><strong>全网级舆论围剿：</strong>2023年至今爆发的网暴，其规模、持续时间及破坏力均远超2018年。反福瑞组织利用平台监管规则的漏洞，对兽迷画师、兽展主办方及相关社群进行了无差别的举报与骚扰。</li>
+<li id="status-li12"><strong>性质质变：</strong>此次事件不再局限于对"低俗内容"的批判，而是演变为对整个兽迷群体生存空间的系统性挤压，试图通过制造恐慌和污名化，将兽迷文化彻底驱逐出公共网络平台。</li>
+</ul>
+<h3 id="status-h3-4">现象成因与社会学分析</h3>
+<p id="status-p8">综合来看，中文反福瑞现象的爆发并非单一因素所致，而是多重矛盾叠加的结果：</p>
+<ul>
+<li id="status-li13"><strong>内部因素：</strong>圈子门槛较低导致受众极度低龄化，部分缺乏判断力的低龄用户发表极端言论或擦边行为，加之圈内少数不良分子借机宣泄过度欲望，为外界攻击提供了直接抓手。</li>
+<li id="status-li14"><strong>外部因素：</strong>随着社交媒体的普及，福瑞文化从封闭同好群进入大众视野。大众往往无法区分"正常爱好者"与"不良分子"，产生易得性启发与群体归因错误，将极少数不良个体等同于整个圈层。</li>
+<li id="status-li15"><strong>心理机制：</strong>部分反福瑞行为本质上是一种网络霸凌的变体。施暴者通过寻找一个相对弱势的亚文化群体作为"替罪羊"（即"黑羊效应"）欺负弱小的福瑞（即踢猫效应）一次忍让带来的变本加厉（即破窗效应），以此来释放现实生活中的压力或获取群体归属感。</li>
+</ul>
+<h3 id="status-h3-5">2025-2026年：针对性恶性抹黑与网络暴力事件</h3>
+<h4 id="status-h4-1">5.1 事件概述</h4>
+<p id="status-p9">2025年11月至2026年初，中文互联网爆发了一场针对Furry（兽迷）社群的有组织、大规模的恶意攻击事件。该事件并非单纯的亚文化冲突，而是由反串黑（Fauxurry）、极端反兽迷群体（Anti-Furry）以及逐利营销号（锐评圈）共同推动的舆论风暴。攻击者通过伪造聊天记录、盗用身份篡改国歌、造谣公共安全事件、辱骂退伍军人等极端手段，试图将兽迷群体污名化、罪犯化。尽管后期有部分澄清，但此次事件对社群造成了深远的负面影响。</p>
+<h4 id="status-h4-2">5.2 核心恶性事件时间轴</h4>
+<p id="status-p10"><strong>2025年11月：导火索与反串铺垫</strong></p>
+<ul>
+<li id="status-li16"><strong>盗用兽设篡改国歌事件：</strong>B站用户 @浩气长存逍遥自在 盗用画师"@奇迹初一"的兽设，制作并发布篡改《义勇军进行曲》歌词的恶劣视频。此举迅速引发公众愤怒，并成功将舆论矛头引向整个兽迷群体，导致大量不知情网民参与攻击。</li>
+<li id="status-li17"><strong>文化引流与私域反串：</strong>用户"@福瑞控的救世主"发布视频声称"福瑞文化与中华传统文化相辅相成"进行引流，随后在私域群聊（全员禁言，仅管理员发言）中发布大量极端、反智言论，并截图外传，制造"兽迷群体内部极端化"的假象。</li>
+</ul>
+<p id="status-p11"><strong>2025年11月底-12月初：谣言爆发与电影风波</strong></p>
+<ul>
+<li id="status-li18"><strong>电影院"不雅行为"谣言：</strong>借《疯狂动物城2》上映热度，反串群体伪造QQ群聊天记录，谎称"有兽迷在电影院做出不雅行为弄到他人头上"。经网友核查，所用图片早在电影上映前（11月5日）就已流传，且背景、时间线均存在明显逻辑漏洞，确认为伪造栽赃。</li>
+<li id="status-li19"><strong>兽迷包场观影被抹黑：</strong>11月28日，奇点兽聚主办方组织包场观看《疯狂动物城2》。部分反串者掐头去尾，隐瞒"包场"事实，造谣兽迷"霸占影厅、气味难闻、影响路人"，引发针对观影者的网暴。</li>
+</ul>
+<p id="status-p12"><strong>2025年12月：全面开战与触碰红线</strong></p>
+<ul>
+<li id="status-li20"><strong>百度贴吧"地狱笑话"钓鱼：</strong>11月30日，账号"青春大萎"在地狱笑话吧发帖造谣"兽迷家长穿兽装吓坏孩子"，并刻意提及"退伍军人"身份以激化矛盾。该贴随后被反串群作为素材扩散，两次登上贴吧热搜。</li>
+<li id="status-li21"><strong>QQ群炸群袭击：</strong>12月4日起，不明身份群体利用小号伪装成兽迷或宝可梦、植物大战僵尸玩家，混入群聊后发送大量涉政、涉黄、暴恐表情包进行"炸群"，导致大量正常社群被迫解散或开启严格验证。</li>
+<li id="status-li22"><strong>公交车"撒不明液体"谣言：</strong>12月7日，反兽迷群体造谣称"要在上海公交车上撒不明黄色液体，让公交迷闻味道"。该谣言波及交通圈。经考证，谣言配图中的公交车为2015年重组前的旧涂装车辆，且车型已于2023年报废，车内设施也与描述不符，确认为利用旧图造谣。</li>
+</ul>
+<p id="status-p13"><strong>2026年初：锐评圈入局与法律制裁</strong></p>
+<ul>
+<li id="status-li23"><strong>锐评博主"麒麟达"辱骂退伍军人事件：</strong>在流量裹挟下，博主"麒麟达"为博眼球，借吐槽之名公然辱骂退伍军人、否认军人功绩。该行为严重触犯《英雄烈士保护法》及社会公德底线，随后该账号被全网永久封禁（炸号），相关内容下架。</li>
+<li id="status-li24"><strong>事件回落：</strong>随着谣言被逐一拆穿及核心造谣账号被封禁，2026年后事件热度逐渐消退，但针对兽迷的刻板印象已部分固化。</li>
+</ul>
+<h4 id="status-h4-3">5.3 攻击手段深度解析</h4>
+<p id="status-p14">本次事件中，攻击者展现出了高度的组织性与卑劣的手段，主要包括以下几类：</p>
+<ul>
+<li id="status-li25"><strong>政治性抹黑（红线攻击）：</strong>盗用兽设形象篡改国歌、在群聊中发布反党反社言论并截图外传、辱骂退伍军人。利用公众的爱国情怀和对军人的尊崇，将兽迷群体与"危害国家安全"、"侮辱英烈"挂钩，借官方和大众之手进行打击。</li>
+<li id="status-li26"><strong>社会性死亡（黄谣与恐慌）：</strong>伪造"电影院不雅行为"、"公交车撒尿/撒毒"等聊天记录。引发公众的生理厌恶和恐慌，将兽迷塑造成"潜在的性犯罪者"和"公共卫生威胁"。</li>
+<li id="status-li27"><strong>技术性破坏（炸群与盗号）：</strong>批量注册小号，伪装身份入群后发送违规内容导致群组被封。直接破坏了兽迷社群的交流基础设施，导致大量无辜群聊解散。</li>
+</ul>
+<h2 id="status-h2-5">2026年：商业化消费与内部乱象的双重夹击</h2>
+<p id="status-p17">进入2026年，在持续遭受第5部分所述的外部系统性污名化攻击的同时，福瑞圈还面临来自商业品牌的消费式营销与圈内不良分子的恶意作乱——两者共同构成了对福瑞生存空间的全新挤压。</p>
+<h3 id="status-h3-6">6.1 小鹏汽车"鹏装热流"营销风波：商业品牌乘污名化之机"宠物化"福瑞</h3>
+<p id="status-p18">2026年3月，小鹏汽车策划了一场名为"鹏装热流"的营销活动，试图借助福瑞亚文化的热度博取年轻群体关注。然而，该营销方式引发了福瑞圈的强烈反感，并因后续公关失误升级为一场涉及商业诋毁的法律风波。</p>
+<h4 id="status-h4-4">事件经过</h4>
+<p id="status-p19">2026年3月3日17时许，小鹏汽车通过认证为"警察"的蓝V政务账号发布了一则"宠物出行小指南"，配图小鹏汽车，文案为 "牵好文明绳" 。该内容将小鹏汽车及其关联概念放置于"宠物/犬只"的语境下进行宣传。由于"鹏装热流"与福瑞圈核心概念"兽装"（Fursuit）发音高度相似，此次营销被普遍认为是在刻意"碰瓷"福瑞文化。</p>
+<h4 id="status-h4-5">争议焦点</h4>
+<ul>
+<li id="status-li28"><strong>"宠物化"侮辱：</strong>时值2026年初，福瑞圈正处于"扫福瑞"等污名化标签泛滥的高压期。小鹏汽车在此背景下，利用官方政务账号将亚文化相关概念与"牵绳宠物"直接等同，被广大爱好者视为乘人之危的侮辱，而非友善的文化联动。</li>
+<li id="status-li29"><strong>官方背书性质：</strong>发布渠道为"警察"蓝V账号，使该营销带有官方背书意味，进一步放大了其负面影响。</li>
+<li id="status-li30"><strong>危机公关失误：</strong>面对福瑞圈的抵制，小鹏汽车发布了道歉声明。然而，该声明中直接提及并抵制小米，将一场亚文化风波升级为两家上市公司之间的商业诋毁纠纷。</li>
+</ul>
+<h4 id="status-h4-6">结果与压制</h4>
+<p id="status-p20">包含侵权内容的道歉声明因法律风险被迅速删除——并非普通"删帖"，而是为消除商业诋毁证据。相关信息被大规模清理，小鹏法务部的介入使该事件在公开渠道几乎无迹可寻。讽刺的是，2026年7月，小鹏集团法务部宣布多起名誉权侵权案二审胜诉——而此时小鹏自身也因"拉踩"小米而被迫删文的经历已被成功"压制"。</p>
+<h4 id="status-h4-7">事件定性</h4>
+<p id="status-p21">这不是一次简单的营销翻车，而是一场由商业品牌策划、借官方政务账号渠道发布、将亚文化系统性"宠物化"与"降格"的争议性营销事件，因危机公关失误升级为商业诋毁，最终被法律强制叫停。</p>
+<h3 id="status-h3-7">6.2 "豪城"兽聚作乱事件：圈内不良分子利用品牌IP恶意抹黑</h3>
+<p id="status-p22">与外部商业消费相对应，2026年福瑞圈内部也出现了一起不良分子恶意作乱、最终引发品牌方与警方双重介入的恶性事件。</p>
+<h4 id="status-h4-8">人物身份</h4>
+<p id="status-p23">"豪城"是福瑞圈一名争议人物的个人代号，并非广州豪城房产、北京豪城物业等同名企业（那些均为正规经营的房地产/物业公司，与福瑞圈无关）。大家以"豪城"称呼此人，具体真名不详。</p>
+<h4 id="status-h4-9">事件经过</h4>
+<table id="status-table1" style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;line-height:1.7;">
+<thead><tr style="background:var(--highlight-box);">
+<th id="status-th1" style="padding:10px 14px;text-align:left;border:1px solid var(--border);width:30%;">时间</th>
+<th id="status-th2" style="padding:10px 14px;text-align:left;border:1px solid var(--border);">事件</th>
+</tr></thead>
+<tbody>
+<tr>
+<td id="status-td1" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">2026年五一期间</td>
+<td id="status-td2" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">"豪城"在HF（Hi Furry）兽聚现场，携带印有零食品牌 "好想来" 吉祥物"袋袋兔"的购物塑料袋，试图将主流商业IP与亚文化争议事件强行关联，制造话题、抹黑兽聚。</td>
+</tr>
+<tr>
+<td id="status-td3" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">2026年8月</td>
+<td id="status-td4" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">"豪城"试图携带同类物料进入天津城兽汇会场，被主办方阻拦后现场发生冲突，主办方报警，警察到场调解处理。</td>
+</tr>
+<tr>
+<td id="status-td5" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">事件后</td>
+<td id="status-td6" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">"豪城"在直播中持续讨论该事件，相关视频因涉及"好想来"品牌IP侵权，被好想来官方（万辰集团）以侵权为由要求下架。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="status-h4-10">压制逻辑</h4>
+<ul>
+<li id="status-li31"><strong>好想来法务部介入：</strong>品牌IP"袋袋兔"被用于负面炒作，法务部门以侵权为由要求全网下架相关视频。</li>
+<li id="status-li32"><strong>警方出警记录：</strong>天津城兽汇现场的治安纠纷有警方出警记录。涉及警方出警的事件，平台会自动加强审核，相关讨论容易被限流或删除。</li>
+<li id="status-li33"><strong>双重叠加：</strong>品牌法务维权与警方出警记录叠加，触发了平台最严格的审核机制，信息被清理得比单一事件更为彻底。</li>
+</ul>
+<h4 id="status-h4-11">事件定性</h4>
+<p id="status-p24">"豪城"试图用好想来IP抹黑兽聚，被好想来法务部以侵权为由全网下架，叠加天津城兽汇现场警方出警记录，导致信息被双重压制。这不是"捂嘴"，而是品牌维权与警方记录共同触发的平台清理机制。</p>
+<h3 id="status-h3-8">6.3 现象规律总结</h3>
+<p id="status-p25">2026年这两起事件揭示了福瑞信息被"压制"的共同规律：</p>
+<table id="status-table2" style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;line-height:1.7;">
+<thead><tr style="background:var(--highlight-box);">
+<th id="status-th3" style="padding:10px 14px;text-align:left;border:1px solid var(--border);width:22%;">维度</th>
+<th id="status-th4" style="padding:10px 14px;text-align:left;border:1px solid var(--border);width:39%;">小鹏汽车事件</th>
+<th id="status-th5" style="padding:10px 14px;text-align:left;border:1px solid var(--border);width:39%;">"豪城"事件</th>
+</tr></thead>
+<tbody>
+<tr>
+<td id="status-td7" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">触发力量</td>
+<td id="status-td8" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">小鹏法务部 + 警察蓝V账号</td>
+<td id="status-td9" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">好想来法务部 + 警方出警</td>
+</tr>
+<tr>
+<td id="status-td10" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">压制方式</td>
+<td id="status-td11" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">道歉声明因侵权被删，负面信息清理</td>
+<td id="status-td12" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">侵权视频下架，讨论被限流</td>
+</tr>
+<tr>
+<td id="status-td13" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">官方介入标志</td>
+<td id="status-td14" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">"警察"蓝V背书</td>
+<td id="status-td15" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">警方到场调解</td>
+</tr>
+<tr>
+<td id="status-td16" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">品牌维权对象</td>
+<td id="status-td17" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">小鹏自身品牌形象</td>
+<td id="status-td18" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">"袋袋兔"IP形象</td>
+</tr>
+<tr>
+<td id="status-td19" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">对福瑞圈的影响</td>
+<td id="status-td20" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">被商业品牌乘污名化之机"宠物化"羞辱</td>
+<td id="status-td21" style="padding:10px 14px;border:1px solid var(--border);vertical-align:top;">被圈内不良分子利用品牌IP恶意抹黑</td>
+</tr>
+</tbody>
+</table>
+<p id="status-p26">当两件事同时具备以下两个条件时，信息会被清理得最为彻底：</p>
+<ul>
+<li id="status-li34">商业品牌法务介入（无论品牌是有意营销还是被动维权）</li>
+<li id="status-li35">警方/官方机构出警记录</li>
+</ul>
+<p id="status-p27">这两个因素都会触发平台最严格的审核与清理机制，其清理力度远超普通网络争议，在这两重因素叠加面前，信息会被"无差别压制"。</p>
+<h3 id="status-h3-9">6.4 对历史记录者的启示</h3>
+<ul>
+<li id="status-li36"><strong>"公开叙事"不可信——</strong>官方公告只是"被允许存在"的表层叙事，事件的真实逻辑往往被掩盖。</li>
+<li id="status-li37"><strong>一手史料是核心资产——</strong>截图、亲历者口述、原始链接存档，才是真实的历史证据。AI检索所爬取的底层碎片信息，也可作为追溯真相的切入点。</li>
+<li id="status-li38"><strong>压制逻辑可复制——</strong>未来再有类似事件，只要涉及"品牌法务+警方/官方"，即可判断信息会被系统性清理。福瑞圈的生存空间正受到来自外部商业消费与内部不良分子的双重挤压——记录这些历史，是为了让真相不被"压制"所吞噬。</li>
+</ul>
+<h2 id="status-h2-4">结语</h2>
+<p id="status-p15">从2016年的媒体误读，到2018年针对具体作品的网暴，再到2023年的全网围剿，以及2025-2026年更加恶毒的组织化攻击，反福瑞现象的演变史，是一部亚文化在偏见与恶意中艰难求生的血泪史。进入2026年，商业品牌的消费式营销与圈内不良分子的恶意作乱，又为福瑞圈增添了新的生存压力。记录这些历史，旨在客观还原事件真相，警惕网络暴力的蔓延，并呼吁社会各界对多元文化保持应有的尊重与包容。</p>
+<p id="status-p16" style="font-size:13px;color:#888;">备注：本词条依据公开网络信息整理，旨在记录历史真相，反对任何形式的网络暴力与造谣诽谤。</p>
+            </div>        </div>
+
+        <div style="flex-grow:1;"></div>
+    </div>
+
+    <script>
+        const T = {
+            'status-title': { zh:'福瑞现状与反福瑞现象', 'zh-tw':'福瑞現狀與反福瑞現象', en:'Current State of Furry Culture and Anti-Furry Phenomenon' },
+            'status-h2-1': { zh:'现在的漫画与创作生态', 'zh-tw':'現在的漫畫與創作生態', en:'Current Comic and Creative Ecosystem' },
+            'status-p1': { zh:'如今的福瑞文化早已不再局限于早期的设定集，而是衍生出了庞大的产业链。漫画创作是其中的核心载体，题材跨度极大：', 'zh-tw':'如今的福瑞文化早已不再局限於早期的設定集，而是衍生出了龐大的產業鏈。漫畫創作是其中的核心載體，題材跨度極大：', en:'Today\'s Furry culture is no longer limited to early setting collections, but has spawned a massive industrial chain. Comic creation is the core medium, covering a wide range of themes:' },
+            'status-li1': { zh:'<strong>全年龄向作品：</strong>许多作品专注于温馨日常或探讨社会议题。例如《坏蛋大饭店》和《Beastars》，深刻探讨了种族偏见、身份认同等严肃话题。', 'zh-tw':'<strong>全年齡向作品：</strong>許多作品專注於溫馨日常或探討社會議題。例如《壞蛋大飯店》和《Beastars》，深刻探討了種族偏見、身份認同等嚴肅話題。', en:'<strong>All-age works:</strong> Many works focus on heartwarming daily life or explore social issues. For example, "Bad Guys Hotel" and "Beastars" deeply explore serious topics such as racial prejudice and identity.' },
+            'status-li2': { zh:'<strong>网络条漫与独立创作：</strong>随着互联网的发展，大量创作者通过 Webtoon 等平台连载条漫，极大地降低了创作和传播门槛。', 'zh-tw':'<strong>網絡條漫與獨立創作：</strong>隨著互聯網的發展，大量創作者通過 Webtoon 等平台連載條漫，極大地降低了創作和傳播門檻。', en:'<strong>Web comics and independent creation:</strong> With the development of the internet, numerous creators serialize web comics through platforms like Webtoon, significantly lowering the barriers to creation and distribution.' },
+            'status-li3': { zh:'<strong>成人向内容：</strong>必须客观承认，这也是圈子庞大流量的一部分。由于互联网的传播特性，这部分内容往往更容易"破圈"，但也因此给大众留下了刻板印象。', 'zh-tw':'<strong>成人向內容：</strong>必須客觀承認，這也是圈子龐大流量的一部分。由於互聯網的傳播特性，這部分內容往往更容易"破圈"，但也因此給大眾留下了刻板印象。', en:'<strong>Adult content:</strong> It must be objectively acknowledged that this is also part of the community\'s massive traffic. Due to the internet\'s dissemination characteristics, this content often "breaks through" more easily, but as a result, it creates stereotypes for the general public.' },
+            'status-h2-2': { zh:'圈内的分歧与冲突', 'zh-tw':'圈內的分歧與衝突', en:'Internal Divisions and Conflicts' },
+            'status-p2': { zh:'福瑞圈内部并非铁板一块，随着群体扩大，关于"什么是真正的福瑞"以及"如何对外展示"的争论从未停止。', 'zh-tw':'福瑞圈內部並非鐵板一塊，隨著群體擴大，關於"什麼是真正的福瑞"以及"如何對外展示"的爭論從未停止。', en:'The Furry community is not monolithic. As the group expands, debates about "what is truly Furry" and "how to present externally" have never ceased.' },
+            'status-li4': { zh:'<strong>"兽设"与"皮套"之争：</strong>拥有昂贵定制皮套（Fursuit）的现充派与坚持二次元绘画、文字创作的"键盘派"之间偶尔存在鄙视链。', 'zh-tw':'<strong>"獸設"與"皮套"之爭：</strong>擁有昂貴定制皮套（Fursuit）的現充派與堅持二次元繪畫、文字創作的"鍵盤派"之間偶爾存在鄙視鏈。', en:'<strong>"Fursona" vs "Fursuit" debate:</strong> There is occasionally a hierarchy between those with expensive custom Fursuits and "keyboard warriors" who stick to 2D art and writing.' },
+            'status-li5': { zh:'<strong>商业化与原教旨主义：</strong>一部分人主张积极商业化、拥抱主流；另一部分人则担心过度商业化和色情化会毁掉这个亚文化的纯粹性。', 'zh-tw':'<strong>商業化與原教旨主義：</strong>一部分人主張積極商業化、擁抱主流；另一部分人則擔心過度商業化和色情化會毁掉這個亞文化的純粹性。', en:'<strong>Commercialization vs fundamentalism:</strong> Some advocate active commercialization and embracing the mainstream; others worry that over-commercialization and sexualization will destroy the subculture\'s purity.' },
+            'status-h2-3': { zh:'国内政治议题与底线', 'zh-tw':'國內政治議題與底線', en:'Domestic Political Issues and Bottom Lines' },
+            'status-p3': { zh:'在国内语境下，福瑞圈并非脱离现实的"乌托邦"，当亚文化与大是大非发生碰撞时，往往会引发激烈的争议与抵制：', 'zh-tw':'在國內語境下，福瑞圈並非脫離現實的"烏托邦"，當亞文化與大是大非發生碰撞時，往往會引發激烈的爭議與抵制：', en:'In the domestic context, the Furry community is not an unrealistic "utopia." When subculture collides with major right and wrong issues, it often triggers intense controversy and resistance:' },
+            'status-li6': { zh:'<strong>坚决抵制"台独"等分裂言论：</strong>曾有极个别拥有兽设的主播或创作者暗夹私货，这种行为一经曝光，立刻遭到国内兽迷群体的强烈抵制与自发封杀。大家普遍认为，无论披着多么可爱的"兽皮"，都不能掩盖政治立场上的恶劣本质。', 'zh-tw':'<strong>堅決抵制"台獨"等分裂言論：</strong>曾有極個別擁有獸設的主播或創作者暗夾私貨，這種行為一經曝光，立刻遭到國內獸迷群體的強烈抵制與自發封殺。大家普遍認為，無論披著多麼可愛的"獸皮"，都不能掩蓋政治立場上的惡劣本質。', en:'<strong>Firmly resist "Taiwan independence" and other separatist remarks:</strong> There have been isolated cases where streamers or creators with fursonas secretly included separatist content. Once exposed, such behavior is immediately met with strong resistance and spontaneous boycotts from the domestic Furry community. It is widely believed that no matter how cute the "furry skin" is, it cannot cover up the vile nature of political stance.' },
+            'status-li7': { zh:'<strong>网络黑称与侮辱性标签：</strong>随着圈子扩大，外界针对福瑞群体的恶意攻击层出不穷。部分极端反福瑞群体发明了诸如"扫福瑞"等带有强烈侮辱性的黑称。这类词汇本质上是针对整个亚文化群体的无差别攻击和污名化。', 'zh-tw':'<strong>網絡黑稱與侮辱性標籤：</strong>隨著圈子擴大，外界針對福瑞群體的惡意攻擊層出不窮。部分極端反福瑞群體發明了諸如"掃福瑞"等帶有強烈侮辱性的黑稱。這類詞彙本質上是針對整個亞文化群體的無差別攻擊和污名化。', en:'<strong>Online slurs and derogatory labels:</strong> As the community grows, malicious attacks against Furries from outside are endless. Some extreme anti-Furry groups have invented highly derogatory terms like "扫福瑞" (literally "clean up Furries"). Such terms are essentially indiscriminate attacks and stigmatization of the entire subculture.' },
+            'status-h1-2': { zh:'中文反福瑞现象发展史', 'zh-tw':'中文反福瑞現象發展史', en:'History of Anti-Furry Phenomenon in Chinese Internet' },
+            'status-p4': { zh:'中文反福瑞现象，是指在中国互联网语境下，部分网民及组织针对"福瑞"（Furry，即兽迷/拟人化动物爱好者）亚文化群体，所产生的一系列排斥、污名化及网络暴力事件的总称。该现象自2016年起初露端倪，经历了从媒体误读、圈层内部矛盾外溢，到最终演变为有组织、系统性的网络"猎巫"行动，其演变史反映了边缘亚文化在破圈过程中所面临的严峻舆论环境。', 'zh-tw':'中文反福瑞現象，是指在中國互聯網語境下，部分網民及組織針對"福瑞"（Furry，即獸迷/擬人化動物愛好者）亞文化群體，所產生的一系列排斥、污名化及網絡暴力事件的總稱。該現象自2016年起初露端倪，經歷了從媒體誤讀、圈層內部矛盾外溢，到最終演變為有組織、系統性的網絡"獵巫"行動，其演變史反映了邊緣亞文化在破圈過程中所面臨的嚴峻輿論環境。', en:'The Chinese anti-Furry phenomenon refers to a series of exclusion, stigmatization, and cyberbullying incidents targeting the "Furry" (anthropomorphic animal enthusiasts) subculture community by some netizens and organizations in the Chinese internet context. This phenomenon emerged in 2016, evolving from media misinterpretation and internal community conflicts to organized, systematic online "witch hunt" actions. Its history reflects the severe public opinion environment faced by marginal subcultures during their breakthrough into mainstream awareness.' },
+            'status-h3-1': { zh:'2016年：媒体失实报道与舆论"第一枪"', 'zh-tw':'2016年：媒體失實報道與輿論"第一槍"', en:'2016: Media Misreporting and the "First Shot" of Public Opinion' },
+            'status-p5': { zh:'反福瑞舆论的源头可追溯至2016年。当时，《南方都市报》发布了一篇关于兽迷圈的深度报道，该报道在描述圈内乱象时出现了关键性的表述缺失。文中指出"兽迷圈存在未成年人的低俗色情内容"，却未加上"部分"或"少数"等关键限定词。这一以偏概全的表述，直接将亚文化圈层内部的灰色地带问题等同于整个群体的普遍特征，触发了社会大众对于"未成年人保护"的敏感神经。此次报道被广泛视为中文互联网"反福瑞"情绪的第一枪，确立了后续反福瑞群体利用"道德高地"进行攻击的逻辑基础。', 'zh-tw':'反福瑞輿論的源頭可追溯至2016年。當時，《南方都市報》發布了一篇關於獸迷圈的深度報道，該報道在描述圈內亂象時出現了關鍵性的表述缺失。文中指出"獸迷圈存在未成年人的低俗色情內容"，卻未加上"部分"或"少數"等關鍵限定詞。這一以偏概全的表述，直接將亞文化圈層內部的灰色地帶問題等同於整個群體的普遍特徵，觸發了社會大眾對於"未成年人保護"的敏感神經。此次報道被廣泛視為中文互聯網"反福瑞"情緒的第一槍，確立了後續反福瑞群體利用"道德高地"進行攻擊的邏輯基礎。', en:'The origin of anti-Furry sentiment can be traced back to 2016. At that time, the Southern Metropolis Daily published an in-depth report about the Furry community that contained critical omissions in its description of community issues. The article stated that "the Furry community contains vulgar and pornographic content involving minors" without adding qualifying words like "some" or "a minority." This overgeneralization directly equated the gray areas within the subculture with the characteristics of the entire group, triggering the public\'s sensitive nerves regarding "minor protection." This report is widely regarded as the first shot of "anti-Furry" sentiment on the Chinese internet, establishing the logical foundation for subsequent anti-Furry groups to attack using the "moral high ground."' },
+            'status-h3-2': { zh:'2018年：低龄化乱象与《有兽焉》网暴事件', 'zh-tw':'2018年：低齡化亂象與《有獸焉》網暴事件', en:'2018: Youthful Chaos and Online Harassment Against "Youshouyan"' },
+            'status-p6': { zh:'2018年是反福瑞情绪从"观念排斥"转向"具体行动"的关键年份，期间发生了两起标志性事件，标志着反福瑞行为开始针对具体的文化作品进行"定点爆破"。', 'zh-tw':'2018年是反福瑞情緒從"觀念排斥"轉向"具體行動"的關鍵年份，期間發生了兩起標誌性事件，標誌著反福瑞行為開始針對具體的文化作品進行"定點爆破"。', en:'2018 was a pivotal year when anti-Furry sentiment shifted from "ideological rejection" to "concrete action." Two landmark events occurred, marking the beginning of targeted attacks on specific cultural works.' },
+            'status-li8': { zh:'<strong>"大牛村"低龄化乱象：</strong>以"大牛村"为代表的事件暴露了当时兽迷圈受众的极度低龄化。大量心智尚未成熟的小学生及初中生涌入，在缺乏引导的情况下模仿圈内不良风气，导致公共网络平台出现大量出格行为，为反福瑞群体提供了攻击的"实锤"。', 'zh-tw':'<strong>"大牛村"低齡化亂象：</strong>以"大牛村"為代表的事件暴露了當時獸迷圈受眾的極度低齡化。大量心智尚未成熟的小學生及初中生湧入，在缺乏引導的情況下模仿圈內不良風氣，導致公共網絡平台出現大量出格行為，為反福瑞群體提供了攻擊的"實錘"。', en:'<strong>"Big Cow Village" youthful chaos:</strong> Events like "Big Cow Village" exposed the extreme youthfulness of the Furry community at the time. Large numbers of immature elementary and middle school students flooded in, mimicking bad behavior within the community without guidance, leading to numerous inappropriate actions on public platforms. This provided "hard evidence" for anti-Furry groups to attack.' },
+            'status-li9': { zh:'<strong>《有兽焉》遭遇大型网暴：</strong>2024.10.01，国产知名条漫《有兽焉》遭遇了史无前例的大型网络暴力。反福瑞群体及部分极端网友利用漫画中的个别争议点，进行了断章取义的传播与恶意解读，引发了针对作者及作品的大规模谩骂与举报。这是兽迷相关文化产品首次在主流视野中遭受如此规模的集中攻击。', 'zh-tw':'<strong>《有獸焉》遭遇大型網暴：</strong>2024.10.01，國產知名條漫《有獸焉》遭遇了史無前例的大型網絡暴力。反福瑞群體及部分極端網友利用漫畫中的個別爭議點，進行了斷章取義的傳播與惡意解讀，引發了針對作者及作品的大規模謾罵與舉報。這是獸迷相關文化產品首次在主流視野中遭受如此規模的集中攻擊。', en:'<strong>"Youshouyan" massive cyberbullying:</strong> On October 1, 2024, the popular domestic webcomic "Youshouyan" (There Are Beasts) suffered unprecedented large-scale cyberbullying. Anti-Furry groups and some extreme netizens took isolated controversial points out of context, spreading and maliciously interpreting them, triggering large-scale harassment and reports against the author and the work. This was the first time Furry-related cultural products suffered such concentrated attacks in mainstream view.' },
+            'status-h3-3': { zh:'2023年：组织化对抗与历史最大规模网暴', 'zh-tw':'2023年：組織化對抗與歷史最大規模網暴', en:'2023: Organized Confrontation and the Largest Cyberbullying in History' },
+            'status-p7': { zh:'进入2023年，反福瑞行为彻底完成了从"散兵游勇"到"有组织集团"的蜕变，并爆发了历史上规模最大的围剿事件。', 'zh-tw':'進入2023年，反福瑞行為徹底完成了從"散兵游勇"到"有組織集團"的蛻變，並爆發了歷史上規模最大的圍剿事件。', en:'In 2023, anti-Furry behavior completely transformed from "disorganized individuals" to "organized groups," and the largest-scale attack event in history erupted.' },
+            'status-li10': { zh:'<strong>有组织的"猎巫"行动：</strong>反福瑞群体不再是个体宣泄，而是形成了严密的组织架构。他们建立了专门的素材库与话术群，制定了统一的攻击计划，将反福瑞行为演变为一种"网络狂欢"与"烂梗"传播。', 'zh-tw':'<strong>有組織的"獵巫"行動：</strong>反福瑞群體不再是個體宣洩，而是形成了嚴密的組織架構。他們建立了專門的素材庫與話術群，制定了統一的攻擊計劃，將反福瑞行為演變為一種"網絡狂歡"與"爛梗"傳播。', en:'<strong>Organized "witch hunt" operations:</strong> Anti-Furry groups are no longer individual venting, but have formed a tight organizational structure. They established specialized material libraries and talking point groups, developed unified attack plans, and turned anti-Furry behavior into a form of "online carnival" and "meme" spread.' },
+            'status-li11': { zh:'<strong>全网级舆论围剿：</strong>2023年至今爆发的网暴，其规模、持续时间及破坏力均远超2018年。反福瑞组织利用平台监管规则的漏洞，对兽迷画师、兽展主办方及相关社群进行了无差别的举报与骚扰。', 'zh-tw':'<strong>全網級輿論圍剿：</strong>2023年至今爆發的網暴，其規模、持續時間及破壞力均遠超2018年。反福瑞組織利用平台監管規則的漏洞，對獸迷畫師、獸展主辦方及相關社群進行了無差別的舉報與騷擾。', en:'<strong>Cross-platform public opinion siege:</strong> The cyberbullying that erupted in 2023 and continues to this day far exceeds the 2018 incident in scale, duration, and destructive power. Anti-Furry organizations exploited loopholes in platform moderation rules to conduct indiscriminate reports and harassment against Furry artists, convention organizers, and related communities.' },
+            'status-li12': { zh:'<strong>性质质变：</strong>此次事件不再局限于对"低俗内容"的批判，而是演变为对整个兽迷群体生存空间的系统性挤压，试图通过制造恐慌和污名化，将兽迷文化彻底驱逐出公共网络平台。', 'zh-tw':'<strong>性質質變：</strong>此次事件不再局限於對"低俗內容"的批判，而是演變為對整個獸迷群體生存空間的系統性擠壓，試圖通過製造恐慌和污名化，將獸迷文化徹底驅逐出公共網絡平台。', en:'<strong>Qualitative change:</strong> This incident is no longer limited to criticism of "vulgar content," but has evolved into systematic suppression of the entire Furry community\'s living space. Through creating panic and stigmatization, they attempt to completely drive Furry culture out of public online platforms.' },
+            'status-h3-4': { zh:'现象成因与社会学分析', 'zh-tw':'現象成因與社會學分析', en:'Causes and Sociological Analysis' },
+            'status-p8': { zh:'综合来看，中文反福瑞现象的爆发并非单一因素所致，而是多重矛盾叠加的结果：', 'zh-tw':'綜合來看，中文反福瑞現象的爆發並非單一因素所致，而是多重矛盾疊加的結果：', en:'Overall, the outbreak of the Chinese anti-Furry phenomenon is not due to a single factor, but the result of multiple conflicting factors:' },
+            'status-li13': { zh:'<strong>内部因素：</strong>圈子门槛较低导致受众极度低龄化，部分缺乏判断力的低龄用户发表极端言论或擦边行为，加之圈内少数不良分子借机宣泄过度欲望，为外界攻击提供了直接抓手。', 'zh-tw':'<strong>內部因素：</strong>圈子門檻較低導致受眾極度低齡化，部分缺乏判斷力的低齡用戶發表極端言論或擦邊行為，加之圈內少數不良分子藉機宣洩過度慾望，為外界攻擊提供了直接抓手。', en:'<strong>Internal factors:</strong> The community\'s low entry threshold leads to extreme youthfulness of the audience. Some immature users make extreme remarks or borderline behaviors, and a few bad actors within the community take the opportunity to express excessive desires, providing direct handles for external attacks.' },
+            'status-li14': { zh:'<strong>外部因素：</strong>随着社交媒体的普及，福瑞文化从封闭同好群进入大众视野。大众往往无法区分"正常爱好者"与"不良分子"，产生易得性启发与群体归因错误，将极少数不良个体等同于整个圈层。', 'zh-tw':'<strong>外部因素：</strong>隨著社交媒體的普及，福瑞文化從封閉同好群進入大眾視野。大眾往往無法區分"正常愛好者"與"不良分子"，產生易得性啟發與群體歸因錯誤，將極少數不良個體等同於整個圈層。', en:'<strong>External factors:</strong> With the popularity of social media, Furry culture has entered public view from closed interest groups. The general public often cannot distinguish between "normal enthusiasts" and "bad actors," falling prey to availability bias and group attribution errors, equating a few bad individuals with the entire community.' },
+            'status-li15': { zh:'<strong>心理机制：</strong>部分反福瑞行为本质上是一种网络霸凌的变体。施暴者通过寻找一个相对弱势的亚文化群体作为"替罪羊"（即"黑羊效应"）欺负弱小的福瑞（即踢猫效应）一次忍让带来的变本加厉（即破窗效应），以此来释放现实生活中的压力或获取群体归属感。', 'zh-tw':'<strong>心理機制：</strong>部分反福瑞行為本質上是一種網絡霸凌的變體。施暴者通過尋找一個相對弱勢的亞文化群體作為"替罪羊"（即"黑羊效應"）欺負弱小的福瑞（即踢貓效應）一次忍讓帶來的變本加厲（即破窗效應），以此來釋放現實生活中的壓力或獲取群體歸屬感。', en:'<strong>Psychological mechanisms:</strong> Some anti-Furry behaviors are essentially a variant of cyberbullying. Perpetrators find a relatively vulnerable subculture group as a "scapegoat" (black sheep effect), bully weak Furries (kick the cat effect), and escalate after initial tolerance (broken windows effect), using this to release real-life stress or gain a sense of group belonging.' },
+            'status-h3-5': { zh:'2025-2026年：针对性恶性抹黑与网络暴力事件', 'zh-tw':'2025-2026年：針對性惡性抹黑與網絡暴力事件', en:'2025-2026: Targeted Malicious Smear Campaigns and Cyberbullying' },
+            'status-h4-1': { zh:'5.1 事件概述', 'zh-tw':'5.1 事件概述', en:'5.1 Event Overview' },
+            'status-p9': { zh:'2025年11月至2026年初，中文互联网爆发了一场针对Furry（兽迷）社群的有组织、大规模的恶意攻击事件。该事件并非单纯的亚文化冲突，而是由反串黑（Fauxurry）、极端反兽迷群体（Anti-Furry）以及逐利营销号（锐评圈）共同推动的舆论风暴。攻击者通过伪造聊天记录、盗用身份篡改国歌、造谣公共安全事件、辱骂退伍军人等极端手段，试图将兽迷群体污名化、罪犯化。尽管后期有部分澄清，但此次事件对社群造成了深远的负面影响。', 'zh-tw':'2025年11月至2026年初，中文互聯網爆發了一場針對Furry（獸迷）社群的有組織、大規模的惡意攻擊事件。該事件並非單純的亞文化衝突，而是由反串黑（Fauxurry）、極端反獸迷群體（Anti-Furry）以及逐利營銷號（銳評圈）共同推動的輿論風暴。攻擊者通過偽造聊天記錄、盜用身份篡改國歌、造謠公共安全事件、辱罵退伍軍人等極端手段，試圖將獸迷群體污名化、罪犯化。儘管後期有部分澄清，但此次事件對社群造成了深遠的負面影響。', en:'From November 2025 to early 2026, the Chinese internet witnessed an organized, large-scale malicious attack against the Furry community. This was not a simple subculture conflict, but a public opinion storm jointly driven by fake Furries (Fauxurry), extreme anti-Furry groups, and profit-seeking marketing accounts. Attackers used extreme methods including forging chat records, stealing identities to alter the national anthem, spreading false public safety rumors, and insulting veterans, attempting to stigmatize and criminalize the Furry community. Despite some clarifications later, this incident had a profound negative impact on the community.' },
+            'status-h4-2': { zh:'5.2 核心恶性事件时间轴', 'zh-tw':'5.2 核心惡性事件時間軸', en:'5.2 Timeline of Core Malicious Events' },
+            'status-p10': { zh:'<strong>2025年11月：导火索与反串铺垫</strong>', 'zh-tw':'<strong>2025年11月：導火索與反串鋪墊</strong>', en:'<strong>November 2025: Trigger and Fake Furry Groundwork</strong>' },
+            'status-li16': { zh:'<strong>盗用兽设篡改国歌事件：</strong>B站用户 @浩气长存逍遥自在 盗用画师"@奇迹初一"的兽设，制作并发布篡改《义勇军进行曲》歌词的恶劣视频。此举迅速引发公众愤怒，并成功将舆论矛头引向整个兽迷群体，导致大量不知情网民参与攻击。', 'zh-tw':'<strong>盜用獸設篡改國歌事件：</strong>B站用戶 @浩氣長存逍遙自在 盜用畫師"@奇跡初一"的獸設，製作並發布篡改《義勇軍進行曲》歌詞的惡劣視頻。此舉迅速引發公眾憤怒，並成功將輿論矛頭引向整個獸迷群體，導致大量不知情網民參與攻擊。', en:'<strong>Stolen fursona national anthem alteration incident:</strong> Bilibili user @浩气长存逍遥自在 stole artist "@奇迹初一"\'s fursona to create and publish a malicious video altering the lyrics of "March of the Volunteers." This quickly sparked public anger and successfully directed public opinion against the entire Furry community, causing many uninformed netizens to join the attacks.' },
+            'status-li17': { zh:'<strong>文化引流与私域反串：</strong>用户"@福瑞控的救世主"发布视频声称"福瑞文化与中华传统文化相辅相成"进行引流，随后在私域群聊（全员禁言，仅管理员发言）中发布大量极端、反智言论，并截图外传，制造"兽迷群体内部极端化"的假象。', 'zh-tw':'<strong>文化引流與私域反串：</strong>用戶"@福瑞控的救世主"發布視頻聲稱"福瑞文化與中華傳統文化相輔相成"進行引流，隨後在私域群聊（全員禁言，僅管理員發言）中發布大量極端、反智言論，並截圖外傳，製造"獸迷群體內部極端化"的假象。', en:'<strong>Cultural promotion and private group fake Furries:</strong> User "@福瑞控的救世主" published videos claiming "Furry culture complements Chinese traditional culture" to attract followers, then posted numerous extreme and anti-intellectual remarks in private group chats (muted for all members except admins), and shared screenshots externally to create the illusion of "extremism within the Furry community."' },
+            'status-p11': { zh:'<strong>2025年11月底-12月初：谣言爆发与电影风波</strong>', 'zh-tw':'<strong>2025年11月底-12月初：謠言爆發與電影風波</strong>', en:'<strong>Late November - Early December 2025: Rumor Outbreak and Movie Controversy</strong>' },
+            'status-li18': { zh:'<strong>电影院"不雅行为"谣言：</strong>借《疯狂动物城2》上映热度，反串群体伪造QQ群聊天记录，谎称"有兽迷在电影院做出不雅行为弄到他人头上"。经网友核查，所用图片早在电影上映前（11月5日）就已流传，且背景、时间线均存在明显逻辑漏洞，确认为伪造栽赃。', 'zh-tw':'<strong>電影院"不雅行為"謠言：</strong>借《瘋狂動物城2》上映熱度，反串群體偽造QQ群聊天記錄，謊稱"有獸迷在電影院做出不雅行為弄到他人頭上"。經網友核查，所用圖片早在電影上映前（11月5日）就已流傳，且背景、時間線均存在明顯邏輯漏洞，確認為偽造栽贓。', en:'<strong>Cinema "indecent behavior" rumor:</strong> Taking advantage of the release of "Zootopia 2," fake Furries forged QQ group chat records, falsely claiming "Furries engaged in indecent behavior in cinemas that affected others." After verification by netizens, the images used had already circulated before the movie release (November 5), and there were obvious logical flaws in the background and timeline, confirming it as a fabricated frame-up.' },
+            'status-li19': { zh:'<strong>兽迷包场观影被抹黑：</strong>11月28日，奇点兽聚主办方组织包场观看《疯狂动物城2》。部分反串者掐头去尾，隐瞒"包场"事实，造谣兽迷"霸占影厅、气味难闻、影响路人"，引发针对观影者的网暴。', 'zh-tw':'<strong>獸迷包場觀影被抹黑：</strong>11月28日，奇點獸聚主辦方組織包場觀看《瘋狂動物城2》。部分反串者掐頭去尾，隱瞞"包場"事實，造謠獸迷"霸佔影廳、氣味難聞、影響路人"，引發針對觀影者的網暴。', en:'<strong>Furry group viewing smearing:</strong> On November 28, the organizer of Singularity Furry Con arranged a group viewing of "Zootopia 2." Some fake Furries took things out of context, hiding the fact that it was a private screening, falsely claiming Furries "occupied theaters, smelled bad, and disturbed passersby," triggering cyberbullying against the viewers.' },
+            'status-p12': { zh:'<strong>2025年12月：全面开战与触碰红线</strong>', 'zh-tw':'<strong>2025年12月：全面開戰與碰觸紅線</strong>', en:'<strong>December 2025: Full-scale War and Crossing Red Lines</strong>' },
+            'status-li20': { zh:'<strong>百度贴吧"地狱笑话"钓鱼：</strong>11月30日，账号"青春大萎"在地狱笑话吧发帖造谣"兽迷家长穿兽装吓坏孩子"，并刻意提及"退伍军人"身份以激化矛盾。该贴随后被反串群作为素材扩散，两次登上贴吧热搜。', 'zh-tw':'<strong>百度貼吧"地獄笑話"釣魚：</strong>11月30日，賬號"青春大萎"在地獄笑話吧發帖造謠"獸迷家長穿獸裝嚇壞孩子"，並刻意提及"退伍軍人"身份以激化矛盾。該帖隨後被反串群作為素材擴散，兩次登上貼吧熱搜。', en:'<strong>Baidu Tieba "dark humor" baiting:</strong> On November 30, account "青春大萎" posted a rumor on the Dark Humor forum claiming "Furry parents wearing fursuits scared children," deliberately mentioning "veteran" status to escalate conflicts. This post was subsequently spread by fake Furry groups as material and made it to the Tieba trending list twice.' },
+            'status-li21': { zh:'<strong>QQ群炸群袭击：</strong>12月4日起，不明身份群体利用小号伪装成兽迷或宝可梦、植物大战僵尸玩家，混入群聊后发送大量涉政、涉黄、暴恐表情包进行"炸群"，导致大量正常社群被迫解散或开启严格验证。', 'zh-tw':'<strong>QQ群炸群襲擊：</strong>12月4日起，不明身份群體利用小號偽裝成獸迷或寶可夢、植物大戰殭屍玩家，混入群聊後發送大量涉政、涉黃、暴恐表情包進行"炸群"，導致大量正常社群被迫解散或開啟嚴格驗證。', en:'<strong>QQ group bombing attacks:</strong> Starting December 4, unidentified groups used alternate accounts pretending to be Furries, Pokémon, or Plants vs. Zombies players. After infiltrating groups, they sent massive amounts of political, pornographic, and violent terrorist memes to "bomb" the groups, forcing many normal communities to disband or implement strict verification.' },
+            'status-li22': { zh:'<strong>公交车"撒不明液体"谣言：</strong>12月7日，反兽迷群体造谣称"要在上海公交车上撒不明黄色液体，让公交迷闻味道"。该谣言波及交通圈。经考证，谣言配图中的公交车为2015年重组前的旧涂装车辆，且车型已于2023年报废，车内设施也与描述不符，确认为利用旧图造谣。', 'zh-tw':'<strong>公車"撒不明液體"謠言：</strong>12月7日，反獸迷群體造謠稱"要在上海公車上撒不明黃色液體，讓公車迷聞味道"。該謠言波及交通圈。經考證，謠言配圖中的公車為2015年重組前的舊塗裝車輛，且車型已於2023年報廢，車內設施也與描述不符，確認為利用舊圖造謠。', en:'<strong>Bus "unknown liquid" rumor:</strong> On December 7, anti-Furry groups spread rumors claiming "someone would spray unknown yellow liquid on Shanghai buses to make bus fans smell it." This rumor spread to the transportation community. After verification, the bus in the rumor image was an old livery vehicle before the 2015 reorganization, and the model had been scrapped in 2023, with interior facilities inconsistent with the description, confirming it as an old image used for spreading rumors.' },
+            'status-p13': { zh:'<strong>2026年初：锐评圈入局与法律制裁</strong>', 'zh-tw':'<strong>2026年初：銳評圈入局與法律制裁</strong>', en:'<strong>Early 2026: Critical Commentators Join and Legal Sanctions</strong>' },
+            'status-li23': { zh:'<strong>锐评博主"麒麟达"辱骂退伍军人事件：</strong>在流量裹挟下，博主"麒麟达"为博眼球，借吐槽之名公然辱骂退伍军人、否认军人功绩。该行为严重触犯《英雄烈士保护法》及社会公德底线，随后该账号被全网永久封禁（炸号），相关内容下架。', 'zh-tw':'<strong>銳評博主"麒麟達"辱罵退伍軍人事件：</strong>在流量裹挾下，博主"麒麟達"為博眼球，借吐槽之名公然辱罵退伍軍人、否認軍人功績。該行為嚴重觸犯《英雄烈士保護法》及社會公德底線，隨後該賬號被全網永久封禁（炸號），相關內容下架。', en:'<strong>Critical commentator "Qilin Da" insulting veterans incident:</strong> Driven by traffic, blogger "Qilin Da" publicly insulted veterans and denied their contributions under the guise of criticism to gain attention. This behavior seriously violated the "Heroes and Martyrs Protection Law" and social morality. The account was subsequently permanently banned across all platforms, and related content was removed.' },
+            'status-li24': { zh:'<strong>事件回落：</strong>随着谣言被逐一拆穿及核心造谣账号被封禁，2026年后事件热度逐渐消退，但针对兽迷的刻板印象已部分固化。', 'zh-tw':'<strong>事件回落：</strong>隨著謠言被逐一拆穿及核心造謠賬號被封禁，2026年後事件熱度逐漸消退，但針對獸迷的刻板印象已部分固化。', en:'<strong>Event decline:</strong> As rumors were exposed one by one and core rumor-mongering accounts were banned, the incident\'s intensity gradually subsided after 2026. However, stereotypes about Furries have become partially entrenched.' },
+            'status-h4-3': { zh:'5.3 攻击手段深度解析', 'zh-tw':'5.3 攻擊手段深度解析', en:'5.3 In-depth Analysis of Attack Methods' },
+            'status-p14': { zh:'本次事件中，攻击者展现出了高度的组织性与卑劣的手段，主要包括以下几类：', 'zh-tw':'本次事件中，攻擊者展現出了高度的組織性與卑劣的手段，主要包括以下幾類：', en:'In this incident, attackers demonstrated high organizational capabilities and despicable methods, mainly including:' },
+            'status-li25': { zh:'<strong>政治性抹黑（红线攻击）：</strong>盗用兽设形象篡改国歌、在群聊中发布反党反社言论并截图外传、辱骂退伍军人。利用公众的爱国情怀和对军人的尊崇，将兽迷群体与"危害国家安全"、"侮辱英烈"挂钩，借官方和大众之手进行打击。', 'zh-tw':'<strong>政治性抹黑（紅線攻擊）：</strong>盗用獸設形象篡改國歌、在群聊中發布反黨反社言論並截圖外傳、辱罵退伍軍人。利用公眾的愛國情懷和對軍人的尊崇，將獸迷群體與"危害國家安全"、"侮辱英烈"掛鉤，借官方和大眾之手進行打擊。', en:'<strong>Political smearing (red line attacks):</strong> Stealing fursona images to alter the national anthem, posting anti-party and anti-social remarks in group chats and sharing screenshots externally, and insulting veterans. Exploiting the public\'s patriotism and respect for soldiers, they link the Furry community to "endangering national security" and "insulting heroes," using official and public forces to attack.' },
+            'status-li26': { zh:'<strong>社会性死亡（黄谣与恐慌）：</strong>伪造"电影院不雅行为"、"公交车撒尿/撒毒"等聊天记录。引发公众的生理厌恶和恐慌，将兽迷塑造成"潜在的性犯罪者"和"公共卫生威胁"。', 'zh-tw':'<strong>社會性死亡（黃謠與恐慌）：</strong>偽造"電影院不雅行為"、"公車撒尿/撒毒"等聊天記錄。引發公眾的生理厭惡和恐慌，將獸迷塑造成"潛在的性犯罪者"和"公共衛生威脅"。', en:'<strong>Social death (sex rumors and panic):</strong> Forging chat records of "cinema indecent behavior," "bus urination/poisoning," etc. Triggering public physical disgust and panic, portraying Furries as "potential sex offenders" and "public health threats."' },
+            'status-li27': { zh:'<strong>技术性破坏（炸群与盗号）：</strong>批量注册小号，伪装身份入群后发送违规内容导致群组被封。直接破坏了兽迷社群的交流基础设施，导致大量无辜群聊解散。', 'zh-tw':'<strong>技術性破壞（炸群與盜號）：</strong>批量註冊小號，偽裝身份入群後發送違規內容導致群組被封。直接破壞了獸迷社群的交流基礎設施，導致大量無辜群聊解散。', en:'<strong>Technical sabotage (group bombing and account hacking):</strong> Mass registering alternate accounts, infiltrating groups under false identities, then sending violating content to get groups banned. Directly destroying the communication infrastructure of the Furry community, causing many innocent groups to disband.' },
+            'status-h2-4': { zh:'结语', 'zh-tw':'結語', en:'Conclusion' },
+            'status-p15': { zh:'从2016年的媒体误读，到2018年针对具体作品的网暴，再到2023年的全网围剿，以及2025-2026年更加恶毒的组织化攻击，反福瑞现象的演变史，是一部亚文化在偏见与恶意中艰难求生的血泪史。进入2026年，商业品牌的消费式营销与圈内不良分子的恶意作乱，又为福瑞圈增添了新的生存压力。记录这些历史，旨在客观还原事件真相，警惕网络暴力的蔓延，并呼吁社会各界对多元文化保持应有的尊重与包容。', 'zh-tw':'從2016年的媒體誤讀，到2018年針對具體作品的網暴，再到2023年的全網圍剿，以及2025-2026年更加惡毒的組織化攻擊，反福瑞現象的演變史，是一部亞文化在偏見與惡意中艱難求生的血淚史。進入2026年，商業品牌的消費式營銷與圈內不良分子的惡意作亂，又為福瑞圈增添了新的生存壓力。記錄這些歷史，旨在客觀還原事件真相，警惕網絡暴力的蔓延，並呼籲社會各界對多元文化保持應有的尊重與包容。', en:'From media misinterpretation in 2016, to targeted cyberbullying in 2018, to cross-platform siege in 2023, and to even more vicious organized attacks in 2025-2026, the history of the anti-Furry phenomenon is a painful chronicle of a subculture struggling to survive amid prejudice and malice. Entering 2026, consumerist marketing by commercial brands and malicious sabotage by bad actors within the community have added new survival pressures on the Furry circle. Recording this history aims to objectively restore the truth of events, warn against the spread of cyberbullying, and call on all sectors of society to maintain proper respect and tolerance for diverse cultures.' },
+            'status-p16': { zh:'备注：本词条依据公开网络信息整理，旨在记录历史真相，反对任何形式的网络暴力与造谣诽谤。', 'zh-tw':'備註：本詞條依據公開網絡信息整理，旨在記錄歷史真相，反對任何形式的網絡暴力與造謠誹謗。', en:'Note: This entry is compiled based on publicly available internet information, aiming to record historical truth and oppose all forms of cyberbullying and defamation.' },
+            'status-h2-5': { zh:'2026年：商业化消费与内部乱象的双重夹击', 'zh-tw':'2026年：商業化消費與內部亂象的雙重夾擊', en:'2026: Dual Assault of Commercialization and Internal Chaos' },
+            'status-p17': { zh:'进入2026年，在持续遭受第5部分所述的外部系统性污名化攻击的同时，福瑞圈还面临来自商业品牌的消费式营销与圈内不良分子的恶意作乱——两者共同构成了对福瑞生存空间的全新挤压。', 'zh-tw':'進入2026年，在持續遭受第5部分所述的外部系統性污名化攻擊的同時，福瑞圈還面臨來自商業品牌的消費式營銷與圈內不良分子的惡意作亂——兩者共同構成了對福瑞生存空間的全新擠壓。', en:'Entering 2026, while continuing to suffer from the external systemic stigmatization attacks described in Section 5, the Furry circle also faces consumerist marketing from commercial brands and malicious sabotage by bad actors within the community — together constituting a new squeeze on Furry living space.' },
+            'status-h3-6': { zh:'6.1 小鹏汽车"鹏装热流"营销风波：商业品牌乘污名化之机"宠物化"福瑞', 'zh-tw':'6.1 小鵬汽車"鵬裝熱流"營銷風波：商業品牌乘污名化之機"寵物化"福瑞', en:'6.1 XPeng Motors "Peng Outfit Craze" Marketing Controversy: Brands "Pet-ify" Furries Amid Stigmatization' },
+            'status-p18': { zh:'2026年3月，小鹏汽车策划了一场名为"鹏装热流"的营销活动，试图借助福瑞亚文化的热度博取年轻群体关注。然而，该营销方式引发了福瑞圈的强烈反感，并因后续公关失误升级为一场涉及商业诋毁的法律风波。', 'zh-tw':'2026年3月，小鵬汽車策劃了一場名為"鵬裝熱流"的營銷活動，試圖借助福瑞亞文化的熱度博取年輕群體關注。然而，該營銷方式引發了福瑞圈的強烈反感，並因後續公關失誤升級為一場涉及商業詆毀的法律風波。', en:'In March 2026, XPeng Motors planned a marketing campaign called "Peng Outfit Craze," attempting to capitalize on the Furry subculture\'s popularity to attract young audiences. However, this marketing approach sparked strong resentment in the Furry circle and escalated into a legal dispute involving commercial defamation due to subsequent PR missteps.' },
+            'status-h4-4': { zh:'事件经过', 'zh-tw':'事件經過', en:'Event Timeline' },
+            'status-p19': { zh:'2026年3月3日17时许，小鹏汽车通过认证为"警察"的蓝V政务账号发布了一则"宠物出行小指南"，配图小鹏汽车，文案为 "牵好文明绳" 。该内容将小鹏汽车及其关联概念放置于"宠物/犬只"的语境下进行宣传。由于"鹏装热流"与福瑞圈核心概念"兽装"（Fursuit）发音高度相似，此次营销被普遍认为是在刻意"碰瓷"福瑞文化。', 'zh-tw':'2026年3月3日17時許，小鵬汽車通過認證為"警察"的藍V政務賬號發布了一則"寵物出行小指南"，配圖小鵬汽車，文案為 "牽好文明繩" 。該內容將小鵬汽車及其關聯概念放置於"寵物/犬隻"的語境下進行宣傳。由於"鵬裝熱流"與福瑞圈核心概念"獸裝"（Fursuit）發音高度相似，此次營銷被普遍認為是在刻意"碰瓷"福瑞文化。', en:'At around 17:00 on March 3, 2026, XPeng Motors published a "Pet Travel Guide" through a verified "Police" blue-V government account, with a picture of an XPeng car and the caption "Tie up the civilized leash." This content promoted XPeng and related concepts in the context of "pets/dogs." Due to the high phonetic similarity between "Peng Outfit Craze" and the core Furry concept "Fursuit," this marketing was widely seen as deliberately piggybacking on Furry culture.' },
+            'status-h4-5': { zh:'争议焦点', 'zh-tw':'爭議焦點', en:'Controversy Focus' },
+            'status-li28': { zh:'<strong>"宠物化"侮辱：</strong>时值2026年初，福瑞圈正处于"扫福瑞"等污名化标签泛滥的高压期。小鹏汽车在此背景下，利用官方政务账号将亚文化相关概念与"牵绳宠物"直接等同，被广大爱好者视为乘人之危的侮辱，而非友善的文化联动。', 'zh-tw':'<strong>"寵物化"侮辱：</strong>時值2026年初，福瑞圈正處於"掃福瑞"等污名化標籤泛濫的高壓期。小鵬汽車在此背景下，利用官方政務賬號將亞文化相關概念與"牽繩寵物"直接等同，被廣大愛好者視為乘人之危的侮辱，而非友善的文化聯動。', en:'<strong>"Pet-ification" insult:</strong> In early 2026, the Furry circle was in a high-pressure period of rampant stigmatizing labels like "Sweep Furries." Against this backdrop, XPeng Motors used a government account to directly equate subculture-related concepts with "leashed pets," widely seen by enthusiasts as opportunistic insult rather than friendly cultural collaboration.' },
+            'status-li29': { zh:'<strong>官方背书性质：</strong>发布渠道为"警察"蓝V账号，使该营销带有官方背书意味，进一步放大了其负面影响。', 'zh-tw':'<strong>官方背書性質：</strong>發布渠道為"警察"藍V賬號，使該營銷帶有官方背書意味，進一步放大了其負面影響。', en:'<strong>Official endorsement nature:</strong> The distribution channel was a "Police" blue-V account, giving the marketing a sense of official endorsement and further amplifying its negative impact.' },
+            'status-li30': { zh:'<strong>危机公关失误：</strong>面对福瑞圈的抵制，小鹏汽车发布了道歉声明。然而，该声明中直接提及并抵制小米，将一场亚文化风波升级为两家上市公司之间的商业诋毁纠纷。', 'zh-tw':'<strong>危機公關失誤：</strong>面對福瑞圈的抵制，小鵬汽車發布了道歉聲明。然而，該聲明中直接提及並抵制小米，將一場亞文化風波升級為兩家上市公司之間的商業詆毀糾紛。', en:'<strong>Crisis PR misstep:</strong> Facing resistance from the Furry circle, XPeng Motors issued an apology. However, the statement directly mentioned and criticized Xiaomi, escalating a subculture dispute into a commercial defamation conflict between two listed companies.' },
+            'status-h4-6': { zh:'结果与压制', 'zh-tw':'結果與壓制', en:'Outcome and Suppression' },
+            'status-p20': { zh:'包含侵权内容的道歉声明因法律风险被迅速删除——并非普通"删帖"，而是为消除商业诋毁证据。相关信息被大规模清理，小鹏法务部的介入使该事件在公开渠道几乎无迹可寻。讽刺的是，2026年7月，小鹏集团法务部宣布多起名誉权侵权案二审胜诉——而此时小鹏自身也因"拉踩"小米而被迫删文的经历已被成功"压制"。', 'zh-tw':'包含侵權內容的道歉聲明因法律風險被迅速刪除——並非普通"刪帖"，而是為消除商業詆毀證據。相關信息被大規模清理，小鵬法務部的介入使該事件在公開渠道幾乎無跡可尋。諷刺的是，2026年7月，小鵬集團法務部宣佈多起名譽權侵權案二審勝訴——而此時小鵬自身也因"拉踩"小米而被迫刪文的經歷已被成功"壓制"。', en:'The apology containing infringing content was quickly deleted due to legal risks — not ordinary "post removal," but to eliminate evidence of commercial defamation. Relevant information was cleaned up on a large scale, and the intervention of XPeng\'s legal department left almost no trace of the incident in public channels. Ironically, in July 2026, XPeng Group\'s legal department announced multiple second-instance victories in reputation rights infringement cases — by which time XPeng\'s own experience of being forced to delete posts for "trashing" Xiaomi had been successfully "suppressed."' },
+            'status-h4-7': { zh:'事件定性', 'zh-tw':'事件定性', en:'Event Characterization' },
+            'status-p21': { zh:'这不是一次简单的营销翻车，而是一场由商业品牌策划、借官方政务账号渠道发布、将亚文化系统性"宠物化"与"降格"的争议性营销事件，因危机公关失误升级为商业诋毁，最终被法律强制叫停。', 'zh-tw':'這不是一次簡單的營銷翻車，而是一場由商業品牌策劃、借官方政務賬號渠道發布、將亞文化系統性"寵物化"與"降格"的爭議性營銷事件，因危機公關失誤升級為商業詆毀，最終被法律強制叫停。', en:'This was not a simple marketing failure, but a controversial marketing event planned by a commercial brand, distributed through official government accounts, systematically "pet-ifying" and "degrading" a subculture. Due to PR missteps it escalated into commercial defamation and was ultimately stopped by law.' },
+            'status-h3-7': { zh:'6.2 "豪城"兽聚作乱事件：圈内不良分子利用品牌IP恶意抹黑', 'zh-tw':'6.2 "豪城"獸聚作亂事件：圈內不良分子利用品牌IP惡意抹黑', en:'6.2 "Haocheng" Convention Sabotage: Bad Actors Using Brand IP to Maliciously Smear' },
+            'status-p22': { zh:'与外部商业消费相对应，2026年福瑞圈内部也出现了一起不良分子恶意作乱、最终引发品牌方与警方双重介入的恶性事件。', 'zh-tw':'與外部商業消費相對應，2026年福瑞圈內部也出現了一起不良分子惡意作亂、最終引發品牌方與警方雙重介入的惡性事件。', en:'Corresponding to external commercial exploitation, 2026 also saw a malicious incident within the Furry circle where bad actors engaged in sabotage, ultimately triggering dual intervention by the brand owner and law enforcement.' },
+            'status-h4-8': { zh:'人物身份', 'zh-tw':'人物身份', en:'Identity of the Individual' },
+            'status-p23': { zh:'"豪城"是福瑞圈一名争议人物的个人代号，并非广州豪城房产、北京豪城物业等同名企业（那些均为正规经营的房地产/物业公司，与福瑞圈无关）。大家以"豪城"称呼此人，具体真名不详。', 'zh-tw':'"豪城"是福瑞圈一名爭議人物的個人代號，並非廣州豪城房產、北京豪城物業等同名企業（那些均為正規經營的房地產/物業公司，與福瑞圈無關）。大家以"豪城"稱呼此人，具體真名不詳。', en:'"Haocheng" is the personal codename of a controversial figure in the Furry circle, not to be confused with namesake enterprises like Guangzhou Haocheng Real Estate or Beijing Haocheng Property (those are legitimate real estate/property companies unrelated to the Furry community). People refer to this individual as "Haocheng"; their real name is unknown.' },
+            'status-h4-9': { zh:'事件经过', 'zh-tw':'事件經過', en:'Event Progression' },
+            'status-th1': { zh:'时间', 'zh-tw':'時間', en:'Time' },
+            'status-th2': { zh:'事件', 'zh-tw':'事件', en:'Event' },
+            'status-td1': { zh:'2026年五一期间', 'zh-tw':'2026年五一期間', en:'May Day 2026' },
+            'status-td2': { zh:'"豪城"在HF（Hi Furry）兽聚现场，携带印有零食品牌 "好想来" 吉祥物"袋袋兔"的购物塑料袋，试图将主流商业IP与亚文化争议事件强行关联，制造话题、抹黑兽聚。', 'zh-tw':'"豪城"在HF（Hi Furry）獸聚現場，攜帶印有零食品牌 "好想來" 吉祥物"袋袋兔"的購物塑料袋，試圖將主流商業IP與亞文化爭議事件強行關聯，製造話題、抹黑獸聚。', en:'At the HF (Hi Furry) convention, "Haocheng" carried shopping bags printed with "Daidaitu," the mascot of snack brand "Haoxianglai," attempting to forcibly associate mainstream commercial IP with subculture controversy to create buzz and smear the convention.' },
+            'status-td3': { zh:'2026年8月', 'zh-tw':'2026年8月', en:'August 2026' },
+            'status-td4': { zh:'"豪城"试图携带同类物料进入天津城兽汇会场，被主办方阻拦后现场发生冲突，主办方报警，警察到场调解处理。', 'zh-tw':'"豪城"試圖攜帶同類物料進入天津城獸匯會場，被主辦方阻攔後現場發生衝突，主辦方報警，警察到場調解處理。', en:'"Haocheng" attempted to bring similar materials into the Tianjin Beast Expo venue; after being blocked by organizers, a conflict broke out. The organizers called the police, and officers arrived to mediate.' },
+            'status-td5': { zh:'事件后', 'zh-tw':'事件後', en:'After the Incident' },
+            'status-td6': { zh:'"豪城"在直播中持续讨论该事件，相关视频因涉及"好想来"品牌IP侵权，被好想来官方（万辰集团）以侵权为由要求下架。', 'zh-tw':'"豪城"在直播中持續討論該事件，相關視頻因涉及"好想來"品牌IP侵權，被好想來官方（萬辰集團）以侵權為由要求下架。', en:'"Haocheng" continuously discussed the incident during livestreams. Related videos were taken down at the request of Haoxianglai\'s official (Wanchen Group) on grounds of brand IP infringement.' },
+            'status-h4-10': { zh:'压制逻辑', 'zh-tw':'壓制邏輯', en:'Suppression Mechanism' },
+            'status-li31': { zh:'<strong>好想来法务部介入：</strong>品牌IP"袋袋兔"被用于负面炒作，法务部门以侵权为由要求全网下架相关视频。', 'zh-tw':'<strong>好想來法務部介入：</strong>品牌IP"袋袋兔"被用於負面炒作，法務部門以侵權為由要求全網下架相關視頻。', en:'<strong>Haoxianglai legal department intervention:</strong> The brand IP "Daidaitu" was used in negative hype. The legal department demanded platform-wide removal of related videos on infringement grounds.' },
+            'status-li32': { zh:'<strong>警方出警记录：</strong>天津城兽汇现场的治安纠纷有警方出警记录。涉及警方出警的事件，平台会自动加强审核，相关讨论容易被限流或删除。', 'zh-tw':'<strong>警方出警記錄：</strong>天津城獸匯現場的治安糾紛有警方出警記錄。涉及警方出警的事件，平台會自動加強審核，相關討論容易被限流或刪除。', en:'<strong>Police dispatch records:</strong> The public order dispute at the Tianjin Beast Expo has a police dispatch record. Platforms automatically tighten moderation for incidents with police involvement; related discussions are easily throttled or removed.' },
+            'status-li33': { zh:'<strong>双重叠加：</strong>品牌法务维权与警方出警记录叠加，触发了平台最严格的审核机制，信息被清理得比单一事件更为彻底。', 'zh-tw':'<strong>雙重疊加：</strong>品牌法務維權與警方出警記錄疊加，觸發了平台最嚴格的審核機制，信息被清理得比單一事件更為徹底。', en:'<strong>Dual superposition:</strong> The combination of brand legal enforcement and police dispatch records triggered the platform\'s strictest moderation mechanisms. Information was cleaned more thoroughly than for any single incident.' },
+            'status-h4-11': { zh:'事件定性', 'zh-tw':'事件定性', en:'Event Characterization' },
+            'status-p24': { zh:'"豪城"试图用好想来IP抹黑兽聚，被好想来法务部以侵权为由全网下架，叠加天津城兽汇现场警方出警记录，导致信息被双重压制。这不是"捂嘴"，而是品牌维权与警方记录共同触发的平台清理机制。', 'zh-tw':'"豪城"試圖用好想來IP抹黑獸聚，被好想來法務部以侵權為由全網下架，疊加天津城獸匯現場警方出警記錄，導致信息被雙重壓制。這不是"捂嘴"，而是品牌維權與警方記錄共同觸發的平台清理機制。', en:'"Haocheng" attempted to smear the convention using the Haoxianglai IP; Haoxianglai\'s legal department removed content platform-wide on infringement grounds, compounded by the Tianjin Beast Expo police dispatch record, resulting in dual information suppression. This is not "silencing," but a platform cleanup mechanism jointly triggered by brand rights enforcement and police records.' },
+            'status-h3-8': { zh:'6.3 现象规律总结', 'zh-tw':'6.3 現象規律總結', en:'6.3 Summary of Phenomenon Patterns' },
+            'status-p25': { zh:'2026年这两起事件揭示了福瑞信息被"压制"的共同规律：', 'zh-tw':'2026年這兩起事件揭示了福瑞信息被"壓制"的共同規律：', en:'These two 2026 incidents reveal shared patterns in how Furry-related information is "suppressed":' },
+            'status-th3': { zh:'维度', 'zh-tw':'維度', en:'Dimension' },
+            'status-th4': { zh:'小鹏汽车事件', 'zh-tw':'小鵬汽車事件', en:'XPeng Motors Incident' },
+            'status-th5': { zh:'"豪城"事件', 'zh-tw':'"豪城"事件', en:'"Haocheng" Incident' },
+            'status-td7': { zh:'触发力量', 'zh-tw':'觸發力量', en:'Trigger Force' },
+            'status-td8': { zh:'小鹏法务部 + 警察蓝V账号', 'zh-tw':'小鵬法務部 + 警察藍V賬號', en:'XPeng Legal Dept + Police Blue-V Account' },
+            'status-td9': { zh:'好想来法务部 + 警方出警', 'zh-tw':'好想來法務部 + 警方出警', en:'Haoxianglai Legal Dept + Police Dispatch' },
+            'status-td10': { zh:'压制方式', 'zh-tw':'壓制方式', en:'Suppression Method' },
+            'status-td11': { zh:'道歉声明因侵权被删，负面信息清理', 'zh-tw':'道歉聲明因侵權被刪，負面信息清理', en:'Apology deleted for infringement; negative info cleaned' },
+            'status-td12': { zh:'侵权视频下架，讨论被限流', 'zh-tw':'侵權視頻下架，討論被限流', en:'Infringing videos removed; discussions throttled' },
+            'status-td13': { zh:'官方介入标志', 'zh-tw':'官方介入標誌', en:'Official Intervention Marker' },
+            'status-td14': { zh:'"警察"蓝V背书', 'zh-tw':'"警察"藍V背書', en:'"Police" Blue-V endorsement' },
+            'status-td15': { zh:'警方到场调解', 'zh-tw':'警方到場調解', en:'Police arrived to mediate' },
+            'status-td16': { zh:'品牌维权对象', 'zh-tw':'品牌維權對象', en:'Brand Enforcement Target' },
+            'status-td17': { zh:'小鹏自身品牌形象', 'zh-tw':'小鵬自身品牌形象', en:'XPeng\'s own brand image' },
+            'status-td18': { zh:'"袋袋兔"IP形象', 'zh-tw':'"袋袋兔"IP形象', en:'"Daidaitu" IP character' },
+            'status-td19': { zh:'对福瑞圈的影响', 'zh-tw':'對福瑞圈的影響', en:'Impact on Furry Circle' },
+            'status-td20': { zh:'被商业品牌乘污名化之机"宠物化"羞辱', 'zh-tw':'被商業品牌乘污名化之機"寵物化"羞辱', en:'Humiliated via "pet-ification" by brands capitalizing on stigmatization' },
+            'status-td21': { zh:'被圈内不良分子利用品牌IP恶意抹黑', 'zh-tw':'被圈內不良分子利用品牌IP惡意抹黑', en:'Maliciously smeared by internal bad actors using brand IP' },
+            'status-p26': { zh:'当两件事同时具备以下两个条件时，信息会被清理得最为彻底：', 'zh-tw':'當兩件事同時具備以下兩個條件時，信息會被清理得最為徹底：', en:'Information is most thoroughly cleaned when both of the following conditions are met:' },
+            'status-li34': { zh:'商业品牌法务介入（无论品牌是有意营销还是被动维权）', 'zh-tw':'商業品牌法務介入（無論品牌是有意營銷還是被動維權）', en:'Commercial brand legal intervention (whether intentional marketing or passive enforcement)' },
+            'status-li35': { zh:'警方/官方机构出警记录', 'zh-tw':'警方/官方機構出警記錄', en:'Police / official agency dispatch records' },
+            'status-p27': { zh:'这两个因素都会触发平台最严格的审核与清理机制，其清理力度远超普通网络争议，在这两重因素叠加面前，信息会被"无差别压制"。', 'zh-tw':'這兩個因素都會觸發平台最嚴格的審核與清理機制，其清理力度遠超普通網絡爭議，在這兩重因素疊加面前，信息會被"無差別壓制"。', en:'Both factors trigger the platform\'s strictest moderation and cleanup mechanisms, far exceeding ordinary online disputes. In the face of this dual overlay, information faces "indiscriminate suppression."' },
+            'status-h3-9': { zh:'6.4 对历史记录者的启示', 'zh-tw':'6.4 對歷史記錄者的啟示', en:'6.4 Lessons for Historians and Archivists' },
+            'status-li36': { zh:'<strong>"公开叙事"不可信——</strong>官方公告只是"被允许存在"的表层叙事，事件的真实逻辑往往被掩盖。', 'zh-tw':'<strong>"公開敘事"不可信——</strong>官方公告只是"被允許存在"的表層敘事，事件的真實邏輯往往被掩蓋。', en:'<strong>"Public narratives" are unreliable —</strong> official announcements are only the surface narratives "allowed to exist"; the true logic of events is often buried.' },
+            'status-li37': { zh:'<strong>一手史料是核心资产——</strong>截图、亲历者口述、原始链接存档，才是真实的历史证据。AI检索所爬取的底层碎片信息，也可作为追溯真相的切入点。', 'zh-tw':'<strong>一手史料是核心資產——</strong>截圖、親歷者口述、原始鏈接存檔，才是真實的歷史證據。AI檢索所爬取的底層碎片信息，也可作為追溯真相的切入點。', en:'<strong>Primary sources are core assets —</strong> screenshots, eyewitness accounts, original link archives are real historical evidence. The underlying fragmented information crawled by AI search can also serve as an entry point for tracing the truth.' },
+            'status-li38': { zh:'<strong>压制逻辑可复制——</strong>未来再有类似事件，只要涉及"品牌法务+警方/官方"，即可判断信息会被系统性清理。福瑞圈的生存空间正受到来自外部商业消费与内部不良分子的双重挤压——记录这些历史，是为了让真相不被"压制"所吞噬。', 'zh-tw':'<strong>壓制邏輯可複製——</strong>未來再有類似事件，只要涉及"品牌法務+警方/官方"，即可判斷信息會被系統性清理。福瑞圈的生存空間正受到來自外部商業消費與內部不良分子的雙重擠壓——記錄這些歷史，是為了讓真相不被"壓制"所吞噬。', en:'<strong>Suppression logic is replicable —</strong> for any future similar incident involving "brand legal + police/official," one can predict systematic information cleanup. The Furry circle\'s living space is being squeezed by both external commercial exploitation and internal bad actors — recording this history ensures the truth is not swallowed by "suppression."' }
+        };
+
+        function updatePageLang(lang) {
+            for(let key in T){
+                const el = document.getElementById(key);
+                if(el) el.innerHTML = T[key][lang];
+            }
+        }
+        updatePageLang(localStorage.getItem('lang') || 'zh');
+    </script>
+
+    <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
+        <div class="lang-row" style="justify-content:center;">
+            <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
+            <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
+            <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+        </div>
+        <div class="theme-toggle-row" style="margin:0;display:flex;gap:6px;justify-content:center;">
+            <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
+            <button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
+        </div>
+        <a href="编辑.html?page=current-status.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','current-status.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
+    </div>
+</body>
+</html>
