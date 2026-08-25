@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FurryWiki - 兽圈百科知识库">
-    <title>旧Wiki档案 - FurryWiki</title>
+    <title>网友投稿 - FurryWiki</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root{
@@ -175,11 +175,6 @@
             .page-title { font-size: 22px; }
             .comic-card { width: 100%; }
         }
-        .feedback-btn{position:fixed;right:28px;bottom:28px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#4da1ff);color:#fff;border:none;cursor:pointer;font-size:26px;box-shadow:0 4px 20px rgba(87,195,255,.4);transition:all .3s;z-index:9999;display:flex;align-items:center;justify-content:center;text-decoration:none}
-        .feedback-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(87,195,255,.5)}
-        @media (max-width: 768px) {
-            .feedback-btn{width:52px;height:52px;font-size:22px;right:18px;bottom:18px}
-        }
         [data-theme="dark"] .comic-card h3 a { color: #e2e8f0; }
         [data-theme="dark"] .game-body h3 { color: #e2e8f0; }
         [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
@@ -195,7 +190,9 @@
 <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
         <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
         <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
-        <a href="old-wiki.html" class="nav-link active" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
         <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
         <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
@@ -203,64 +200,77 @@
         <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
         <a href="编辑.html" class="nav-link" id="nav-contribute" data-zh="编辑" data-zhtw="編輯" data-en="Edit">编辑</a>
         <a href="about.html" class="nav-link" id="nav-about" data-zh="关于" data-zhtw="關於" data-en="About">关于</a>
+        <div class="lang-group">
+            <div class="lang-row">
+                <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
+                <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+            </div>
+            <div class="theme-toggle-row">
+                <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button><button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
+            </div>
+        </div>
     </nav>
 
     <div class="main-content">
         <div class="page-container">
-<h1 class="page-title" id="oldwiki-title">旧Wiki档案</h1>
-            <div class="oldwiki-page">
-                <h2 style="color:var(--text);" id="oldwiki-h2">旧版 Furry Wiki 历史档案</h2>
-                <p id="oldwiki-p1"><em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em></p>
-                <div style="background:var(--section-bg);padding:15px;border-radius:8px;margin:15px 0;border:1px solid var(--section-border);">
-                    <p id="oldwiki-establish"><strong>成立时间：</strong>2020年4月1日</p>
-                    <p id="oldwiki-founder"><strong>创始人：</strong>福林菌</p>
-                    <p id="oldwiki-status"><strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span></p>
-                </div>
-                <h3 id="oldwiki-crisis">危机与争议</h3>
-                <ol>
-                    <li id="oldwiki-crisis-1">管理混乱，任用错误行政员</li>
-                    <li id="oldwiki-crisis-2">历史抹除，数据库修改</li>
-                    <li id="oldwiki-crisis-3">商业背刺，涉嫌违反CC协议</li>
-                    <li id="oldwiki-crisis-4">域名重定向至"兽聚汇"</li>
-                </ol>
+<h1 class="page-title" id="contribute-title">📬 网友投稿</h1>
+            <div class="page-content">
+<p id="contribute-p1">欢迎各位兽迷、画师、创作者向 FurryWiki 投稿！我们希望通过大家的共同努力，让这个知识库更加丰富多元。</p>
+<div class="highlight-box">
+<h3 id="contribute-h3-1">投稿范围</h3>
+<ul>
+<li id="contribute-li1"><strong>福瑞相关科普文章</strong> —— 历史、文化、作品分析等</li>
+<li id="contribute-li2"><strong>原创角色（OC）介绍</strong> —— 展示你的兽设，附上设定图和文字</li>
+<li id="contribute-li3"><strong>兽展/兽聚游记</strong> —— 分享你的线下经历与见闻</li>
+<li id="contribute-li4"><strong>福瑞艺术创作</strong> —— 绘画、音乐、小说等任何形式</li>
+<li id="contribute-li5"><strong>其他与福瑞文化相关的内容</strong></li>
+</ul>
+</div>
+<h3 id="contribute-h3-2">投稿方式</h3>
+<p id="contribute-p2">请将稿件发送至邮箱：<strong>13144346930@163.com</strong></p>
+<p id="contribute-p3">邮件标题请注明"【投稿】+ 标题"，并在正文中附上你的署名（可匿名）。我们将在审核后尽快发布。</p>
+<div class="highlight-box">
+<h3 id="contribute-h3-3">注意事项</h3>
+<ul>
+<li id="contribute-li6">投稿内容需为原创或已获得原作者授权。</li>
+<li id="contribute-li7">请勿涉及政治敏感、色情、暴力等违规内容。</li>
+<li id="contribute-li8">我们有权对稿件进行适当编辑和排版调整。</li>
+<li id="contribute-li9">欢迎附带你的联系方式（可选），以便我们与你沟通。</li>
+</ul>
+</div>
+<p id="contribute-p4" style="text-align:right;color:#888;">—— FurryWiki 管理组</p>
             </div>        </div>
 
         <div style="flex-grow:1;"></div>
     </div>
 
     <script>
-        const OLDWIKI_T = {
-            'oldwiki-title': { zh:'旧Wiki档案', 'zh-tw':'舊Wiki檔案', en:'Old Wiki Archive' },
-            'oldwiki-h2': { zh:'旧版 Furry Wiki 历史档案', 'zh-tw':'舊版 Furry Wiki 歷史檔案', en:'Old Furry Wiki Historical Archive' },
-            'oldwiki-p1': { zh:'<em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em>', 'zh-tw':'<em>"訪問速度很快，頁面UI美觀，可惜無人更新維護……"</em>', en:'<em>"Fast access speed, beautiful page UI, but unfortunately no one updates and maintains it..."</em>' },
-            'oldwiki-establish': { zh:'<strong>成立时间：</strong>2020年4月1日', 'zh-tw':'<strong>成立時間：</strong>2020年4月1日', en:'<strong>Establishment time:</strong> April 1, 2020' },
-            'oldwiki-founder': { zh:'<strong>创始人：</strong>福林菌', 'zh-tw':'<strong>創始人：</strong>福林菌', en:'<strong>Founder:</strong> Fu Lin Jun' },
-            'oldwiki-status': { zh:'<strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span>', 'zh-tw':'<strong>最終狀態：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商業約稿平台</span>', en:'<strong>Final status:</strong><span style="color:#ff6b6b;">Expired in January 2024, redirected to commercial commission platform</span>' },
-            'oldwiki-crisis': { zh:'危机与争议', 'zh-tw':'危機與爭議', en:'Crisis and Controversy' },
-            'oldwiki-crisis-1': { zh:'管理混乱，任用错误行政员', 'zh-tw':'管理混亂，任用錯誤行政員', en:'Management chaos, appointing wrong administrators' },
-            'oldwiki-crisis-2': { zh:'历史抹除，数据库修改', 'zh-tw':'歷史抹除，數據庫修改', en:'History erasure, database modification' },
-            'oldwiki-crisis-3': { zh:'商业背刺，涉嫌违反CC协议', 'zh-tw':'商業背刺，涉嫌違反CC協議', en:'Commercial betrayal, suspected violation of CC agreement' },
-            'oldwiki-crisis-4': { zh:'域名重定向至"兽聚汇"', 'zh-tw':'域名重定向至"獸聚匯"', en:'Domain name redirected to "Shouju Hui"' }
+        const CONTRIBUTE_T = {
+            'contribute-title': { zh:'📬 网友投稿', 'zh-tw':'📬 網友投稿', en:'📬 User Contribution' },
+            'contribute-p1': { zh:'欢迎各位兽迷、画师、创作者向 FurryWiki 投稿！我们希望通过大家的共同努力，让这个知识库更加丰富多元。', 'zh-tw':'歡迎各位獸迷、畫師、創作者向 FurryWiki 投稿！我們希望通過大家的共同努力，讓這個知識庫更加豐富多元。', en:'Welcome all Furry fans, artists, and creators to contribute to FurryWiki! We hope to make this knowledge base more rich and diverse through everyone\'s joint efforts.' },
+            'contribute-h3-1': { zh:'投稿范围', 'zh-tw':'投稿範圍', en:'Submission Scope' },
+            'contribute-li1': { zh:'福瑞相关科普文章 —— 历史、文化、作品分析等', 'zh-tw':'福瑞相關科普文章 —— 歷史、文化、作品分析等', en:'Furry-related popular science articles —— History, culture, work analysis, etc.' },
+            'contribute-li2': { zh:'原创角色（OC）介绍 —— 展示你的兽设，附上设定图和文字', 'zh-tw':'原創角色（OC）介紹 —— 展示你的獸設，附上設定圖和文字', en:'Original Character (OC) introductions —— Showcase your fursona with reference images and descriptions' },
+            'contribute-li3': { zh:'兽展/兽聚游记 —— 分享你的线下经历与见闻', 'zh-tw':'獸展/獸聚遊記 —— 分享你的線下經歷與見聞', en:'Furry convention/meetup travel logs —— Share your offline experiences' },
+            'contribute-li4': { zh:'福瑞艺术创作 —— 绘画、音乐、小说等任何形式', 'zh-tw':'福瑞藝術創作 —— 繪畫、音樂、小說等任何形式', en:'Furry art creations —— Paintings, music, novels, etc.' },
+            'contribute-li5': { zh:'其他与福瑞文化相关的内容', 'zh-tw':'其他與福瑞文化相關的內容', en:'Other Furry culture related content' },
+            'contribute-h3-2': { zh:'投稿方式', 'zh-tw':'投稿方式', en:'Submission Method' },
+            'contribute-p2': { zh:'请将稿件发送至邮箱：13144346930@163.com', 'zh-tw':'請將稿件發送至郵箱：13144346930@163.com', en:'Please send your submission to email: 13144346930@163.com' },
+            'contribute-p3': { zh:'邮件标题请注明"【投稿】+ 标题"，并在正文中附上你的署名（可匿名）。我们将在审核后尽快发布。', 'zh-tw':'郵件標題請註明"【投稿】+ 標題"，並在正文中附上你的署名（可匿名）。我們將在審核後儘快發佈。', en:'Please mark the email subject as "[Submission] + Title", and include your signature (can be anonymous) in the email body. We will publish it as soon as possible after review.' },
+            'contribute-h3-3': { zh:'注意事项', 'zh-tw':'注意事項', en:'Notes' },
+            'contribute-li6': { zh:'投稿内容需为原创或已获得原作者授权。', 'zh-tw':'投稿內容需為原創或已獲得原作者授權。', en:'Submissions must be original or authorized by the original author.' },
+            'contribute-li7': { zh:'请勿涉及政治敏感、色情、暴力等违规内容。', 'zh-tw':'請勿涉及政治敏感、色情、暴力等違規內容。', en:'Please do not include politically sensitive, pornographic, violent or other inappropriate content.' },
+            'contribute-li8': { zh:'我们有权对稿件进行适当编辑和排版调整。', 'zh-tw':'我們有權對稿件進行適當編輯和排版調整。', en:'We reserve the right to edit and format submissions appropriately.' },
+            'contribute-li9': { zh:'欢迎附带你的联系方式（可选），以便我们与你沟通。', 'zh-tw':'歡迎附帶你的聯絡方式（可選），以便我們與你溝通。', en:'Feel free to include your contact information (optional) for communication purposes.' },
+            'contribute-p4': { zh:'—— FurryWiki 管理组', 'zh-tw':'—— FurryWiki 管理組', en:'—— FurryWiki Management Team' }
         };
         function updatePageLang(lang) {
-            for(let key in OLDWIKI_T){
+            for(let key in CONTRIBUTE_T){
                 const el = document.getElementById(key);
-                if(el) el.innerHTML = OLDWIKI_T[key][lang];
+                if(el) el.textContent = CONTRIBUTE_T[key][lang];
             }
         }
     </script>
-
-    <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
-        <div class="lang-row" style="justify-content:center;">
-            <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
-            <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
-            <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
-        </div>
-        <div class="theme-toggle-row" style="margin:0;display:flex;gap:6px;justify-content:center;">
-            <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
-            <button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
-        </div>
-        <a href="编辑.html?page=old-wiki.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','old-wiki.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
-    </div>
 </body>
 </html>

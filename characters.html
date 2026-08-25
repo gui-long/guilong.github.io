@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FurryWiki - 兽圈百科知识库">
-    <title>旧Wiki档案 - FurryWiki</title>
+    <title>角色 - FurryWiki</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root{
@@ -192,10 +192,13 @@
         <a href="index.html" class="logo">FurryWiki</a>
         <a href="index.html" class="nav-link" id="nav-home" data-zh="主页" data-zhtw="主頁" data-en="Home">主页</a>
         <a href="furry-intro.html" class="nav-link" id="nav-intro" data-zh="Furry (兽迷文化)" data-zhtw="Furry (獸迷文化)" data-en="Furry (Furry Fandom)">Furry (兽迷文化)</a>
-<a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
+        <a href="characters.html" class="nav-link active" id="nav-characters" data-zh="角色" data-zhtw="角色" data-en="Characters">角色</a>
+        <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
         <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
         <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
-        <a href="old-wiki.html" class="nav-link active" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
         <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
         <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
@@ -207,47 +210,114 @@
 
     <div class="main-content">
         <div class="page-container">
-<h1 class="page-title" id="oldwiki-title">旧Wiki档案</h1>
-            <div class="oldwiki-page">
-                <h2 style="color:var(--text);" id="oldwiki-h2">旧版 Furry Wiki 历史档案</h2>
-                <p id="oldwiki-p1"><em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em></p>
-                <div style="background:var(--section-bg);padding:15px;border-radius:8px;margin:15px 0;border:1px solid var(--section-border);">
-                    <p id="oldwiki-establish"><strong>成立时间：</strong>2020年4月1日</p>
-                    <p id="oldwiki-founder"><strong>创始人：</strong>福林菌</p>
-                    <p id="oldwiki-status"><strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span></p>
-                </div>
-                <h3 id="oldwiki-crisis">危机与争议</h3>
-                <ol>
-                    <li id="oldwiki-crisis-1">管理混乱，任用错误行政员</li>
-                    <li id="oldwiki-crisis-2">历史抹除，数据库修改</li>
-                    <li id="oldwiki-crisis-3">商业背刺，涉嫌违反CC协议</li>
-                    <li id="oldwiki-crisis-4">域名重定向至"兽聚汇"</li>
-                </ol>
-            </div>        </div>
+<h1 class="page-title" id="char-title">角色</h1>
+            <div class="ranking-container">
+                <div class="ranking-title" id="ranking-title">兽圈/泛兽类主播热度 TOP 20</div>
+                <div id="ranking-list"></div>
+                <div class="note-text" id="ranking-note">* 数据来源：网络统计（截止至b站的2026年6月）。<br>* 特别说明：榜单第1，3名"碧月狐，李飞雪_"虽然拥有极高的相关话题热度，但作者本人不属于兽迷（Furry）圈子。本榜单将其列入旨在客观反映当前furry内容的流量分布，不代表对其身份的定义。<br>* 如有数据遗漏或更新，欢迎联系站长。</div>
+            </div>
+    <script>
+        const RANKING_DATA = { 
+            zh: [
+                {r:1,n:'碧月狐',v:'373.2w',w:100.0,h:1},
+                {r:2,n:'一块电鹿板',v:'136.1w',w:36.5,h:0},
+                {r:3,n:'李飞雪_',v:'98.1w',w:26.3,h:1},
+                {r:4,n:'银碳Gintan',v:'76.3w',w:20.4,h:0},
+                {r:5,n:'小鬼卡比',v:'76.2w',w:20.4,h:0},
+                {r:6,n:'一株晨草',v:'50.9w',w:13.6,h:0},
+                {r:7,n:'奥奇传说',v:'46.5w',w:12.5,h:0},
+                {r:8,n:'带袋浣熊Rakky',v:'36.3w',w:9.7,h:0},
+                {r:9,n:'茭白柒',v:'36.1w',w:9.7,h:0},
+                {r:10,n:'饼人b',v:'34.7w',w:9.3,h:0},
+                {r:11,n:'鹿野灸',v:'28.5w',w:7.6,h:0},
+                {r:12,n:'蹭饭不下饭',v:'25.8w',w:6.9,h:0},
+                {r:13,n:'sound一track',v:'25.1w',w:6.7,h:0},
+                {r:14,n:'冰糖雪狸不是梨',v:'25.0w',w:6.7,h:0},
+                {r:15,n:'老朋友王海缤',v:'24.9w',w:6.7,h:0},
+                {r:16,n:'黑猫boy爱糖果',v:'24.8w',w:6.7,h:0},
+                {r:17,n:'星穹日记office',v:'24.8w',w:6.6,h:0},
+                {r:18,n:'塔米糕ovo',v:'24.3w',w:6.5,h:0},
+                {r:19,n:'呆呆凛ovo',v:'23.6w',w:6.3,h:0},
+                {r:20,n:'红楼下的玄猫',v:'23.5w',w:6.3,h:0}
+            ],
+            'zh-tw': [
+                {r:1,n:'碧月狐',v:'373.2w',w:100.0,h:1},
+                {r:2,n:'一塊電鹿板',v:'136.1w',w:36.5,h:0},
+                {r:3,n:'李飛雪_',v:'98.1w',w:26.3,h:1},
+                {r:4,n:'銀碳Gintan',v:'76.3w',w:20.4,h:0},
+                {r:5,n:'小鬼卡比',v:'76.2w',w:20.4,h:0},
+                {r:6,n:'一株晨草',v:'50.9w',w:13.6,h:0},
+                {r:7,n:'奧奇傳說',v:'46.5w',w:12.5,h:0},
+                {r:8,n:'帶袋浣熊Rakky',v:'36.3w',w:9.7,h:0},
+                {r:9,n:'茭白柒',v:'36.1w',w:9.7,h:0},
+                {r:10,n:'餅人b',v:'34.7w',w:9.3,h:0},
+                {r:11,n:'鹿野灸',v:'28.5w',w:7.6,h:0},
+                {r:12,n:'蹭飯不下飯',v:'25.8w',w:6.9,h:0},
+                {r:13,n:'sound一track',v:'25.1w',w:6.7,h:0},
+                {r:14,n:'冰糖雪狸不是梨',v:'25.0w',w:6.7,h:0},
+                {r:15,n:'老朋友王海繽',v:'24.9w',w:6.7,h:0},
+                {r:16,n:'黑貓boy愛糖果',v:'24.8w',w:6.7,h:0},
+                {r:17,n:'星穹日記office',v:'24.8w',w:6.6,h:0},
+                {r:18,n:'塔米糕ovo',v:'24.3w',w:6.5,h:0},
+                {r:19,n:'呆呆凜ovo',v:'23.6w',w:6.3,h:0},
+                {r:20,n:'紅樓下的玄貓',v:'23.5w',w:6.3,h:0}
+            ],
+            en: [
+                {r:1,n:'Biyuehu',v:'3.73M',w:100.0,h:1},
+                {r:2,n:'ElectricDeerBoard',v:'1.36M',w:36.5,h:0},
+                {r:3,n:'LiFeixue_',v:'981K',w:26.3,h:1},
+                {r:4,n:'Gintan',v:'763K',w:20.4,h:0},
+                {r:5,n:'KabiGhost',v:'762K',w:20.4,h:0},
+                {r:6,n:'MorningGrass',v:'509K',w:13.6,h:0},
+                {r:7,n:'AokiLegend',v:'465K',w:12.5,h:0},
+                {r:8,n:'RakkyRaccoon',v:'363K',w:9.7,h:0},
+                {r:9,n:'JiaobaiQi',v:'361K',w:9.7,h:0},
+                {r:10,n:'BingRenB',v:'347K',w:9.3,h:0},
+                {r:11,n:'LuyeJiu',v:'285K',w:7.6,h:0},
+                {r:12,n:'CengFanBuXiaFan',v:'258K',w:6.9,h:0},
+                {r:13,n:'SoundTrack',v:'251K',w:6.7,h:0},
+                {r:14,n:'IceSugarFox',v:'250K',w:6.7,h:0},
+                {r:15,n:'WangHaibin',v:'249K',w:6.7,h:0},
+                {r:16,n:'BlackCatBoy',v:'248K',w:6.7,h:0},
+                {r:17,n:'StarDiary',v:'248K',w:6.6,h:0},
+                {r:18,n:'Tamigo',v:'243K',w:6.5,h:0},
+                {r:19,n:'DaiDaiLin',v:'236K',w:6.3,h:0},
+                {r:20,n:'XuanMao',v:'235K',w:6.3,h:0}
+            ]
+        };
+        
+        function renderRanking(lang) {
+            const items = RANKING_DATA[lang] || RANKING_DATA.zh;
+            let h = '';
+            items.forEach(i=>{
+                let c=i.r<=3?`top-${i.r}`:'';
+                let bar=i.h?'highlight-bar':'';
+                let note=(i.r===1||i.r===3)?'<span class="icon-note" title="'+(lang==='zh'?'注':lang==='zh-tw'?'註':'Note')+'">?</span>':'';
+                h+=`<div class="rank-item"><div class="rank-num ${c}">${i.r}</div><div class="rank-name">${i.n}${note}</div><div class="rank-bar-bg"><div class="rank-bar-fill ${bar}" style="width:${i.w}%;"></div></div><div class="rank-value">${i.v}</div></div>`;
+            });
+            document.getElementById('ranking-list').innerHTML = h;
+        }
+        renderRanking(localStorage.getItem('lang') || 'zh');
+    </script>        </div>
 
         <div style="flex-grow:1;"></div>
     </div>
 
     <script>
-        const OLDWIKI_T = {
-            'oldwiki-title': { zh:'旧Wiki档案', 'zh-tw':'舊Wiki檔案', en:'Old Wiki Archive' },
-            'oldwiki-h2': { zh:'旧版 Furry Wiki 历史档案', 'zh-tw':'舊版 Furry Wiki 歷史檔案', en:'Old Furry Wiki Historical Archive' },
-            'oldwiki-p1': { zh:'<em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em>', 'zh-tw':'<em>"訪問速度很快，頁面UI美觀，可惜無人更新維護……"</em>', en:'<em>"Fast access speed, beautiful page UI, but unfortunately no one updates and maintains it..."</em>' },
-            'oldwiki-establish': { zh:'<strong>成立时间：</strong>2020年4月1日', 'zh-tw':'<strong>成立時間：</strong>2020年4月1日', en:'<strong>Establishment time:</strong> April 1, 2020' },
-            'oldwiki-founder': { zh:'<strong>创始人：</strong>福林菌', 'zh-tw':'<strong>創始人：</strong>福林菌', en:'<strong>Founder:</strong> Fu Lin Jun' },
-            'oldwiki-status': { zh:'<strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span>', 'zh-tw':'<strong>最終狀態：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商業約稿平台</span>', en:'<strong>Final status:</strong><span style="color:#ff6b6b;">Expired in January 2024, redirected to commercial commission platform</span>' },
-            'oldwiki-crisis': { zh:'危机与争议', 'zh-tw':'危機與爭議', en:'Crisis and Controversy' },
-            'oldwiki-crisis-1': { zh:'管理混乱，任用错误行政员', 'zh-tw':'管理混亂，任用錯誤行政員', en:'Management chaos, appointing wrong administrators' },
-            'oldwiki-crisis-2': { zh:'历史抹除，数据库修改', 'zh-tw':'歷史抹除，數據庫修改', en:'History erasure, database modification' },
-            'oldwiki-crisis-3': { zh:'商业背刺，涉嫌违反CC协议', 'zh-tw':'商業背刺，涉嫌違反CC協議', en:'Commercial betrayal, suspected violation of CC agreement' },
-            'oldwiki-crisis-4': { zh:'域名重定向至"兽聚汇"', 'zh-tw':'域名重定向至"獸聚匯"', en:'Domain name redirected to "Shouju Hui"' }
+        const T = {
+            'char-title': { zh:'角色', 'zh-tw':'角色', en:'Characters' },
+            'ranking-title': { zh:'兽圈/泛兽类主播热度 TOP 20', 'zh-tw':'獸圈/泛獸類主播熱度 TOP 20', en:'Furry/Fur-adjacent Streamer Popularity TOP 20' },
+            'ranking-note': { zh:'* 数据来源：网络统计（截止至b站的2026年6月）。<br>* 特别说明：榜单第1，3名"碧月狐，李飞雪_"虽然拥有极高的相关话题热度，但作者本人不属于兽迷（Furry）圈子。本榜单将其列入旨在客观反映当前furry内容的流量分布，不代表对其身份的定义。<br>* 如有数据遗漏或更新，欢迎联系站长。', 'zh-tw':'* 數據來源：網絡統計（截止至B站的2026年6月）。<br>* 特別說明：榜單第1，3名"碧月狐，李飛雪_"雖然擁有極高的相關話題熱度，但作者本人不屬於獸迷（Furry）圈子。本榜單將其列入旨在客觀反映當前furry內容的流量分布，不代表對其身份的定義。<br>* 如有數據遺漏或更新，歡迎聯繫站長。', en:'* Data Source: Network statistics (as of June 2026 on Bilibili).<br>* Note: Rankings 1 and 3 ("Biyuehu", "LiFeixue_") have extremely high topic popularity, but the authors themselves do not identify as Furry. This list includes them to objectively reflect the current traffic distribution of furry content, and does not represent a definition of their identity.<br>* If there are data omissions or updates, please contact the site administrator.' },
         };
+
         function updatePageLang(lang) {
-            for(let key in OLDWIKI_T){
+            for(let key in T){
                 const el = document.getElementById(key);
-                if(el) el.innerHTML = OLDWIKI_T[key][lang];
+                if(el) el.innerHTML = T[key][lang];
             }
+            renderRanking(lang);
         }
+        updatePageLang(localStorage.getItem('lang') || 'zh');
     </script>
 
     <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
@@ -260,7 +330,7 @@
             <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
             <button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
         </div>
-        <a href="编辑.html?page=old-wiki.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','old-wiki.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
+        <a href="编辑.html?page=characters.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','characters.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
     </div>
 </body>
 </html>

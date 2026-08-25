@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FurryWiki - 兽圈百科知识库">
-    <title>旧Wiki档案 - FurryWiki</title>
+    <title>兽聚日期 - FurryWiki</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root{
@@ -195,8 +195,10 @@
 <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
         <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
         <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
-        <a href="old-wiki.html" class="nav-link active" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
-        <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="calendar.html" class="nav-link active" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
         <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
         <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
@@ -207,46 +209,54 @@
 
     <div class="main-content">
         <div class="page-container">
-<h1 class="page-title" id="oldwiki-title">旧Wiki档案</h1>
-            <div class="oldwiki-page">
-                <h2 style="color:var(--text);" id="oldwiki-h2">旧版 Furry Wiki 历史档案</h2>
-                <p id="oldwiki-p1"><em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em></p>
-                <div style="background:var(--section-bg);padding:15px;border-radius:8px;margin:15px 0;border:1px solid var(--section-border);">
-                    <p id="oldwiki-establish"><strong>成立时间：</strong>2020年4月1日</p>
-                    <p id="oldwiki-founder"><strong>创始人：</strong>福林菌</p>
-                    <p id="oldwiki-status"><strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span></p>
+<h1 class="page-title">全球兽聚日历</h1>
+            <div class="calendar-page">
+                <h2 class="calendar-title">全球兽聚日历 (Furry Con Calendar)</h2>
+                <p class="calendar-sub">线下相聚，感受毛茸茸的魅力！(数据持续更新中)</p>
+                <div class="month-buttons">
+                    <button onclick="showMonth('may')" class="month-btn">5月</button>
+                    <button onclick="showMonth('jun')" class="month-btn active">6月</button>
+                    <button onclick="showMonth('jul')" class="month-btn">7月</button>
+                    <button onclick="showMonth('aug')" class="month-btn">8月</button>
+                    <button onclick="showMonth('sep')" class="month-btn">9月</button>
+                    <button onclick="showMonth('oct')" class="month-btn">10月</button>
                 </div>
-                <h3 id="oldwiki-crisis">危机与争议</h3>
-                <ol>
-                    <li id="oldwiki-crisis-1">管理混乱，任用错误行政员</li>
-                    <li id="oldwiki-crisis-2">历史抹除，数据库修改</li>
-                    <li id="oldwiki-crisis-3">商业背刺，涉嫌违反CC协议</li>
-                    <li id="oldwiki-crisis-4">域名重定向至"兽聚汇"</li>
-                </ol>
-            </div>        </div>
+                <div id="calendar-content" style="background:var(--card-bg);padding:20px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,0.03);min-height:150px;"></div>
+            </div>
+
+    <script>
+        const CON = {
+            may:[ {date:"6日",name:"Furrymosa"},{date:"11-15日",name:"Campfire Tails"},{date:"11-14日",name:"Furvaria"},{date:"13-14日",name:"Little Island Furcon"},{date:"19-21日",name:"墨兽居·花与海之歌"},{date:"19-21日",name:"Argentina FurFiesta"},{date:"20-21日",name:"Borneo Anthro Hub"},{date:"27-30日",name:"Lakeside Furs"},{date:"27日",name:"UTFG"} ],
+            jun:[ {date:"1-6日",name:"Lakeside Furs"},{date:"2-6日",name:"Anthrocon"},{date:"4-5日",name:"Indonesia Anthro Gathering"},{date:"9-11日",name:"福绒聚"},{date:"10-12日",name:"绒萌世界"},{date:"11-13日",name:"青笛兽韵"},{date:"16日",name:"探麟志"},{date:"16日",name:"星绒会·第四届"},{date:"16日",name:"Fur-Eh!"},{date:"17-20日",name:"得闲兽聚·像素奇旅"},{date:"17-19日",name:"古都有兽·瑞兽迎福"},{date:"17-19日",name:"绵绒汇"},{date:"23-26日",name:"幻兽聚·龙渊溯踪"},{date:"23-26日",name:"兽星航·ECHO"},{date:"23日",name:"Eufuria"},{date:"24-26日",name:"福瑞八奇物志·虚匣伪宴"},{date:"24-26日",name:"落茜聚"},{date:"31日",name:"星澜特快号"} ],
+            jul:[ {date:"6-9日",name:"EAST"},{date:"19-23日",name:"Eurofurence"},{date:"20-22日",name:"瑞影聚坊·万兽吟风"},{date:"21-23日",name:"Megaplex"},{date:"28-30日",name:"DenFur"} ],
+            aug:[ {date:"3-4日",name:"FursonaCon"},{date:"4-6日",name:"Calfurry"},{date:"5-6日",name:"Barkada FurFest"},{date:"8日",name:"理想小聚"},{date:"11-13日",name:"Furry Migration"} ],
+            sep:[ {date:"9-11日",name:"AquatiFur"},{date:"29-31日",name:"Confuror"},{date:"30-31日",name:"Infurnity獸無限"} ],
+            oct:[ {date:"1-8日",name:"GoldenHorn"},{date:"暂时未公开",name:"狸想城"} ]
+        };
+        function showMonth(m) {
+            document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
+            let btn = document.querySelector(`.month-btn[onclick*="${m}"]`);
+            if(btn) btn.classList.add('active');
+            let list = CON[m] || [];
+            let h = '<ul class="con-list">';
+            list.forEach(c => { h += `<li><span class="con-date">${c.date}</span>${c.name}</li>`; });
+            h += '</ul>';
+            document.getElementById('calendar-content').innerHTML = h;
+        }
+        showMonth('jun');
+    </script>        </div>
 
         <div style="flex-grow:1;"></div>
     </div>
 
     <script>
-        const OLDWIKI_T = {
-            'oldwiki-title': { zh:'旧Wiki档案', 'zh-tw':'舊Wiki檔案', en:'Old Wiki Archive' },
-            'oldwiki-h2': { zh:'旧版 Furry Wiki 历史档案', 'zh-tw':'舊版 Furry Wiki 歷史檔案', en:'Old Furry Wiki Historical Archive' },
-            'oldwiki-p1': { zh:'<em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em>', 'zh-tw':'<em>"訪問速度很快，頁面UI美觀，可惜無人更新維護……"</em>', en:'<em>"Fast access speed, beautiful page UI, but unfortunately no one updates and maintains it..."</em>' },
-            'oldwiki-establish': { zh:'<strong>成立时间：</strong>2020年4月1日', 'zh-tw':'<strong>成立時間：</strong>2020年4月1日', en:'<strong>Establishment time:</strong> April 1, 2020' },
-            'oldwiki-founder': { zh:'<strong>创始人：</strong>福林菌', 'zh-tw':'<strong>創始人：</strong>福林菌', en:'<strong>Founder:</strong> Fu Lin Jun' },
-            'oldwiki-status': { zh:'<strong>最终状态：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商业约稿平台</span>', 'zh-tw':'<strong>最終狀態：</strong><span style="color:#ff6b6b;">2024年1月失效，重定向至商業約稿平台</span>', en:'<strong>Final status:</strong><span style="color:#ff6b6b;">Expired in January 2024, redirected to commercial commission platform</span>' },
-            'oldwiki-crisis': { zh:'危机与争议', 'zh-tw':'危機與爭議', en:'Crisis and Controversy' },
-            'oldwiki-crisis-1': { zh:'管理混乱，任用错误行政员', 'zh-tw':'管理混亂，任用錯誤行政員', en:'Management chaos, appointing wrong administrators' },
-            'oldwiki-crisis-2': { zh:'历史抹除，数据库修改', 'zh-tw':'歷史抹除，數據庫修改', en:'History erasure, database modification' },
-            'oldwiki-crisis-3': { zh:'商业背刺，涉嫌违反CC协议', 'zh-tw':'商業背刺，涉嫌違反CC協議', en:'Commercial betrayal, suspected violation of CC agreement' },
-            'oldwiki-crisis-4': { zh:'域名重定向至"兽聚汇"', 'zh-tw':'域名重定向至"獸聚匯"', en:'Domain name redirected to "Shouju Hui"' }
-        };
-        function updatePageLang(lang) {
-            for(let key in OLDWIKI_T){
-                const el = document.getElementById(key);
-                if(el) el.innerHTML = OLDWIKI_T[key][lang];
-            }
+        
+
+        
+
+        
+        );
+            if(typeof updatePageLang === 'function') updatePageLang(lang);
         }
     </script>
 
@@ -260,7 +270,7 @@
             <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
             <button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
         </div>
-        <a href="编辑.html?page=old-wiki.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','old-wiki.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
+        <a href="编辑.html?page=calendar.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','calendar.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
     </div>
 </body>
 </html>
