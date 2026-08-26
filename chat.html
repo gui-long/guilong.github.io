@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FurryWiki - 兽圈群聊导航，收录各地区兽迷交流群组">
+    <title>群聊 - FurryWiki</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root{
+            --bg:#f5f6f8; --text:#2c3e50; --text-secondary:#4b5563; --text-muted:#6b7280;
+            --card-bg:#fff; --card-hover:#f8fafc; --border:#eef1f5; --border-strong:#e4e7eb;
+            --nav-bg:#1a1c23; --nav-text:#b0b5c0; --accent:#57c3ff; --accent-light:#f0f6ff;
+            --highlight-box:#f0f6ff; --ranking-bg:#1a1c23; --ranking-text:#eee;
+            --ranking-bar-bg:#2a2d35; --ranking-note:#777e8c; --btn-bg:#eef1f5; --btn-text:#333;
+            --icon-note-bg:#444b5a; --section-bg:#fdf2f8; --section-border:#fce7f3;
+        }
+        [data-theme="dark"]{
+            --bg:#0f172a; --text:#e2e8f0; --text-secondary:#cbd5e1; --text-muted:#94a3b8;
+            --card-bg:#1e293b; --card-hover:#334155; --border:#334155; --border-strong:#475569;
+            --nav-bg:#0f172a; --nav-text:#94a3b8; --accent:#38bdf8; --accent-light:#1e3a5f;
+            --highlight-box:#1e3a5f; --ranking-bg:#1e293b; --ranking-text:#e2e8f0;
+            --ranking-bar-bg:#334155; --ranking-note:#64748b; --btn-bg:#334155; --btn-text:#e2e8f0;
+            --icon-note-bg:#475569; --section-bg:#3f1d38; --section-border:#5b2a50;
+        }
+        [data-colorblind="true"]{
+            --accent:#f59e0b; --accent-light:#fffbeb; --highlight-box:#fffbeb;
+            --section-bg:#fffbeb; --section-border:#fef3c7;
+        }
+        [data-theme="dark"][data-colorblind="true"]{
+            --accent:#fbbf24; --accent-light:#451a03; --highlight-box:#451a03;
+            --section-bg:#451a03; --section-border:#78350f;
+        }
+        body { font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif; background: var(--bg); display: flex; min-height: 100vh; line-height: 1.7; color: var(--text); transition: background .3s, color .3s; }
+        nav { position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: var(--nav-bg); display: flex; flex-direction: column; padding: 30px 0 24px 0; box-shadow: 4px 0 25px rgba(0,0,0,0.25); z-index: 9999; overflow-y: auto; overflow-x: hidden; flex-shrink: 0; scrollbar-width: thin; scrollbar-color: #4a4a5a transparent; border-right: 1px solid rgba(255,255,255,0.08); transition: background .3s; }
+        nav::-webkit-scrollbar { width: 6px; }
+        nav::-webkit-scrollbar-track { background: transparent; }
+        nav::-webkit-scrollbar-thumb { background: #4a4a5a; border-radius: 10px; }
+        .logo { color: #fff; font-size: 30px; font-weight: 700; text-decoration: none; padding: 10px 30px 28px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; display: block; letter-spacing: 1.5px; }
+        .logo:hover { color: #57c3ff; }
+        nav .nav-link { color: var(--nav-text); text-decoration: none; font-size: 16px; padding: 14px 30px; margin: 3px 12px; border-radius: 10px; transition: all 0.2s; flex-shrink: 0; display: block; border-left: 4px solid transparent; white-space: nowrap; font-weight: 500; }
+        nav .nav-link:hover { color: #fff; background: rgba(255,255,255,0.06); border-left: 4px solid var(--accent); }
+        nav .nav-link.active { color: #fff; background: rgba(87,195,255,0.15); border-left: 4px solid var(--accent); }
+        .lang-group { margin-top: auto; flex-shrink: 0; padding: 24px 18px 16px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; flex-direction: column; align-items: center; }
+        .lang-row { display: flex; gap: 10px; }
+        .theme-toggle-row { margin-top: 14px; }
+        .theme-toggle-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #ccc; padding: 10px 20px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+        .theme-toggle-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); color: #ccc; padding: 8px 18px; border-radius: 24px; cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap; }
+        .lang-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .lang-btn.active { background: #57c3ff; color: #fff; border-color: #57c3ff; font-weight: 600; }
+        .main-content { margin-left: 300px; flex: 1; min-width: 0; padding: 50px 50px 40px 50px; display: flex; flex-direction: column; }
+        .page-container { max-width: 1100px; margin: 0 auto; width: 100%; }
+        .page-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 3px solid var(--accent); }
+        .page-content { font-size: 16px; line-height: 1.85; color: var(--text-secondary); }
+        .highlight-box { background: var(--highlight-box); padding: 14px 22px; border-radius: 14px; border-left: 5px solid var(--accent); margin: 18px 0; font-size: 14px; }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 20px; }
+        .search-box { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--border-strong); border-radius: 24px; font-size: 14px; background: var(--card-bg); color: var(--text); }
+        .search-box:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+        .stat-text { font-size: 13px; color: var(--text-muted); margin-left: auto; }
+        .chat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 8px; }
+        .chat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); transition: 0.2s; display: flex; flex-direction: column; gap: 6px; }
+        .chat-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.06); transform: translateY(-2px); border-color: var(--accent); }
+        .chat-card .name { font-size: 16px; font-weight: 700; color: var(--accent); line-height: 1.4; }
+        .chat-card .row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); flex-wrap: wrap; }
+        .chat-card .label { color: var(--text-muted); min-width: 36px; }
+        .chat-card .value { color: var(--text); font-weight: 500; }
+        .chat-card .qq { font-family: "Consolas", "Monaco", monospace; font-size: 14px; }
+        .chat-card .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; background: var(--accent-light); color: var(--accent); font-weight: 600; }
+        .chat-card .desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .chat-card .actions { display: flex; gap: 8px; margin-top: 8px; }
+        .chat-card .btn-join, .chat-card .btn-detail { flex: 1; text-align: center; padding: 7px 12px; border-radius: 18px; font-size: 12px; text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .chat-card .btn-join { background: var(--accent); color: #fff; }
+        .chat-card .btn-join:hover { box-shadow: 0 4px 14px rgba(87,195,255,0.35); transform: translateY(-1px); }
+        .chat-card .btn-detail { background: var(--btn-bg); color: var(--btn-text); }
+        .chat-card .btn-detail:hover { background: var(--border-strong); }
+        .empty { text-align: center; color: var(--text-muted); padding: 40px; }
+        .source-note { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border); }
+        .source-note a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            nav { position: fixed; top: 0; width: 100%; height: 56px; flex-direction: row; align-items: center; padding: 0 16px; overflow-x: auto; white-space: nowrap; z-index: 1000; -webkit-overflow-scrolling: touch; }
+            .logo { font-size: 18px; padding: 0 16px 0 6px; border-bottom: none; margin: 0; font-weight: 700; }
+            nav .nav-link { font-size: 14px; padding: 8px 16px; margin: 0; border-radius: 20px; border-left: none !important; }
+            nav .nav-link.active { border-left: none !important; }
+            .lang-group { margin: 0; padding: 0 12px 0 8px; border: none; flex-direction: row; gap: 8px; align-items: center; }
+            .lang-row { display: flex; gap: 6px; }
+            .theme-toggle-row { margin-top: 0; display: flex; gap: 6px; }
+            .lang-btn { font-size: 12px; padding: 5px 12px; border-radius: 16px; }
+            #themeToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #themeToggle::before { content: "🌙"; font-size: 14px; }
+            [data-theme="dark"] #themeToggle::before { content: "☀️"; }
+            #colorblindToggle { font-size: 0; padding: 5px 10px; border-radius: 16px; gap: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+            #colorblindToggle::before { content: "👁️"; font-size: 14px; }
+            [data-colorblind="true"] #colorblindToggle::before { content: "🔴"; font-size: 14px; }
+            .main-content { margin-left: 0; padding: 70px 20px 40px 20px; }
+            .page-title { font-size: 26px; margin-bottom: 16px; }
+            .chat-grid { grid-template-columns: 1fr; gap: 12px; }
+            .toolbar { flex-direction: column; align-items: stretch; }
+            .stat-text { margin-left: 0; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            nav { height: 50px; padding: 0 10px; }
+            .logo { font-size: 16px; padding: 0 12px 0 4px; }
+            nav .nav-link { font-size: 12px; padding: 6px 12px; }
+            .lang-group { padding: 0 8px 0 6px; gap: 6px; }
+            .lang-btn { font-size: 11px; padding: 4px 10px; }
+            #themeToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #themeToggle::before { font-size: 13px; }
+            #colorblindToggle { padding: 4px 8px; width: 28px; height: 28px; }
+            #colorblindToggle::before { font-size: 13px; }
+            .main-content { padding: 62px 14px 32px 14px; }
+            .page-title { font-size: 22px; }
+        }
+        .feedback-btn{position:fixed;right:28px;bottom:28px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#4da1ff);color:#fff;border:none;cursor:pointer;font-size:26px;box-shadow:0 4px 20px rgba(87,195,255,.4);transition:all .3s;z-index:9999;display:flex;align-items:center;justify-content:center;text-decoration:none}
+        .feedback-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(87,195,255,.5)}
+        @media (max-width: 768px) {
+            .feedback-btn{width:52px;height:52px;font-size:22px;right:18px;bottom:18px}
+        }
+    </style>
+<script src="common.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">FurryWiki</a>
+        <a href="index.html" class="nav-link" id="nav-home" data-zh="主页" data-zhtw="主頁" data-en="Home">主页</a>
+        <a href="furry-intro.html" class="nav-link" id="nav-intro" data-zh="Furry (兽迷文化)" data-zhtw="Furry (獸迷文化)" data-en="Furry (Furry Fandom)">Furry (兽迷文化)</a>
+<a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
+        <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
+        <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
+        <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
+        <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="兽聚信息" data-zhtw="獸聚資訊" data-en="Con Info">兽聚信息</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
+
+        <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
+        <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
+        <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
+        <a href="chat.html" class="nav-link active" id="nav-chat" data-zh="群聊" data-zhtw="群聊" data-en="Chat Groups">群聊</a>
+        <a href="编辑.html" class="nav-link" id="nav-contribute" data-zh="编辑" data-zhtw="編輯" data-en="Edit">编辑</a>
+        <a href="about.html" class="nav-link" id="nav-about" data-zh="关于" data-zhtw="關於" data-en="About">关于</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-container">
+<h1 class="page-title" id="chatTitle">💬 兽圈群聊</h1>
+            <div class="page-content">
+                <div class="highlight-box" id="noticeBox">
+                    <strong>⚠️ 注意：</strong>本页群组信息来源于网络收录，仅供导航参考。入群请遵守各群规则，文明交流。<br>
+                    <span style="font-size:13px;color:var(--text-muted);"><span id="sourceLabel">数据来源：</span><a href="https://furrygroup.cn/" target="_blank" rel="noopener" style="color:var(--accent);">furrygroup.cn</a> · <span id="totalPrefix">共 </span><span id="totalCount">0</span> <span id="groupsUnit">个群组</span></span>
+                </div>
+            </div>
+
+            <div class="toolbar">
+                <input type="text" class="search-box" id="searchInput" placeholder="搜索群名 / 地区 / 群号..." oninput="renderChat()">
+                <span class="stat-text" id="statText"></span>
+            </div>
+
+            <div id="chat-content" class="chat-grid"></div>
+
+        <div style="flex-grow:1;"></div>
+    </div>
+
+    <script>
+        var CHAT_DATA = null;
+        var allGroups = [];
+        var currentLang = localStorage.getItem('lang') || 'zh';
+
+        var CHAT_T = {
+            chatTitle: { zh:'💬 兽圈群聊', 'zh-tw':'💬 獸圈群聊', en:'💬 Furry Chat Groups' },
+            notice: {
+                zh:'本页群组信息来源于网络收录，仅供导航参考。入群请遵守各群规则，文明交流。',
+                'zh-tw':'本頁群組資訊來源於網路收錄，僅供導航參考。入群請遵守各群規則，文明交流。',
+                en:'Group info here is collected from the web for navigation reference only. Follow each group\'s rules.'
+            },
+            sourceLabel: { zh:'数据来源：', 'zh-tw':'資料來源：', en:'Source: ' },
+            totalPrefix: { zh:'共 ', 'zh-tw':'共 ', en:'' },
+            groupsUnit: { zh:'个群组', 'zh-tw':'個群組', en:' groups' },
+            searchPh: {
+                zh:'搜索群名 / 地区 / 群号...',
+                'zh-tw':'搜尋群名 / 地區 / 群號...',
+                en:'Search name / region / QQ...'
+            },
+            unnamed: { zh:'未命名群组', 'zh-tw':'未命名群組', en:'Unnamed group' },
+            region: { zh:'地区', 'zh-tw':'地區', en:'Region' },
+            qq: { zh:'群号', 'zh-tw':'群號', en:'QQ' },
+            hidden: { zh:'未公开', 'zh-tw':'未公開', en:'Hidden' },
+            size: { zh:'规模', 'zh-tw':'規模', en:'Size' },
+            people: { zh:'人', 'zh-tw':'人', en:'' },
+            noDesc: { zh:'', 'zh-tw':'', en:'' },
+            join: { zh:'复制群号', 'zh-tw':'複製群號', en:'Copy QQ' },
+            copied: { zh:'已复制', 'zh-tw':'已複製', en:'Copied' },
+            noQq: { zh:'无群号', 'zh-tw':'無群號', en:'No QQ' },
+            detail: { zh:'详情', 'zh-tw':'詳情', en:'Detail' },
+            empty: { zh:'没有匹配的群组', 'zh-tw':'沒有匹配的群組', en:'No matching groups' },
+            showing: { zh:'显示 ', 'zh-tw':'顯示 ', en:'Showing ' },
+            of: { zh:' / ', 'zh-tw':' / ', en:' of ' }
+        };
+
+        function t(key){
+            var e = CHAT_T[key];
+            if(!e) return '';
+            return e[currentLang] != null ? e[currentLang] : e.zh;
+        }
+
+        function loadChatData(cb){
+            if(CHAT_DATA){ cb(); return; }
+            var s = document.createElement('script');
+            s.src = 'chat-data.js?' + Date.now();
+            s.onload = function(){
+                if(typeof window.CHAT_DATA !== 'undefined'){
+                    CHAT_DATA = window.CHAT_DATA;
+                    var byProv = CHAT_DATA.groups_by_province || {};
+                    allGroups = [];
+                    (CHAT_DATA.provinces_order || []).forEach(function(p){
+                        (byProv[p] || []).forEach(function(g){ allGroups.push(g); });
+                    });
+                }
+                cb();
+            };
+            s.onerror = function(){ cb(); };
+            s.async = true;
+            document.head.appendChild(s);
+        }
+
+        function escapeHtml(s){
+            if(s == null) return '';
+            return String(s).replace(/[&<>"']/g, function(c){
+                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+            });
+        }
+
+        function renderChat(){
+            var q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+            var list = allGroups.filter(function(g){
+                if(!q) return true;
+                var name = (g.name || '').toLowerCase();
+                var region = (g.region || '').toLowerCase();
+                var qq = (g.qq || '').toLowerCase();
+                return name.indexOf(q) >= 0 || region.indexOf(q) >= 0 || qq.indexOf(q) >= 0;
+            });
+
+            var html = '';
+            if(list.length === 0){
+                html = '<div class="empty">' + escapeHtml(t('empty')) + '</div>';
+            } else {
+                list.forEach(function(g){
+                    var qqHtml = g.qq
+                        ? '<span class="value qq">' + escapeHtml(g.qq) + '</span>'
+                        : '<span class="value" style="color:var(--text-muted)">' + escapeHtml(t('hidden')) + '</span>';
+                    var size = g.size ? (g.size + ' ' + t('people')).trim() : '—';
+                    var desc = g.desc ? '<div class="desc">' + escapeHtml(g.desc) + '</div>' : '';
+                    var joinBtn = g.qq
+                        ? '<button class="btn-join" onclick="copyQq(this, \'' + g.qq + '\')">' + escapeHtml(t('join')) + '</button>'
+                        : '<span class="btn-join" style="opacity:.5;cursor:not-allowed;">' + escapeHtml(t('noQq')) + '</span>';
+                    html += '<div class="chat-card">'
+                        + '<div class="name">' + escapeHtml(g.name || t('unnamed')) + '</div>'
+                        + '<div class="row"><span class="label">' + escapeHtml(t('region')) + '</span><span class="value">' + escapeHtml(g.region || '—') + '</span><span class="tag">' + escapeHtml(g.region || '') + '</span></div>'
+                        + '<div class="row"><span class="label">' + escapeHtml(t('qq')) + '</span>' + qqHtml + '<span style="margin-left:auto;color:var(--text-muted);font-size:12px;">' + escapeHtml(t('size')) + ' ' + size + '</span></div>'
+                        + desc
+                        + '<div class="actions">'
+                        + joinBtn
+                        + '<a class="btn-detail" href="' + escapeHtml(g.url || '#') + '" target="_blank" rel="noopener">' + escapeHtml(t('detail')) + '</a>'
+                        + '</div>'
+                        + '</div>';
+                });
+            }
+            document.getElementById('chat-content').innerHTML = html;
+            document.getElementById('statText').textContent = t('showing') + list.length + t('of') + allGroups.length;
+            document.getElementById('totalCount').textContent = allGroups.length;
+        }
+
+        function copyQq(btn, qq){
+            var done = false;
+            try{
+                if(navigator.clipboard && navigator.clipboard.writeText){
+                    navigator.clipboard.writeText(qq).then(function(){
+                        if(!done){ done = true; flashCopied(btn); }
+                    }).catch(function(){
+                        if(!done){ done = true; legacyCopy(qq); flashCopied(btn); }
+                    });
+                    setTimeout(function(){ if(!done){ done = true; legacyCopy(qq); flashCopied(btn); } }, 400);
+                    return;
+                }
+            }catch(e){}
+            legacyCopy(qq);
+            flashCopied(btn);
+        }
+        function legacyCopy(text){
+            try{
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }catch(e){}
+        }
+        function flashCopied(btn){
+            if(!btn) return;
+            var old = btn.innerHTML;
+            btn.innerHTML = escapeHtml(t('copied'));
+            btn.style.background = '#10b981';
+            setTimeout(function(){
+                btn.innerHTML = old;
+                btn.style.background = '';
+            }, 1200);
+        }
+        function updatePageLang(lang){
+            currentLang = lang;
+            document.getElementById('chatTitle').textContent = t('chatTitle');
+            document.getElementById('noticeBox').innerHTML = '<strong>⚠️ ' + (lang === 'en' ? 'Notice:' : '注意：') + '</strong> ' + escapeHtml(t('notice')) + '<br><span style="font-size:13px;color:var(--text-muted);"><span id="sourceLabel">' + escapeHtml(t('sourceLabel')) + '</span><a href="https://furrygroup.cn/" target="_blank" rel="noopener" style="color:var(--accent);">furrygroup.cn</a> · <span id="totalPrefix">' + escapeHtml(t('totalPrefix')) + '</span><span id="totalCount">' + allGroups.length + '</span> <span id="groupsUnit">' + escapeHtml(t('groupsUnit')) + '</span></span>';
+            document.getElementById('searchInput').placeholder = t('searchPh');
+            renderChat();
+        }
+
+        loadChatData(function(){
+            renderChat();
+        });
+    </script>
+
+    <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
+        <div class="lang-row" style="justify-content:center;">
+            <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
+            <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
+            <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+        </div>
+        <div class="theme-toggle-row" style="margin:0;display:flex;gap:6px;justify-content:center;">
+            <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙 深色模式</button>
+            <button class="theme-toggle-btn" id="colorblindToggle" onclick="toggleColorblind()">👁️ 正常模式</button>
+        </div>
+        <a href="编辑.html?page=chat.html" class="theme-toggle-btn" style="text-decoration:none;justify-content:center;" onclick="try{var c=document.querySelector('.page-content')||document.querySelector('.main-content');var t=document.querySelector('h1.page-title')||document.querySelector('h1');sessionStorage.setItem('editPageContent',c?c.innerHTML:'');sessionStorage.setItem('editPageUrl','chat.html');sessionStorage.setItem('editPageTitle',t?t.textContent.trim():'');}catch(e){}">✉️ 编辑本页</a>
+    </div>
+</body>
+</html>
