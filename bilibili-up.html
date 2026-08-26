@@ -223,7 +223,6 @@
                     <input type="text" class="search-input" id="searchInput" placeholder="搜索 UP 主名称..." oninput="handleSearch()">
                     <button class="search-btn" onclick="handleSearch()">🔍 搜索</button>
                 </div>
-                <a href="chat.html" class="nav-contribute" title="群聊" target="_blank">💬 群聊</a>
                 <a href="编辑.html" class="nav-contribute" title="编辑">✏️ 编辑</a>
                 <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换主题">🌙</button>
             </div>
@@ -288,8 +287,8 @@
         </div>
     </div>
 
-    <script src="up-data.js"></script>
     <script>
+        document.write('<script src="up-data.js?' + Date.now() + '"><\/script>');
         function initTheme(){
             var saved = localStorage.getItem('theme');
             var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
