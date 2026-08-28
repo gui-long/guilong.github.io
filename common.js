@@ -15,6 +15,7 @@ var NAV_DATA = {
     'nav-gallery': { zh:'绘画作品', 'zh-tw':'繪畫作品', en:'Art Gallery' },
     'nav-bilibili': { zh:'B站UP主', 'zh-tw':'B站UP主', en:'Bilibili UP' },
     'nav-terminology': { zh:'术语', 'zh-tw':'術語', en:'Terminology' },
+    'nav-chat': { zh:'群聊', 'zh-tw':'群聊', en:'Chat Groups' },
     'nav-contribute': { zh:'编辑', 'zh-tw':'編輯', en:'Edit' },
     'nav-about': { zh:'关于', 'zh-tw':'關於', en:'About' },
 };
@@ -146,6 +147,7 @@ function initNav(){
         'gallery.html': 'nav-gallery',
         'bilibili-up.html': 'nav-bilibili',
         'terminology.html': 'nav-terminology',
+        'chat.html': 'nav-chat',
         'contribute.html': 'nav-contribute',
         '编辑.html': 'nav-contribute',
         'about.html': 'nav-about'
