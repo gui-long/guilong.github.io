@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FurryWiki - 兽圈百科知识库">
-    <title>旧Wiki档案 - FurryWiki</title>
+    <title>已失败的Wiki列表 - FurryWiki</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root{
@@ -103,6 +103,7 @@
         .month-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 32px; }
         .tv-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); border-left: 6px solid #ffb347; }
         .oldwiki-page { margin-top: 30px; padding: 28px; background: var(--card-bg); border-radius: 20px; border-left: 6px solid #ff6b6b; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        .wikifur-page { margin-top: 24px; padding: 28px; background: var(--card-bg); border-radius: 20px; border-left: 6px solid #f59e0b; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
         .thanks-page { margin-top: 30px; padding: 32px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
         .comic-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px; }
         .comic-card { width: 220px; padding: 20px 16px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; border: 1px solid rgba(0,0,0,0.04); transition: all 0.25s; }
@@ -155,7 +156,7 @@
             .rank-num { width: 26px; margin-right: 10px; font-size: 13px; }
             .rank-value { width: 50px; font-size: 11px; }
             .studio-grid { grid-template-columns: 1fr; gap: 12px; }
-            .works-section, .calendar-page, .tv-page, .oldwiki-page, .thanks-page { padding: 20px 16px; }
+            .works-section, .calendar-page, .tv-page, .oldwiki-page, .wikifur-page, .thanks-page { padding: 20px 16px; }
             .comic-grid { gap: 12px; }
             .comic-card { width: calc(50% - 6px); padding: 14px 10px; }
             .game-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -197,7 +198,7 @@
 <a href="history.html" class="nav-link" id="nav-history" data-zh="历史" data-zhtw="歷史" data-en="History">历史</a>
         <a href="current-status.html" class="nav-link" id="nav-status" data-zh="福瑞现状与反福瑞" data-zhtw="福瑞現狀與反福瑞" data-en="Furry Status & Anti-Furry">福瑞现状与反福瑞</a>
         <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
-        <a href="old-wiki.html" class="nav-link active" id="nav-oldwiki" data-zh="旧Wiki档案" data-zhtw="舊Wiki檔案" data-en="Old Wiki">旧Wiki档案</a>
+        <a href="old-wiki.html" class="nav-link active" id="nav-oldwiki" data-zh="已失败的Wiki列表" data-zhtw="已失敗的Wiki列表" data-en="Failed Wikis">已失败的Wiki列表</a>
         <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
         <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
@@ -210,7 +211,7 @@
 
     <div class="main-content">
         <div class="page-container">
-<h1 class="page-title" id="oldwiki-title">旧Wiki档案</h1>
+<h1 class="page-title" id="oldwiki-title">已失败的Wiki列表</h1>
             <div class="oldwiki-page">
                 <h2 style="color:var(--text);" id="oldwiki-h2">旧版 Furry Wiki 历史档案</h2>
                 <p id="oldwiki-p1"><em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em></p>
@@ -226,6 +227,16 @@
                     <li id="oldwiki-crisis-3">商业背刺，涉嫌违反CC协议</li>
                     <li id="oldwiki-crisis-4">域名重定向至"兽聚汇"</li>
                 </ol>
+            </div>
+
+            <div class="wikifur-page">
+                <h2 style="color:var(--text);" id="wikifur-h2">WikiFur中文 历史档案</h2>
+                <p id="wikifur-p1"><em>"访问速度很快，页面UI美观，可惜栽在网信办……"</em></p>
+                <div style="background:var(--section-bg);padding:15px;border-radius:8px;margin:15px 0;border:1px solid var(--section-border);">
+                    <p id="wikifur-establish"><strong>成立时间：</strong>2009年7月24日</p>
+                    <p id="wikifur-founder"><strong>创始人：</strong>dbfox、omegaCyberDragon 和 Kakurady</p>
+                    <p id="wikifur-status"><strong>最终状态：</strong><span style="color:#ff6b6b;">2026年9月2日被网信办拦到防火墙外</span></p>
+                </div>
             </div>        </div>
 
         <div style="flex-grow:1;"></div>
@@ -233,7 +244,7 @@
 
     <script>
         const OLDWIKI_T = {
-            'oldwiki-title': { zh:'旧Wiki档案', 'zh-tw':'舊Wiki檔案', en:'Old Wiki Archive' },
+            'oldwiki-title': { zh:'已失败的Wiki列表', 'zh-tw':'已失敗的Wiki列表', en:'Failed Wikis' },
             'oldwiki-h2': { zh:'旧版 Furry Wiki 历史档案', 'zh-tw':'舊版 Furry Wiki 歷史檔案', en:'Old Furry Wiki Historical Archive' },
             'oldwiki-p1': { zh:'<em>"访问速度很快，页面UI美观，可惜无人更新维护……"</em>', 'zh-tw':'<em>"訪問速度很快，頁面UI美觀，可惜無人更新維護……"</em>', en:'<em>"Fast access speed, beautiful page UI, but unfortunately no one updates and maintains it..."</em>' },
             'oldwiki-establish': { zh:'<strong>成立时间：</strong>2020年4月1日', 'zh-tw':'<strong>成立時間：</strong>2020年4月1日', en:'<strong>Establishment time:</strong> April 1, 2020' },
@@ -243,7 +254,12 @@
             'oldwiki-crisis-1': { zh:'管理混乱，任用错误行政员', 'zh-tw':'管理混亂，任用錯誤行政員', en:'Management chaos, appointing wrong administrators' },
             'oldwiki-crisis-2': { zh:'历史抹除，数据库修改', 'zh-tw':'歷史抹除，數據庫修改', en:'History erasure, database modification' },
             'oldwiki-crisis-3': { zh:'商业背刺，涉嫌违反CC协议', 'zh-tw':'商業背刺，涉嫌違反CC協議', en:'Commercial betrayal, suspected violation of CC agreement' },
-            'oldwiki-crisis-4': { zh:'域名重定向至"兽聚汇"', 'zh-tw':'域名重定向至"獸聚匯"', en:'Domain name redirected to "Shouju Hui"' }
+            'oldwiki-crisis-4': { zh:'域名重定向至"兽聚汇"', 'zh-tw':'域名重定向至"獸聚匯"', en:'Domain name redirected to "Shouju Hui"' },
+            'wikifur-h2': { zh:'WikiFur中文 历史档案', 'zh-tw':'WikiFur中文 歷史檔案', en:'WikiFur Chinese Historical Archive' },
+            'wikifur-p1': { zh:'<em>"访问速度很快，页面UI美观，可惜栽在网信办……"</em>', 'zh-tw':'<em>"訪問速度很快，頁面UI美觀，可惜栽在網信辦……"</em>', en:'<em>"Fast access speed and beautiful page UI, but it unfortunately fell afoul of the Cyberspace Administration of China..."</em>' },
+            'wikifur-establish': { zh:'<strong>成立时间：</strong>2009年7月24日', 'zh-tw':'<strong>成立時間：</strong>2009年7月24日', en:'<strong>Establishment time:</strong> July 24, 2009' },
+            'wikifur-founder': { zh:'<strong>创始人：</strong>dbfox、omegaCyberDragon 和 Kakurady', 'zh-tw':'<strong>創始人：</strong>dbfox、omegaCyberDragon 和 Kakurady', en:'<strong>Founders:</strong> dbfox, omegaCyberDragon and Kakurady' },
+            'wikifur-status': { zh:'<strong>最终状态：</strong><span style="color:#ff6b6b;">2026年9月2日被网信办拦到防火墙外</span>', 'zh-tw':'<strong>最終狀態：</strong><span style="color:#ff6b6b;">2026年9月2日被網信辦攔到防火長城外</span>', en:'<strong>Final status:</strong><span style="color:#ff6b6b;">On September 2, 2026, blocked outside the Great Firewall by the Cyberspace Administration of China</span>' }
         };
         function updatePageLang(lang) {
             for(let key in OLDWIKI_T){
