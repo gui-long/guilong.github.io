@@ -161,6 +161,36 @@
             padding-top: 20px;
         }
 
+        /* 语言切换器样式 */
+        .lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 6px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            color: #ccc;
+            border-color: #555;
+        }
+
+        .lang-btn.active {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-color: #2a2a2a;
+        }
+
         /* 适配手机 */
         @media (max-width: 480px) {
             h1 { font-size: 1.5rem; letter-spacing: 2px; }
@@ -173,49 +203,159 @@
 </head>
 <body>
     <div class="container">
+        <!-- 装饰条 -->
         <div class="ribbon"></div>
 
         <!-- 标题 -->
-        <h1>勿忘国耻 · 吾辈自强</h1>
-        <div class="date">1894 - 1945 · 铭记东北十四年抗战</div>
+        <h1 id="main-title">勿忘国耻 · 吾辈自强</h1>
+        <div class="date" id="sub-title">1894 - 1945 · 铭记东北十四年抗战</div>
 
         <!-- 停服公告 -->
         <div class="notice-box">
-            <h2>🕯️ 默哀停服公告</h2>
-            <p>尊敬的FurryWiki用户：<br><br>
-            值此“九一八事变”纪念日之际，为悼念在抗日战争中死难的同胞，FurryWiki 网站将于 <span class="highlight">9月17日 9:18 至 9月19日 9:18</span> 暂停服务。给您带来不便，敬请谅解。愿逝者安息，和平永驻。</p>
+            <h2 id="notice-title">🕯️ 默哀停服公告</h2>
+            <p id="notice-content">尊敬的FurryWiki用户：<br><br>值此“九一八事变”纪念日之际，为悼念在抗日战争中死难的同胞，FurryWiki 网站将于 <span class="highlight">9月17日 9:18 至 9月19日 9:18</span> 暂停服务。给您带来不便，敬请谅解。愿逝者安息，和平永驻。</p>
         </div>
 
         <!-- 历史介绍 -->
-        <div class="history-section">
-            <h3>甲午之殇：旅顺大屠杀（1894年）</h3>
-            <p>日本对东北的觊觎由来已久。1894年甲午中日战争期间，日军于11月21日攻陷位于辽东半岛的旅顺。随后，日军在旅顺城内进行了长达四天三夜的惨绝人寰的大屠杀。</p>
-            <p>全城近两万名无辜平民惨遭杀戮，老弱妇孺无一幸免，最终仅有负责掩埋尸体的36人幸存。这段血泪史，是近代日本侵略者在东北大地上犯下的最早、最惨烈的暴行之一。</p>
-
-            <h3>九一八事变与东北沦陷（1931年）</h3>
-            <p>1931年9月18日夜，日本关东军安排铁道“守备队”炸毁沈阳柳条湖附近的南满铁路路轨，并栽赃嫁祸于中国军队。日军以此为借口，炮轰沈阳北大营，是为“九一八事变”。</p>
-            <p>由于当时中国东北当局执行“不抵抗政策”，日军在短短4个多月内，就占领了东北三省全境，128万平方公里、相当于日本国土3.5倍的中国东北全部沦陷，3000多万父老乡亲成了亡国奴。</p>
-            
-            <h3>日本在东北的殖民与暴行（1932-1945年）</h3>
-            <p>1932年，日本扶植清朝末代皇帝溥仪，建立傀儡政权“伪满洲国”，对东北人民进行了长达14年的殖民统治与奴化教育。</p>
-            <p>在此期间，日军在东北犯下了累累罪行。其中，<span class="highlight">731部队</span>在哈尔滨等地用活人进行细菌实验和人体试验，手段极其残忍。此外，日军还疯狂掠夺东北的煤炭、钢铁、粮食等战略资源，强征劳工，无数同胞在奴役中惨死。</p>
-
-            <h3>不屈的抗争</h3>
-            <p>面对侵略，东北人民从未屈服。东北抗日联军在白山黑水间与日军展开了殊死搏斗，杨靖宇、赵尚志等无数抗日英雄血洒疆场，用生命筑起了血肉长城。</p>
-            
-            <!-- 默哀专区 -->
-            <div class="mourning-box">
-                <p>青山埋忠骨，史册载功勋。在这场长达十四年的艰苦抗争中，无数抗联将士血染疆场，无数无辜同胞惨遭屠戮。他们用生命捍卫了民族的尊严，用鲜血浇灌了今日的和平。</p>
-                <p>在此，我们向所有在东北抗战中英勇牺牲的烈士，以及在侵略者铁蹄下不幸遇难的同胞，致以最深切的哀悼。</p>
-                <p class="mourning-text">向英雄致敬，为逝者默哀。<br>愿山河无恙，英魂安息。</p>
-            </div>
+        <div class="history-section" id="history-section">
+            <!-- 内容由 JS 动态渲染以支持多语言 -->
         </div>
 
         <!-- 结语 -->
-        <div class="footer">
-            <p>铭记历史，不是为了延续仇恨，而是为了警醒未来。</p>
-            <p>FurryWiki 管理团队 敬上</p>
+        <div class="footer" id="footer-section">
+            <!-- 内容由 JS 动态渲染以支持多语言 -->
+        </div>
+
+        <!-- 语言切换器 -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('zh-CN', this)">简</button>
+            <button class="lang-btn" onclick="setLanguage('zh-TW', this)">繁</button>
+            <button class="lang-btn" onclick="setLanguage('en', this)">EN</button>
         </div>
     </div>
+
+    <script>
+        // 多语言数据字典
+        const translations = {
+            'zh-CN': {
+                pageTitle: '九一八事变纪念 · 停服公告 - FurryWiki',
+                mainTitle: '勿忘国耻 · 吾辈自强',
+                subTitle: '1894 - 1945 · 铭记东北十四年抗战',
+                noticeTitle: '🕯️ 默哀停服公告',
+                noticeContent: '尊敬的FurryWiki用户：<br><br>值此“九一八事变”纪念日之际，为悼念在抗日战争中死难的同胞，FurryWiki 网站将于 <span class="highlight">9月17日 9:18 至 9月19日 9:18</span> 暂停服务。给您带来不便，敬请谅解。愿逝者安息，和平永驻。',
+                history: `
+                    <h3>甲午之殇：旅顺大屠杀（1894年）</h3>
+                    <p>日本对东北的觊觎由来已久。1894年甲午中日战争期间，日军于11月21日攻陷位于辽东半岛的旅顺。随后，日军在旅顺城内进行了长达四天三夜的惨绝人寰的大屠杀。</p>
+                    <p>全城近两万名无辜平民惨遭杀戮，老弱妇孺无一幸免，最终仅有负责掩埋尸体的36人幸存。这段血泪史，是近代日本侵略者在东北大地上犯下的最早、最惨烈的暴行之一。</p>
+                    <h3>九一八事变与东北沦陷（1931年）</h3>
+                    <p>1931年9月18日夜，日本关东军安排铁道“守备队”炸毁沈阳柳条湖附近的南满铁路路轨，并栽赃嫁祸于中国军队。日军以此为借口，炮轰沈阳北大营，是为“九一八事变”。</p>
+                    <p>由于当时中国东北当局执行“不抵抗政策”，日军在短短4个多月内，就占领了东北三省全境，128万平方公里、相当于日本国土3.5倍的中国东北全部沦陷，3000多万父老乡亲成了亡国奴。</p>
+                    <h3>日本在东北的殖民与暴行（1932-1945年）</h3>
+                    <p>1932年，日本扶植清朝末代皇帝溥仪，建立傀儡政权“伪满洲国”，对东北人民进行了长达14年的殖民统治与奴化教育。</p>
+                    <p>在此期间，日军在东北犯下了累累罪行。其中，<span class="highlight">731部队</span>在哈尔滨等地用活人进行细菌实验和人体试验，手段极其残忍。此外，日军还疯狂掠夺东北的煤炭、钢铁、粮食等战略资源，强征劳工，无数同胞在奴役中惨死。</p>
+                    <h3>不屈的抗争</h3>
+                    <p>面对侵略，东北人民从未屈服。东北抗日联军在白山黑水间与日军展开了殊死搏斗，杨靖宇、赵尚志等无数抗日英雄血洒疆场，用生命筑起了血肉长城。</p>
+                    <div class="mourning-box">
+                        <p>青山埋忠骨，史册载功勋。在这场长达十四年的艰苦抗争中，无数抗联将士血染疆场，无数无辜同胞惨遭屠戮。他们用生命捍卫了民族的尊严，用鲜血浇灌了今日的和平。</p>
+                        <p>在此，我们向所有在东北抗战中英勇牺牲的烈士，以及在侵略者铁蹄下不幸遇难的同胞，致以最深切的哀悼。</p>
+                        <p class="mourning-text">向英雄致敬，为逝者默哀。<br>愿山河无恙，英魂安息。</p>
+                    </div>
+                `,
+                footer: `
+                    <p>铭记历史，不是为了延续仇恨，而是为了警醒未来。</p>
+                    <p>FurryWiki 管理团队 敬上</p>
+                `
+            },
+            'zh-TW': {
+                pageTitle: '九一八事變紀念 · 停服公告 - FurryWiki',
+                mainTitle: '勿忘國恥 · 吾輩自強',
+                subTitle: '1894 - 1945 · 銘記東北十四年抗戰',
+                noticeTitle: '🕯️ 默哀停服公告',
+                noticeContent: '尊敬的FurryWiki用戶：<br><br>值此「九一八事變」紀念日之際，為悼念在抗日戰爭中死難的同胞，FurryWiki 網站將於 <span class="highlight">9月17日 9:18 至 9月19日 9:18</span> 暫停服務。給您帶來不便，敬請諒解。願逝者安息，和平永駐。',
+                history: `
+                    <h3>甲午之殤：旅順大屠殺（1894年）</h3>
+                    <p>日本對東北的覬覦由來已久。1894年甲午中日戰爭期間，日軍於11月21日攻陷位於遼東半島的旅順。隨後，日軍在旅順城內進行了長達四天三夜的慘絕人寰的大屠殺。</p>
+                    <p>全城近兩萬名無辜平民慘遭殺戮，老弱婦孺無一倖免，最終僅有負責掩埋屍體的36人倖存。這段血淚史，是近代日本侵略者在東北大地上犯下的最早、最慘烈的暴行之一。</p>
+                    <h3>九一八事變與東北淪陷（1931年）</h3>
+                    <p>1931年9月18日夜，日本關東軍安排鐵道「守備隊」炸毀瀋陽柳條湖附近的南滿鐵路路軌，並栽贓嫁禍於中國軍隊。日軍以此為藉口，砲轟瀋陽北大營，是為「九一八事變」。</p>
+                    <p>由於當時中國東北當局執行「不抵抗政策」，日軍在短短4個多月內，就佔領了東北三省全境，128萬平方公里、相當於日本國土3.5倍的中國東北全部淪陷，3000多萬父老鄉親成了亡國奴。</p>
+                    <h3>日本在東北的殖民與暴行（1932-1945年）</h3>
+                    <p>1932年，日本扶植清朝末代皇帝溥儀，建立傀儡政權「偽滿洲國」，對東北人民進行了長達14年的殖民統治與奴化教育。</p>
+                    <p>在此期間，日軍在東北犯下了累累罪行。其中，<span class="highlight">731部隊</span>在哈爾濱等地用活人進行細菌實驗和人體試驗，手段極其殘忍。此外，日軍還瘋狂掠奪東北的煤炭、鋼鐵、糧食等戰略資源，強徵勞工，無數同胞在奴役中慘死。</p>
+                    <h3>不屈的抗爭</h3>
+                    <p>面對侵略，東北人民從未屈服。東北抗日聯軍在白山黑水間與日軍展開了殊死搏鬥，楊靖宇、趙尚志等無數抗日英雄血灑疆場，用生命築起了血肉長城。</p>
+                    <div class="mourning-box">
+                        <p>青山埋忠骨，史冊載功勳。在這場長達十四年的艱苦抗爭中，無數抗聯將士血染疆場，無數無辜同胞慘遭屠戮。他們用生命捍衛了民族的尊嚴，用鮮血澆灌了今日的和平。</p>
+                        <p>在此，我們向所有在東北抗戰中英勇犧牲的烈士，以及在侵略者鐵蹄下不幸遇難的同胞，致以最深切的哀悼。</p>
+                        <p class="mourning-text">向英雄致敬，為逝者默哀。<br>願山河無恙，英魂安息。</p>
+                    </div>
+                `,
+                footer: `
+                    <p>銘記歷史，不是為了延續仇恨，而是為了警醒未來。</p>
+                    <p>FurryWiki 管理團隊 敬上</p>
+                `
+            },
+            'en': {
+                pageTitle: 'September 18 Incident Memorial - Service Suspension Notice - FurryWiki',
+                mainTitle: 'Never Forget National Humiliation · Strive for Self-Improvement',
+                subTitle: '1894 - 1945 · Remember the 14-Year Resistance in Northeast China',
+                noticeTitle: '🕯️ Mourning Service Suspension Notice',
+                noticeContent: 'Dear FurryWiki Users:<br><br>On the occasion of the anniversary of the "September 18 Incident", to mourn the compatriots who died in the War of Resistance Against Japanese Aggression, FurryWiki will suspend its services from <span class="highlight">Sep 17, 9:18 to Sep 19, 9:18</span>. We apologize for any inconvenience. May the deceased rest in peace, and may peace prevail.',
+                history: `
+                    <h3>The Tragedy of 1894: The Port Arthur Massacre</h3>
+                    <p>Japan's covetousness for Northeast China has a long history. During the First Sino-Japanese War in 1894, the Japanese army captured Port Arthur (Lüshun) on the Liaodong Peninsula on November 21. Subsequently, the Japanese army carried out an appalling four-day massacre in the city.</p>
+                    <p>Nearly 20,000 innocent civilians were killed, including the elderly, weak, women, and children. In the end, only 36 people survived to bury the bodies. This bloody history is one of the earliest and most tragic atrocities committed by modern Japanese invaders in Northeast China.</p>
+                    <h3>The September 18 Incident and the Fall of Northeast China (1931)</h3>
+                    <p>On the night of September 18, 1931, the Japanese Kwantung Army arranged for railway "guards" to blow up the South Manchuria Railway tracks near Liutiaohu in Shenyang, and framed the Chinese army. Using this as a pretext, the Japanese army bombarded Beidaying in Shenyang, which is known as the "September 18 Incident".</p>
+                    <p>Due to the "non-resistance policy" of the Chinese authorities in Northeast China at that time, the Japanese army occupied the entire three provinces of Northeast China in just over 4 months. 1.28 million square kilometers of Chinese territory, 3.5 times the size of Japan, fell completely. More than 30 million compatriots became slaves of a conquered nation.</p>
+                    <h3>Japanese Colonization and Atrocities in Northeast China (1932-1945)</h3>
+                    <p>In 1932, Japan installed Puyi, the last emperor of the Qing Dynasty, to establish the puppet regime "Manchukuo", subjecting the people of Northeast China to 14 years of colonial rule and enslavement education.</p>
+                    <p>During this period, the Japanese army committed numerous crimes in Northeast China. Among them, <span class="highlight">Unit 731</span> conducted bacterial and human experiments on living people in Harbin and other places with extremely cruel methods. In addition, the Japanese army frantically plundered strategic resources such as coal, steel, and grain in Northeast China, and forcibly recruited laborers. Countless compatriots died miserably under slavery.</p>
+                    <h3>Unyielding Resistance</h3>
+                    <p>Facing aggression, the people of Northeast China never yielded. The Northeast Anti-Japanese United Army fought desperately against the Japanese army in the white mountains and black waters. Countless heroes such as Yang Jingyu and Zhao Shangzhi shed their blood on the battlefield, building a Great Wall of flesh and blood with their lives.</p>
+                    <div class="mourning-box">
+                        <p>Loyal bones are buried in the green mountains, and their merits are recorded in history. In this 14-year arduous struggle, countless anti-Japanese soldiers shed blood on the battlefield, and countless innocent compatriots were brutally slaughtered. They defended the dignity of the nation with their lives and watered today's peace with their blood.</p>
+                        <p>Here, we express our deepest condolences to all the martyrs who died heroically in the anti-Japanese war in Northeast China, and to the compatriots who unfortunately perished under the iron heel of the invaders.</p>
+                        <p class="mourning-text">Pay tribute to the heroes and mourn the deceased.<br>May the mountains and rivers be safe, and may the souls rest in peace.</p>
+                    </div>
+                `,
+                footer: `
+                    <p>Remembering history is not to prolong hatred, but to alert the future.</p>
+                    <p>FurryWiki Management Team</p>
+                `
+            }
+        };
+
+        // 切换语言的核心函数
+        function setLanguage(lang, btnElement) {
+            const data = translations[lang];
+            if (!data) return;
+
+            // 更新浏览器标签页标题
+            document.title = data.pageTitle;
+
+            // 更新页面元素内容
+            document.getElementById('main-title').innerHTML = data.mainTitle;
+            document.getElementById('sub-title').innerHTML = data.subTitle;
+            document.getElementById('notice-title').innerHTML = data.noticeTitle;
+            document.getElementById('notice-content').innerHTML = data.noticeContent;
+            document.getElementById('history-section').innerHTML = data.history;
+            document.getElementById('footer-section').innerHTML = data.footer;
+
+            // 更新按钮激活状态
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+        }
+
+        // 页面加载完成后，默认显示简体中文
+        window.addEventListener('DOMContentLoaded', () => {
+            // 默认加载简体中文
+            const defaultBtn = document.querySelector('.lang-btn');
+            setLanguage('zh-CN', defaultBtn);
+        });
+    </script>
 </body>
 </html>
