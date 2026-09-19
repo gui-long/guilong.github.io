@@ -185,7 +185,7 @@
         [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
         [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
     </style>
-<script src="common.js"></script>
+<script src="common.js?v=20260919"></script>
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
 </head>
@@ -199,10 +199,9 @@
         <a href="works.html" class="nav-link" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
         <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
         <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="站内合作兽聚" data-zhtw="站內合作獸聚" data-en="Partner Conventions">站内合作兽聚</a>
-        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="已失败的Wiki列表" data-zhtw="已失敗的Wiki列表" data-en="Failed Wikis">已失败的Wiki列表</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="下架的Wiki列表" data-zhtw="下架的Wiki列表" data-en="Delisted Wikis">下架的Wiki列表</a>
         <a href="calendar.html" class="nav-link active" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
-        <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
         <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
         <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
         <a href="chat.html" class="nav-link" id="nav-chat" data-zh="群聊" data-zhtw="群聊" data-en="Chat Groups">群聊</a>
@@ -215,30 +214,64 @@
 <h1 class="page-title">全球兽聚日历</h1>
             <div class="calendar-page">
                 <h2 class="calendar-title">全球兽聚日历 (Furry Con Calendar)</h2>
-                <p class="calendar-sub">线下相聚，感受毛茸茸的魅力！(数据持续更新中)</p>
+                <p class="calendar-sub">线下相聚，感受毛茸茸的魅力！(数据持续更新中 · 来源：<a href="https://www.furrycons.cn/years" target="_blank" rel="noopener" style="color:var(--accent);">FEC 兽展信息中心</a>，更新于2026-09-19)</p>
                 <div class="month-buttons">
-                    <button onclick="showMonth('may')" class="month-btn">5月</button>
-                    <button onclick="showMonth('jun')" class="month-btn active">6月</button>
-                    <button onclick="showMonth('jul')" class="month-btn">7月</button>
-                    <button onclick="showMonth('aug')" class="month-btn">8月</button>
-                    <button onclick="showMonth('sep')" class="month-btn">9月</button>
-                    <button onclick="showMonth('oct')" class="month-btn">10月</button>
+                    <button onclick="showMonth('2609')" class="month-btn active">26年9月</button>
+                    <button onclick="showMonth('2610')" class="month-btn">26年10月</button>
+                    <button onclick="showMonth('2611')" class="month-btn">26年11月</button>
+                    <button onclick="showMonth('2701')" class="month-btn">27年1月</button>
+                    <button onclick="showMonth('2702')" class="month-btn">27年2月</button>
+                    <button onclick="showMonth('2705')" class="month-btn">27年5月</button>
+                    <button onclick="showMonth('2708')" class="month-btn">27年8月</button>
                 </div>
                 <div id="calendar-content" style="background:var(--card-bg);padding:20px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,0.03);min-height:150px;"></div>
             </div>
 
     <script>
         const CON = {
-            may:[ {date:"6日",name:"Furrymosa"},{date:"11-15日",name:"Campfire Tails"},{date:"11-14日",name:"Furvaria"},{date:"13-14日",name:"Little Island Furcon"},{date:"19-21日",name:"墨兽居·花与海之歌"},{date:"19-21日",name:"Argentina FurFiesta"},{date:"20-21日",name:"Borneo Anthro Hub"},{date:"27-30日",name:"Lakeside Furs"},{date:"27日",name:"UTFG"} ],
-            jun:[ {date:"1-6日",name:"Lakeside Furs"},{date:"2-6日",name:"Anthrocon"},{date:"4-5日",name:"Indonesia Anthro Gathering"},{date:"9-11日",name:"福绒聚"},{date:"10-12日",name:"绒萌世界"},{date:"11-13日",name:"青笛兽韵"},{date:"16日",name:"探麟志"},{date:"16日",name:"星绒会·第四届"},{date:"16日",name:"Fur-Eh!"},{date:"17-20日",name:"得闲兽聚·像素奇旅"},{date:"17-19日",name:"古都有兽·瑞兽迎福"},{date:"17-19日",name:"绵绒汇"},{date:"23-26日",name:"幻兽聚·龙渊溯踪"},{date:"23-26日",name:"兽星航·ECHO"},{date:"23日",name:"Eufuria"},{date:"24-26日",name:"福瑞八奇物志·虚匣伪宴"},{date:"24-26日",name:"落茜聚"},{date:"31日",name:"星澜特快号"} ],
-            jul:[ {date:"6-9日",name:"EAST"},{date:"19-23日",name:"Eurofurence"},{date:"20-22日",name:"瑞影聚坊·万兽吟风"},{date:"21-23日",name:"Megaplex"},{date:"28-30日",name:"DenFur"} ],
-            aug:[ {date:"3-4日",name:"FursonaCon"},{date:"4-6日",name:"Calfurry"},{date:"5-6日",name:"Barkada FurFest"},{date:"8日",name:"理想小聚"},{date:"11-13日",name:"Furry Migration"} ],
-            sep:[ {date:"9-11日",name:"AquatiFur"},{date:"29-31日",name:"Confuror"},{date:"30-31日",name:"Infurnity獸無限"} ],
-            oct:[ {date:"1-8日",name:"GoldenHorn"},{date:"暂时未公开",name:"狸想城"} ]
+            '2609':[
+                {date:"24-26日",name:"南京·黄金殿堂（椰绒岛）"},
+                {date:"24-26日",name:"广州·鹊桥之约（福瑞节FurryFestival）"},
+                {date:"25-27日",name:"青岛·霍华德美术馆（FurryGala）"},
+                {date:"26日",name:"汉中·寻秋逢（汉澜兽会）"}
+            ],
+            '2610':[
+                {date:"01-03日",name:"哈尔滨·第二届（星岚圣域）"},
+                {date:"01-04日",name:"广州·深蓝遗章（你好兽聚 Hi Furry）"},
+                {date:"01日",name:"哈尔滨·秋屿探奇（梦江聚）"},
+                {date:"02-05日",name:"郑州·琉海栖灵（重生兽聚）"},
+                {date:"02-04日",name:"大连·悠游雅集（狂想兽生）"},
+                {date:"03-06日",name:"济南·星叙之章（百兽行）"},
+                {date:"03-06日",name:"上海·庆典季（狸想城）"},
+                {date:"05日",name:"沈阳·百兽狂欢（沧岳兽堂）"},
+                {date:"23-25日",name:"深圳·山海逸境（UwU）"},
+                {date:"30日-1日",name:"佛山·幽堡探奇（屿梦兽聚）"},
+                {date:"30日-1日",name:"台中·餘獸重生（Infurnity獸無限）"}
+            ],
+            '2611':[
+                {date:"13-15日",name:"南京·泯没于未名之海（绒境汇）"},
+                {date:"27-29日",name:"嘉兴·海洋之泪（奇点兽聚）"}
+            ],
+            '2701':[
+                {date:"22-25日",name:"长春·起源2027（这有兽聚）"},
+                {date:"22-24日",name:"无锡·溯火流光（福禄兽）"},
+                {date:"22-24日",name:"南京·穿越金陵（兽·纪元）"},
+                {date:"29-31日",name:"佛山·锈卷迷踪（绒探局Furtace）"},
+                {date:"29-31日",name:"苏州·双澜遗珠（绒萌世界）"}
+            ],
+            '2702':[
+                {date:"13-15日",name:"广州·春遇绮境（麦兽聚）"}
+            ],
+            '2705':[
+                {date:"01-04日",name:"上海·绒光记（绒光记Furry Light）"}
+            ],
+            '2708':[
+                {date:"07-08日",name:"香港·街頭生活（Furban Jungle）"}
+            ]
         };
         function showMonth(m) {
             document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
-            let btn = document.querySelector(`.month-btn[onclick*="${m}"]`);
+            let btn = document.querySelector(`.month-btn[onclick*="'${m}'"]`);
             if(btn) btn.classList.add('active');
             let list = CON[m] || [];
             let h = '<ul class="con-list">';
@@ -246,22 +279,13 @@
             h += '</ul>';
             document.getElementById('calendar-content').innerHTML = h;
         }
-        showMonth('jun');
+        showMonth('2609');
     </script>        </div>
 
         <div style="flex-grow:1;"></div>
     </div>
 
-    <script>
-        
 
-        
-
-        
-        );
-            if(typeof updatePageLang === 'function') updatePageLang(lang);
-        }
-    </script>
 
     <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
         <div class="lang-row" style="justify-content:center;">

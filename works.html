@@ -181,7 +181,7 @@
         [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
         [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
     </style>
-<script src="common.js"></script>
+<script src="common.js?v=20260919"></script>
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
 </head>
@@ -195,10 +195,9 @@
         <a href="works.html" class="nav-link active" id="nav-works" data-zh="福瑞周边推荐" data-zhtw="福瑞周邊推薦" data-en="Furry Merch">福瑞周边推荐</a>
         <a href="studio.html" class="nav-link" id="nav-studio" data-zh="兽装工作室" data-zhtw="獸裝工作室" data-en="Fursuit Studio">兽装工作室</a>
         <a href="con-info.html" class="nav-link" id="nav-coninfo" data-zh="站内合作兽聚" data-zhtw="站內合作獸聚" data-en="Partner Conventions">站内合作兽聚</a>
-        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="已失败的Wiki列表" data-zhtw="已失敗的Wiki列表" data-en="Failed Wikis">已失败的Wiki列表</a>
+        <a href="old-wiki.html" class="nav-link" id="nav-oldwiki" data-zh="下架的Wiki列表" data-zhtw="下架的Wiki列表" data-en="Delisted Wikis">下架的Wiki列表</a>
         <a href="calendar.html" class="nav-link" id="nav-calendar" data-zh="兽聚日期" data-zhtw="獸聚日期" data-en="Con Calendar">兽聚日期</a>
 
-        <a href="gallery.html" class="nav-link" id="nav-gallery" data-zh="绘画作品" data-zhtw="繪畫作品" data-en="Art Gallery">绘画作品</a>
         <a href="bilibili-up.html" class="nav-link" id="nav-bilibili" data-zh="B站UP主" data-zhtw="B站UP主" data-en="Bilibili UP">B站UP主</a>
         <a href="terminology.html" class="nav-link" id="nav-terminology" data-zh="术语" data-zhtw="術語" data-en="Terminology">术语</a>
         <a href="chat.html" class="nav-link" id="nav-chat" data-zh="群聊" data-zhtw="群聊" data-en="Chat Groups">群聊</a>
@@ -215,11 +214,13 @@
                     <button onclick="switchWorksTab('novel')" id="tab-novel" class="works-tab" data-id="tab-novel">📖 福瑞小说</button>
                     <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab" data-id="tab-game">🎮 福瑞游戏</button>
                     <button onclick="switchWorksTab('tv')" id="tab-tv" class="works-tab" data-id="tab-tv">📺 兽频道</button>
+                    <button onclick="switchWorksTab('app')" id="tab-app" class="works-tab" data-id="tab-app">🐾 识兽</button>
                 </div>
                 <div id="works-comic" class="works-content"></div>
                 <div id="works-novel" class="works-content" style="display:none;"></div>
                 <div id="works-game" class="works-content" style="display:none;"></div>
                 <div id="works-tv" class="works-content" style="display:none;"></div>
+                <div id="works-app" class="works-content" style="display:none;"></div>
             </div>
 
     <script>
@@ -249,6 +250,7 @@
             'tab-novel': { zh:'📖 福瑞小说', 'zh-tw':'📖 福瑞小說', en:'📖 Furry Novels' },
             'tab-game': { zh:'🎮 福瑞游戏', 'zh-tw':'🎮 福瑞遊戲', en:'🎮 Furry Games' },
             'tab-tv': { zh:'📺 兽频道', 'zh-tw':'📺 獸頻道', en:'📺 Fursuit TV' },
+            'tab-app': { zh:'🐾 识兽', 'zh-tw':'🐾 識獸', en:'🐾 Shi Shou' },
             'comic-title': { zh:'精选福瑞漫画与动画', 'zh-tw':'精選福瑞漫畫與動畫', en:'Featured Furry Comics & Animation' },
             'comic-desc': { zh:'收录圈内知名作品，感受兽设的魅力', 'zh-tw':'收錄圈內知名作品，感受獸設的魅力', en:'Discover well-known works in the community and experience the charm of fursonas' },
             'novel-title': { zh:'精选福瑞小说', 'zh-tw':'精選福瑞小說', en:'Featured Furry Novels' },
@@ -258,6 +260,12 @@
             'tv-title': { zh:'兽频道 (Fursuit.tv)', 'zh-tw':'獸頻道 (Fursuit.tv)', en:'Fursuit TV' },
             'tv-desc': { zh:'国内知名的兽装文化交流平台。官网', 'zh-tw':'國內知名的獸裝文化交流平台。官網', en:'A well-known domestic fursuit culture exchange platform. Official website' },
             'tv-qq': { zh:'，官方QQ群：1042314846', 'zh-tw':'，官方QQ群：1042314846', en:', Official QQ Group: 1042314846' },
+            'app-title': { zh:'识兽', 'zh-tw':'識獸', en:'Shi Shou' },
+            'app-desc': { zh:'返图、刷视频的好应用', 'zh-tw':'返圖、刷影片的好應用', en:'A great app for sharing photos and watching videos' },
+            'app-shishou-name': { zh:'识兽', 'zh-tw':'識獸', en:'Shi Shou' },
+            'app-shishou-desc': { zh:'返图、刷视频的好应用', 'zh-tw':'返圖、刷影片的好應用', en:'A great app for sharing photos and watching videos' },
+            'app-download': { zh:'立即下载', 'zh-tw':'立即下載', en:'Download Now' },
+            'app-qq': { zh:'官方QQ群：1065449714', 'zh-tw':'官方QQ群：1065449714', en:'Official QQ Group: 1065449714' },
         };
 
         const COMIC_T = {
@@ -412,6 +420,18 @@
             html += '</div>';
             document.getElementById('works-tv').innerHTML = html;
         }
+        function renderApp() {
+            let html = '<div style="margin-top:20px;">';
+            html += '<div style="display:flex;align-items:center;margin-bottom:20px;">';
+            html += '<div style="width:60px;height:60px;background:linear-gradient(135deg,#57c3ff,#4da1ff);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:28px;margin-right:20px;">🐾</div>';
+            html += '<div><h2 style="margin:0;">' + WORKS_T['app-shishou-name'][currentLang] + '</h2><span style="font-size:13px;color:#666;background:#eee;padding:3px 8px;border-radius:4px;">APP</span></div>';
+            html += '</div>';
+            html += '<p style="font-size:16px;margin-bottom:16px;">' + WORKS_T['app-shishou-desc'][currentLang] + '</p>';
+            html += '<div style="margin-bottom:12px;"><span style="font-weight:600;">' + WORKS_T['app-qq'][currentLang] + '</span></div>';
+            html += '<a href="https://doc.vfurry.cn/app-version/update/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:var(--accent);color:#fff;border-radius:24px;text-decoration:none;font-weight:600;box-shadow:0 4px 12px rgba(87,195,255,0.3);">' + WORKS_T['app-download'][currentLang] + '</a>';
+            html += '</div>';
+            document.getElementById('works-app').innerHTML = html;
+        }
         function switchWorksTab(t) {
             document.querySelectorAll('.works-content').forEach(e=>e.style.display='none');
             document.querySelectorAll('.works-tab').forEach(b=>b.classList.remove('active'));
@@ -430,6 +450,7 @@
                 renderNovel();
                 renderGame();
                 renderTv();
+                renderApp();
             }
         }
         updatePageLang(localStorage.getItem('lang') || 'zh');
@@ -439,6 +460,7 @@
             renderNovel();
             renderGame();
             renderTv();
+            renderApp();
         });
     </script>        </div>
 

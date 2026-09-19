@@ -81,7 +81,6 @@ var COMIC = [
                 { name:'鹭兽岛', theme:'双影之谜', city:'厦门', venue:'厦门悦华酒店', type:'综合性展会' },
                 { name:'FurryGooo', theme:'秘境归航', city:'深圳', venue:'深圳市国际会展中心洲际酒店', type:'综合性展会' },
                 { name:'落茜聚', theme:'凯诺特游戏', city:'成都', venue:'友豪锦江酒店', type:'综合性展会' },
-                { name:'狸想城', theme:'狸想小聚', city:'上海', venue:'环游嘉年华（环球港店）', type:'综合性展会' },
                 { name:'兽潮兽聚', theme:'海风之旅', city:'佛山', venue:'佛山东平保利洲际酒店', type:'综合性展会' },
                 { name:'黔兽聚', theme:'兽影秘信', city:'贵阳', venue:'兴业希尔顿欢朋酒店', type:'综合性展会' },
                 { name:'海兽聚', theme:'沧海瓷吟', city:'上海', venue:'上海建工浦江皇冠假日酒店', type:'综合性展会' },
