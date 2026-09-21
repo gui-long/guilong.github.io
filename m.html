@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>wiki.furry.beer 网站更新前用户调查</title>
+<style>
+:root{
+  --primary:#7C5CFF; --primary-d:#5A3BE0; --accent:#FF8A3D;
+  --bg:#F4F2FA; --card:#FFFFFF; --text:#1E1B2E; --muted:#6E6885;
+  --border:#E7E3F2; --ok:#22C55E; --err:#EF4444;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.65;
+  -webkit-font-smoothing:antialiased; padding-bottom:40px;
+}
+.hidden{display:none !important;}
+
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(0,0,0,.05);z-index:999;}
+.topbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7C5CFF,#FF8A3D);transition:width .3s;}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 14px;}
+
+.hero{
+  background:linear-gradient(135deg,#1F1440 0%,#3B2470 45%,#7C5CFF 100%);
+  color:#fff; padding:44px 22px 30px; border-radius:0 0 28px 28px;
+  position:relative; overflow:hidden; margin-bottom:22px;
+}
+.hero::after{
+  content:''; position:absolute; width:300px; height:300px; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,138,61,.5),transparent 70%);
+  top:-140px; right:-90px; pointer-events:none;
+}
+.hero::before{
+  content:''; position:absolute; width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.6),transparent 70%);
+  bottom:-120px; left:-80px; pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.badge{
+  display:inline-block; font-size:12px; letter-spacing:.06em; font-weight:600;
+  background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25);
+  padding:4px 12px; border-radius:99px; margin-bottom:14px;
+}
+.hero h1{font-size:25px; line-height:1.35; margin:0 0 10px; font-weight:700; letter-spacing:-.01em;}
+.hero p{margin:0; font-size:14px; color:rgba(255,255,255,.82); line-height:1.7;}
+.pbar{height:6px; background:rgba(255,255,255,.2); border-radius:99px; overflow:hidden; margin-top:18px;}
+.pbar i{display:block; height:100%; width:0; background:linear-gradient(90deg,#FF8A3D,#FFD166); border-radius:99px; transition:width .3s;}
+.pbar-text{font-size:12px; color:rgba(255,255,255,.75); margin-top:8px;}
+
+.sec-title{
+  font-size:13px; font-weight:700; color:var(--primary);
+  margin:30px 0 12px; padding-left:12px; position:relative; letter-spacing:.02em;
+}
+.sec-title::before{
+  content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:4px; height:15px; border-radius:99px;
+  background:linear-gradient(180deg,#7C5CFF,#FF8A3D);
+}
+
+.q{
+  background:var(--card); border-radius:16px; padding:18px 16px 12px;
+  margin-bottom:12px; border:1.5px solid transparent;
+  box-shadow:0 1px 3px rgba(30,27,46,.05);
+  transition:border-color .2s;
+}
+.q.error{border-color:var(--err); animation:shake .35s;}
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  75%{transform:translateX(5px);}
+}
+.q-title{font-size:15.5px; font-weight:600; margin-bottom:13px; display:flex; gap:7px; line-height:1.55;}
+.q-num{color:var(--primary); font-weight:700; flex:0 0 auto;}
+.req{color:var(--err); font-weight:700; margin-left:2px;}
+.q-hint{font-size:12.5px; color:var(--muted); font-weight:400;}
+
+.opt{
+  display:flex; gap:11px; align-items:flex-start;
+  padding:11px 13px; border:1.5px solid var(--border); border-radius:11px;
+  margin-bottom:8px; cursor:pointer; transition:all .15s; background:#fff;
+}
+.opt:hover{border-color:#C9BDF5; background:#FAF8FF;}
+.opt:active{transform:scale(.995);}
+.opt input[type=radio],.opt input[type=checkbox]{
+  appearance:none; -webkit-appearance:none;
+  width:20px; height:20px; flex:0 0 auto; margin:1px 0 0 0;
+  border:2px solid #C9C2DD; background:#fff; position:relative;
+  transition:all .15s; cursor:pointer;
+}
+.opt input[type=radio]{border-radius:50%;}
+.opt input[type=checkbox]{border-radius:6px;}
+.opt input[type=radio]:checked{border-color:var(--primary); border-width:6px;}
+.opt input[type=checkbox]:checked{background:var(--primary); border-color:var(--primary);}
+.opt input[type=checkbox]:checked::after{
+  content:''; position:absolute; left:6px; top:2px;
+  width:5px; height:10px; border:solid #fff; border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+}
+.opt-text{font-size:14.5px; line-height:1.5; padding-top:1px;}
+.opt input:checked ~ .opt-text{color:var(--primary-d); font-weight:500;}
+
+.other-wrap{margin:-2px 0 10px 31px;}
+.other-wrap input{
+  width:100%; padding:10px 12px; border:1.5px solid var(--border); border-radius:10px;
+  font-size:14px; font-family:inherit; color:var(--text); background:#FAFAFE; outline:none;
+  transition:border-color .15s;
+}
+.other-wrap input:focus{border-color:var(--primary); background:#fff;}
+
+.scale{display:flex; gap:8px;}
+.scale-item{flex:1; position:relative;}
+.scale-item input{position:absolute; opacity:0; pointer-events:none;}
+.scale-item span{
+  display:flex; align-items:center; justify-content:center;
+  height:50px; border:1.5px solid var(--border); border-radius:12px;
+  font-weight:600; color:var(--muted); cursor:pointer; transition:all .15s; background:#fff;
+  font-size:15px;
+}
+.scale-item span:hover{border-color:#C9BDF5;}
+.scale-item input:checked + span{
+  background:linear-gradient(135deg,#7C5CFF,#5A3BE0); border-color:transparent;
+  color:#fff; box-shadow:0 4px 14px rgba(124,92,255,.32); transform:translateY(-1px);
+}
+.scale-labels{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-top:9px; padding:0 4px;}
+
+textarea{
+  width:100%; min-height:88px; padding:12px 13px; border:1.5px solid var(--border);
+  border-radius:11px; font-size:14.5px; font-family:inherit; color:var(--text);
+  background:#FAFAFE; outline:none; resize:vertical; line-height:1.6;
+  transition:border-color .15s, background .15s;
+}
+textarea:focus{border-color:var(--primary); background:#fff;}
+
+.submit-btn{
+  width:100%; padding:16px; border:none; border-radius:14px; margin-top:26px;
+  background:linear-gradient(135deg,#7C5CFF,#5A3BE0); color:#fff;
+  font-size:16.5px; font-weight:600; font-family:inherit; cursor:pointer;
+  box-shadow:0 6px 20px rgba(124,92,255,.34); transition:all .18s;
+}
+.submit-btn:hover{box-shadow:0 8px 26px rgba(124,92,255,.45);}
+.submit-btn:active{transform:scale(.985);}
+
+.contact-box{
+  background:#fff; border-radius:16px; padding:18px 16px;
+  box-shadow:0 1px 3px rgba(30,27,46,.05); margin-top:12px;
+}
+.contact-box input{
+  width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:11px;
+  font-size:14.5px; font-family:inherit; outline:none; background:#FAFAFE; color:var(--text);
+}
+.contact-box input:focus{border-color:var(--primary); background:#fff;}
+
+.footnote{text-align:center; font-size:12.5px; color:var(--muted); margin-top:22px; line-height:1.7;}
+
+.result-view{padding-top:10px;}
+.result-card{
+  background:#fff; border-radius:20px; padding:34px 22px 26px; text-align:center;
+  box-shadow:0 4px 24px rgba(30,27,46,.09);
+}
+.check{
+  width:66px; height:66px; border-radius:50%; margin:0 auto 18px;
+  background:linear-gradient(135deg,#22C55E,#16A34A);
+  display:flex; align-items:center; justify-content:center;
+  font-size:34px; color:#fff; box-shadow:0 6px 20px rgba(34,197,94,.35);
+}
+.result-card h2{font-size:20px; margin:0 0 8px; font-weight:700;}
+.result-card > p{color:var(--muted); font-size:14px; margin:0 0 22px;}
+.meta-chip{
+  display:inline-block; font-size:12.5px; color:var(--primary-d);
+  background:#F0ECFF; border-radius:99px; padding:5px 14px; margin-bottom:20px;
+  font-weight:600; letter-spacing:.03em;
+}
+.btn-row{display:flex; gap:10px; flex-direction:column;}
+.btn{
+  padding:14px; border-radius:13px; border:none; font-size:15.5px; font-weight:600;
+  font-family:inherit; cursor:pointer; transition:all .18s; width:100%;
+}
+.btn-main{background:linear-gradient(135deg,#7C5CFF,#5A3BE0); color:#fff; box-shadow:0 5px 16px rgba(124,92,255,.32);}
+.btn-main:active{transform:scale(.985);}
+.btn-line{background:#fff; color:var(--primary-d); border:1.5px solid #DCD4FF;}
+.btn-line:active{background:#F6F3FF;}
+.btn-ghost{background:transparent; color:var(--muted); font-size:13.5px; margin-top:14px; padding:10px;}
+.btn-ghost:active{color:var(--primary);}
+details{margin-top:20px; text-align:left;}
+summary{
+  font-size:13px; color:var(--muted); cursor:pointer; padding:9px;
+  text-align:center; user-select:none; list-style:none;
+}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:'▸ ';}
+details[open] summary::before{content:'▾ ';}
+pre{
+  background:#F7F6FB; border:1px solid var(--border); border-radius:12px;
+  padding:14px; font-size:12.5px; line-height:1.75; white-space:pre-wrap;
+  word-break:break-word; max-height:340px; overflow:auto; margin:8px 0 0;
+  font-family:ui-monospace,Menlo,Consolas,monospace; color:#3A3550;
+}
+.toast{
+  position:fixed; left:50%; bottom:34px; transform:translateX(-50%) translateY(20px);
+  background:rgba(30,27,46,.94); color:#fff; padding:11px 22px; border-radius:99px;
+  font-size:13.5px; opacity:0; transition:all .28s; pointer-events:none; z-index:9999;
+  white-space:nowrap; max-width:88vw;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+@media (max-width:480px){
+  .hero{padding:36px 18px 26px;}
+  .hero h1{font-size:21px;}
+  .q{padding:16px 14px 10px;}
+  .q-title{font-size:15px;}
+  .opt-text{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><i id="topbarFill"></i></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="badge">wiki.furry.beer</div>
+      <h1>网站大更新 · 用户调查</h1>
+      <p>我们正在筹备一次大更新，想听听你的真实感受。问卷匿名，约 3–5 分钟，你的每一条反馈都会直接影响改版方向。</p>
+      <div class="pbar"><i id="pbarFill"></i></div>
+      <div class="pbar-text" id="pbarText">已完成 0 / 18 题</div>
+    </div>
+  </div>
+
+  <main id="form"></main>
+
+  <div class="contact-box">
+    <div class="q-title" style="margin-bottom:10px;">
+      <span class="q-num">＋</span>
+      <span>联系方式 <span class="q-hint">（选填，愿意参与后续测试再留）</span></span>
+    </div>
+    <input type="text" id="contact" placeholder="QQ / 微信 / 邮箱 / 其他，任选一种">
+  </div>
+
+  <button class="submit-btn" id="submitBtn">提交问卷</button>
+
+  <div class="footnote">
+    本问卷数据只保存在你自己的浏览器里，不会自动上传。<br>
+    提交后请把结果发回给发放问卷的人。
+  </div>
+</div>
+
+<div class="wrap result-view hidden" id="resultView">
+  <div class="result-card">
+    <div class="check">✓</div>
+    <h2>填写完成，非常感谢！</h2>
+    <p>最后一步：把结果发回给我。<br>下面两种方式任选一种即可。</p>
+    <div class="meta-chip" id="metaChip"></div>
+    <div class="btn-row">
+      <button class="btn btn-main" id="downloadBtn">① 下载结果文件（推荐电脑）</button>
+      <button class="btn btn-line" id="copyBtn">② 复制结果文本（推荐手机）</button>
+    </div>
+    <details>
+      <summary>预览结果内容</summary>
+      <pre id="preview"></pre>
+    </details>
+    <button class="btn btn-ghost" id="againBtn">再填一份 / 重新开始</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 问卷数据 ================= */
+const sections = [
+  {
+    title: '第一部分 · 你是谁，怎么用这个站',
+    questions: [
+      { id:'q1', type:'radio', required:true,
+        title:'你在 wiki.furry.beer 上通常是什么角色？',
+        options:['只是来浏览 / 查资料的普通读者','偶尔会编辑或补充内容的用户','经常参与编辑的活跃贡献者','只是听说过，还没怎么用过'] },
+      { id:'q2', type:'radio', required:true,
+        title:'你平均多久访问一次 wiki.furry.beer？',
+        options:['几乎每天','每周几次','每月几次','几个月才来一次','这是第一次 / 基本没来过'] },
+      { id:'q3', type:'radio', required:true,
+        title:'你通常在什么设备上访问？',
+        options:['手机','电脑 / 笔记本','平板','都有，不一定'] },
+      { id:'q4', type:'checkbox', required:true,
+        title:'你主要来这个网站看什么内容？',
+        hint:'（可多选）',
+        options:['兽设 / 角色资料','画师 / 创作者页面','兽聚 / 活动信息','圈内术语或文化科普','作品 / 同人相关内容','社区动态或讨论',{text:'其他',other:true}] }
+    ]
+  },
+  {
+    title: '第二部分 · 现在的体验怎么样',
+    questions: [
+      { id:'q5', type:'scale', required:true, min:1, max:5,
+        title:'总体来说，你对目前网站的满意度如何？',
+        labels:['很不满意','很满意'] },
+      { id:'q6', type:'radio', required:true,
+        title:'你觉得目前网站在手机上浏览的体验如何？',
+        options:['很好，和电脑上差不多','还可以，基本能用','一般，有些地方不方便','比较差，经常看不清楚或点错','没有用手机看过'] },
+      { id:'q7', type:'radio', required:true,
+        title:'你找想要的信息时，容易找到吗？',
+        options:['很容易，搜索或导航一下就找到了','还行，稍微找一下能找到','有点难，经常要翻很久','很难，经常找不到','没怎么用过搜索 / 导航'] },
+      { id:'q8', type:'radio', required:true,
+        title:'你觉得目前网站的内容质量怎么样？',
+        options:['内容很丰富，信息也比较可靠','内容还行，但有些条目比较旧或不全','内容偏少，很多想看的还没有','不太关注内容质量，只是随便看看'] }
+    ]
+  },
+  {
+    title: '第三部分 · 你最在意什么，希望怎么改',
+    questions: [
+      { id:'q9', type:'checkbox', required:false, max:3,
+        title:'以下哪些方面，你觉得目前最需要改进？',
+        hint:'（最多选 3 项）',
+        options:['页面加载速度','手机上的显示和操作','搜索功能','页面排版 / 阅读舒适度','分类和导航结构','内容更新频率','编辑和贡献内容的方式','社区互动功能（评论、讨论等）',{text:'其他',other:true}] },
+      { id:'q10', type:'checkbox', required:false,
+        title:'如果网站大更新，你最期待增加或强化哪些功能？',
+        hint:'（可多选）',
+        options:['更好的搜索（按标签、关键词精准查找）','更友好的手机端体验','更简单的编辑方式（不用学复杂语法）','用户个人主页 / 展示页','兽聚信息聚合（时间、地点、状态）','画师 / 创作者目录','社区讨论区 / 评论功能','内容收藏 / 关注功能',{text:'其他',other:true}] },
+      { id:'q11', type:'radio', required:false,
+        title:'你觉得“编辑 Wiki 内容”这件事，目前对你来说门槛高吗？',
+        options:['很高，完全不知道怎么下手','有点高，需要花时间学','一般，有人教一下就能上手','不高，我觉得挺简单的','我不编辑，也不打算编辑'] },
+      { id:'q12', type:'radio', required:false,
+        title:'如果网站提供更简单的编辑工具（比如可视化编辑器，不用记语法），你会更愿意参与编辑吗？',
+        options:['会，简单的话我愿意试试','可能会，看情况','不会，我只想看不想改','不确定'] }
+    ]
+  },
+  {
+    title: '第四部分 · 你对“大更新”的态度',
+    questions: [
+      { id:'q13', type:'radio', required:true,
+        title:'你希望这次更新更偏向哪种方向？',
+        options:['先把现有的阅读和搜索体验做好','多增加新功能和新板块','优先让编辑和贡献变得更简单','优先把手机端做好','均衡推进，都兼顾'] },
+      { id:'q14', type:'checkbox', required:true,
+        title:'网站如果改版，你担心什么？',
+        hint:'（可多选）',
+        options:['改完之后找不到以前熟悉的东西','新界面太复杂，反而不好用','内容丢失或链接失效','加载变慢','没什么担心的',{text:'其他',other:true}] },
+      { id:'q15', type:'radio', required:true,
+        title:'你愿意在更新后参与测试或反馈吗？',
+        options:['愿意，可以留联系方式','看情况','不太愿意'] }
+    ]
+  },
+  {
+    title: '第五部分 · 开放题',
+    questions: [
+      { id:'q16', type:'textarea', required:false,
+        title:'目前网站上你最喜欢的一个点是什么？',
+        placeholder:'随便说说，一句话也行…' },
+      { id:'q17', type:'textarea', required:false,
+        title:'如果只能提一条改进建议，你会说什么？',
+        placeholder:'最想让我们改的那一件事…' },
+      { id:'q18', type:'textarea', required:false,
+        title:'还有什么想对我们说的？',
+        placeholder:'自由发挥…' }
+    ]
+  }
+];
+
+/* ================= 初始化 ================= */
+const ALL_QUESTIONS = [];
+sections.forEach(s => s.questions.forEach(q => ALL_QUESTIONS.push(q)));
+ALL_QUESTIONS.forEach((q, i) => { q.num = i + 1; });
+const byId = {};
+ALL_QUESTIONS.forEach(q => { byId[q.id] = q; });
+const TOTAL = ALL_QUESTIONS.length;
+const DRAFT_KEY = 'wiki_furry_beer_survey_draft_v1';
+
+const formEl = document.getElementById('form');
+const toastEl = document.getElementById('toast');
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function optText(o){ return typeof o === 'string' ? o : o.text; }
+function isOther(o){ return typeof o === 'object' && o.other; }
+
+/* ================= 渲染 ================= */
+function render(){
+  let html = '';
+  sections.forEach(sec => {
+    html += `<div class="sec-title">${esc(sec.title)}</div>`;
+    sec.questions.forEach(q => {
+      html += `<div class="q" id="card-${q.id}">`;
+      html += `<div class="q-title"><span class="q-num">${q.num}.</span><span>${esc(q.title)}`;
+      if (q.required) html += `<span class="req">*</span>`;
+      if (q.hint) html += ` <span class="q-hint">${esc(q.hint)}</span>`;
+      html += `</span></div>`;
+
+      if (q.type === 'scale') {
+        html += '<div class="scale">';
+        for (let i = q.min; i <= q.max; i++) {
+          html += `<label class="scale-item"><input type="radio" name="${q.id}" value="${i}"><span>${i}</span></label>`;
+        }
+        html += '</div>';
+        html += `<div class="scale-labels"><span>${esc(q.labels[0])}</span><span>${esc(q.labels[1])}</span></div>`;
+      } else if (q.type === 'radio' || q.type === 'checkbox') {
+        const t = q.type === 'checkbox' ? 'checkbox' : 'radio';
+        q.options.forEach((o, i) => {
+          const text = optText(o);
+          const oth = isOther(o);
+          const oid = `${q.id}_${i}`;
+          html += `<label class="opt" for="${oid}">
+            <input type="${t}" id="${oid}" name="${q.id}" value="${esc(text)}"${oth ? ' data-other="1"' : ''}>
+            <span class="opt-text">${esc(text)}${oth ? '：______' : ''}</span>
+          </label>`;
+          if (oth) {
+            html += `<div class="other-wrap hidden" id="${q.id}__other_wrap">
+              <input type="text" id="${q.id}__other" placeholder="请填写具体内容…">
+            </div>`;
+          }
+        });
+      } else if (q.type === 'textarea') {
+        html += `<textarea id="${q.id}" placeholder="${esc(q.placeholder || '')}"></textarea>`;
+      }
+
+      html += '</div>';
+    });
+  });
+  formEl.innerHTML = html;
+}
+
+/* ================= 收集数据 ================= */
+function collect(){
+  const data = {};
+  ALL_QUESTIONS.forEach(q => {
+    if (q.type === 'radio' || q.type === 'scale') {
+      const el = document.querySelector(`input[name="${q.id}"]:checked`);
+      if (el) data[q.id] = el.value;
+    } else if (q.type === 'checkbox') {
+      const els = Array.prototype.slice.call(document.querySelectorAll(`input[name="${q.id}"]:checked`));
+      if (els.length) data[q.id] = els.map(e => e.value);
+    } else if (q.type === 'textarea') {
+      const el = document.getElementById(q.id);
+      if (el && el.value.trim()) data[q.id] = el.value.trim();
+    }
+    const oth = document.getElementById(q.id + '__other');
+    if (oth && oth.value.trim()) data[q.id + '__other'] = oth.value.trim();
+  });
+  const c = document.getElementById('contact');
+  if (c && c.value.trim()) data.__contact = c.value.trim();
+  return data;
+}
+
+/* ================= 进度 ================= */
+function updateProgress(data){
+  let done = 0;
+  ALL_QUESTIONS.forEach(q => {
+    const v = data[q.id];
+    if (Array.isArray(v) ? v.length > 0 : (v !== undefined && String(v).trim() !== '')) done++;
+  });
+  const pct = Math.round(done / TOTAL * 100);
+  document.getElementById('pbarFill').style.width = pct + '%';
+  document.getElementById('topbarFill').style.width = pct + '%';
+  document.getElementById('pbarText').textContent = `已完成 ${done} / ${TOTAL} 题`;
+}
+
+/* ================= 草稿保存 ================= */
+function save(){
+  const data = collect();
+  updateProgress(data);
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch(e){}
+}
+
+function restore(){
+  let data = null;
+  try { data = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch(e){}
+  if (!data) return;
+  Object.keys(data).forEach(k => {
+    if (k === '__contact') {
+      const el = document.getElementById('contact');
+      if (el) el.value = data[k];
+      return;
+    }
+    if (k.endsWith('__other')) {
+      const el = document.getElementById(k);
+      if (el) {
+        el.value = data[k];
+        el.parentElement.classList.remove('hidden');
+      }
+      return;
+    }
+    const q = byId[k];
+    if (!q) return;
+    if (q.type === 'radio' || q.type === 'scale') {
+      document.querySelectorAll(`input[name="${k}"]`).forEach(el => {
+        if (el.value === data[k]) el.checked = true;
+      });
+    } else if (q.type === 'checkbox') {
+      const arr = data[k] || [];
+      document.querySelectorAll(`input[name="${k}"]`).forEach(el => {
+        if (arr.indexOf(el.value) > -1) el.checked = true;
+      });
+    } else if (q.type === 'textarea') {
+      const el = document.getElementById(k);
+      if (el) el.value = data[k];
+    }
+  });
+  updateProgress(data);
+}
+
+/* ================= 交互 ================= */
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toastEl.classList.remove('show'), 2000);
+}
+
+formEl.addEventListener('change', e => {
+  const input = e.target;
+  if (input.type === 'radio' || input.type === 'checkbox') {
+    const q = byId[input.name];
+    if (q) {
+      if (q.type === 'checkbox' && q.max) {
+        const checked = document.querySelectorAll(`input[name="${q.id}"]:checked`);
+        if (checked.length > q.max) {
+          input.checked = false;
+          showToast(`这题最多选 ${q.max} 项哦`);
+        }
+      }
+      const otherInput = document.getElementById(q.id + '__other');
+      if (otherInput) {
+        const checkedOther = document.querySelector(`input[name="${q.id}"][data-other="1"]:checked`);
+        otherInput.parentElement.classList.toggle('hidden', !checkedOther);
+        if (!checkedOther) otherInput.value = '';
+      }
+      const card = document.getElementById('card-' + q.id);
+      if (card) card.classList.remove('error');
+    }
+  }
+  save();
+});
+
+formEl.addEventListener('input', e => {
+  if (e.target.tagName === 'TEXTAREA' || e.target.type === 'text') save();
+});
+
+document.getElementById('contact').addEventListener('input', save);
+
+/* ================= 提交校验 ================= */
+function validate(){
+  const data = collect();
+  const missing = [];
+  ALL_QUESTIONS.forEach(q => {
+    if (!q.required) return;
+    const v = data[q.id];
+    const empty = Array.isArray(v) ? v.length === 0 : (v === undefined || String(v).trim() === '');
+    if (empty) missing.push(q);
+  });
+  return missing;
+}
+
+/* ================= 生成报告 ================= */
+function pad(n){ return n < 10 ? '0' + n : '' + n; }
+function nowStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+function randId(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = '';
+  for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return s;
+}
+
+function buildReport(data, meta){
+  let out = '';
+  out += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  out += 'wiki.furry.beer 用户调查问卷 · 提交结果\n';
+  out += `提交时间：${meta.time}\n`;
+  out += `编号：${meta.id}\n`;
+  out += '━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  sections.forEach(sec => {
+    out += `【${sec.title}】\n\n`;
+    sec.questions.forEach(q => {
+      out += `${q.num}. ${q.title}\n`;
+      let v = data[q.id];
+      if (Array.isArray(v)) v = v.join('、');
+      if (!v) v = '（未填写）';
+      const oth = data[q.id + '__other'];
+      if (oth) v += `　→ 其他：${oth}`;
+      out += `答：${v}\n\n`;
+    });
+  });
+  if (data.__contact) {
+    out += `【联系方式】\n${data.__contact}\n\n`;
+  }
+  out += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  return out;
+}
+
+/* ================= 提交 ================= */
+let lastData = null, lastMeta = null;
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const missing = validate();
+  if (missing.length) {
+    const first = missing[0];
+    const card = document.getElementById('card-' + first.id);
+    card.classList.add('error');
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+    setTimeout(() => card.classList.remove('error'), 3200);
+    showToast(`还有 ${missing.length} 道必答题没填哦`);
+    return;
+  }
+
+  const data = collect();
+  const meta = { time: nowStr(), id: randId() };
+  lastData = data;
+  lastMeta = meta;
+
+  const report = buildReport(data, meta);
+
+  document.getElementById('metaChip').textContent = `编号 ${meta.id} · ${meta.time}`;
+  document.getElementById('preview').textContent = report;
+
+  document.querySelector('.wrap:not(.result-view)').classList.add('hidden');
+  document.getElementById('resultView').classList.remove('hidden');
+  window.scrollTo({ top:0, behavior:'smooth' });
+
+  try { localStorage.removeItem(DRAFT_KEY); } catch(e){}
+});
+
+/* ================= 下载 ================= */
+function downloadFile(){
+  if (!lastData) return;
+  const payload = {
+    site: 'wiki.furry.beer',
+    survey: '网站大更新前用户调查',
+    submittedAt: lastMeta.time,
+    responseId: lastMeta.id,
+    answers: lastData
+  };
+  const text = JSON.stringify(payload, null, 2);
+  const blob = new Blob([text], { type:'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = lastMeta.time.replace(/[-: ]/g, '').slice(0, 14);
+  a.href = url;
+  a.download = `wiki问卷_${stamp}_${lastMeta.id}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  showToast('已开始下载，请把文件发回给我');
+}
+
+/* ================= 复制（修复版） ================= */
+function copyText(text){
+  return new Promise(resolve => {
+    // 第 1 层：现代 Clipboard API（https / localhost 可用）
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(text)
+          .then(() => resolve(true))
+          .catch(() => resolve(legacyCopy(text)));
+        return;
+      }
+    } catch (e) { /* 忽略，走下一层 */ }
+    // 第 2 层：execCommand（file:// 可用）
+    resolve(legacyCopy(text));
+  });
+}
+
+function legacyCopy(text){
+  let ok = false;
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  // 关键：用 left:-9999px 移出屏幕，而不是 opacity:0 / display:none
+  ta.style.cssText = 'position:fixed;top:0;left:-9999px;width:2em;height:2em;padding:0;border:0;';
+  document.body.appendChild(ta);
+
+  const sel = document.getSelection();
+  const savedRange = sel && sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
+
+  ta.focus();
+  ta.select();
+  try { ta.setSelectionRange(0, text.length); } catch(e){}
+
+  try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+
+  document.body.removeChild(ta);
+
+  if (savedRange && sel) {
+    try { sel.removeAllRanges(); sel.addRange(savedRange); } catch(e){}
+  }
+  return ok;
+}
+
+/* 终极兜底：全选预览区文字，让用户长按/右键复制 */
+function selectPreview(){
+  const pre = document.getElementById('preview');
+  const details = document.querySelector('details');
+  if (details) details.open = true;
+
+  const range = document.createRange();
+  range.selectNodeContents(pre);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+
+  pre.scrollIntoView({ behavior:'smooth', block:'center' });
+  pre.style.transition = 'background .3s';
+  pre.style.background = '#FFF4E5';
+  setTimeout(() => { pre.style.background = ''; }, 1200);
+}
+
+document.getElementById('downloadBtn').addEventListener('click', downloadFile);
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if (!lastData) return;
+  const report = buildReport(lastData, lastMeta);
+  const btn = document.getElementById('copyBtn');
+
+  copyText(report).then(ok => {
+    if (ok) {
+      showToast('已复制！粘贴发给我就行');
+      btn.textContent = '✓ 已复制，去粘贴发送';
+      setTimeout(() => { btn.textContent = '② 复制结果文本（推荐手机）'; }, 2600);
+    } else {
+      showToast('复制被浏览器拦了，已帮你全选，长按/右键复制即可');
+      selectPreview();
+      btn.textContent = '③ 再次尝试复制';
+      setTimeout(() => { btn.textContent = '② 复制结果文本（推荐手机）'; }, 3000);
+    }
+  });
+});
+
+document.getElementById('againBtn').addEventListener('click', () => {
+  try { localStorage.removeItem(DRAFT_KEY); } catch(e){}
+  location.reload();
+});
+
+/* ================= 启动 ================= */
+render();
+restore();
+save();
+</script>
+</body>
+</html>
