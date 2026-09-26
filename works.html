@@ -181,7 +181,7 @@
         [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
         [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
     </style>
-<script src="common.js?v=20260919"></script>
+<script src="common.js?v=20260928"></script>
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
 </head>
@@ -266,6 +266,7 @@
             'app-shishou-desc': { zh:'返图、刷视频的好应用', 'zh-tw':'返圖、刷影片的好應用', en:'A great app for sharing photos and watching videos' },
             'app-download': { zh:'立即下载', 'zh-tw':'立即下載', en:'Download Now' },
             'app-qq': { zh:'官方QQ群：1065449714', 'zh-tw':'官方QQ群：1065449714', en:'Official QQ Group: 1065449714' },
+            'contributor-label': { zh:'投稿人：', 'zh-tw':'投稿人：', en:'Contributor: ' },
         };
 
         const COMIC_T = {
@@ -301,6 +302,9 @@
             '鱼干集团那些事': { zh:'鱼干集团那些事', 'zh-tw':'魚乾集團那些事', en:'Stories of the Fish Dried Group' },
             '一名学生穿越福瑞世界的事情。': { zh:'一名学生穿越福瑞世界的事情。', 'zh-tw':'一名學生穿越福瑞世界的事情。', en:'A student travels to the furry world.' },
             '小灰渊': { zh:'小灰渊', 'zh-tw':'小灰淵', en:'Little Gray Abyss' },
+            'Housepets': { zh:'Housepets', 'zh-tw':'Housepets', en:'Housepets' },
+            '画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>': { zh:'画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>', 'zh-tw':'畫風可愛，連貫曲折，<strong>（含有部分PG）內容</strong>', en:'Cute art style, coherent and twisting storyline. <strong>(Contains some PG content)</strong>' },
+            'Rick Griffin': { zh:'Rick Griffin', 'zh-tw':'Rick Griffin', en:'Rick Griffin' },
         };
 
         const NOVEL_T = {
@@ -385,7 +389,8 @@
             html += `<p style="text-align:center;color:var(--text-muted);margin-bottom:24px;">${WORKS_T['comic-desc'][currentLang]}</p>`;
             html += '<div class="comic-grid">';
             COMIC.forEach((c, idx) => {
-                html += `<div class="comic-card"><h3><a href="${c.link}" target="_blank">${t(c.title, currentLang)}</a></h3><p>${t(c.desc, currentLang)}</p><p class="author">${t(c.author, currentLang)}</p></div>`;
+                let contrib = c.contributor ? `<p class="author" style="margin-top:0;">${WORKS_T['contributor-label'][currentLang]}${t(c.contributor, currentLang)}</p>` : '';
+                html += `<div class="comic-card"><h3><a href="${c.link}" target="_blank">${t(c.title, currentLang)}</a></h3><p>${t(c.desc, currentLang)}</p><p class="author">${t(c.author, currentLang)}</p>${contrib}</div>`;
             });
             html += '</div>';
             document.getElementById('works-comic').innerHTML = html;

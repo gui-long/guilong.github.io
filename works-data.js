@@ -10,6 +10,7 @@ var COMIC = [
             { title:'九子不成龙', desc:'龙生九子，各不成器。', author:'靴下猫腰子', link:'https://manga.bilibili.com/m/detail/mc29441?from=bili_search_card&from_spmid=search.search-result.0.0' },
             { title:'非人哉', desc:'神仙妖怪在现代生活的搞笑日常。', author:'一汪空气', link:'https://www.bilibili.com/bangumi/play/ss24298?spm_id_from=333.337.0.0' },
             { title:'鱼干集团那些事', desc:'一名学生穿越福瑞世界的事情。', author:'小灰渊', link:'https://www.bilibili.com/video/BV1VD421u7cy' },
+            { title:'Housepets', desc:'画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>', author:'Rick Griffin', contributor:'Simone', link:'https://www.bilibili.com/opus/572557915526687332?' },
         ];
         var NOVEL = [
             { title:'有兽焉众兽观看四叶苜蓿', desc:'貔貅天禄醒来以后，发现自己在一个电影院里，定睛一看，发现众人都在这里。', author:'不爱说话的黑羽', link:'https://changdunovel.com/t/D9bC2qwYSg0/' },

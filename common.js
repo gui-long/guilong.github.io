@@ -1,5 +1,92 @@
 var currentLang = 'zh';
 
+// 站内页面索引（用于搜索）
+var PAGES = [
+    { url:'index.html', zh:'主页', 'zh-tw':'主頁', en:'Home', keywords:['首页','home','主页'] },
+    { url:'furry-intro.html', zh:'Furry 兽迷文化', 'zh-tw':'Furry 獸迷文化', en:'Furry Fandom', keywords:['福瑞','furry','兽迷','兽人','文化','介绍'] },
+    { url:'history.html', zh:'历史', 'zh-tw':'歷史', en:'History', keywords:['福瑞历史','发展史','时间线'] },
+    { url:'current-status.html', zh:'福瑞现状与反福瑞', 'zh-tw':'福瑞現狀與反福瑞', en:'Furry Status & Anti-Furry', keywords:['现状','反福瑞','污名化','网暴','小鹏','豪城'] },
+    { url:'works.html', zh:'福瑞周边推荐', 'zh-tw':'福瑞周邊推薦', en:'Furry Merch', keywords:['漫画','小说','游戏','兽频道','识兽','周边','作品'] },
+    { url:'studio.html', zh:'兽装工作室', 'zh-tw':'獸裝工作室', en:'Fursuit Studio', keywords:['兽装','fursuit','工作室','定制','毛装'] },
+    { url:'con-info.html', zh:'站内合作兽聚', 'zh-tw':'站內合作獸聚', en:'Partner Conventions', keywords:['兽聚','展会','狸想城','兽展','活动'] },
+    { url:'old-wiki.html', zh:'下架的Wiki列表', 'zh-tw':'下架的Wiki列表', en:'Delisted Wikis', keywords:['wiki','下架','旧wiki','wikifur'] },
+    { url:'calendar.html', zh:'兽聚日期', 'zh-tw':'獸聚日期', en:'Con Calendar', keywords:['日历','日期','兽聚','展会','时间'] },
+    { url:'bilibili-up.html', zh:'B站UP主', 'zh-tw':'B站UP主', en:'Bilibili UP', keywords:['b站','up主','视频','画师','博主'] },
+    { url:'terminology.html', zh:'术语', 'zh-tw':'術語', en:'Terminology', keywords:['术语','名词','解释','定义'] },
+    { url:'chat.html', zh:'群聊', 'zh-tw':'群聊', en:'Chat Groups', keywords:['qq群','群聊','社群','交流'] },
+    { url:'编辑.html', zh:'编辑', 'zh-tw':'編輯', en:'Edit', keywords:['编辑','投稿','反馈','贡献'] },
+    { url:'about.html', zh:'关于', 'zh-tw':'關於', en:'About', keywords:['关于','介绍','联系'] }
+];
+
+function getPageTitle(p){ return p[currentLang] || p.zh; }
+
+function searchPages(q){
+    q = (q||'').trim().toLowerCase();
+    if(!q) return [];
+    return PAGES.filter(function(p){
+        var title = getPageTitle(p).toLowerCase();
+        if(title.indexOf(q) !== -1) return true;
+        return (p.keywords||[]).some(function(k){ return k.toLowerCase().indexOf(q) !== -1; });
+    }).slice(0, 8);
+}
+
+function renderSearchBox(){
+    var currentPage = window.location.pathname.split('/').pop();
+    if(currentPage === 'bilibili-up.html') return;
+    if(document.getElementById('search-box-wrap')) return;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'search-box-wrap';
+    wrap.style.cssText = 'position:fixed;top:16px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:4px;';
+    wrap.innerHTML =
+        '<div style="display:flex;gap:6px;align-items:center;">' +
+        '  <input id="site-search-input" type="text" placeholder="' + (currentLang==='en'?'Search...':'搜索站内…') + '" style="width:180px;padding:8px 14px;border-radius:20px;border:1px solid rgba(120,120,130,0.4);background:rgba(255,255,255,0.85);color:#222;font-size:13px;outline:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);" oninput="onSearchInput(event)" onkeydown="onSearchKey(event)" onfocus="onSearchInput(event)">' +
+        '  <button id="site-search-btn" onclick="doSearch()" style="padding:8px 14px;border-radius:20px;border:none;background:var(--accent,#57c3ff);color:#fff;cursor:pointer;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.12);">🔍</button>' +
+        '</div>' +
+        '<div id="site-search-results" style="display:none;max-height:280px;overflow-y:auto;background:rgba(255,255,255,0.98);border:1px solid rgba(120,120,130,0.25);border-radius:12px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,0.18);backdrop-filter:blur(6px);"></div>';
+    document.body.appendChild(wrap);
+
+    // 点击外部关闭下拉
+    document.addEventListener('click', function(e){
+        var wrap = document.getElementById('search-box-wrap');
+        if(!wrap) return;
+        if(!wrap.contains(e.target)){
+            var r = document.getElementById('site-search-results');
+            if(r) r.style.display = 'none';
+        }
+    });
+}
+
+function onSearchInput(e){
+    var q = e.target.value;
+    var results = document.getElementById('site-search-results');
+    if(!q.trim()){ results.style.display='none'; return; }
+    var matches = searchPages(q);
+    if(matches.length === 0){
+        results.style.display = 'block';
+        results.innerHTML = '<div style="padding:10px;color:#999;font-size:13px;text-align:center;">' + (currentLang==='en'?'No results':'无匹配结果') + '</div>';
+        return;
+    }
+    results.style.display = 'block';
+    results.innerHTML = matches.map(function(p){
+        return '<a href="'+p.url+'" style="display:block;padding:8px 12px;color:#333;text-decoration:none;border-radius:8px;font-size:13px;" onmouseover="this.style.background=\'rgba(0,0,0,0.06)\'" onmouseout="this.style.background=\'transparent\'">'+getPageTitle(p)+'</a>';
+    }).join('');
+}
+
+function onSearchKey(e){
+    if(e.key === 'Enter'){ doSearch(); }
+}
+
+function doSearch(){
+    var input = document.getElementById('site-search-input');
+    var q = input.value.trim();
+    if(!q) return;
+    var matches = searchPages(q);
+    if(matches.length > 0){
+        window.location.href = matches[0].url;
+    }
+}
+
 var NAV_DATA = {
     'nav-home': { zh:'主页', 'zh-tw':'主頁', en:'Home' },
     'nav-intro': { zh:'Furry (兽迷文化)', 'zh-tw':'Furry (獸迷文化)', en:'Furry (Furry Fandom)' },
@@ -113,6 +200,11 @@ function switchLang(l){
     updateThemeBtn(theme);
     var colorblind = document.documentElement.getAttribute('data-colorblind') === 'true';
     updateColorblindBtn(colorblind);
+    // 更新搜索框占位符
+    var searchInput = document.getElementById('site-search-input');
+    if(searchInput){
+        searchInput.placeholder = l === 'en' ? 'Search...' : '搜索站内…';
+    }
     if(typeof updateContent === 'function'){
         updateContent();
     }
@@ -168,6 +260,7 @@ if(document.readyState === 'loading'){
         initColorblind();
         initLang();
         initNav();
+        renderSearchBox();
     });
 }else{
     console.log('DOM already ready, initializing...');
@@ -175,4 +268,5 @@ if(document.readyState === 'loading'){
     initColorblind();
     initLang();
     initNav();
+    renderSearchBox();
 }
