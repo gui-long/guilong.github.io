@@ -29,6 +29,15 @@ var COMIC = [
             { title:'有兽焉：玄晖', desc:'窗外，大雨倾盆而下，打在窗户上啪啪作响，伴随着秋分到来的雨季，给炎热的天气带来了一丝丝的凉意。', author:'大隐隐于愚', link:'https://changdunovel.com/t/ZpBxtgnIamo/' },
             { title:'有兽焉：创世方块', desc:'远古大地，金玉环绕，巍峨挺拔，仿佛天地初开时的模样。远处的山峰高耸入云……', author:'东海域的鬼龙', link:'https://changdunovel.com/t/xWzu6GqGOq4/' },
         ];
+        var MUSIC = {
+            mv: [
+                { title:'想成为兽人', author:'BAYACHAO搬运', contributor:'茶花诗意在黄昏时分', link:'https://b23.tv/xsnahtM' },
+                { title:'拜托了狐仙大人', author:'BAYACHAO', link:'https://b23.tv/MYhxYwT' },
+            ],
+            song: [
+                { title:'【FURRY?!】', author:'小鱼沫白', contributor:'茶花诗意在黄昏时分', link:'https://b23.tv/jKDyGcI' },
+            ]
+        };
         var GAME = [
             { title:'兽化实验室 (Changed)', desc:'横版动作解谜神作。扮演实验体 Colin，在充满变异生物的实验室中潜行逃生。无战斗系统，全靠策略与观察，剧情丰富且结局多样。', tags:'#解谜 #硬核', extra:'推荐解说：<a href="https://space.bilibili.com/35565205" target="_blank" style="color:var(--accent);font-weight:500;">B站UP主 茭白柒</a>', grad:'linear-gradient(135deg,#a1c4fd,#c2e9fb)', link:'https://store.steampowered.com/app/826910/Changed/' },
             { title:'四叶苜蓿 (Clover Field)', desc:'像素风角色扮演游戏。以《有兽焉》为背景，自由探索关卡并与NPC互动。画风复古可爱，氛围轻松温馨，适合休闲玩家。', tags:'#RPG #像素风', extra:'作者：小猫Giovanni', grad:'linear-gradient(135deg,#84fab0,#8fd3f4)' },

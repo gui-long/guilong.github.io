@@ -2,32 +2,115 @@ var currentLang = 'zh';
 
 // 站内页面索引（用于搜索）
 var PAGES = [
-    { url:'index.html', zh:'主页', 'zh-tw':'主頁', en:'Home', keywords:['首页','home','主页'] },
-    { url:'furry-intro.html', zh:'Furry 兽迷文化', 'zh-tw':'Furry 獸迷文化', en:'Furry Fandom', keywords:['福瑞','furry','兽迷','兽人','文化','介绍'] },
-    { url:'history.html', zh:'历史', 'zh-tw':'歷史', en:'History', keywords:['福瑞历史','发展史','时间线'] },
-    { url:'current-status.html', zh:'福瑞现状与反福瑞', 'zh-tw':'福瑞現狀與反福瑞', en:'Furry Status & Anti-Furry', keywords:['现状','反福瑞','污名化','网暴','小鹏','豪城'] },
-    { url:'works.html', zh:'福瑞周边推荐', 'zh-tw':'福瑞周邊推薦', en:'Furry Merch', keywords:['漫画','小说','游戏','兽频道','识兽','周边','作品'] },
-    { url:'studio.html', zh:'兽装工作室', 'zh-tw':'獸裝工作室', en:'Fursuit Studio', keywords:['兽装','fursuit','工作室','定制','毛装'] },
-    { url:'con-info.html', zh:'站内合作兽聚', 'zh-tw':'站內合作獸聚', en:'Partner Conventions', keywords:['兽聚','展会','狸想城','兽展','活动'] },
-    { url:'old-wiki.html', zh:'下架的Wiki列表', 'zh-tw':'下架的Wiki列表', en:'Delisted Wikis', keywords:['wiki','下架','旧wiki','wikifur'] },
-    { url:'calendar.html', zh:'兽聚日期', 'zh-tw':'獸聚日期', en:'Con Calendar', keywords:['日历','日期','兽聚','展会','时间'] },
-    { url:'bilibili-up.html', zh:'B站UP主', 'zh-tw':'B站UP主', en:'Bilibili UP', keywords:['b站','up主','视频','画师','博主'] },
-    { url:'terminology.html', zh:'术语', 'zh-tw':'術語', en:'Terminology', keywords:['术语','名词','解释','定义'] },
-    { url:'chat.html', zh:'群聊', 'zh-tw':'群聊', en:'Chat Groups', keywords:['qq群','群聊','社群','交流'] },
-    { url:'编辑.html', zh:'编辑', 'zh-tw':'編輯', en:'Edit', keywords:['编辑','投稿','反馈','贡献'] },
-    { url:'about.html', zh:'关于', 'zh-tw':'關於', en:'About', keywords:['关于','介绍','联系'] }
+    { url:'index.html', zh:'主页', 'zh-tw':'主頁', en:'Home' },
+    { url:'furry-intro.html', zh:'Furry 兽迷文化', 'zh-tw':'Furry 獸迷文化', en:'Furry Fandom' },
+    { url:'history.html', zh:'历史', 'zh-tw':'歷史', en:'History' },
+    { url:'current-status.html', zh:'福瑞现状与反福瑞', 'zh-tw':'福瑞現狀與反福瑞', en:'Furry Status & Anti-Furry' },
+    { url:'works.html', zh:'福瑞周边推荐', 'zh-tw':'福瑞周邊推薦', en:'Furry Merch' },
+    { url:'studio.html', zh:'兽装工作室', 'zh-tw':'獸裝工作室', en:'Fursuit Studio' },
+    { url:'con-info.html', zh:'站内合作兽聚', 'zh-tw':'站內合作獸聚', en:'Partner Conventions' },
+    { url:'old-wiki.html', zh:'下架的Wiki列表', 'zh-tw':'下架的Wiki列表', en:'Delisted Wikis' },
+    { url:'calendar.html', zh:'兽聚日期', 'zh-tw':'獸聚日期', en:'Con Calendar' },
+    { url:'bilibili-up.html', zh:'B站UP主', 'zh-tw':'B站UP主', en:'Bilibili UP' },
+    { url:'terminology.html', zh:'术语', 'zh-tw':'術語', en:'Terminology' },
+    { url:'chat.html', zh:'群聊', 'zh-tw':'群聊', en:'Chat Groups' },
+    { url:'编辑.html', zh:'编辑', 'zh-tw':'編輯', en:'Edit' },
+    { url:'about.html', zh:'关于', 'zh-tw':'關於', en:'About' }
 ];
 
 function getPageTitle(p){ return p[currentLang] || p.zh; }
 
-function searchPages(q){
+// 内容索引缓存
+var contentIndex = null;
+var contentIndexLoading = false;
+var contentIndexCallbacks = [];
+
+function buildContentIndex(callback){
+    // 优先使用预生成的静态索引（兼容 file:// 协议）
+    if(typeof SEARCH_INDEX !== 'undefined'){
+        var staticIndex = PAGES.map(function(p){
+            return { page: p, text: SEARCH_INDEX[p.url] || '' };
+        });
+        contentIndex = staticIndex;
+        if(callback) callback(contentIndex);
+        return;
+    }
+
+    // fallback：运行时 fetch（仅 http:// 环境可用）
+    if(contentIndex){
+        if(callback) callback(contentIndex);
+        return;
+    }
+    if(callback) contentIndexCallbacks.push(callback);
+    if(contentIndexLoading) return;
+    contentIndexLoading = true;
+
+    var index = [];
+    var loaded = 0;
+    var total = PAGES.length;
+
+    PAGES.forEach(function(p){
+        fetch(p.url)
+            .then(function(r){ return r.text(); })
+            .then(function(html){
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(html, 'text/html');
+                var scripts = doc.querySelectorAll('script, style, nav, .lang-group, .theme-toggle-row');
+                scripts.forEach(function(s){ s.remove(); });
+                var text = (doc.body ? doc.body.innerText : '').replace(/\s+/g, ' ').trim();
+                index.push({ page: p, text: text });
+            })
+            .catch(function(){
+                index.push({ page: p, text: '' });
+            })
+            .finally(function(){
+                loaded++;
+                if(loaded === total){
+                    contentIndex = index;
+                    contentIndexLoading = false;
+                    var cbs = contentIndexCallbacks.slice();
+                    contentIndexCallbacks.length = 0;
+                    cbs.forEach(function(cb){ cb(index); });
+                }
+            });
+    });
+}
+
+function searchContent(q){
     q = (q||'').trim().toLowerCase();
     if(!q) return [];
-    return PAGES.filter(function(p){
+
+    var results = [];
+
+    // 先匹配标题
+    PAGES.forEach(function(p){
         var title = getPageTitle(p).toLowerCase();
-        if(title.indexOf(q) !== -1) return true;
-        return (p.keywords||[]).some(function(k){ return k.toLowerCase().indexOf(q) !== -1; });
-    }).slice(0, 8);
+        if(title.indexOf(q) !== -1){
+            results.push({ page: p, type: 'title', snippet: getPageTitle(p) });
+        }
+    });
+
+    // 再匹配内容
+    if(contentIndex){
+        contentIndex.forEach(function(item){
+            var text = item.text.toLowerCase();
+            var pos = text.indexOf(q);
+            if(pos !== -1){
+                // 避免重复标题结果
+                var already = results.some(function(r){ return r.page.url === item.page.url && r.type === 'title'; });
+                if(!already){
+                    var start = Math.max(0, pos - 20);
+                    var end = Math.min(text.length, pos + q.length + 30);
+                    var snippet = item.text.substring(start, end);
+                    if(start > 0) snippet = '…' + snippet;
+                    if(end < text.length) snippet = snippet + '…';
+                    results.push({ page: item.page, type: 'content', snippet: snippet });
+                }
+            }
+        });
+    }
+
+    return results.slice(0, 10);
 }
 
 function renderSearchBox(){
@@ -43,8 +126,11 @@ function renderSearchBox(){
         '  <input id="site-search-input" type="text" placeholder="' + (currentLang==='en'?'Search...':'搜索站内…') + '" style="width:180px;padding:8px 14px;border-radius:20px;border:1px solid rgba(120,120,130,0.4);background:rgba(255,255,255,0.85);color:#222;font-size:13px;outline:none;box-shadow:0 2px 8px rgba(0,0,0,0.12);" oninput="onSearchInput(event)" onkeydown="onSearchKey(event)" onfocus="onSearchInput(event)">' +
         '  <button id="site-search-btn" onclick="doSearch()" style="padding:8px 14px;border-radius:20px;border:none;background:var(--accent,#57c3ff);color:#fff;cursor:pointer;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.12);">🔍</button>' +
         '</div>' +
-        '<div id="site-search-results" style="display:none;max-height:280px;overflow-y:auto;background:rgba(255,255,255,0.98);border:1px solid rgba(120,120,130,0.25);border-radius:12px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,0.18);backdrop-filter:blur(6px);"></div>';
+        '<div id="site-search-results" style="display:none;max-height:320px;overflow-y:auto;background:rgba(255,255,255,0.98);border:1px solid rgba(120,120,130,0.25);border-radius:12px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,0.18);backdrop-filter:blur(6px);"></div>';
     document.body.appendChild(wrap);
+
+    // 预加载内容索引
+    buildContentIndex();
 
     // 点击外部关闭下拉
     document.addEventListener('click', function(e){
@@ -57,19 +143,53 @@ function renderSearchBox(){
     });
 }
 
+function highlightMatch(text, q){
+    var lower = text.toLowerCase();
+    var ql = q.toLowerCase();
+    var pos = lower.indexOf(ql);
+    if(pos === -1) return escapeHtml(text);
+    var before = text.substring(0, pos);
+    var match = text.substring(pos, pos + q.length);
+    var after = text.substring(pos + q.length);
+    return escapeHtml(before) + '<mark style="background:#ffe082;padding:0 2px;border-radius:3px;">' + escapeHtml(match) + '</mark>' + escapeHtml(after);
+}
+
+function escapeHtml(s){
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+}
+
 function onSearchInput(e){
     var q = e.target.value;
     var results = document.getElementById('site-search-results');
     if(!q.trim()){ results.style.display='none'; return; }
-    var matches = searchPages(q);
+
+    // 如果索引未就绪，先只显示标题匹配，同时等待索引
+    if(!contentIndex){
+        buildContentIndex(function(){
+            // 索引完成后重新触发搜索
+            var input = document.getElementById('site-search-input');
+            if(input && input.value.trim()){
+                onSearchInput({ target: input });
+            }
+        });
+    }
+
+    var matches = searchContent(q);
     if(matches.length === 0){
         results.style.display = 'block';
         results.innerHTML = '<div style="padding:10px;color:#999;font-size:13px;text-align:center;">' + (currentLang==='en'?'No results':'无匹配结果') + '</div>';
         return;
     }
     results.style.display = 'block';
-    results.innerHTML = matches.map(function(p){
-        return '<a href="'+p.url+'" style="display:block;padding:8px 12px;color:#333;text-decoration:none;border-radius:8px;font-size:13px;" onmouseover="this.style.background=\'rgba(0,0,0,0.06)\'" onmouseout="this.style.background=\'transparent\'">'+getPageTitle(p)+'</a>';
+    results.innerHTML = matches.map(function(r){
+        var icon = r.type === 'title' ? '📄' : '📝';
+        var snippetHtml = r.type === 'title'
+            ? '<div style="font-weight:600;">' + highlightMatch(getPageTitle(r.page), q) + '</div>'
+            : '<div style="font-weight:600;">' + escapeHtml(getPageTitle(r.page)) + '</div><div style="font-size:11px;color:#666;margin-top:2px;line-height:1.4;">' + highlightMatch(r.snippet, q) + '</div>';
+        return '<a href="'+r.page.url+'" style="display:block;padding:8px 12px;color:#333;text-decoration:none;border-radius:8px;font-size:13px;" onmouseover="this.style.background=\'rgba(0,0,0,0.06)\'" onmouseout="this.style.background=\'transparent\'">' +
+            icon + ' ' + snippetHtml + '</a>';
     }).join('');
 }
 
@@ -81,9 +201,9 @@ function doSearch(){
     var input = document.getElementById('site-search-input');
     var q = input.value.trim();
     if(!q) return;
-    var matches = searchPages(q);
+    var matches = searchContent(q);
     if(matches.length > 0){
-        window.location.href = matches[0].url;
+        window.location.href = matches[0].page.url;
     }
 }
 

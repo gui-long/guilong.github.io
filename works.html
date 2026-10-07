@@ -181,7 +181,8 @@
         [data-theme="dark"] .game-extra { background: #334155; color: #cbd5e1; }
         [data-theme="dark"] .game-tags { background: #1e3a5f; color: #38bdf8; }
     </style>
-<script src="common.js?v=20260928"></script>
+<script src="search-index.js?v=20260928"></script>
+    <script src="common.js?v=20260928"></script>
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
 </head>
@@ -213,12 +214,14 @@
                     <button onclick="switchWorksTab('comic')" id="tab-comic" class="works-tab active" data-id="tab-comic">📚 漫画动画</button>
                     <button onclick="switchWorksTab('novel')" id="tab-novel" class="works-tab" data-id="tab-novel">📖 福瑞小说</button>
                     <button onclick="switchWorksTab('game')" id="tab-game" class="works-tab" data-id="tab-game">🎮 福瑞游戏</button>
+                    <button onclick="switchWorksTab('music')" id="tab-music" class="works-tab" data-id="tab-music">🎵 音乐</button>
                     <button onclick="switchWorksTab('tv')" id="tab-tv" class="works-tab" data-id="tab-tv">📺 兽频道</button>
                     <button onclick="switchWorksTab('app')" id="tab-app" class="works-tab" data-id="tab-app">🐾 识兽</button>
                 </div>
                 <div id="works-comic" class="works-content"></div>
                 <div id="works-novel" class="works-content" style="display:none;"></div>
                 <div id="works-game" class="works-content" style="display:none;"></div>
+                <div id="works-music" class="works-content" style="display:none;"></div>
                 <div id="works-tv" class="works-content" style="display:none;"></div>
                 <div id="works-app" class="works-content" style="display:none;"></div>
             </div>
@@ -249,6 +252,12 @@
             'tab-comic': { zh:'📚 漫画动画', 'zh-tw':'📚 漫畫動畫', en:'📚 Comics & Animation' },
             'tab-novel': { zh:'📖 福瑞小说', 'zh-tw':'📖 福瑞小說', en:'📖 Furry Novels' },
             'tab-game': { zh:'🎮 福瑞游戏', 'zh-tw':'🎮 福瑞遊戲', en:'🎮 Furry Games' },
+            'tab-music': { zh:'🎵 音乐', 'zh-tw':'🎵 音樂', en:'🎵 Music' },
+            'music-title': { zh:'精选福瑞音乐', 'zh-tw':'精選福瑞音樂', en:'Featured Furry Music' },
+            'music-desc': { zh:'圈内的动听旋律，MV 与歌曲一网打尽', 'zh-tw':'圈內的動聽旋律，MV 與歌曲一網打盡', en:'Great melodies from the community — MVs and songs all in one place' },
+            'music-mv-title': { zh:'🎬 MV', 'zh-tw':'🎬 MV', en:'🎬 MV' },
+            'music-song-title': { zh:'🎵 音乐', 'zh-tw':'🎵 音樂', en:'🎵 Music' },
+            'music-empty': { zh:'内容筹备中，欢迎投稿', 'zh-tw':'內容籌備中，歡迎投稿', en:'Content in preparation — submissions welcome' },
             'tab-tv': { zh:'📺 兽频道', 'zh-tw':'📺 獸頻道', en:'📺 Fursuit TV' },
             'tab-app': { zh:'🐾 识兽', 'zh-tw':'🐾 識獸', en:'🐾 Shi Shou' },
             'comic-title': { zh:'精选福瑞漫画与动画', 'zh-tw':'精選福瑞漫畫與動畫', en:'Featured Furry Comics & Animation' },
@@ -305,6 +314,13 @@
             'Housepets': { zh:'Housepets', 'zh-tw':'Housepets', en:'Housepets' },
             '画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>': { zh:'画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>', 'zh-tw':'畫風可愛，連貫曲折，<strong>（含有部分PG）內容</strong>', en:'Cute art style, coherent and twisting storyline. <strong>(Contains some PG content)</strong>' },
             'Rick Griffin': { zh:'Rick Griffin', 'zh-tw':'Rick Griffin', en:'Rick Griffin' },
+            '【FURRY?!】': { zh:'【FURRY?!】', 'zh-tw':'【FURRY?!】', en:'【FURRY?!】' },
+            '小鱼沫白': { zh:'小鱼沫白', 'zh-tw':'小魚沫白', en:'Xiaoyu Mobai' },
+            '茶花诗意在黄昏时分': { zh:'茶花诗意在黄昏时分', 'zh-tw':'茶花詩意在黃昏時分', en:'茶花詩意在黃昏時分' },
+            '想成为兽人': { zh:'想成为兽人', 'zh-tw':'想成為獸人', en:'Want to Be a Beastman' },
+            'BAYACHAO搬运': { zh:'BAYACHAO搬运', 'zh-tw':'BAYACHAO搬運', en:'Reposted by BAYACHAO' },
+            '拜托了狐仙大人': { zh:'拜托了狐仙大人', 'zh-tw':'拜託了狐仙大人', en:'Please, Fox Spirit Lord' },
+            'BAYACHAO': { zh:'BAYACHAO', 'zh-tw':'BAYACHAO', en:'BAYACHAO' },
         };
 
         const NOVEL_T = {
@@ -425,6 +441,38 @@
             html += '</div>';
             document.getElementById('works-tv').innerHTML = html;
         }
+        function renderMusicCard(c){
+            let descHtml = c.desc ? '<p>' + t(c.desc, currentLang) + '</p>' : '';
+            let contrib = c.contributor ? '<p class="author" style="margin-top:0;">' + WORKS_T['contributor-label'][currentLang] + t(c.contributor, currentLang) + '</p>' : '';
+            return '<div class="comic-card"><h3><a href="' + c.link + '" target="_blank">' + t(c.title, currentLang) + '</a></h3>' + descHtml + '<p class="author">' + t(c.author, currentLang) + '</p>' + contrib + '</div>';
+        }
+        function renderMusic() {
+            let html = '<h2 style="text-align:center;margin-bottom:8px;">🎵 ' + WORKS_T['music-title'][currentLang] + '</h2>';
+            html += '<p style="text-align:center;color:var(--text-muted);margin-bottom:24px;">' + WORKS_T['music-desc'][currentLang] + '</p>';
+            let mvItems = (typeof MUSIC !== 'undefined' && MUSIC.mv) ? MUSIC.mv : [];
+            html += '<div style="margin-bottom:24px;">';
+            html += '<h3 style="margin-bottom:12px;padding-left:12px;border-left:4px solid #ff6b6b;">' + WORKS_T['music-mv-title'][currentLang] + '</h3>';
+            if(mvItems.length === 0){
+                html += '<p style="color:#999;text-align:center;padding:20px;">' + WORKS_T['music-empty'][currentLang] + '</p>';
+            } else {
+                html += '<div class="comic-grid">';
+                mvItems.forEach(function(c){ html += renderMusicCard(c); });
+                html += '</div>';
+            }
+            html += '</div>';
+            let songItems = (typeof MUSIC !== 'undefined' && MUSIC.song) ? MUSIC.song : [];
+            html += '<div style="margin-bottom:24px;">';
+            html += '<h3 style="margin-bottom:12px;padding-left:12px;border-left:4px solid #57c3ff;">' + WORKS_T['music-song-title'][currentLang] + '</h3>';
+            if(songItems.length === 0){
+                html += '<p style="color:#999;text-align:center;padding:20px;">' + WORKS_T['music-empty'][currentLang] + '</p>';
+            } else {
+                html += '<div class="comic-grid">';
+                songItems.forEach(function(c){ html += renderMusicCard(c); });
+                html += '</div>';
+            }
+            html += '</div>';
+            document.getElementById('works-music').innerHTML = html;
+        }
         function renderApp() {
             let html = '<div style="margin-top:20px;">';
             html += '<div style="display:flex;align-items:center;margin-bottom:20px;">';
@@ -454,6 +502,7 @@
                 renderComic();
                 renderNovel();
                 renderGame();
+                renderMusic();
                 renderTv();
                 renderApp();
             }
@@ -464,6 +513,7 @@
             renderComic();
             renderNovel();
             renderGame();
+            renderMusic();
             renderTv();
             renderApp();
         });
