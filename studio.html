@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="FurryWiki - 兽圈百科知识库">
+    <meta name="description" content="兽装工作室名录：收录国内外 Fursuit 制作工作室与个人制作者，含工作室简介、联系方式与代表作品封面，方便按地区与风格筛选。想做兽装却不知道找谁？这里整理了各家价位区间、制作周期与口碑信息，帮助兽装新手找到合适的定制渠道，同时汇总各家风格特点、制作周期与常见价位区间，方便横向比价与联系，名录持续更新。">
     <title>兽装工作室 - FurryWiki</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -113,10 +113,9 @@
             .feedback-btn{width:52px;height:52px;font-size:22px;right:18px;bottom:18px}
         }
     </style>
-<script src="search-index.js?v=20260928"></script>
-    <script src="common.js?v=20260928"></script>
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
+<script defer src="search-index.js?v=20260928"></script>
+    <script defer src="common.js?v=20260928"></script>
+<script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
 </head>
 <body>
     <nav>
@@ -156,7 +155,7 @@
                 return;
             }
             var script = document.createElement("script");
-            script.src = "works-data.js?" + Date.now();
+            script.src = "works-data.js?v=20261009";
             script.onload = function(){
                 worksDataLoaded = true;
                 callback();

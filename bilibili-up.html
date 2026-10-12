@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <meta name="description" content="哔哩哔哩Furry区UP主数据排行榜 - 粉丝数、获赞数、简介等完整数据查询">
+    <meta name="description" content="哔哩哔哩 Furry 区 UP 主数据榜：收录兽圈创作者的粉丝数、获赞数、播放量、简介与头像，支持按粉丝、获赞、播放排行查看，并提供创作者详情弹窗与数据查询。想了解圈内头部 UP 主、寻找优质兽圈内容创作者，可从这份持续更新的数据榜单入手，数据定期抓取更新，便于横向对比各创作者的表现与增长趋势，榜单持续更新。">
     <meta name="keywords" content="B站UP主,Furry UP主,UP主排行榜,粉丝数排名,哔哩哔哩数据">
     <meta name="author" content="FurryWiki">
     <meta name="robots" content="index,follow">
     <meta property="og:title" content="哔哩哔哩 UP 主数据">
-    <meta property="og:description" content="哔哩哔哩Furry区UP主数据排行榜 - 粉丝数、获赞数、简介等完整数据查询">
+    <meta property="og:description" content="哔哩哔哩 Furry 区 UP 主数据榜：收录兽圈创作者的粉丝数、获赞数、播放量、简介与头像，支持按粉丝、获赞、播放排行查看，并提供创作者详情弹窗与数据查询。想了解圈内头部 UP 主、寻找优质兽圈内容创作者，可从这份持续更新的数据榜单入手，数据定期抓取更新，便于横向对比各创作者的表现与增长趋势，榜单持续更新。">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_CN">
     <title>哔哩哔哩 UP 主数据</title>
@@ -213,8 +213,7 @@
             .feedback-btn{width:48px;height:48px;font-size:20px;right:16px;bottom:16px}
         }
     </style>
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
+<script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
 </head>
 <body>
     <div class="header">
@@ -290,7 +289,7 @@
     </div>
 
     <script>
-        document.write('<script src="up-data.js?' + Date.now() + '"><\/script>');
+        var UP_DATA_VERSION = '20261009';
         function initTheme(){
             var saved = localStorage.getItem('theme');
             var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -931,14 +930,21 @@
         function esc(t){var d=document.createElement('div');d.appendChild(document.createTextNode(t));return d.innerHTML}
         document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 
-        function loadData(callback){
-            if(typeof rawData !== 'undefined' && Array.isArray(rawData)){
-                console.log('rawData 已通过script标签加载，长度:', rawData.length);
-                callback(rawData);
-                return;
+        function showLoadError(message){
+            var ls = document.getElementById('loadingState');
+            if(ls) ls.style.display = 'none';
+            var ca = document.getElementById('contentArea');
+            if(ca) ca.style.display = 'none';
+            var es = document.getElementById('emptyState');
+            if(es){
+                es.style.display = 'block';
+                es.innerHTML = '<div class="icon">⚠️</div><p>' + (message || '数据加载失败，请检查网络连接并刷新页面重试') + '</p>';
             }
+        }
+
+        function loadDataViaFetch(callback){
             console.log('尝试通过fetch加载数据...');
-            fetch('up-data.js?' + Date.now())
+            fetch('up-data.js?v=' + UP_DATA_VERSION)
                 .then(function(response){
                     if(!response.ok){
                         throw new Error('网络请求失败: ' + response.status);
@@ -962,11 +968,32 @@
                 })
                 .catch(function(error){
                     console.error('数据加载失败:', error.message);
-                    document.getElementById('loadingState').style.display = 'none';
-                    document.getElementById('contentArea').style.display = 'none';
-                    document.getElementById('emptyState').style.display = 'block';
-                    document.getElementById('emptyState').innerHTML = '<div class="icon">⚠️</div><p>数据加载失败，请检查网络连接并刷新页面重试</p>';
+                    showLoadError();
                 });
+        }
+
+        function loadData(callback){
+            if(typeof rawData !== 'undefined' && Array.isArray(rawData)){
+                console.log('rawData 已存在，长度:', rawData.length);
+                callback(rawData);
+                return;
+            }
+            // 异步注入数据脚本（可被浏览器缓存，不阻塞页面渲染）
+            var s = document.createElement('script');
+            s.src = 'up-data.js?v=' + UP_DATA_VERSION;
+            s.onload = function(){
+                if(typeof rawData !== 'undefined' && Array.isArray(rawData)){
+                    console.log('script加载成功，数据长度:', rawData.length);
+                    callback(rawData);
+                }else{
+                    loadDataViaFetch(callback);
+                }
+            };
+            s.onerror = function(){
+                console.log('script标签加载失败，改用fetch');
+                loadDataViaFetch(callback);
+            };
+            document.head.appendChild(s);
         }
 
         loadData(function(data){
