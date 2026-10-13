@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wiki 页面编辑</title>
+    <title>页面编辑与投稿｜参与 FurryWiki 词条共建 - FurryWiki</title>
+    <meta name="description" content="FurryWiki 页面编辑器：选择要修改的词条页面，直接在浏览器中编辑正文内容并提交，无需登录后台。适合想为兽圈百科补充资料、修正错误或翻译内容的贡献者使用，提交后会由维护者审核合并，也欢迎参与校对与补充已有词条中的错别字、数据与配图信息，让词条内容更加完整、准确、可靠，内容会持续更新，欢迎使用。">
     <!-- CKEditor 5 富文本编辑器 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
     <!-- EmailJS SDK -->
@@ -235,10 +236,9 @@
             }
         }
     </style>
-<script src="search-index.js?v=20260928"></script>
-    <script src="common.js?v=20260928"></script>
-<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-<script>LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true})</script>
+<script defer src="search-index.js?v=20260928"></script>
+    <script defer src="common.js?v=20260928"></script>
+<script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
 </head>
 <body>
 
@@ -277,6 +277,24 @@
 
         <!-- 状态消息 -->
         <div id="status"></div>
+
+        <div style="margin-top:34px;text-align:left;line-height:1.9;font-size:14px;color:#475569;">
+            <h2 style="font-size:18px;margin:0 0 12px;color:#0f172a;">如何使用页面编辑器</h2>
+            <ol style="padding-left:20px;margin:0 0 22px;">
+                <li>在站内打开要修改的词条页面，点击右下角的 ✉️ 按钮，该页正文会自动带入编辑区。</li>
+                <li>在编辑区修改内容，支持标题、加粗、列表、链接、表格与图片等常用格式。</li>
+                <li>填写修改说明后点击提交，内容会发送给维护者审核，通过后合并到站点并更新页面。</li>
+            </ol>
+            <h2 style="font-size:18px;margin:0 0 12px;color:#0f172a;">投稿与编辑规范</h2>
+            <ul style="padding-left:20px;margin:0;">
+                <li>内容请基于公开可查的信息编写，避免主观臆测、人身攻击与未经证实的指控。</li>
+                <li>涉及具体人物、工作室或活动时保持中立表述，不公开他人隐私信息。</li>
+                <li>图片请使用自有或已获授权的素材，避免直接引用他人作品。</li>
+                <li>提交前建议通读一遍，检查错别字、链接与数据是否准确。</li>
+                <li>如果不确定如何修改，可以在提交说明里写下你的建议，由维护者代为整理实现。</li>
+            </ul>
+        </div>
+
 
     </div>
 
