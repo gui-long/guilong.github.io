@@ -164,6 +164,7 @@
     <script defer src="search-index.js?v=20260928"></script>
     <script defer src="common.js?v=20260928"></script>
     <script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
+    <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2262%22%20r%3D%2222%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2228%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
 </head>
 <body>
     <nav>
@@ -200,7 +201,7 @@
             city: '上海',
             venue: '环游嘉年华（环球港店）',
             type: '综合性展会',
-            background: '狸想城是上海地区的中型兽聚活动，以轻松娱乐为主题，适合休闲参与。大聚将至，小聚先行！狸想城展前预热「狸想小聚」2000平超大室内游戏体验馆，把快乐拉满一整天！交通优势：5条地铁线路交汇，出站直达！17大项设备放肆畅玩！',
+            background: '狸想城是一座基于"愿望力量"的城市，起初只是一座漂浮在虚空中的孤岛，一切都只停留于"零散的幻想"。<br><br>但随着人类世界中越来越多充满梦想的人出现，他们在印象世界所制造的"愿力"也越来越强，狸想城也逐渐变得清晰可见。<br><br>哈雷彗星每次接近太阳时，都会喷射出大量尘埃和碎石，逐渐在轨道上形成一条广阔的"尘埃带"。地球每年在5月和10月穿越这片区域时，这些微小颗粒进入大气层并燃烧，便在夜空中化作规模宏大的流星雨。<br><br>而人类若想进入狸想城，就必须把握住每年"愿望力量"最为集中的窗口期，也正是对应这两场流星雨——10月的猎户座流星雨，以及5月的宝瓶座η流星雨。（至于原因，猜测是每当流星雨来临时许愿的人很多）<br><br>得到电子/纸质邀请函的居民可以前往集合地点，搭乘一辆布满青苔的列车进入到狸想城的世界。但切记要在窗口期内返回，否则将会永远困在印象的世界中。',
             history: [
                 { year: '2025', event: '首届狸想城举办' },
                 { year: '2026', event: '狸想小聚举办，8月8日在上海环游嘉年华（环球港店）' }
@@ -227,8 +228,66 @@
             }
         };
 
+        var currentDetailLang = localStorage.getItem('lang') || 'zh';
+        if(['zh','zh-tw','en'].indexOf(currentDetailLang) === -1) currentDetailLang = 'zh';
+
+        // 繁体/英文翻译（简中直接用 CON）
+        var CON_I18N = {
+            'zh-tw': {
+                name: '狸想城',
+                theme: '狸想小聚',
+                city: '上海',
+                venue: '環遊嘉年華（環球港店）',
+                type: '綜合性展會',
+                background: '狸想城是一座基於「願望力量」的城市，起初只是一座漂浮在虛空中的孤島，一切都只停留於「零散的幻想」。<br><br>但隨著人類世界中越來越多充滿夢想的人出現，他們在印象世界所製造的「願力」也越來越強，狸想城也逐漸變得清晰可見。<br><br>哈雷彗星每次接近太陽時，都會噴射出大量塵埃和碎石，逐漸在軌道上形成一條廣闊的「塵埃帶」。地球每年在5月和10月穿越這片區域時，這些微小顆粒進入大氣層並燃燒，便在夜空中化作規模宏大的流星雨。<br><br>而人類若想進入狸想城，就必須把握住每年「願望力量」最為集中的窗口期，也正是對應這兩場流星雨——10月的獵戶座流星雨，以及5月的寶瓶座η流星雨。（至於原因，猜測是每當流星雨來臨時許願的人很多）<br><br>得到電子/紙質邀請函的居民可以前往集合地點，搭乘一輛佈滿青苔的列車進入到狸想城的世界。但切記要在窗口期內返回，否則將會永遠困在印象的世界中。',
+                history: [
+                    { year: '2025', event: '首屆狸想城舉辦' },
+                    { year: '2026', event: '狸想小聚舉辦，8月8日在上海環遊嘉年華（環球港店）' }
+                ],
+                captions: ['2026.8.8 狸想小聚·簽名合照（一）','2026.8.8 狸想小聚·簽名合照（二）','2026.8.8 狸想小聚·活動現場合照','狸想小聚·活動照片（一）','狸想小聚·活動照片（二）','狸想小聚·活動照片（三）','狸想小聚·活動照片（四）']
+            },
+            'en': {
+                name: 'Lixiang City',
+                theme: 'Lixiang Mini-Con',
+                city: 'Shanghai',
+                venue: 'Universal Carnival (Global Harbor)',
+                type: 'General Convention',
+                background: 'Lixiang City is a city built on the "power of wishes." It began as a lone island drifting in the void, where everything remained but "scattered fantasies."<br><br>Yet as more and more dreamers appeared in the human world, the "wish power" they generated in the world of impressions grew ever stronger, and Lixiang City gradually became clearly visible.<br><br>Each time Halley\'s Comet approaches the Sun, it sheds vast amounts of dust and grit, slowly forming a broad "dust belt" along its orbit. Every May and October, Earth passes through this region; the tiny particles enter the atmosphere and burn up, turning into grand meteor showers in the night sky.<br><br>To enter Lixiang City, one must catch the annual window when the "power of wishes" is at its most concentrated — exactly matching these two meteor showers: the October Orionids and the May Eta Aquariids. (As for why — the guess is that many people make wishes whenever a meteor shower arrives.)<br><br>Residents holding an electronic or paper invitation may head to the gathering point and board a moss-covered train into the world of Lixiang City. But remember to return within the window period, or you will be trapped in the world of impressions forever.',
+                history: [
+                    { year: '2025', event: 'First Lixiang City event held' },
+                    { year: '2026', event: 'Lixiang Mini-Con held on Aug 8 at Universal Carnival (Global Harbor), Shanghai' }
+                ],
+                captions: ['2026.8.8 Lixiang Mini-Con · Signing group photo (1)','2026.8.8 Lixiang Mini-Con · Signing group photo (2)','2026.8.8 Lixiang Mini-Con · On-site group photo','Lixiang Mini-Con · Event photo (1)','Lixiang Mini-Con · Event photo (2)','Lixiang Mini-Con · Event photo (3)','Lixiang Mini-Con · Event photo (4)']
+            }
+        };
+
+        var T = {
+            'bg': { zh:'📖 活动背景', 'zh-tw':'📖 活動背景', en:'📖 About Lixiang City' },
+            'history': { zh:'📅 举办历史', 'zh-tw':'📅 舉辦歷史', en:'📅 History' },
+            'photos': { zh:'📷 活动配图', 'zh-tw':'📷 活動配圖', en:'📷 Photos' },
+            'official': { zh:'🌐 官方信息', 'zh-tw':'🌐 官方資訊', en:'🌐 Official Info' },
+            'contact': { zh:'📞 联系方式', 'zh-tw':'📞 聯絡方式', en:'📞 Contact' },
+            'website': { zh:'官方网站', 'zh-tw':'官方網站', en:'Website' },
+            'bilibili': { zh:'哔哩哔哩', 'zh-tw':'嗶哩嗶哩', en:'Bilibili' },
+            'weibo': { zh:'新浪微博', 'zh-tw':'新浪微博', en:'Weibo' },
+            'qq': { zh:'QQ群', 'zh-tw':'QQ群', en:'QQ Group' },
+            'email': { zh:'邮箱', 'zh-tw':'郵箱', en:'Email' },
+            'phone': { zh:'电话', 'zh-tw':'電話', en:'Phone' },
+            'address': { zh:'地址', 'zh-tw':'地址', en:'Address' },
+            'unannounced': { zh:'暂未公布', 'zh-tw':'暫未公佈', en:'Not announced yet' },
+            'tipTitle': { zh:'💡 温馨提示', 'zh-tw':'💡 溫馨提示', en:'💡 Note' },
+            'tip': { zh:'以上信息仅供参考，请以官方发布为准。如有疑问，建议加入官方QQ群或关注官方社交媒体获取最新消息。', 'zh-tw':'以上資訊僅供參考，請以官方發佈為準。如有疑問，建議加入官方QQ群或關注官方社交媒體獲取最新消息。', en:'The information above is for reference only; please refer to official announcements. For any questions, we recommend joining the official QQ group or following the official social media accounts for the latest updates.' }
+        };
+        function t(k){ var e = T[k]; return e ? (e[currentDetailLang] || e.zh) : k; }
+
+        function updatePageLang(l){
+            currentDetailLang = l;
+            renderDetail();
+        }
+
         function renderDetail() {
-            const detail = CON;
+            const ov = CON_I18N[currentDetailLang] || {};
+            const detail = Object.assign({}, CON, ov);
             const conName = detail.name;
 
             let html = `
@@ -243,12 +302,12 @@
                 </div>
 
                 <div class="info-card">
-                    <h3>📖 活动背景</h3>
+                    <h3>${t('bg')}</h3>
                     <p>${detail.background}</p>
                 </div>
 
                 <div class="info-card">
-                    <h3>📅 举办历史</h3>
+                    <h3>${t('history')}</h3>
                     <ul class="history-list">
             `;
 
@@ -263,14 +322,15 @@
 
             html += `
                 <div class="info-card photo-gallery">
-                    <h3 class="photo-gallery-title">📷 活动配图</h3>
+                    <h3 class="photo-gallery-title">${t('photos')}</h3>
                     <div class="photo-grid">
             `;
-            detail.photos.forEach((p) => {
+            detail.photos.forEach((p, idx) => {
+                const cap = (ov.captions && ov.captions[idx]) ? ov.captions[idx] : p.caption;
                 html += `
-                    <div class="photo-item" onclick="openPhotoLightbox('${p.src}', '${p.caption}')">
-                        <img src="${p.src}" alt="${p.caption}" loading="lazy" onerror="this.style.background='var(--border)';this.alt='图片加载失败'">
-                        <div class="photo-caption">${p.caption}</div>
+                    <div class="photo-item" onclick="openPhotoLightbox('${p.src}', '${cap}')">
+                        <img src="${p.src}" alt="${cap}" loading="lazy" onerror="this.style.background='var(--border)';this.alt='图片加载失败'">
+                        <div class="photo-caption">${cap}</div>
                     </div>
                 `;
             });
@@ -281,55 +341,55 @@
 
             html += `
                 <div class="info-card">
-                    <h3>🌐 官方信息</h3>
+                    <h3>${t('official')}</h3>
                     <div class="contact-grid">
                         <div class="contact-item">
                             <div class="icon">🌐</div>
-                            <div class="label">官方网站</div>
-                            <div class="value"><a href="${detail.official.website}" target="_blank" rel="noopener">${detail.official.website !== '#' ? detail.official.website : '暂未公布'}</a></div>
+                            <div class="label">${t('website')}</div>
+                            <div class="value"><a href="${detail.official.website}" target="_blank" rel="noopener">${detail.official.website !== '#' ? detail.official.website : t('unannounced')}</a></div>
                         </div>
                         <div class="contact-item">
                             <div class="icon">📺</div>
-                            <div class="label">哔哩哔哩</div>
-                            <div class="value"><a href="${detail.official.bilibili}" target="_blank" rel="noopener">${detail.official.bilibili !== '#' ? detail.official.bilibili : '暂未公布'}</a></div>
+                            <div class="label">${t('bilibili')}</div>
+                            <div class="value"><a href="${detail.official.bilibili}" target="_blank" rel="noopener">${detail.official.bilibili !== '#' ? detail.official.bilibili : t('unannounced')}</a></div>
                         </div>
                         <div class="contact-item">
                             <div class="icon">📱</div>
-                            <div class="label">新浪微博</div>
-                            <div class="value">${detail.official.weibo !== '#' ? '<a href="' + detail.official.weibo + '" target="_blank" rel="noopener">' + detail.official.weibo + '</a>' : '暂未公布'}</div>
+                            <div class="label">${t('weibo')}</div>
+                            <div class="value">${detail.official.weibo !== '#' ? '<a href="' + detail.official.weibo + '" target="_blank" rel="noopener">' + detail.official.weibo + '</a>' : t('unannounced')}</div>
                         </div>
                         <div class="contact-item">
                             <div class="icon">💬</div>
-                            <div class="label">QQ群</div>
+                            <div class="label">${t('qq')}</div>
                             <div class="value">${detail.official.qq_group}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="info-card">
-                    <h3>📞 联系方式</h3>
+                    <h3>${t('contact')}</h3>
                     <div class="contact-grid">
                         <div class="contact-item">
                             <div class="icon">✉️</div>
-                            <div class="label">邮箱</div>
+                            <div class="label">${t('email')}</div>
                             <div class="value"><a href="mailto:${detail.contact.email}">${detail.contact.email}</a></div>
                         </div>
                         <div class="contact-item">
                             <div class="icon">📞</div>
-                            <div class="label">电话</div>
+                            <div class="label">${t('phone')}</div>
                             <div class="value">${detail.contact.phone}</div>
                         </div>
                         <div class="contact-item">
                             <div class="icon">📍</div>
-                            <div class="label">地址</div>
+                            <div class="label">${t('address')}</div>
                             <div class="value">${detail.contact.address}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="highlight-box">
-                    <strong>💡 温馨提示</strong><br>
-                    以上信息仅供参考，请以官方发布为准。如有疑问，建议加入官方QQ群或关注官方社交媒体获取最新消息。
+                    <strong>${t('tipTitle')}</strong><br>
+                    ${t('tip')}
                 </div>
             `;
 

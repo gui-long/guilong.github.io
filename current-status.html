@@ -189,6 +189,7 @@
 <script defer src="search-index.js?v=20260928"></script>
     <script defer src="common.js?v=20260928"></script>
 <script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
+    <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2262%22%20r%3D%2222%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2228%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
 </head>
 <body>
     <nav>
@@ -220,6 +221,7 @@
                     <button onclick="switchStatusTab('history')" id="stab-history" class="works-tab">📜 反福瑞发展史</button>
                     <button onclick="switchStatusTab('attack')" id="stab-attack" class="works-tab">⚔️ 2025-26网暴事件</button>
                     <button onclick="switchStatusTab('newera')" id="stab-newera" class="works-tab">🏢 2026双重夹击</button>
+                    <a href="m.html" class="works-tab" style="background:rgba(120,120,130,0.25);">🕯️ 哀悼</a>
                 </div>
                 <div id="status-current" class="status-pane">
 <h2 id="status-h2-1">现在的漫画与创作生态</h2>
@@ -574,6 +576,13 @@
             }
         }
         updatePageLang(localStorage.getItem('lang') || 'zh');
+        // 支持通过 URL 参数 ?tab= 直接定位到对应分类
+        (function(){
+            var m = /[?&]tab=([a-z]+)/.exec(location.search);
+            if(m && document.getElementById('status-' + m[1])){
+                switchStatusTab(m[1]);
+            }
+        })();
     </script>
 
     <div style="position:fixed;right:20px;bottom:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:flex-end;background:transparent;padding:0;">
