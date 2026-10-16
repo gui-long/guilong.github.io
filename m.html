@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铭记与缅怀 · 逝者纪念 - FurryWiki</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-main: #d4d4d4;
+            --text-muted: #888888;
+            --accent-red: #b32424;
+            --border-color: #2a2a2a;
+            --card-bg: #131313;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.7;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 40px 24px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .ribbon {
+            width: 2px;
+            height: 60px;
+            background-color: var(--accent-red);
+            margin: 0 auto 30px auto;
+            position: relative;
+        }
+        
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .intro {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            text-align: left;
+        }
+
+        .memorial-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .memorial-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-red);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            transition: transform 0.2s ease;
+        }
+
+        .memorial-card:hover {
+            transform: translateX(4px);
+        }
+
+        .memorial-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .memorial-date {
+            font-size: 0.85rem;
+            color: var(--accent-red);
+            font-family: monospace;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .memorial-desc {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* 适配手机 */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; letter-spacing: 2px; }
+            .container { padding: 20px 16px; }
+            .memorial-card { padding: 16px; }
+        }
+
+        .lang-row {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+        .lang-btn.active { background: var(--accent-red); color: #fff; border-color: var(--accent-red); }
+    </style>
+    <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2262%22%20r%3D%2222%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2228%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
+</head>
+<body>
+    <div class="lang-row">
+        <button class="lang-btn active" data-lang="zh" onclick="switchLang('zh')">简</button>
+        <button class="lang-btn" data-lang="zh-tw" onclick="switchLang('zh-tw')">繁</button>
+        <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+    </div>
+    <div class="container">
+        <!-- 装饰条 -->
+        <div class="ribbon"></div>
+
+        <!-- 标题 -->
+        <h1 id="m-title">铭记与缅怀</h1>
+        <div class="subtitle" id="m-subtitle">FurryWiki · 逝者纪念</div>
+
+        <!-- 引言 -->
+        <div class="intro">
+            <p id="m-intro1">在兽圈（Furry）这个大家庭中，我们曾拥有过许多温暖、才华横溢的朋友。然而，抑郁症、网络暴力以及生活中的重压，不幸地带走了他们。</p>
+            <p id="m-intro2">他们曾用画笔、代码和热情，为这个圈子带来色彩与欢乐。今天，我们在这里留下他们存在过的痕迹。愿玫瑰铺满他们去时的路，愿他们在没有痛苦的世界里安息。</p>
+        </div>
+
+        <!-- 纪念名单 -->
+        <div class="memorial-list">
+            <!-- Momo -->
+            <div class="memorial-card">
+                <div class="memorial-name" id="m-name1">Momo（杨先生）</div>
+                <div class="memorial-date" id="m-date1">2021年12月20日 · 年仅25岁</div>
+                <p class="memorial-desc" id="m-desc1">兽圈爱好者，待人友善。据记载，他离世前长期受抑郁症困扰，并遭遇突发的财务危机，网络暴力被认为是加重其心理负担的因素之一。</p>
+            </div>
+
+            <!-- 仔小天 -->
+            <div class="memorial-card">
+                <div class="memorial-name" id="m-name2">仔小天（虎浩天 / 白虎浩天）</div>
+                <div class="memorial-date" id="m-date2">2024年5月31日</div>
+                <p class="memorial-desc" id="m-desc2">早期活跃的圈友。公开记录显示其因重度抑郁症自尽。</p>
+            </div>
+
+            <!-- Byuu -->
+            <div class="memorial-card">
+                <div class="memorial-name" id="m-name3">Byuu（Near / David Ginder）</div>
+                <div class="memorial-date" id="m-date3">2021年6月</div>
+                <p class="memorial-desc" id="m-desc3">被誉为“天才福瑞程序员”，是BSnes模拟器的作者。他生前长期遭受论坛 Kiwi Farms 用户的网络霸凌与人肉搜索。他在最后的帖子中明确将自己的痛苦归因于该论坛的攻击。Kiwi Farms被指与至少三起自杀事件有关。</p>
+            </div>
+
+            <!-- 无新四 -->
+            <div class="memorial-card">
+                <div class="memorial-name" id="m-name4">无新四</div>
+                <div class="memorial-date" id="m-date4">2024年10月1日</div>
+                <p class="memorial-desc" id="m-desc4">生前住在新疆库尔勒，性格开朗。据纪念馆记录，他因重度抑郁症跳楼自杀。</p>
+            </div>
+
+            <!-- POPnoob -->
+            <div class="memorial-card">
+                <div class="memorial-name" id="m-name5">POPnoob</div>
+                <div class="memorial-date" id="m-date5">2023年8月10日晚</div>
+                <p class="memorial-desc" id="m-desc5">据Furry纪念馆记录，于8月10日晚上自尽，次日早上被发现。</p>
+            </div>
+        </div>
+
+        <!-- 结语 -->
+        <div class="footer">
+            <p id="m-footer1">如果你正经历黑暗，请记住你并不孤单。这个世界总有人在默默爱着你。</p>
+            <p id="m-footer2">FurryWiki 管理团队 敬上</p>
+        </div>
+    </div>
+    <script>
+        var currentMLang = localStorage.getItem('lang') || 'zh';
+        if(['zh','zh-tw','en'].indexOf(currentMLang) === -1) currentMLang = 'zh';
+
+        var M_T = {
+            'm-title': { zh:'铭记与缅怀', 'zh-tw':'銘記與緬懷', en:'In Memoriam' },
+            'm-subtitle': { zh:'FurryWiki · 逝者纪念', 'zh-tw':'FurryWiki · 逝者紀念', en:'FurryWiki · Memorial' },
+            'm-intro1': { zh:'在兽圈（Furry）这个大家庭中，我们曾拥有过许多温暖、才华横溢的朋友。然而，抑郁症、网络暴力以及生活中的重压，不幸地带走了他们。', 'zh-tw':'在獸圈（Furry）這個大家庭中，我們曾擁有過許多溫暖、才華橫溢的朋友。然而，抑鬱症、網絡暴力以及生活中的重壓，不幸地帶走了他們。', en:'In the Furry community, we once had many warm and talented friends. Sadly, depression, cyberbullying, and the pressures of life took them away.' },
+            'm-intro2': { zh:'他们曾用画笔、代码和热情，为这个圈子带来色彩与欢乐。今天，我们在这里留下他们存在过的痕迹。愿玫瑰铺满他们去时的路，愿他们在没有痛苦的世界里安息。', 'zh-tw':'他們曾用畫筆、代碼和熱情，為這個圈子帶來色彩與歡樂。今天，我們在這裡留下他們存在過的痕跡。願玫瑰鋪滿他們去時的路，願他們在沒有痛苦的世界裡安息。', en:'They brought color and joy to this community with their brushes, code, and passion. Today, we leave traces of their existence here. May roses pave their path, and may they rest in a world without pain.' },
+            'm-name1': { zh:'Momo（杨先生）', 'zh-tw':'Momo（楊先生）', en:'Momo (Mr. Yang)' },
+            'm-date1': { zh:'2021年12月20日 · 年仅25岁', 'zh-tw':'2021年12月20日 · 年僅25歲', en:'Dec 20, 2021 · Age 25' },
+            'm-desc1': { zh:'兽圈爱好者，待人友善。据记载，他离世前长期受抑郁症困扰，并遭遇突发的财务危机，网络暴力被认为是加重其心理负担的因素之一。', 'zh-tw':'獸圈愛好者，待人友善。據記載，他離世前長期受抑鬱症困擾，並遭遇突發的財務危機，網絡暴力被認為是加重其心理負擔的因素之一。', en:'A Furry enthusiast, known for being friendly. Records show he struggled with depression for a long time before passing, and faced a sudden financial crisis. Cyberbullying is believed to have been one of the factors adding to his psychological burden.' },
+            'm-name2': { zh:'仔小天（虎浩天 / 白虎浩天）', 'zh-tw':'仔小天（虎浩天 / 白虎浩天）', en:'Zai Xiaotian (Hu Haotian / Baihu Haotian)' },
+            'm-date2': { zh:'2024年5月31日', 'zh-tw':'2024年5月31日', en:'May 31, 2024' },
+            'm-desc2': { zh:'早期活跃的圈友。公开记录显示其因重度抑郁症自尽。', 'zh-tw':'早期活躍的圈友。公開記錄顯示其因重度抑鬱症自盡。', en:'An early active member of the community. Public records indicate he died by suicide due to severe depression.' },
+            'm-name3': { zh:'Byuu（Near / David Ginder）', 'zh-tw':'Byuu（Near / David Ginder）', en:'Byuu (Near / David Ginder)' },
+            'm-date3': { zh:'2021年6月', 'zh-tw':'2021年6月', en:'June 2021' },
+            'm-desc3': { zh:'被誉为“天才福瑞程序员”，是BSnes模拟器的作者。他生前长期遭受论坛 Kiwi Farms 用户的网络霸凌与人肉搜索。他在最后的帖子中明确将自己的痛苦归因于该论坛的攻击。Kiwi Farms被指与至少三起自杀事件有关。', 'zh-tw':'被譽為「天才福瑞程式設計師」，是BSnes模擬器的作者。他生前長期遭受論壇 Kiwi Farms 用戶的網絡霸凌與人肉搜尋。他在最後的帖子中明確將自己的痛苦歸因於該論壇的攻擊。Kiwi Farms被指與至少三起自殺事件有關。', en:'Known as the "genius furry programmer," he was the creator of the BSnes emulator. During his life, he endured long-term cyberbullying and doxxing from users of the Kiwi Farms forum. In his final post, he explicitly attributed his suffering to attacks from that forum. Kiwi Farms has been linked to at least three suicides.' },
+            'm-name4': { zh:'无新四', 'zh-tw':'無新四', en:'Wu Xinsi' },
+            'm-date4': { zh:'2024年10月1日', 'zh-tw':'2024年10月1日', en:'Oct 1, 2024' },
+            'm-desc4': { zh:'生前住在新疆库尔勒，性格开朗。据纪念馆记录，他因重度抑郁症跳楼自杀。', 'zh-tw':'生前住在新疆庫爾勒，性格開朗。據紀念館記錄，他因重度抑鬱症跳樓自殺。', en:'Lived in Korla, Xinjiang, and was known for his cheerful personality. According to memorial records, he died by jumping from a building due to severe depression.' },
+            'm-name5': { zh:'POPnoob', 'zh-tw':'POPnoob', en:'POPnoob' },
+            'm-date5': { zh:'2023年8月10日晚', 'zh-tw':'2023年8月10日晚', en:'Evening of Aug 10, 2023' },
+            'm-desc5': { zh:'据Furry纪念馆记录，于8月10日晚上自尽，次日早上被发现。', 'zh-tw':'據Furry紀念館記錄，於8月10日晚上自盡，次日早上被發現。', en:'According to Furry Memorial records, he died by suicide on the evening of Aug 10 and was found the next morning.' },
+            'm-footer1': { zh:'如果你正经历黑暗，请记住你并不孤单。这个世界总有人在默默爱着你。', 'zh-tw':'如果你正經歷黑暗，請記住你並不孤單。這個世界總有人在默默愛著你。', en:'If you are going through darkness, remember you are not alone. There is always someone in this world who loves you in silence.' },
+            'm-footer2': { zh:'FurryWiki 管理团队 敬上', 'zh-tw':'FurryWiki 管理團隊 敬上', en:'— FurryWiki Management Team' }
+        };
+
+        function switchLang(l){
+            currentMLang = l;
+            localStorage.setItem('lang', l);
+            document.querySelectorAll('.lang-btn').forEach(function(b){
+                b.classList.remove('active');
+                if(b.dataset.lang === l) b.classList.add('active');
+            });
+            for(var key in M_T){
+                var el = document.getElementById(key);
+                if(el) el.textContent = M_T[key][l];
+            }
+        }
+        switchLang(currentMLang);
+    </script>
+</body>
+</html>
