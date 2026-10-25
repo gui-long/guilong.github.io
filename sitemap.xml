@@ -2,92 +2,176 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://wiki.furry.beer/index.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/current-status.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/bilibili-up.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/history.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/furry-intro.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/works.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://wiki.furry.beer/work-hbhx.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-syzj.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-ygjt.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-housepets.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-llhx.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-sx.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-dsj.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-ysy.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-ysy-dh.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-jzbcl.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-frz.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/work-yhyx.html</loc>
+        <lastmod>2026-10-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://wiki.furry.beer/calendar.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/gallery.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/con-info.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/studio.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/chat.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/terminology.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://wiki.furry.beer/m.html</loc>
+        <lastmod>2026-10-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://wiki.furry.beer/about.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/old-wiki.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://wiki.furry.beer/%E7%BC%96%E8%BE%91.html</loc>
-        <lastmod>2026-10-12</lastmod>
+        <lastmod>2026-10-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://wiki.furry.beer/%E5%B9%BF%E5%91%8A.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
     </url>
 </urlset>

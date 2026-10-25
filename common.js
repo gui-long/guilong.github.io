@@ -369,6 +369,50 @@ function initNav(){
     }
 }
 
+// ===== 狸想城互动广告弹窗（每浏览满 10 页弹出一次；部分页面不弹）=====
+function initAd(){
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    // 不弹广告的页面：广告页自身、Furry兽迷文化、历史、群聊、兽聚日期
+    var noAdPages = ['广告.html', 'furry-intro.html', 'history.html', 'chat.html', 'calendar.html'];
+    // 全站页面浏览计数（含不弹页，累计满10次后在下一个允许弹窗的页面弹出）
+    var count = 0;
+    try {
+        count = parseInt(localStorage.getItem('ad_pv_count') || '0', 10) + 1;
+        localStorage.setItem('ad_pv_count', String(count));
+    } catch(e){ return; } // 存储被禁用时无法计数，直接不弹
+    if(noAdPages.indexOf(currentPage) !== -1) return;
+    if(count < 10) return;
+    try { localStorage.setItem('ad_pv_count', '0'); } catch(e){}
+    var css = document.createElement('style');
+    css.textContent = ''
+      + '#site-ad-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(8,6,17,.72);backdrop-filter:blur(3px);animation:adFadeIn .3s ease;}'
+      + '@keyframes adFadeIn{from{opacity:0}to{opacity:1}}'
+      + '#site-ad-overlay.ad-closing{opacity:0;transition:opacity .2s ease;}'
+      + '#site-ad-wrap{position:relative;width:min(460px,92vw);animation:adPop .35s cubic-bezier(.2,.9,.3,1.2);}'
+      + '@keyframes adPop{from{transform:scale(.85) translateY(20px);opacity:0}to{transform:none;opacity:1}}'
+      + '#site-ad-frame{width:100%;height:min(620px,80vh);border:none;border-radius:24px;display:block;background:#080611;box-shadow:0 24px 64px rgba(0,0,0,.6);}'
+      + '#site-ad-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border:none;border-radius:50%;background:#2a2340;color:#d4b8ff;font-size:16px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;z-index:2;}'
+      + '#site-ad-close:hover{background:#7c5cbf;color:#fff;transform:scale(1.1);}';
+    document.head.appendChild(css);
+    var overlay = document.createElement('div');
+    overlay.id = 'site-ad-overlay';
+    overlay.innerHTML = ''
+      + '<div id="site-ad-wrap">'
+      +   '<button id="site-ad-close" title="关闭" aria-label="关闭">✕</button>'
+      +   '<iframe id="site-ad-frame" src="广告.html" title="狸想城互动入口"></iframe>'
+      + '</div>';
+    document.body.appendChild(overlay);
+    function closeAd(){
+        overlay.classList.add('ad-closing');
+        setTimeout(function(){ overlay.remove(); }, 200);
+    }
+    document.getElementById('site-ad-close').addEventListener('click', closeAd);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeAd(); });
+    document.addEventListener('keydown', function esc(e){
+        if(e.key === 'Escape' && document.getElementById('site-ad-overlay')) closeAd();
+    });
+}
+
 console.log('=== common.js loaded ===');
 console.log('document.readyState:', document.readyState);
 
@@ -381,6 +425,7 @@ if(document.readyState === 'loading'){
         initLang();
         initNav();
         renderSearchBox();
+        initAd();
     });
 }else{
     console.log('DOM already ready, initializing...');
@@ -389,4 +434,5 @@ if(document.readyState === 'loading'){
     initLang();
     initNav();
     renderSearchBox();
+    initAd();
 }

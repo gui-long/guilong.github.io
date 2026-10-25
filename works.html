@@ -111,6 +111,15 @@
         .comic-card h3 a { color: #1e293b; text-decoration: none; }
         .comic-card p { font-size: 14px; color: #5b6877; line-height: 1.6; margin-bottom: 10px; flex-grow: 1; }
         .comic-card .author { font-size: 12px; color: #999; margin: 0; }
+        .comic-detail-btn { display: inline-block; margin-top: 8px; padding: 4px 14px; font-size: 12px; color: var(--accent); background: none; border: 1px solid var(--accent); border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+        .comic-detail-btn:hover { background: var(--accent); color: #fff; }
+        .comic-detail { text-align: left; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 13px; line-height: 1.7; color: #5b6877; }
+        .comic-detail .d-label { display: inline-block; font-size: 12px; font-weight: 700; color: var(--accent); margin: 8px 0 2px; }
+        .comic-detail .d-label:first-child { margin-top: 0; }
+        .comic-detail p { font-size: 13px; margin: 0 0 6px; flex-grow: 0; }
+        [data-theme="dark"] .comic-detail { color: #b8c2d0; }
+        .comic-group-title { margin: 28px 0 4px; padding-left: 12px; border-left: 4px solid var(--accent); font-size: 18px; }
+        .comic-group-title:first-of-type { margin-top: 0; }
         .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 20px; }
         .game-card { border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); background: var(--card-bg); display: flex; flex-direction: column; }
         .game-header { height: 130px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold; padding: 0 16px; text-align: center; }
@@ -236,7 +245,7 @@
                 return;
             }
             var script = document.createElement("script");
-            script.src = "works-data.js?v=20261009";
+            script.src = "works-data.js?v=20261021";
             script.onload = function(){
                 worksDataLoaded = true;
                 callback();
@@ -276,6 +285,9 @@
             'app-download': { zh:'立即下载', 'zh-tw':'立即下載', en:'Download Now' },
             'app-qq': { zh:'官方QQ群：1065449714', 'zh-tw':'官方QQ群：1065449714', en:'Official QQ Group: 1065449714' },
             'contributor-label': { zh:'投稿人：', 'zh-tw':'投稿人：', en:'Contributor: ' },
+            'comic-group-cn': { zh:'🐾 国产兽设 / 原创漫画与动画', 'zh-tw':'🐾 國產獸設 / 原創漫畫與動畫', en:'🐾 Chinese Original Furry Comics & Animation' },
+            'comic-group-myth': { zh:'🏮 新中式神话 / 国漫条漫', 'zh-tw':'🏮 新中式神話 / 國漫條漫', en:'🏮 New Chinese Mythology Comics' },
+            'detail-page': { zh:'📄 详情页', 'zh-tw':'📄 詳情頁', en:'📄 Details' },
         };
 
         const COMIC_T = {
@@ -314,6 +326,10 @@
             'Housepets': { zh:'Housepets', 'zh-tw':'Housepets', en:'Housepets' },
             '画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>': { zh:'画风可爱，连贯曲折，<strong>（含有部分PG）内容</strong>', 'zh-tw':'畫風可愛，連貫曲折，<strong>（含有部分PG）內容</strong>', en:'Cute art style, coherent and twisting storyline. <strong>(Contains some PG content)</strong>' },
             'Rick Griffin': { zh:'Rick Griffin', 'zh-tw':'Rick Griffin', en:'Rick Griffin' },
+            '苍笙': { zh:'苍笙', 'zh-tw':'蒼笙', en:'Cangsheng' },
+            '钰逆INVERSE': { zh:'钰逆INVERSE', 'zh-tw':'鈺逆INVERSE', en:'Yu Ni INVERSE' },
+            '灰渊（众兽逐梦工作室）': { zh:'灰渊（众兽逐梦工作室）', 'zh-tw':'灰淵（眾獸逐夢工作室）', en:'Huiyuan (Dreamchaser Studio)' },
+            '载水 / 呆鸭屋': { zh:'载水 / 呆鸭屋', 'zh-tw':'載水 / 呆鴨屋', en:'Zaishui / Daiya Wu Studio' },
             '【FURRY?!】': { zh:'【FURRY?!】', 'zh-tw':'【FURRY?!】', en:'【FURRY?!】' },
             '小鱼沫白': { zh:'小鱼沫白', 'zh-tw':'小魚沫白', en:'Xiaoyu Mobai' },
             '茶花诗意在黄昏时分': { zh:'茶花诗意在黄昏时分', 'zh-tw':'茶花詩意在黃昏時分', en:'茶花詩意在黃昏時分' },
@@ -400,15 +416,20 @@
             return text;
         }
 
+        function renderComicCard(c){
+            let contrib = c.contributor ? `<p class="author" style="margin-top:0;">${WORKS_T['contributor-label'][currentLang]}${t(c.contributor, currentLang)}</p>` : '';
+            let pageBtn = c.page ? `<a class="comic-detail-btn" style="text-decoration:none;" href="${c.page}">${WORKS_T['detail-page'][currentLang]}</a>` : '';
+            return `<div class="comic-card"><h3><a href="${c.link}" target="_blank">${t(c.title, currentLang)}</a></h3><p>${t(c.desc, currentLang)}</p><p class="author">${t(c.author, currentLang)}</p>${contrib}${pageBtn}</div>`;
+        }
         function renderComic() {
             let html = `<h2 style="text-align:center;margin-bottom:8px;">📚 ${WORKS_T['comic-title'][currentLang]}</h2>`;
             html += `<p style="text-align:center;color:var(--text-muted);margin-bottom:24px;">${WORKS_T['comic-desc'][currentLang]}</p>`;
-            html += '<div class="comic-grid">';
-            COMIC.forEach((c, idx) => {
-                let contrib = c.contributor ? `<p class="author" style="margin-top:0;">${WORKS_T['contributor-label'][currentLang]}${t(c.contributor, currentLang)}</p>` : '';
-                html += `<div class="comic-card"><h3><a href="${c.link}" target="_blank">${t(c.title, currentLang)}</a></h3><p>${t(c.desc, currentLang)}</p><p class="author">${t(c.author, currentLang)}</p>${contrib}</div>`;
+            ['cn','myth'].forEach(g => {
+                html += `<h3 class="comic-group-title">${WORKS_T['comic-group-'+g][currentLang]}</h3>`;
+                html += '<div class="comic-grid">';
+                COMIC.filter(c => c.group === g).forEach(c => { html += renderComicCard(c); });
+                html += '</div>';
             });
-            html += '</div>';
             document.getElementById('works-comic').innerHTML = html;
         }
         function renderNovel() {

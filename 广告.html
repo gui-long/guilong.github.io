@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>狸想城 · 互动入口</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #080611;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .ad-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(165deg, #12101f 0%, #1a1428 45%, #0d0a16 100%);
+    border: 1px solid rgba(200, 170, 255, 0.18);
+    border-radius: 24px;
+    padding: 36px 28px 32px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 210, 140, 0.05) inset;
+  }
+
+  /* 星尘氛围 */
+  .ad-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 230, 180, 0.7), transparent),
+      radial-gradient(1px 1px at 78% 12%, rgba(200, 220, 255, 0.6), transparent),
+      radial-gradient(1.5px 1.5px at 55% 88%, rgba(255, 210, 160, 0.5), transparent),
+      radial-gradient(1px 1px at 90% 65%, rgba(180, 200, 255, 0.5), transparent),
+      radial-gradient(1px 1px at 30% 72%, rgba(255, 240, 200, 0.4), transparent),
+      radial-gradient(1.5px 1.5px at 85% 40%, rgba(255, 220, 180, 0.45), transparent);
+    pointer-events: none;
+    animation: twinkle 5s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  /* 流星划过 */
+  .meteor {
+    position: absolute;
+    top: -10%;
+    right: 8%;
+    width: 1.5px;
+    height: 1.5px;
+    background: #ffe2a8;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255, 210, 140, 0.7);
+    animation: meteor-fall 4s ease-in infinite;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
+
+  .meteor:nth-child(2) {
+    top: -5%;
+    right: 35%;
+    animation-delay: 3.2s;
+  }
+
+  @keyframes meteor-fall {
+    0% { transform: translate(0, 0); opacity: 0; }
+    8% { opacity: 1; }
+    30% { transform: translate(-120px, 140px); opacity: 0; }
+    100% { transform: translate(-120px, 140px); opacity: 0; }
+  }
+
+  .badge {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #d4b8ff;
+    border: 1px solid rgba(180, 140, 255, 0.3);
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 22px;
+    background: rgba(120, 80, 200, 0.08);
+  }
+
+  .title {
+    position: relative;
+    z-index: 1;
+    font-size: 26px;
+    font-weight: 800;
+    color: #f3eaff;
+    line-height: 1.35;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  .title span {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: #8f82a8;
+    letter-spacing: 3px;
+    margin-top: 8px;
+  }
+
+  .desc {
+    position: relative;
+    z-index: 1;
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: #a89cb8;
+    margin-bottom: 26px;
+  }
+
+  .desc strong {
+    color: #e8c98a;
+    font-weight: 600;
+  }
+
+  .divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 170, 255, 0.25), transparent);
+    margin-bottom: 24px;
+  }
+
+  .cta {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, #7c5cbf 0%, #9d6be0 50%, #c98fd6 100%);
+    color: #120e1c;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 17px 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(140, 90, 220, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(160, 110, 240, 0.5);
+  }
+
+  .cta:active {
+    transform: translateY(0);
+  }
+
+  .cta small {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: rgba(18, 14, 28, 0.65);
+    margin-top: 6px;
+  }
+
+  .footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 10px;
+    color: #5f5572;
+    letter-spacing: 0.5px;
+  }
+
+  .footer .up {
+    color: #8f82a8;
+    font-weight: 600;
+  }
+
+  .footer .hint {
+    color: #6f637f;
+  }
+</style>
+</head>
+<body>
+
+<div class="ad-card">
+  <div class="meteor"></div>
+  <div class="meteor"></div>
+
+  <div class="badge">B站互动 · 狸想城同人企划</div>
+
+  <div class="title">
+    搭乘青苔列车<br>进入「愿望」之中
+    <span>LIFURRY · INTERACTIVE</span>
+  </div>
+
+  <div class="desc">
+    当流星雨划过夜空，愿望力量最为浓烈的窗口期再次开启。
+    云狸在站台等候，雾狸已确认了你的邀请函——
+    <strong>这一次，由你亲自踏入狸想城。</strong>
+  </div>
+
+  <div class="divider"></div>
+
+  <a class="cta" href="https://www.bilibili.com/toy/lifurrygame/play.html?spm_id_from=333.1387.0.0" target="_blank" rel="noopener">
+    进入狸想城 · 开始互动
+    <small>BILIBILI TOY · 免费游玩</small>
+  </a>
+
+  <div class="footer">
+    <span class="up">UP主：二创making</span>
+    <span class="hint">132+ 位居民已到访</span>
+  </div>
+</div>
+
+</body>
+</html>
