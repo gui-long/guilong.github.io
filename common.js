@@ -383,34 +383,47 @@ function initAd(){
     if(noAdPages.indexOf(currentPage) !== -1) return;
     if(count < 10) return;
     try { localStorage.setItem('ad_pv_count', '0'); } catch(e){}
-    var css = document.createElement('style');
-    css.textContent = ''
-      + '#site-ad-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(8,6,17,.72);backdrop-filter:blur(3px);animation:adFadeIn .3s ease;}'
-      + '@keyframes adFadeIn{from{opacity:0}to{opacity:1}}'
-      + '#site-ad-overlay.ad-closing{opacity:0;transition:opacity .2s ease;}'
-      + '#site-ad-wrap{position:relative;width:min(460px,92vw);animation:adPop .35s cubic-bezier(.2,.9,.3,1.2);}'
-      + '@keyframes adPop{from{transform:scale(.85) translateY(20px);opacity:0}to{transform:none;opacity:1}}'
-      + '#site-ad-frame{width:100%;height:min(620px,80vh);border:none;border-radius:24px;display:block;background:#080611;box-shadow:0 24px 64px rgba(0,0,0,.6);}'
-      + '#site-ad-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border:none;border-radius:50%;background:#2a2340;color:#d4b8ff;font-size:16px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;z-index:2;}'
-      + '#site-ad-close:hover{background:#7c5cbf;color:#fff;transform:scale(1.1);}';
-    document.head.appendChild(css);
-    var overlay = document.createElement('div');
-    overlay.id = 'site-ad-overlay';
-    overlay.innerHTML = ''
-      + '<div id="site-ad-wrap">'
-      +   '<button id="site-ad-close" title="关闭" aria-label="关闭">✕</button>'
-      +   '<iframe id="site-ad-frame" src="广告.html" title="狸想城互动入口"></iframe>'
-      + '</div>';
-    document.body.appendChild(overlay);
-    function closeAd(){
-        overlay.classList.add('ad-closing');
-        setTimeout(function(){ overlay.remove(); }, 200);
+
+    // 等页面完全加载、首屏渲染完成后再弹，避免和页面加载抢主线程造成卡顿
+    function showAd(){
+        if(document.getElementById('site-ad-overlay')) return;
+        var css = document.createElement('style');
+        css.textContent = ''
+          + '#site-ad-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(8,6,17,.78);animation:adFadeIn .25s ease;}'
+          + '@keyframes adFadeIn{from{opacity:0}to{opacity:1}}'
+          + '#site-ad-overlay.ad-closing{opacity:0;pointer-events:none;transition:opacity .18s ease;}'
+          + '#site-ad-wrap{position:relative;width:min(460px,92vw);animation:adPop .3s ease-out;}'
+          + '@keyframes adPop{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}'
+          + '#site-ad-frame{width:100%;height:min(620px,80vh);border:none;border-radius:24px;display:block;background:#080611;box-shadow:0 10px 28px rgba(0,0,0,.45);}'
+          + '#site-ad-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border:none;border-radius:50%;background:#2a2340;color:#d4b8ff;font-size:16px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;z-index:2;}'
+          + '#site-ad-close:hover{background:#7c5cbf;color:#fff;transform:scale(1.1);}';
+        document.head.appendChild(css);
+        var overlay = document.createElement('div');
+        overlay.id = 'site-ad-overlay';
+        overlay.innerHTML = ''
+          + '<div id="site-ad-wrap">'
+          +   '<button id="site-ad-close" title="关闭" aria-label="关闭">✕</button>'
+          +   '<iframe id="site-ad-frame" src="广告.html" title="狸想城互动入口"></iframe>'
+          + '</div>';
+        document.body.appendChild(overlay);
+        function closeAd(){
+            document.removeEventListener('keydown', escHandler);
+            overlay.classList.add('ad-closing');
+            setTimeout(function(){ overlay.remove(); }, 180);
+        }
+        document.getElementById('site-ad-close').addEventListener('click', closeAd);
+        overlay.addEventListener('click', function(e){ if(e.target === overlay) closeAd(); });
+        function escHandler(e){
+            if(e.key === 'Escape') closeAd();
+        }
+        document.addEventListener('keydown', escHandler);
     }
-    document.getElementById('site-ad-close').addEventListener('click', closeAd);
-    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeAd(); });
-    document.addEventListener('keydown', function esc(e){
-        if(e.key === 'Escape' && document.getElementById('site-ad-overlay')) closeAd();
-    });
+
+    if(document.readyState === 'complete'){
+        setTimeout(showAd, 250);
+    }else{
+        window.addEventListener('load', function(){ setTimeout(showAd, 250); }, { once:true });
+    }
 }
 
 console.log('=== common.js loaded ===');
