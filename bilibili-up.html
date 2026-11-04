@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,9 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_CN">
     <title>哔哩哔哩 Furry 区 UP 主数据排行｜粉丝数、获赞与播放量 - FurryWiki</title>
+    <link rel="preconnect" href="https://i0.hdslb.com" crossorigin>
+    <link rel="preconnect" href="https://i1.hdslb.com" crossorigin>
+    <link rel="preconnect" href="https://i2.hdslb.com" crossorigin>
     <style>
         *{box-sizing:border-box;margin:0;padding:0}
         :root{
@@ -213,7 +216,7 @@
             .feedback-btn{width:48px;height:48px;font-size:20px;right:16px;bottom:16px}
         }
     </style>
-<script>window.addEventListener("load",function(){var s=document.createElement("script");s.charset="UTF-8";s.id="LA_COLLECT";s.src="https://sdk.51.la/js-sdk-pro.min.js";s.onload=function(){if(window.LA){LA.init({id:"3R1OeLm7QQsWNZXh",ck:"3R1OeLm7QQsWNZXh",autoTrack:true,hashMode:true,screenRecord:true});}};document.head.appendChild(s);});</script>
+<!-- 51.la 统计临时停用（性能排查） -->
     <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2262%22%20r%3D%2222%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2228%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2272%22%20cy%3D%2238%22%20r%3D%2211%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2258%22%20r%3D%229%22%20fill%3D%22%2357c3ff%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
 </head>
 <body>
@@ -997,10 +1000,18 @@
             document.head.appendChild(s);
         }
 
-        loadData(function(data){
-            document.getElementById('loadingState').style.display = 'none';
-            initData();
-        });
+        // 数据文件较大（约 6.8MB），等页面渲染完成后再加载，避免阻塞首屏
+        function startDataLoad(){
+            loadData(function(data){
+                document.getElementById('loadingState').style.display = 'none';
+                initData();
+            });
+        }
+        if(document.readyState === 'complete'){
+            setTimeout(startDataLoad, 600);
+        }else{
+            window.addEventListener('load', function(){ setTimeout(startDataLoad, 600); }, { once:true });
+        }
     </script>
     <div style="text-align:center;padding:24px 16px;color:#9ca3af;font-size:13px;line-height:1.8;">
         数据由 <a href="https://furup.me/" target="_blank" style="color:#fb7299;text-decoration:none;font-weight:500;">furup万事屋</a> 友情提供，同意人 <strong style="color:#6b7280;">一枚小黑粉</strong>

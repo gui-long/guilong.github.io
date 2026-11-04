@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# 广告弹窗内部页面，无需搜索引擎收录
+Disallow: /广告.html
+Disallow: /%E5%B9%BF%E5%91%8A.html
+
 Sitemap: https://wiki.furry.beer/sitemap.xml
