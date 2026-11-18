@@ -25,6 +25,27 @@ var contentIndex = null;
 var contentIndexLoading = false;
 var contentIndexCallbacks = [];
 
+// 搜索索引体积约 35KB，改为用户首次搜索时再加载，避免每页都下载
+var searchIndexLoading = false;
+var searchIndexCallbacks = [];
+
+function ensureSearchIndex(cb){
+    if(typeof SEARCH_INDEX !== 'undefined'){ if(cb) cb(); return; }
+    if(cb) searchIndexCallbacks.push(cb);
+    if(searchIndexLoading) return;
+    searchIndexLoading = true;
+    var s = document.createElement('script');
+    s.src = 'search-index.js?v=20260928';
+    s.onload = s.onerror = function(){
+        searchIndexLoading = false;
+        buildContentIndex();
+        var cbs = searchIndexCallbacks.slice();
+        searchIndexCallbacks.length = 0;
+        cbs.forEach(function(f){ f(); });
+    };
+    document.head.appendChild(s);
+}
+
 function buildContentIndex(callback){
     // 优先使用预生成的静态索引（兼容 file:// 协议）
     if(typeof SEARCH_INDEX !== 'undefined'){
@@ -129,9 +150,6 @@ function renderSearchBox(){
         '<div id="site-search-results" style="display:none;max-height:320px;overflow-y:auto;background:rgba(255,255,255,0.98);border:1px solid rgba(120,120,130,0.25);border-radius:12px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,0.18);backdrop-filter:blur(6px);"></div>';
     document.body.appendChild(wrap);
 
-    // 预加载内容索引
-    buildContentIndex();
-
     // 点击外部关闭下拉
     document.addEventListener('click', function(e){
         var wrap = document.getElementById('search-box-wrap');
@@ -165,9 +183,9 @@ function onSearchInput(e){
     var results = document.getElementById('site-search-results');
     if(!q.trim()){ results.style.display='none'; return; }
 
-    // 如果索引未就绪，先只显示标题匹配，同时等待索引
+    // 如果索引未就绪，先只显示标题匹配，同时按需加载索引
     if(!contentIndex){
-        buildContentIndex(function(){
+        ensureSearchIndex(function(){
             // 索引完成后重新触发搜索
             var input = document.getElementById('site-search-input');
             if(input && input.value.trim()){
@@ -201,10 +219,12 @@ function doSearch(){
     var input = document.getElementById('site-search-input');
     var q = input.value.trim();
     if(!q) return;
-    var matches = searchContent(q);
-    if(matches.length > 0){
-        window.location.href = matches[0].page.url;
-    }
+    ensureSearchIndex(function(){
+        var matches = searchContent(q);
+        if(matches.length > 0){
+            window.location.href = matches[0].page.url;
+        }
+    });
 }
 
 var NAV_DATA = {
@@ -227,24 +247,19 @@ var NAV_DATA = {
 };
 
 function initTheme(){
-    console.log('initTheme called');
     var saved = localStorage.getItem('theme');
     var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     var theme = saved || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
     updateThemeBtn(theme);
-    console.log('initTheme done, theme:', theme);
 }
 
 function toggleTheme(){
-    console.log('toggleTheme called');
     var current = document.documentElement.getAttribute('data-theme') || 'light';
     var newTheme = current === 'dark' ? 'light' : 'dark';
-    console.log('toggleTheme: current=', current, 'new=', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeBtn(newTheme);
-    console.log('toggleTheme done');
 }
 
 function updateThemeBtn(theme){
@@ -266,14 +281,11 @@ function initColorblind(){
 }
 
 function toggleColorblind(){
-    console.log('toggleColorblind called');
     var current = document.documentElement.getAttribute('data-colorblind') === 'true';
     var newColorblind = !current;
-    console.log('toggleColorblind: current=', current, 'new=', newColorblind);
     document.documentElement.setAttribute('data-colorblind', newColorblind);
     localStorage.setItem('colorblind', newColorblind);
     updateColorblindBtn(newColorblind);
-    console.log('toggleColorblind done');
 }
 
 function updateColorblindBtn(colorblind){
@@ -292,7 +304,6 @@ function updateColorblindBtn(colorblind){
 }
 
 function switchLang(l){
-    console.log('switchLang called with:', l);
     currentLang = l;
     localStorage.setItem('lang', l);
     document.querySelectorAll('.lang-btn').forEach(function(b){
@@ -301,18 +312,15 @@ function switchLang(l){
     });
     document.querySelectorAll('nav a[id^="nav-"]').forEach(function(el){
         if(NAV_DATA[el.id]){
-            console.log('Updating nav text for', el.id, 'to', NAV_DATA[el.id][l]);
             el.textContent = NAV_DATA[el.id][l];
         }
     });
     var els = document.querySelectorAll('[data-zh]');
-    console.log('Found', els.length, 'elements with data-zh attribute');
     els.forEach(function(el){
         var key = 'zh';
         if(l === 'zh-tw') key = 'zhtw';
         else if(l === 'en') key = 'en';
         if(el.dataset[key]){
-            console.log('Updating text for', el.textContent, 'to', el.dataset[key]);
             el.textContent = el.dataset[key];
         }
     });
@@ -331,7 +339,6 @@ function switchLang(l){
     if(typeof updatePageLang === 'function'){
         updatePageLang(l);
     }
-    console.log('switchLang done');
 }
 
 function initLang(){
@@ -426,26 +433,29 @@ function initAd(){
     }
 }
 
-console.log('=== common.js loaded ===');
-console.log('document.readyState:', document.readyState);
+// 注册 Service Worker：弱网时优先用本地缓存兜底，大幅减少等待
+function initSW(){
+    if(!('serviceWorker' in navigator)) return;
+    if(location.protocol !== 'http:' && location.protocol !== 'https:') return;
+    try { navigator.serviceWorker.register('sw.js'); } catch(e) {}
+}
 
 if(document.readyState === 'loading'){
-    console.log('Waiting for DOMContentLoaded...');
     document.addEventListener('DOMContentLoaded', function(){
-        console.log('DOMContentLoaded fired');
         initTheme();
         initColorblind();
         initLang();
         initNav();
         renderSearchBox();
         initAd();
+        initSW();
     });
 }else{
-    console.log('DOM already ready, initializing...');
     initTheme();
     initColorblind();
     initLang();
     initNav();
     renderSearchBox();
     initAd();
+    initSW();
 }
